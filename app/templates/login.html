@@ -5,7 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <title>CPP CONNECT</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_styles.css') }}">
+    <title>Se connecter</title>
 </head>
 <body>
 
@@ -14,16 +15,20 @@
             <img src="{{ url_for('static', filename='img/assets/cpp_connect.svg') }}" alt="logo" class="logo">
             <h1>CPP CONNECT</h1>
         </div>
-        <div class="header-right">
-            <a href="{{ url_for('login') }}">
-                <h2>Se connecter</h2>
-                <img src="{{ url_for('static', filename='img/assets/user_connect.svg') }}" alt="logo" class="login-img">    
-            </a>
-        </div>
     </div>
 
     <div class="content">
-
+        <div class="login-box">
+            <h1>Se connecter</h1>
+            <div class="inputs">
+                <input type="email" name="user" id="user" placeholder="Nom d'utilisateur ou email">
+                <input type="password" name="password" id=password" placeholder="Mot de passe">
+            </div>
+            <div class="connect">
+                <button class="connect-button">Se connecter</button>
+            </div>
+        </div>
     </div>
+    
 </body>
 </html>

@@ -9,8 +9,12 @@ def fav():
     return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico')
 
 @app.route('/')
-def calculatrice():
+def index():
     return render_template('index.html')
+
+@app.route('/login/')
+def login():
+    return render_template('login.html')
 
 @app.errorhandler(404)
 def page_not_found(e):

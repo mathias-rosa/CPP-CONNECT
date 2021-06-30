@@ -1,11 +1,76 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+
+:root{
+    --couleur-accentuation: rgba(239, 111, 108, 1);
+    --gris-profond: rgba(26, 29, 34, 1);
+    --bleu-cpp: rgba(29, 53, 87, 1);
+    --gris-clair: rgba(225, 225, 234, 1);
+    --blanco: rgba(247, 245, 251, 1);
+}
 
 html{
-    overflow: hidden;
+    height: 100%;
 }
 
 body{
     display: flex;
+    height: 100%;
+    flex-direction: column;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--blanco);
+}
+
+.header{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 4.5em;
+    background-color: var(--gris-clair);
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+}
+.header-left{
+    display: flex;
+    align-items: center;
+    flex: 1;
+    cursor: pointer;
+    height: inherit;
+}
+.header-left h1{
+    display: flex;
+    padding-left: 0.4em;
+    width: fit-content;
+}
+.logo{
+    display: flex;
+    height: 4em;
+}
+.header-right, a{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    align-self: flex-end;
+    flex: 1;
+    height: inherit;
+    width: fit-content;
+    color: inherit;
+    text-decoration: inherit;
+    cursor: pointer;
+}
+.header-left h2{
+    display: flex;
+    font-size: 1em;
+}
+.login-img{
+    display: flex;
+    height: 3em;
+    padding-left: 0.4em;
+}
+
+.content{
+    display: flex;
+    height: 100%;
 }

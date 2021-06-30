@@ -1,0 +1,70 @@
+.header{
+    height: 3.5em;
+}
+.header h1{
+    font-size: 1.5em;
+}
+.logo{
+    height: 3em;
+}
+.content{
+    justify-content: center;
+    align-items: center;
+}
+.login-box{
+    background: rgba( 255, 255, 255, 0.4 );
+    box-shadow: 0 8px 32px 0 var(--gris-clair);
+    backdrop-filter: blur(1em);
+    -webkit-backdrop-filter: blur(1em);
+    border-radius: 1em;
+    border: 0.1em solid rgba( 255, 255, 255, 0.28 );
+    height: 15em;
+    width: 22em;
+    padding: 2.5em;
+    padding-bottom: 1em;
+}
+.login-box h1{
+    margin: 0;
+    color: var(--couleur-accentuation);
+}
+.inputs{
+    display: flex;
+    flex-direction: column;
+    width: 18em;
+}
+.inputs input{
+    display: flex;
+    padding-top: 0.4em;
+    margin-top: 1em;
+    height: 2.3em;
+    background-color: transparent;
+    border: none;
+    border-bottom: solid var(--bleu-cpp);
+    border-radius: 0.1em;
+    font-family: 'Poppins';
+}
+.inputs input:focus-visible{
+    outline: none;
+    border-bottom: solid var(--couleur-accentuation);
+}
+.connect{
+    display: flex;
+    flex: 1;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 4em;
+}
+.connect-button{
+    display: flex;
+    padding: 0.4em;
+    border-radius: 0.5em;
+    border: none;
+    background-color: var(--bleu-cpp);
+    color: var(--blanco);
+    width: 10em;
+    justify-content: center;
+    font-family: 'Poppins';
+    font-size: 1.1em;
+    font-weight: 800;
+    cursor: pointer;
+}
