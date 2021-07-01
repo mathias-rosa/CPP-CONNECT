@@ -5,8 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_styles.css') }}">
-    <title>Se connecter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/signup_styles.css') }}">
+    <title>S'inscrire</title>
 </head>
 <body>
 
@@ -20,20 +20,19 @@
     </div>
 
     <div class="content">
-        <div class="login-box">
-            <h1>Se connecter</h1>
+        <div class="signup-box">
+            <h1>S'inscrire</h1>
             <div class="inputs">
-                <input type="email" name="user" id="user" placeholder="Nom d'utilisateur ou email">
+                <input type="nom" name="name" id="name" placeholder="Nom">
+                <input type="prénom" name="surname" id="surname" placeholder="Prénom">
+                <input type="email" name="user" id="user" placeholder="Email">
                 <input type="password" name="password" id="password" placeholder="Mot de passe">
             </div>
-            <a href="{{ url_for('signup') }}" class="inscription" id="mdp_oublie" ><div class="bouton">
-                <h2>Mot de passe oublié ?</h2>
+            <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
+                <h2>J'ai déjà un compte, me connecter</h2>
             </div></a>
             <div class="connect">
-                <a href="{{ url_for('signup') }}" class="inscription" ><div class="bouton">
-                    <h2>Ou s'inscrire</h2>
-                </div></a>
-                <button class="connect-button">Se connecter</button>
+                <button class="connect-button">S'inscrire</button>
             </div>
         </div>
     </div>

@@ -70,7 +70,7 @@ body{
     align-self: flex-end;
     flex: 1;
 }
-.header-right:hover{
+.header a:hover{
     text-decoration: underline solid 0.15em;
     text-underline-offset: 0.2em;
     color: var(--bleu-cpp);
