@@ -13,12 +13,18 @@ html{
 }
 body{
     display: flex;
-    height: 100%;
     flex-direction: column;
     margin: 0;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     background-color: var(--blanco);
+}
+
+.footer{
+    display: flex;
+    height: 3em;
+    font-size: 0.5em;
+    padding: 2em;
 }
 
 .header{
@@ -85,6 +91,7 @@ body{
     height: 100%;
     flex-direction: column;
     padding: 2em;
+    padding-bottom: 0em;
 }
 
 .salut{
@@ -97,6 +104,7 @@ body{
 .illustration-1{
     display: flex;
     height: fit-content;
+    margin-left: 3em;
 }
 #hexagon{
     display: flex;
@@ -182,19 +190,64 @@ body{
     color: var(--couleur-accentuation);
     font-size: 3em;
 }
-.fiche-texte{
+
+.fiche-1{
+    margin-bottom: 2em;
+}
+
+.fiche-texte-1{
     display: flex;
     margin-left: 10em;
     flex-direction: column;
     position: absolute;
 }
-.fiche-texte h1{
+.fiche-texte-1 h1{
     margin: 0;
-    line-height: 1.2em;
-    font-size: 2.3em;
+    margin-top: -0.3em;
+    line-height: 1.1em;
+    font-size: 2.5em;
     color: var(--bleu-cpp);
 }
-.fiche-texte p{
+.fiche-texte-1 p{
     margin: 0;
-    margin-top: 1em;
+    margin-top: 0.2em;
+    height: 5.5em;
+    overflow-y: auto;
+    font-size: 1.2em;
+    width: 35em;
+}
+
+.fiche-2{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 3em;
+    margin-bottom: 2em;
+}
+
+.fiche-texte-2{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: absolute;
+    align-content: flex-end;
+    align-items: flex-end;
+    margin-right: 10em;
+    text-align: end;
+}
+.fiche-texte-2 h1{
+    margin: 0;
+    width: fit-content;
+    width: -moz-fit-content;
+    margin-top: -0.3em;
+    line-height: 1.1em;
+    font-size: 2.5em;
+    color: var(--bleu-cpp);
+}
+.fiche-texte-2 p{
+    margin: 0;
+    margin-top: 0.2em;
+    height: 5.5em;
+    overflow-y: auto;
+    font-size: 1.2em;
+    width: 35em;
 }

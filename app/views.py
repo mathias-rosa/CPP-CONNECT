@@ -1,7 +1,6 @@
 import os
 from flask import Flask, render_template, send_from_directory, redirect, url_for
-from flask import Blueprint
-from . import db
+import datetime
 
 app = Flask(__name__)
 
@@ -11,7 +10,7 @@ def fav():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', year=datetime.date.today().year)
 
 @app.route('/login/')
 def login():
@@ -21,7 +20,7 @@ def login():
 def page_not_found(e):
     return render_template('404.html'), 404
 
-#global-------------------------------------------------------------------
+# global-------------------------------------------------------------------
 
 #if __name__ == "__main__":
 #    app.run()
