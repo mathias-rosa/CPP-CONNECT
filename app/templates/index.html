@@ -55,12 +55,12 @@
                 </div></a>
             </div>
             <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="queuleuleu">
-        </div>  
+        </div>
         <div class="liste-fontions-texte">
             <h1>Liste des fonctionnalités​</h1>
         </div>
-        <div class="Calcule ta moyenne">
-            <div class="fiche-texte">
+        <div class="fiche-1" id="1">
+            <div class="fiche-texte-1">
                 <h1>Calcule <br> ta moyenne​</h1> 
                 <p>
                     Tes notes seront récupérées depuis le site GEPI, ainsi tu pourras 
@@ -68,12 +68,42 @@
                     générale ainsi que les moyennes par matières.
                 </p>
             </div>
-            <div class="fiche-image">
-                <img src="{{ url_for('static', filename='img/hexagon_coupe.svg') }}" alt="">
+            <div class="fiche-image-1">
+                <img src="{{ url_for('static', filename='img/hexagon_coupe_droit.svg') }}" alt="">
                 <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="">
             </div>
-
         </div>
+        <div class="fiche-2" id="2">
+            <div class="fiche-image-2">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="balançoire">
+                <img src="{{ url_for('static', filename='img/hexagon_coupe_gauche.svg') }}" alt="hexa-gauche" id="hexa-gauche">
+            </div>
+            <div class="fiche-texte-2">
+                <h1>Agenda <br> collectif​</h1> 
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+                </p>
+            </div>
+        </div>
+        <div class="fiche-1" id="3">
+            <div class="fiche-texte-1">
+                <h1>Fichier des <br>devoirs surveillés</h1> 
+                <p>
+                    Tu pourras accéder au fichier des devoirs surveillés
+                    des promotions précédentes pour ainsi te préparer efficacement
+                    pour les prochains devoirs surveillés à venir!
+                </p>
+            </div>
+            <div class="fiche-image-1">
+                <img src="{{ url_for('static', filename='img/hexagon_coupe_droit.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="">
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <h2>&copy; Copyright {{year}} CPP CONNECT</footer>
     </div>
 </body>
 </html>
