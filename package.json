@@ -1,0 +1,12 @@
+
+{
+  "name": "imaginair-colors",
+  "version": "1.0.0",
+  "description": "",
+  "main": "run.py",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mathias ROSA",
+  "license": ""
+}

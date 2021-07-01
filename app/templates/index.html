@@ -11,8 +11,10 @@
 
     <div class="header">
         <div class="header-left">
-            <img src="{{ url_for('static', filename='img/assets/cpp_connect.svg') }}" alt="logo" class="logo">
-            <h1>CPP CONNECT</h1>
+            <a href="{{ url_for('index') }}">
+                <img src="{{ url_for('static', filename='img/assets/cpp_connect.svg') }}" alt="logo" class="logo">
+                <h1>CPP CONNECT</h1>
+            </a>
         </div>
         <div class="header-right">
             <a href="{{ url_for('login') }}">
@@ -26,7 +28,7 @@
         <div class="salut">
             <div class="illustration-1">
                 <img src="{{ url_for('static', filename='img/hexagon.svg') }}" alt="hexagon" id="hexagon">
-                <img src="{{ url_for('static', filename='img/bonome_samoussa.svg') }}" alt="bonome samoussa" id="samoussa">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/Sam.svg') }}" alt="bonome samoussa" id="samoussa">
             </div>
             
             <div class="texte-accueil">
@@ -52,8 +54,26 @@
                     <h1>Se connecter</h1>
                 </div></a>
             </div>
-            <img src="{{ url_for('static', filename='img/pate_sam_bonbon_contents.svg') }}" alt="queuleuleu" id="queuleuleu">
-        </div>    
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="queuleuleu">
+        </div>  
+        <div class="liste-fontions-texte">
+            <h1>Liste des fonctionnalités​</h1>
+        </div>
+        <div class="Calcule ta moyenne">
+            <div class="fiche-texte">
+                <h1>Calcule ta moyenne​</h1> 
+                <p>
+                    Tes notes seront récupérées depuis le site GEPI, ainsi tu pourras 
+                    les consulter rapidement et tu pourras également accéder à ta moyenne 
+                    générale ainsi que les moyennes par matières.
+                </p>
+            </div>
+            <div class="fiche-image">
+                <img src="{{ url_for('static', filename='img/hexagon_coupe.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="">
+            </div>
+
+        </div>
     </div>
 </body>
 </html>

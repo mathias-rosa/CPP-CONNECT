@@ -49,17 +49,20 @@ body{
     display: flex;
     height: 4em;
 }
-.header-right, .header a{
+.header a{
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    align-self: flex-end;
-    flex: 1;
     height: inherit;
     width: fit-content;
     color: inherit;
     text-decoration: inherit;
     cursor: pointer;
+}
+.header-right{
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    flex: 1;
 }
 .header-right:hover{
     text-decoration: underline solid 0.15em;
@@ -146,7 +149,7 @@ body{
     font-size: 0.7em;
     justify-content: center;
     color: var(--blanco);
-    border-radius: 1em;
+    border-radius: 0.6em;
     background-color: var(--bleu-cpp); 
     text-decoration: inherit;
     width: fit-content;
@@ -156,10 +159,11 @@ body{
     margin-top: 1em;
 }
 .connection-text h1{
-    margin: 0;
+    margin: 0.2em;
 }
 .connection-text a:hover {
     background-color: var(--couleur-accentuation);
+    transition: 100ms ease;
 }
 .connection img{
     display: flex;
@@ -169,4 +173,21 @@ body{
     min-height: 0;
     min-width: 0;
     align-self: flex-end;
+}
+.liste-fontions-texte{
+    display: flex;
+}
+.liste-fontions-texte h1{
+    display: flex;
+    color: var(--couleur-accentuation);
+    font-size: 3em;
+}
+.fiche-texte{
+    display: flex;
+    margin-left: 10em;
+    flex-direction: column;
+    position: absolute;
+}
+.fiche-texte h1{
+    margin: 0;
 }
