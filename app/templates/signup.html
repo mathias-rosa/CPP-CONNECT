@@ -21,33 +21,25 @@
     </div>
 
     <div class="content">
-        <div class="signup-box">
-            <h1>S'inscrire</h1>
-            <div class="inputs">
-                <input type="nom" name="name" id="name" placeholder="Nom">
-                <input type="prénom" name="surname" id="surname" placeholder="Prénom">
-                <input type="email" name="user" id="user" placeholder="Email">
-                <input type="password" name="password" id="password" placeholder="Mot de passe">
-            </div>
-            <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
-                <h2>J'ai déjà un compte, me connecter</h2>
-            </div></a>
-            <div class="connect">
-                <button class="connect-button">S'inscrire</button>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-
         <form class="form-signin" method="POST" action="/signup">
-          <h2 class="form-signin-heading">Sign Up</h2>
-          {{ form.hidden_tag() }}
-          {{ wtf.form_field(form.username) }}
-          {{ wtf.form_field(form.email) }}
-          {{ wtf.form_field(form.password) }}
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign Up</button>
+            <div class="signup-box">
+                <h1>S'inscrire</h1>
+                {{ form.hidden_tag() }}
+                <div class="inputs">
+                    <input type="text" name="surname" id="surname" placeholder="Prénom" required>
+                    <input type="text" name="name" id="name" placeholder="Nom" required>
+                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur", id="username", class_="input") }}
+                    {{ wtf.form_field(form.email, placeholder="Email", id="email") }}
+                    {{ wtf.form_field(form.password, placeholder="Mot de passe", id="password") }}
+                </div>
+                <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
+                    <h2>J'ai déjà un compte, me connecter</h2>
+                </div></a>
+                <div class="connect">
+                    <button class="btn btn-lg btn-primary btn-block" type='submit'>S'inscrire</button>
+                </div>
+            </div>
         </form>
-      
-      </div> <!-- /container -->
+    </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
-from flask import Flask, render_template, redirect, url_for
+import os
+from flask import Flask, render_template, redirect, url_for, send_from_directory, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField
@@ -6,6 +7,7 @@ from wtforms.validators import InputRequired, Email, Length
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+import datetime
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
@@ -27,14 +29,14 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 class LoginForm(FlaskForm):
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
-    remember = BooleanField('remember me')
+    username = StringField('', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('', validators=[InputRequired(), Length(min=8, max=80)])
+    remember = BooleanField('Se rappeller de moi')
 
 class RegisterForm(FlaskForm):
-    email = StringField('email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    username = StringField('username', validators=[InputRequired(), Length(min=4, max=15)])
-    password = PasswordField('password', validators=[InputRequired(), Length(min=8, max=80)])
+    email = StringField('', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    username = StringField('', validators=[InputRequired(), Length(min=4, max=15)])
+    password = PasswordField('', validators=[InputRequired(), Length(min=8, max=80)])
 
 @app.route('/favicon.ico')
 def fav():
@@ -42,10 +44,11 @@ def fav():
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index.html', year=datetime.date.today().year)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -56,7 +59,6 @@ def login():
                 return redirect(url_for('dashboard'))
 
         return '<h1>Invalid username or password</h1>'
-        #return '<h1>' + form.username.data + ' ' + form.password.data + '</h1>'
 
     return render_template('login.html', form=form)
 
@@ -75,10 +77,16 @@ def signup():
 
     return render_template('signup.html', form=form)
 
-@app.route('/dashboard')
+@app.route('/dashboard/')
 @login_required
 def dashboard():
     return render_template('dashboard.html', name=current_user.username)
+
+@app.route('/admin/')
+@login_required
+def admin():
+    return render_template('admin.html', name=current_user.username)
+
 
 @app.route('/logout')
 @login_required
@@ -89,6 +97,7 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)

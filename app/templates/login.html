@@ -21,34 +21,28 @@
     </div>
 
     <div class="content">
-        <div class="login-box">
-            <h1>Se connecter</h1>
-            <div class="inputs">
-                <input type="email" name="user" id="user" placeholder="Nom d'utilisateur ou email">
-                <input type="password" name="password" id="password" placeholder="Mot de passe">
-            </div>
-            <a href="{{ url_for('signup') }}" class="inscription" id="mdp_oublie" ><div class="bouton">
-                <h2>Mot de passe oublié ?</h2>
-            </div></a>
-            <div class="connect">
-                <a href="{{ url_for('signup') }}" class="inscription" ><div class="bouton">
-                    <h2>Ou s'inscrire</h2>
-                </div></a>
-                <button class="connect-button">Se connecter</button>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-
         <form class="form-signin" method="POST" action="/login">
-          <h2 class="form-signin-heading">Please sign in</h2>
-          {{ form.hidden_tag() }}
-          {{ wtf.form_field(form.username) }}
-          {{ wtf.form_field(form.password) }}
-          {{ wtf.form_field(form.remember) }}
-          <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <div class="login-box">
+                <h1>Se connecter</h1>
+                {{ form.hidden_tag() }}
+                <div class="inputs">
+                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur ou email", class_="user", id="user") }}
+                    {{ wtf.form_field(form.password, placeholder="Mot de passe", class_="password", id="password") }}
+                </div>
+                <div class="options">
+                    <a href="{{ url_for('signup') }}" class="inscription" id="mdp_oublie" ><div class="bouton">
+                        <h2>Mot de passe oublié ?</h2>
+                    </div></a>
+                    {{ wtf.form_field(form.remember) }}
+                </div>
+                <div class="connect">
+                    <a href="{{ url_for('signup') }}" class="inscription" ><div class="bouton">
+                        <h2>Ou s'inscrire</h2>
+                    </div></a>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+                </div>
+            </div>
         </form>
-        
-    </div> <!-- /container -->
+    </div>
 </body>
 </html>

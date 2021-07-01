@@ -21,7 +21,7 @@ body{
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
     border: 0.1em solid rgba( 255, 255, 255, 0.28 );
-    height: 16em;
+    height: 17em;
     width: 22em;
     padding: 2.5em;
     padding-top : 1.5em;
@@ -46,6 +46,7 @@ body{
     border-bottom: solid var(--bleu-cpp);
     border-radius: 0.1em;
     font-family: 'Poppins';
+    width: 100%;
 }
 .inputs input:focus-visible{
     outline: none;
@@ -55,9 +56,10 @@ body{
     display: flex;
     flex: 1;
     align-items: center;
-    justify-content: flex-end;
+    justify-content: space-between;
+    margin-top: 1em;
 }
-.connect-button{
+.btn{
     display: flex;
     padding-top: 0;
     padding: 0.4em;
@@ -71,6 +73,10 @@ body{
     font-size: 1.1em;
     font-weight: 800;
     cursor: pointer;
+}
+.btn:hover{
+    background-color: var(--couleur-accentuation);
+    transition: 100ms ease;
 }
 .inscription{
     display: flex;
@@ -94,9 +100,25 @@ body{
     color: var(--bleu-cpp);
     transition: 100ms ease;
 }
-#mdp_oublie{
-    justify-content: center;
+.options{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
     color: var(--bleu-cpp);
-    font-size: 0.5em;
+    font-size: 0.8em;
     font-weight: 300;
+    margin-top: 1em;
+    flex-direction: column;
+}
+.checkbox{
+    display: flex;
+    margin-top: 0.8em;
+    font-weight: 700;
+    font-style: normal;
+}
+.checkbox input{
+    margin-left: 0;
+}
+.bouton h2{
+    margin-top: 0;
 }
