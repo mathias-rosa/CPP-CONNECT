@@ -190,4 +190,11 @@ body{
 }
 .fiche-texte h1{
     margin: 0;
+    line-height: 1.2em;
+    font-size: 2.3em;
+    color: var(--bleu-cpp);
+}
+.fiche-texte p{
+    margin: 0;
+    margin-top: 1em;
 }

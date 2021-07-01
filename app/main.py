@@ -1,8 +1,9 @@
 import os
 from flask import Flask, render_template, send_from_directory, redirect, url_for
+from flask import Blueprint
+from . import db
 
 app = Flask(__name__)
-
 
 @app.route('/favicon.ico')
 def fav():
