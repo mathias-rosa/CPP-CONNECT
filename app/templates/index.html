@@ -23,7 +23,37 @@
     </div>
 
     <div class="content">
+        <div class="salut">
+            <div class="illustration-1">
+                <img src="{{ url_for('static', filename='img/hexagon.svg') }}" alt="hexagon" id="hexagon">
+                <img src="{{ url_for('static', filename='img/bonome_samoussa.svg') }}" alt="bonome samoussa" id="samoussa">
+            </div>
+            
+            <div class="texte-accueil">
+                <h1>Salut !</h1>
+                <p>
+                    Si tu est ici c’est que tu est étudiant 
+                    à la prépa des INP de la Réunion ou que tu souhaite le devenir.
+                </p>
+                <p>
+                    Ce site renferme une collection d’outils qui
+                    vont te simplifier la vie si tu est déjà l’un des nôtres
+                    ou te faire découvrir la prépa
+                </p>
+            </div>
+        </div>
 
+        <div class="connection">
+            <div class="connection-text">
+                <p>
+                    Alors connecte-toi vite pour commencer…​
+                </p>
+                <a href="{{ url_for('login') }}" ><div class="bouton">
+                    <h1>Se connecter</h1>
+                </div></a>
+            </div>
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbon_contents.svg') }}" alt="queuleuleu" id="queuleuleu">
+        </div>    
     </div>
 </body>
 </html>
