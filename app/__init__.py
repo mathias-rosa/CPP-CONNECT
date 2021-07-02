@@ -33,7 +33,7 @@ def load_user(user_id):
 
 class LoginForm(FlaskForm):
     username = StringField('', validators=[InputRequired()])
-    password = PasswordField('', validators=[InputRequired(), Length(min=8, max=80)])
+    password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
     remember = BooleanField('Se rappeller de moi')
 
 class RegisterForm(FlaskForm):
