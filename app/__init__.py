@@ -25,6 +25,7 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(15), unique=True)
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
+    admin = db.Column(db.Boolean)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -39,8 +40,8 @@ class RegisterForm(FlaskForm):
     name = StringField('', validators=[InputRequired()])
     surname = StringField('', validators=[InputRequired()])
     email = StringField('', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    password = PasswordField('', validators=[InputRequired(), Length(min=8, max=80)])
-    password_confirm = PasswordField('', validators=[InputRequired(), Length(min=8, max=80)])
+    password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+    password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
 
 @app.route('/favicon.ico')
 def fav():
@@ -61,7 +62,8 @@ def signup():
                             surname=form.name.data,
                             username=username,
                             email=form.email.data,
-                            password=hashed_password)
+                            password=hashed_password,
+                            admin=False)
             db.session.add(new_user)
             db.session.commit()
             user = User.query.filter_by(username=username).first()
