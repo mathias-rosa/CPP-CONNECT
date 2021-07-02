@@ -58,7 +58,7 @@ def signup():
         if form.password.data == form.password_confirm.data:
             hashed_password = generate_password_hash(form.password.data, method='sha256')
             username = form.surname.data.lower() + "." + form.name.data.lower()
-            new_user = User(name=form.name.data,
+            new_user = User(name=form.name.data.upper(),
                             surname=form.surname.data,
                             username=username,
                             email=form.email.data,
@@ -99,17 +99,23 @@ def login():
 @app.route('/dashboard/')
 @login_required
 def dashboard():
-    return render_template('dashboard.html', current_user=current_user)
+    if current_user.admin == 1:
+        return redirect(url_for("admin"))
+    else:
+        return render_template('dashboard.html', current_user=current_user)
 
 
-@app.route('/admin/')
+@app.route('/admin-dashboard/')
 @login_required
 def admin():
-    userlist = [user for user in db.session.query(User)]
-    return render_template('admin.html', 
-                            current_user=current_user,
-                            userlist=userlist
-                            )
+    if current_user.admin == 0:
+        return redirect(url_for("dashboard"))
+    else:
+        userlist = [user for user in db.session.query(User)]
+        return render_template('admin.html', 
+                                current_user=current_user,
+                                userlist=userlist
+                                )
 
 
 @app.route('/logout')
