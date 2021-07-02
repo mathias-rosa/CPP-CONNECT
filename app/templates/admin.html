@@ -1,14 +1,29 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paneau d'administration</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <h1>Bonjour {{ current_user.username }}</h1>
-    
-</body>
-</html>
+{% block content %}
+
+<div class="content">
+    <h1>Bonjour {{ current_user.surname }}</h1>
+
+    <h1>Voici la liste des utilisateurs</h1>
+
+    {% for user in userlist %}
+
+    <div class="user" id="{{user.username}}">
+        <h2 id="name">Nom : {{user.name}}</h2>
+        <h2 id="surname">Prénom : {{user.surname}}</h2>
+        <h2 id="username">Nom d'utilisateur : {{user.username}}</h2>
+        <h2 id="email">Adresse email : {{user.name}}</h2>
+        <h2 id="classe">
+            {% if user.admin == 1 %}
+            Admin
+            {% else %}
+            Lambda
+            {% endif %}
+        </h2>
+    </div>
+
+    {% endfor %}
+</div>
+
+{% endblock %}
