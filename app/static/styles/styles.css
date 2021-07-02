@@ -22,11 +22,22 @@ body{
 
 .footer{
     display: flex;
-    height: 3em;
+    height: 10em;
     font-size: 0.5em;
     padding: 2em;
+    background-color: var(--gris-profond);
+    flex-direction: column;
 }
-
+.footer-text{
+    display: flex;
+    color: var(--blanco);
+}
+#creator{
+    display: flex;
+    justify-content: flex-end;
+    align-self: flex-end;
+    flex: 1;
+}
 .header{
     display: flex;
     flex: 1;
@@ -38,6 +49,10 @@ body{
     padding-top: 0.2em;
     padding-bottom: 0.2em;
     font-weight: 600;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 2;
 }
 .header-left{
     display: flex;

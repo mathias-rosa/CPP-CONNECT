@@ -26,11 +26,11 @@
                 <h1>S'inscrire</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    <input type="text" name="surname" id="surname" placeholder="Prénom" required>
-                    <input type="text" name="name" id="name" placeholder="Nom" required>
-                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur", id="username", class_="input") }}
+                    {{ wtf.form_field(form.name, placeholder="Nom", id="name", class_="input") }}
+                    {{ wtf.form_field(form.surname, placeholder="Prénom", id="name", class_="input") }}
                     {{ wtf.form_field(form.email, placeholder="Email", id="email") }}
                     {{ wtf.form_field(form.password, placeholder="Mot de passe", id="password") }}
+                    {{ wtf.form_field(form.password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
                 </div>
                 <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
                     <h2>J'ai déjà un compte, me connecter</h2>
