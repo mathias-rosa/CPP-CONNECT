@@ -14,7 +14,7 @@
     <div class="header">
         <div class="header-left">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/assets/cpp_connect.svg') }}" alt="logo" class="logo">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/cpp_connect.svg') }}" alt="logo" class="logo">
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
@@ -44,5 +44,6 @@
             </div>
         </form>
     </div>
+    {% include 'darkmode.html' %}
 </body>
 </html>

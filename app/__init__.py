@@ -26,6 +26,7 @@ class User(UserMixin, db.Model):
     email = db.Column(db.String(50), unique=True)
     password = db.Column(db.String(80))
     admin = db.Column(db.Boolean)
+    darkmode = db.Column(db.Boolean)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -49,10 +50,25 @@ def fav():
 
 @app.route('/')
 def index():
-    return render_template('index.html', year=datetime.date.today().year)
+    darkmode_status = "lightmode"
+    try:
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
+    except:
+        print("current_user n'existe pas")
+    return render_template('index.html', 
+                            year=datetime.date.today().year,
+                            darkmode_status=darkmode_status,
+                            )
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
+    darkmode_status = "lightmode"
+    try:
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
+    except:
+        print("current_user n'existe pas")
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data == form.password_confirm.data:
@@ -72,12 +88,20 @@ def signup():
 
         return "<h1>Les mots de passe ne correspondent pas</h1>"
 
-    return render_template('signup.html', form=form)
+    return render_template('signup.html', 
+                            form=form,
+                            darkmode_status=darkmode_status,
+                            )
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-
+    darkmode_status = "lightmode"
+    try:
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
+    except:
+        print("current_user n'existe pas")
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -93,28 +117,41 @@ def login():
 
         return '<h1>Invalid username or password</h1>'
 
-    return render_template('login.html', form=form)
+    return render_template('login.html', 
+                            form=form,
+                            darkmode_status=darkmode_status,
+                            )
 
 
 @app.route('/dashboard/')
 @login_required
 def dashboard():
+    darkmode_status = "lightmode"
     if current_user.admin == 1:
         return redirect(url_for("admin"))
     else:
-        return render_template('dashboard.html', current_user=current_user)
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
+        return render_template('dashboard.html', 
+                                current_user=current_user,
+                                darkmode_status=darkmode_status,
+                                )
 
 
 @app.route('/admin-dashboard/')
 @login_required
 def admin():
+    darkmode_status = "lightmode"
     if current_user.admin == 0:
         return redirect(url_for("dashboard"))
     else:
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
         userlist = [user for user in db.session.query(User)]
         return render_template('admin.html', 
                                 current_user=current_user,
-                                userlist=userlist
+                                userlist=userlist,
+                                darkmode_status=darkmode_status,
                                 )
 
 
@@ -127,7 +164,16 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    return render_template('404.html'), 404
+    darkmode_status = "lightmode"
+    try:
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
+    except:
+        print("current_user n'existe pas")
+
+    return render_template('404.html',
+                            darkmode_status=darkmode_status,
+                            ), 404
 
 
 if __name__ == '__main__':

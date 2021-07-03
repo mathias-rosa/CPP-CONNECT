@@ -12,14 +12,14 @@
     <div class="header">
         <div class="header-left">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/assets/cpp_connect.svg') }}" alt="logo" class="logo">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/cpp_connect.svg') }}" alt="logo" class="logo">
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
         <div class="header-right">
             <a href="{{ url_for('login') }}">
                 <h2>Se connecter</h2>
-                <img src="{{ url_for('static', filename='img/assets/user_connect.svg') }}" alt="logo" class="login-img">    
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
             </a>
         </div>
     </div>
@@ -27,7 +27,7 @@
     <div class="content">
         <div class="salut">
             <div class="illustration-1">
-                <img src="{{ url_for('static', filename='img/hexagon.svg') }}" alt="hexagon" id="hexagon">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon.svg') }}" alt="hexagon" id="hexagon">
                 <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/Sam.svg') }}" alt="bonome samoussa" id="samoussa">
             </div>
             
@@ -54,14 +54,14 @@
                     <h1>Se connecter</h1>
                 </div></a>
             </div>
-            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="queuleuleu">
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="dessin">
         </div>
         <div class="liste-fontions-texte">
             <h1>Liste des fonctionnalités​</h1>
         </div>
         <div class="fiche-1" id="1">
             <div class="fiche-texte-1">
-                <h1>Calcule <br> de moyenne​</h1> 
+                <h1>Calculs <br> de moyenne​</h1> 
                 <p>
                     Tes notes seront récupérées depuis le site GEPI, ainsi tu pourras 
                     les consulter rapidement et tu pourras également accéder à ta moyenne 
@@ -69,14 +69,14 @@
                 </p>
             </div>
             <div class="fiche-image-1">
-                <img src="{{ url_for('static', filename='img/hexagon_coupe_droit.svg') }}" alt="">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
             </div>
         </div>
         <div class="fiche-2" id="2">
             <div class="fiche-image-2">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="balançoire">
-                <img src="{{ url_for('static', filename='img/hexagon_coupe_gauche.svg') }}" alt="hexa-gauche" id="hexa-gauche">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="dessin">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_gauche.svg') }}" alt="hexa-gauche" id="hexa-gauche">
             </div>
             <div class="fiche-texte-2">
                 <h1>Agenda <br> collectif​</h1> 
@@ -96,14 +96,14 @@
                 </p>
             </div>
             <div class="fiche-image-1">
-                <img src="{{ url_for('static', filename='img/hexagon_coupe_droit.svg') }}" alt="">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
             </div>
         </div>
         <div class="fiche-2" id="4">
             <div class="fiche-image-2">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="balançoire">
-                <img src="{{ url_for('static', filename='img/hexagon_coupe_gauche.svg') }}" alt="hexa-gauche" id="hexa-gauche">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="dessin">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_gauche.svg') }}" alt="hexa-gauche" id="hexa-gauche">
             </div>
             <div class="fiche-texte-2">
                 <h1>Messagerie et <br>rappels personnalisés​</h1> 
@@ -122,13 +122,14 @@
                 </p>
             </div>
             <div class="fiche-image-1">
-                <img src="{{ url_for('static', filename='img/hexagon_coupe_droit.svg') }}" alt="">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="">
+                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="", id="dessin">
             </div>
         </div>
     </div>
 
     {% include 'footer.html' %}
+    {% include 'darkmode.html' %}
     
 </body>
 </html>

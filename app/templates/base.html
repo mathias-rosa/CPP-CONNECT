@@ -14,14 +14,14 @@
     <div class="header">
         <div class="header-left">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/assets/cpp_connect.svg') }}" alt="logo" class="logo">
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/cpp_connect.svg') }}" alt="logo" class="logo">
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
         <div class="header-right">
             <a href="{{ url_for('dashboard') }}">
                 <h2>{{current_user.name}} {{current_user.surname}}</h2>
-                <img src="{{ url_for('static', filename='img/assets/user_connect.svg') }}" alt="logo" class="login-img">    
+                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
             </a>
         </div>
     </div>
@@ -29,6 +29,7 @@
     {% block content %}{% endblock %}
 
     {% include 'footer.html' %}
+    {% include 'darkmode.html' %}
     
 </body>
 </html>

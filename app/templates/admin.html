@@ -17,11 +17,14 @@
         <h2 id="classe">
             {% if user.admin == 1 %}
             Admin
+            {% elif user.admin == 2 %}
+            Délégué
             {% else %}
             Lambda
             {% endif %}
         </h2>
     </div>
+
 
     {% endfor %}
 </div>

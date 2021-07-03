@@ -66,7 +66,7 @@ body{
     border-radius: 0.5em;
     border: none;
     background-color: var(--bleu-cpp);
-    color: var(--blanco);
+    color: white;
     width: 10em;
     justify-content: center;
     font-family: 'Poppins';
