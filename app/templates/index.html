@@ -8,109 +8,106 @@
 {% block content %}
 
 <div class="content">
-
-    <div class="content">
-        <div class="salut">
-            <div class="illustration-1">
-            <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_Sam.svg') }}" alt="hexagon" id="hexagon">
-        </div>            
-            <div class="texte-accueil">
-                <h1>Salut !</h1>
-                <p>
-                    Si tu es ici c’est que tu es étudiant 
-                    à la prépa des INP de la Réunion ou que tu souhaites le devenir.
-                </p>
-                <p>
-                    Ce site renferme une collection d’outils qui
-                    vont te simplifier la vie si tu es déjà l’un des nôtres
-                    ou te faire découvrir la prépa.
-                </p>
-            </div>
-        </div>
-    
-        <div class="connection">
-            <div class="connection-text">
-                <p>
-                    Alors connecte-toi vite pour commencer…​
-                </p>
-                <a href="{{ url_for('login') }}" class="cpp-bouton"><div>
-                    <h1>Se connecter</h1>
-                </div></a>
-            </div>
-            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="dessin">
-        </div>
-        <div class="liste-fontions-texte">
-            <h1>Liste des fonctionnalités​</h1>
-        </div>
-        <div class="fiche-1" id="1">
-            <div class="fiche-texte-1">
-                <h1>Calculs <br> de moyenne​</h1> 
-                <p>
-                    Tes notes seront récupérées depuis le site GEPI, ainsi tu pourras 
-                    les consulter rapidement et tu pourras également accéder à ta moyenne 
-                    générale ainsi que les moyennes par matières.
-                </p>
-            </div>
-            <div class="fiche-image">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="hexagon" id="hexagon">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
-            </div>
-        </div>
-        <div class="fiche-2" id="2">
-            <div class="fiche-image">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="dessin">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_gauche.svg') }}" alt="hexagon" id="hexagon">
-            </div>
-            <div class="fiche-texte-2">
-                <h1>Agenda <br> collectif​</h1> 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                </p>
-            </div>
-        </div>
-        <div class="fiche-1" id="3">
-            <div class="fiche-texte-1">
-                <h1>Fichier des <br>devoirs surveillés</h1> 
-                <p>
-                    Tu pourras accéder au fichier des devoirs surveillés
-                    des promotions précédentes pour ainsi te préparer efficacement
-                    pour les prochains devoirs surveillés à venir!
-                </p>
-            </div>
-            <div class="fiche-image">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="hexagon"  id="hexagon">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
-            </div>
-        </div>
-        <div class="fiche-2" id="4">
-            <div class="fiche-image">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="dessin">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_gauche.svg') }}" alt="hexagon"  id="hexagon">
-            </div>
-            <div class="fiche-texte-2">
-                <h1>Messagerie et <br>rappels personnalisés​</h1> 
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-                    sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-                </p>
-            </div>
-        </div>
-        <div class="fiche-1" id="5">
-            <div class="fiche-texte-1">
-                <h1>Compte Gepi et <br> Univ-lorraine​</h1> 
-                <p>
-                    Tu pourras enregistrer tes identifiants par rapport aux différentes
-                    plateformes étudiantes et accéder aux différents sites plus facilement.
-                </p>
-            </div>
-            <div class="fiche-image">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="hexagon" id="hexagon">
-                <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
-            </div>
+    <div class="salut">
+        <div class="illustration-1">
+        <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_Sam.svg') }}" alt="hexagon" id="hexagon">
+    </div>            
+        <div class="texte-accueil">
+            <h1>Salut !</h1>
+            <p>
+                Si tu es ici c’est que tu es étudiant 
+                à la prépa des INP de la Réunion ou que tu souhaites le devenir.
+            </p>
+            <p>
+                Ce site renferme une collection d’outils qui
+                vont te simplifier la vie si tu es déjà l’un des nôtres
+                ou te faire découvrir la prépa.
+            </p>
         </div>
     </div>
 
+    <div class="connection">
+        <div class="connection-text">
+            <p>
+                Alors connecte-toi vite pour commencer…​
+            </p>
+            <a href="{{ url_for('login') }}" class="cpp-bouton"><div>
+                <h1>Se connecter</h1>
+            </div></a>
+        </div>
+        <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="dessin">
+    </div>
+    <div class="liste-fontions-texte">
+        <h1>Liste des fonctionnalités​</h1>
+    </div>
+    <div class="fiche-1" id="1">
+        <div class="fiche-texte-1">
+            <h1>Calculs <br> de moyenne​</h1> 
+            <p>
+                Tes notes seront récupérées depuis le site GEPI, ainsi tu pourras 
+                les consulter rapidement et tu pourras également accéder à ta moyenne 
+                générale ainsi que les moyennes par matières.
+            </p>
+        </div>
+        <div class="fiche-image">
+            <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="hexagon" id="hexagon">
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
+        </div>
+    </div>
+    <div class="fiche-2" id="2">
+        <div class="fiche-image">
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="dessin">
+            <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_gauche.svg') }}" alt="hexagon" id="hexagon">
+        </div>
+        <div class="fiche-texte-2">
+            <h1>Agenda <br> collectif​</h1> 
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+            </p>
+        </div>
+    </div>
+    <div class="fiche-1" id="3">
+        <div class="fiche-texte-1">
+            <h1>Fichier des <br>devoirs surveillés</h1> 
+            <p>
+                Tu pourras accéder au fichier des devoirs surveillés
+                des promotions précédentes pour ainsi te préparer efficacement
+                pour les prochains devoirs surveillés à venir!
+            </p>
+        </div>
+        <div class="fiche-image">
+            <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="hexagon"  id="hexagon">
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
+        </div>
+    </div>
+    <div class="fiche-2" id="4">
+        <div class="fiche-image">
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/balançoire.svg') }}" alt="balançoire" id="dessin">
+            <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_gauche.svg') }}" alt="hexagon"  id="hexagon">
+        </div>
+        <div class="fiche-texte-2">
+            <h1>Messagerie et <br>rappels personnalisés​</h1> 
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+                sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
+            </p>
+        </div>
+    </div>
+    <div class="fiche-1" id="5">
+        <div class="fiche-texte-1">
+            <h1>Compte Gepi et <br> Univ-lorraine​</h1> 
+            <p>
+                Tu pourras enregistrer tes identifiants par rapport aux différentes
+                plateformes étudiantes et accéder aux différents sites plus facilement.
+            </p>
+        </div>
+        <div class="fiche-image">
+            <img src="{{ url_for('static', filename='img/' + darkmode_status + '/hexagon_coupe_droit.svg') }}" alt="hexagon" id="hexagon">
+            <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/forts.svg') }}" alt="" id="dessin">
+        </div>
+    </div>
 </div>
+
 
 {% endblock %}

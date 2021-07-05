@@ -77,17 +77,19 @@
 .fiche-2{
     display: flex;
     flex-direction: row-reverse;
-    margin-right: 2%;
     margin-bottom: 6%;
 }
 .fiche-image{
     display: flex;
     flex-direction: row;
     align-items: flex-end;
+    position: relative;
 }
 .fiche-image #hexagon{
     height: 17em;
     width: auto;
+    position: relative;
+    min-width: 0;
 }
 .fiche-image #dessin{
     height: 5em;
@@ -111,7 +113,7 @@
     align-content: flex-end;
     align-items: flex-end;
     text-align: end;
-    margin-right: 7em;
+    margin-right: 7.5em;
     margin-left: 3%;
 }
 .fiche-texte-1 h1{
@@ -120,6 +122,8 @@
     line-height: 1.1em;
     font-size: 2.5em;
     color: var(--bleu-cpp);
+    height: 2.35em;
+    overflow: auto;
 }
 .fiche-texte-1 p{
     margin: 0;
@@ -137,6 +141,8 @@
     line-height: 1.1em;
     font-size: 2.5em;
     color: var(--bleu-cpp);
+    height: 2.35em;
+    overflow: auto;
 }
 .fiche-texte-2 p{
     margin: 0;
@@ -150,6 +156,7 @@
 
 @media only screen and (max-width: 600px) {
     #hexagon {
-        width: 17em;
+        height: 21em;
+        width: auto;
     }
   }
