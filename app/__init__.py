@@ -44,6 +44,13 @@ class RegisterForm(FlaskForm):
     password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
 
+class ChangeSelfInformationsForm(FlaskForm) :
+    email = StringField('', validators=[Email(message='Invalid email'), Length(max=50)])
+    new_password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+    new_password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+    current_password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+
+
 @app.route('/favicon.ico')
 def fav():
     return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico')
@@ -154,6 +161,16 @@ def admin():
                                 darkmode_status=darkmode_status,
                                 )
 
+@app.route('/profile', methods=['GET', 'POST'])
+def profile():
+    darkmode_status = "lightmode"
+    if current_user.darkmode == True:
+        darkmode_status = 'darkmode'
+    form = ChangeSelfInformationsForm()
+    return render_template('profile.html', 
+                            form=form,
+                            darkmode_status=darkmode_status,
+                            )
 
 @app.route('/logout')
 @login_required

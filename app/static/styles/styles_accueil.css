@@ -1,0 +1,148 @@
+
+.salut{
+    display: flex;
+    flex-direction: row;
+}
+.texte-accueil{
+    margin-left: 4%;
+}
+.illustration-1{
+    display: flex;
+    height: fit-content;
+    margin-left: 3em;
+}
+#hexagon{
+    display: flex;
+    width: 23em;
+}
+.texte-accueil{
+    display: flex;
+    flex-direction: column;
+}
+.texte-accueil h1{
+    display: flex;
+    color: var(--couleur-accentuation);
+    font-size: 3em;
+    margin: 0.5em;
+    margin-left: 0;
+    margin-top: 1em;
+    margin-bottom: 0;
+}
+.texte-accueil p{
+    display: flex;
+    margin: 0.3em;
+    margin-left: 0;
+    font-size: 1.2em;
+}
+.connection{
+    display: flex;
+    margin-top: 2em;
+    margin-bottom: 2em;
+}
+.connection-text {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    padding: 1em;
+    padding-left: 0;
+    flex: 2;
+}
+.connection-text p{
+    display: flex;
+    font-size: 1.5em;
+    margin: 0;
+}
+.connection img{
+    display: flex;
+    width: 35%;
+    align-self: flex-end;
+    flex: 1;
+}
+.liste-fontions-texte{
+    display: flex;
+}
+.liste-fontions-texte h1{
+    display: flex;
+    color: var(--couleur-accentuation);
+    font-size: 3em;
+}
+
+#dessin{
+    color: var(--bleu-cpp);
+}
+
+.fiche-1{
+    margin-bottom: 6%;
+}
+.fiche-2{
+    display: flex;
+    flex-direction: row-reverse;
+    margin-right: 3em;
+    margin-bottom: 6%;
+}
+.fiche-image{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
+.fiche-image #hexagon{
+    height: 17em;
+    width: auto;
+}
+.fiche-image #dessin{
+    height: 5em;
+    width: auto;
+    padding: 2%;
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.fiche-texte-1{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    margin-left: 9em;
+    margin-right: 3%;
+}
+.fiche-texte-2{
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    position: absolute;
+    align-content: flex-end;
+    align-items: flex-end;
+    text-align: end;
+    margin-right: 8em;
+    margin-left: 3%;
+}
+.fiche-texte-1 h1{
+    margin: 0;
+    margin-top: -0.3em;
+    line-height: 1.1em;
+    font-size: 2.5em;
+    color: var(--bleu-cpp);
+}
+.fiche-texte-1 p{
+    margin: 0;
+    margin-top: 0.2em;
+    height: 5.5em;
+    overflow-y: auto;
+    font-size: 1.2em;
+    width: 100%;
+}
+.fiche-texte-2 h1{
+    margin: 0;
+    width: fit-content;
+    width: -moz-fit-content;
+    margin-top: -0.3em;
+    line-height: 1.1em;
+    font-size: 2.5em;
+    color: var(--bleu-cpp);
+}
+.fiche-texte-2 p{
+    margin: 0;
+    margin-top: 0.2em;
+    height: 5.5em;
+    overflow-y: auto;
+    font-size: 1.2em;
+    width: 100%;
+}

@@ -1,12 +1,21 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>La page demandée n'existe pas 😥</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block head %}
+<title>La page demandée n'existe pas 😥</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/styles_404.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+    <img src="{{ url_for('static', filename='img/' + darkmode_status + '/erreur_404.svg') }}" alt="">
+
+    <h1>Il semblerait que vous soyez perdu...</h1>
+    <a href="{{ url_for('index') }}" class="cpp-bouton"><div>
+        <h1>Retourner à la page d'accueil</h1>
+    </div></a>
+
+</div>
+
+{% endblock %}

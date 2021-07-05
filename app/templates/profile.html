@@ -1,0 +1,30 @@
+
+{% import "bootstrap/wtf.html" as wtf %}
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
+<title>Tableau de bord Admin</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+    <h1>{{ current_user.surname }} {{ current_user.name }}</h1>
+
+    <form class="form-signin" method="POST" action="/signup">
+        <h1>Modifier vos informations</h2>
+        {{ form.hidden_tag() }}
+        <div class="inputs">
+            {{ wtf.form_field(form.email, placeholder="Email", id="email") }}
+            {{ wtf.form_field(form.current_password, placeholder="Mot de passe actuel", id="password") }}
+            {{ wtf.form_field(form.new_password, placeholder="Nouveau mot de passe", id="password") }}
+            {{ wtf.form_field(form.new_password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+    </form>
+
+</div>
+
+{% endblock %}

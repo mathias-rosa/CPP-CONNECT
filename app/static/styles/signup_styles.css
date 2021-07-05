@@ -4,9 +4,6 @@
 .header h1{
     font-size: 1.5em;
 }
-.logo{
-    height: 3em;
-}
 .content{
     justify-content: center;
     align-items: center;
@@ -54,25 +51,6 @@
     flex: 1;
     align-items: flex-end;
     justify-content: flex-end;
-}
-.btn{
-    display: flex;
-    padding-top: 0;
-    padding: 0.4em;
-    border-radius: 0.5em;
-    border: none;
-    background-color: var(--bleu-cpp);
-    color: var(--blanco);
-    width: 7em;
-    justify-content: center;
-    font-family: 'Poppins';
-    font-size: 1.1em;
-    font-weight: 800;
-    cursor: pointer;
-}
-.btn:hover{
-    background-color: var(--couleur-accentuation);
-    transition: 100ms ease;
 }
 .login{
     display: flex;

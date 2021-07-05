@@ -5,9 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
     {% block head %}{% endblock %}
-    <title>CPP CONNECT</title>
 </head>
 <body>
 
@@ -19,10 +17,17 @@
             </a>
         </div>
         <div class="header-right">
-            <a href="{{ url_for('dashboard') }}">
-                <h2>{{current_user.name}} {{current_user.surname}}</h2>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">
+                <h2>Se connecter</h2>
                 <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
             </a>
+            {% else %}
+                <a href="{{ url_for('profile') }}">
+                    <h2>{{current_user.name}} {{current_user.surname}}</h2>
+                    <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
+                </a>
+            {% endif %}
         </div>
     </div>
     

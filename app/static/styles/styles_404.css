@@ -1,0 +1,12 @@
+.content img{
+    max-width: 40em;
+    max-height: 20em;
+    height: auto;
+    width: auto;
+}
+.content{
+    padding-bottom: 3%;
+}
+.content h1{
+    margin-bottom: 0;
+}
