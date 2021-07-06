@@ -1,10 +1,19 @@
+html{
+    display: flex;
+    flex-direction: column;
+}
+body{
+    flex: 1;
+}
 .header{
+    flex-grow: 0;
     height: 3.5em;
 }
 .header h1{
     font-size: 1.5em;
 }
 .content{
+    flex: 0.8;
     justify-content: center;
     align-items: center;
     height: 100%;

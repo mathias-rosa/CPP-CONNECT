@@ -38,10 +38,10 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Se rappeller de moi')
 
 class RegisterForm(FlaskForm):
-    name = StringField('', validators=[InputRequired()])
-    surname = StringField('', validators=[InputRequired()])
-    email = StringField('', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
-    password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+    name = StringField('Nom', validators=[InputRequired()])
+    surname = StringField('Prénom', validators=[InputRequired()])
+    email = StringField('Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
+    password = PasswordField('Mot de passe', validators=[InputRequired(), Length(min=6, max=80)])
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
 
 class ChangeSelfInformationsForm(FlaskForm) :

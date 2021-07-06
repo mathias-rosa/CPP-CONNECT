@@ -1,23 +1,32 @@
+html{
+    display: flex;
+    flex-direction: column;
+}
+body{
+    flex: 1;
+}
 .header{
+    flex-grow: 0;
     height: 3.5em;
 }
 .header h1{
     font-size: 1.5em;
 }
 .content{
+    flex: 0.8;
     justify-content: center;
     align-items: center;
     height: 100%;
 }
 .signup-box{
-    background: rgba( 255, 255, 255, 0.4 );
+    background: rgb(255 255 255);
     box-shadow: 0 8px 32px 0 var(--gris-clair);
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
     border: 0.1em solid rgba( 255, 255, 255, 0.28 );
-    height: 25em;
-    width: 22em;
+    /* height: 25em; */
+    width: 20em;
     padding: 1.5em;
     padding-bottom: 1.25em;
 }
@@ -28,19 +37,19 @@
 .inputs{
     display: flex;
     flex-direction: column;
-    width: 18em;
 }
 .inputs input{
     display: flex;
-    padding-top: 0.4em;
-    margin-top: 1em;
+    padding-top: 0.2em;
+    margin-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
     height: 2.3em;
     background-color: transparent;
-    border: none;
-    border-bottom: solid var(--bleu-cpp);
-    border-radius: 0.1em;
+    border: solid 0.14em var(--gris-clair);
+    border-radius: 0.3em;
     font-family: 'Poppins';
-    width: 100%;
+    color: var(--gris-profond);
 }
 .inputs input:focus-visible{
     outline: none;
@@ -48,9 +57,7 @@
 }
 .connect{
     display: flex;
-    flex: 1;
-    align-items: flex-end;
-    justify-content: flex-end;
+    margin-top: 1em;
 }
 .login{
     display: flex;
@@ -58,16 +65,30 @@
     color: var(--gris-profond);
     font-size: 0.65em;
     text-decoration: none;
-    font-weight: 400;
-    width: fit-content;
-    width: -moz-fit-content;
-    margin-top: 1em;
-    margin-bottom: 0;
-    font-style: italic;
 }
 .login:hover{
     text-decoration: underline solid 0.2em;
     text-underline-offset: 0.2em;
     color: var(--bleu-cpp);
     transition: 100ms ease;
+}
+
+.nom-prenom{
+    display: flex;
+    justify-content: space-between;
+}
+.nom-prenom input{
+    width: 10.5em;
+}
+
+.form-group {
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+.login h2 {
+    margin-bottom: 0;
+}
+.btn{
+    width: 100%;
 }

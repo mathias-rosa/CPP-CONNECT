@@ -27,18 +27,21 @@
                 <h1>S'inscrire</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    {{ wtf.form_field(form.name, placeholder="Nom", id="name", class_="input") }}
-                    {{ wtf.form_field(form.surname, placeholder="Prénom", id="name", class_="input") }}
+                    <div class="nom-prenom">
+                        {{ wtf.form_field(form.name, placeholder="Nom", id="name", class_="input") }}
+                        {{ wtf.form_field(form.surname, placeholder="Prénom", id="name", class_="input") }}
+                    </div>
+
                     {{ wtf.form_field(form.email, placeholder="Email", id="email") }}
-                    {{ wtf.form_field(form.password, placeholder="Mot de passe", id="password") }}
+                    {{ wtf.form_field(form.password, placeholder="Entrez votre Mot de passe", id="password") }}
                     {{ wtf.form_field(form.password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
+                </div>
+                <div class="connect">
+                    <button class="btn btn-lg btn-primary btn-block" type='submit'>S'inscrire</button>
                 </div>
                 <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
                     <h2>J'ai déjà un compte, me connecter</h2>
                 </div></a>
-                <div class="connect">
-                    <button class="btn btn-lg btn-primary btn-block" type='submit'>S'inscrire</button>
-                </div>
             </div>
         </form>
     </div>
