@@ -60,6 +60,9 @@ body{
     outline: none;
     border-bottom: solid var(--couleur-accentuation);
 }
+.inputs label{
+    color: var(--gris-profond);
+}
 .help-block{
     display: flex;
     margin-bottom: 0.1em;
