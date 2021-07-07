@@ -19,13 +19,12 @@ body{
     height: 100%;
 }
 .signup-box{
-    background: rgb(255 255 255);
+    background: var(--blanc-ou-noir);
     box-shadow: 0 8px 32px 0 var(--gris-clair);
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
-    border: 0.1em solid rgba( 255, 255, 255, 0.28 );
-    /* height: 25em; */
+    border: 0.1em solid var(--gris-clair);
     width: 20em;
     padding: 1.5em;
     padding-bottom: 1.25em;
@@ -33,6 +32,12 @@ body{
 .signup-box h1{
     margin: 0;
     color: var(--couleur-accentuation);
+}
+
+.form-group{
+    margin-top: 0.5em;
+    display: flex;
+    flex-direction: column;
 }
 .inputs{
     display: flex;
@@ -55,6 +60,21 @@ body{
     outline: none;
     border-bottom: solid var(--couleur-accentuation);
 }
+.help-block{
+    display: flex;
+    margin-bottom: 0.1em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    color: white;
+    font-size: 0.8em;
+    font-weight: 500;
+    background-color: rgb(245 34 45 / 70%);
+    border: solid 0.14em #f5222d;
+    border-radius: 0.3em;
+    text-align: center;
+    justify-content: center;
+}
 .connect{
     display: flex;
     margin-top: 1em;
@@ -72,6 +92,12 @@ body{
     color: var(--bleu-cpp);
     transition: 100ms ease;
 }
+.login h2 {
+    margin-bottom: 0;
+}
+.btn{
+    width: 100%;
+}
 
 .nom-prenom{
     display: flex;
@@ -79,16 +105,4 @@ body{
 }
 .nom-prenom input{
     width: 10.5em;
-}
-
-.form-group {
-    margin-top: 0.5em;
-    display: flex;
-    flex-direction: column;
-}
-.login h2 {
-    margin-bottom: 0;
-}
-.btn{
-    width: 100%;
 }

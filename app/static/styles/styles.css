@@ -6,6 +6,7 @@
     --bleu-cpp: hsl(215, 50%, 23%);
     --gris-clair: hsl(240, 18%, 90%);
     --blanco: hsl(260, 43%, 97%);
+    --blanc-ou-noir: white
 }
 
 html{

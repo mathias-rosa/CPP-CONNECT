@@ -22,7 +22,7 @@
     </div>
 
     <div class="content">
-        <form class="form-signin" method="POST" action="ChangeSelfInformations">
+        <form class="form-signin" method="POST" action="signup">
             <div class="signup-box">
                 <h1>S'inscrire</h1>
                 {{ form.hidden_tag() }}
@@ -42,6 +42,11 @@
                 <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
                     <h2>J'ai déjà un compte, me connecter</h2>
                 </div></a>
+                {% if error is not none %}
+                    <div>
+                        <p class="help-block">{{ error }}</p>
+                    </div>
+                {% endif %}
             </div>
         </form>
     </div>

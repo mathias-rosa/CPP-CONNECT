@@ -33,8 +33,8 @@ def load_user(user_id):
     return User.query.get(int(user_id))
 
 class LoginForm(FlaskForm):
-    username = StringField('', validators=[InputRequired()])
-    password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+    username = StringField("Nom d'utilisateur ou Email", validators=[InputRequired()])
+    password = PasswordField('Mot de passe', validators=[InputRequired(), Length(min=6, max=80)])
     remember = BooleanField('Se rappeller de moi')
 
 class RegisterForm(FlaskForm):
@@ -43,6 +43,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('Mot de passe', validators=[InputRequired(), Length(min=6, max=80)])
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+
 
 class ChangeSelfInformationsForm(FlaskForm) :
     email = StringField('', validators=[Email(message='Invalid email'), Length(max=50)])
@@ -71,6 +72,7 @@ def index():
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
     darkmode_status = "lightmode"
+    error = None
     try:
         if current_user.darkmode == True:
             darkmode_status = 'darkmode'
@@ -79,6 +81,14 @@ def signup():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data == form.password_confirm.data:
+            user = User.query.filter_by(email=form.email.data).first()
+            if user:
+                error = "Cet utilisateur existe déjà"
+                return render_template('signup.html', 
+                                        form=form,
+                                        error=error,
+                                        darkmode_status=darkmode_status,
+                                        )
             hashed_password = generate_password_hash(form.password.data, method='sha256')
             username = form.surname.data.lower() + "." + form.name.data.lower()
             new_user = User(name=form.name.data.upper(),
@@ -93,10 +103,16 @@ def signup():
             login_user(user)
             return redirect(url_for('dashboard'))
 
-        return "<h1>Les mots de passe ne correspondent pas</h1>"
+        error = "Les mots de passe ne correspondent pas"
+        return render_template('signup.html', 
+                            form=form,
+                            error=error,
+                            darkmode_status=darkmode_status,
+                            )
 
     return render_template('signup.html', 
                             form=form,
+                            error=error,
                             darkmode_status=darkmode_status,
                             )
 
@@ -104,6 +120,7 @@ def signup():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     darkmode_status = "lightmode"
+    error = None
     try:
         if current_user.darkmode == True:
             darkmode_status = 'darkmode'
@@ -122,10 +139,16 @@ def login():
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('dashboard'))
 
-        return '<h1>Invalid username or password</h1>'
+        error = "Mot de passe incorrect"        
+        return render_template('login.html', 
+                                form=form,
+                                error=error,
+                                darkmode_status=darkmode_status,
+                                )
 
     return render_template('login.html', 
                             form=form,
+                            error=error,
                             darkmode_status=darkmode_status,
                             )
 

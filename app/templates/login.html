@@ -42,6 +42,11 @@
                     </div></a>
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
                 </div>
+                {% if error is not none %}
+                <div>
+                    <p class="help-block">{{ error }}</p>
+                </div>
+            {% endif %}
             </div>
         </form>
     </div>
