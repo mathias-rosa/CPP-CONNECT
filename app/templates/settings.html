@@ -4,8 +4,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/profile-styles.css') }}">
-<title>Tableau de bord Admin</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/settings-styles.css') }}">
+<title>Paramètres</title>
 {% endblock %}
 
 {% block content %}
@@ -14,16 +14,16 @@
 
     <h1>{{ current_user.surname }} {{ current_user.name }}</h1>
 
-    <div class="div-input">
-        <form class="form-profile" method="POST" action="/profile">
+    <div class="div-box">
+        <form class="form-profile" method="POST" action="/settings">
             <h1>Modifier vos informations</h2>
             {{ form.hidden_tag() }}
             <div class="inputs">
                 <div class="inputs-inline">
-                    {{ wtf.form_field(form.name, placeholder="Nom", id="name") }}
-                    {{ wtf.form_field(form.surname, placeholder="Prénom", id="surname") }}
+                    {{ wtf.form_field(form.name, placeholder=current_user.name, id="name") }}
+                    {{ wtf.form_field(form.surname, placeholder=current_user.surname, id="surname") }}
                 </div>
-                {{ wtf.form_field(form.email, placeholder="Email", id="email") }}
+                {{ wtf.form_field(form.email, placeholder=current_user.email, id="email") }}
                 {{ wtf.form_field(form.current_password, placeholder="Mot de passe actuel", id="password") }}
                 <div class="inputs-inline">
                     {{ wtf.form_field(form.new_password, placeholder="Nouveau mot de passe", id="password") }}
@@ -35,7 +35,22 @@
         </form>
     </div>
 
-    
+    <div class="div-box">
+        <form class="form-profile" method="POST" action="/settings">
+            <h1>Apparance</h2>
+            {{ form.hidden_tag() }}
+            <div class="boutons-modes">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Mode Clair</button>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Mode Sombre</button>
+            </div>
+        </form>
+    </div> 
+
+    {% if current_user.admin == 1 %}
+
+        <h1>Je suis admin</h1>
+
+    {% endif %}
 </div>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-.div-input{
+.div-box{
     display: flex;
     background: var(--blanc-ou-noir);
     box-shadow: 0 8px 32px 0 var(--gris-clair);
@@ -8,18 +8,26 @@
     border-radius: 1em;
     padding: 5%;
     padding-top: 0;
-    padding-bottom: 1%;
+    padding-bottom: 2%;
+    margin-bottom: 3%;
 }
 .form-control{
     display: flex;
+    padding-top: 0.2em;
+    margin-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    height: 2.3em;
+    background-color: transparent;
     border: solid 0.14em var(--gris-clair);
+    border-radius: 0.3em;
     font-family: 'Poppins';
     color: var(--gris-profond);
-    border-radius: 0.3em;
 }
 .form-group{
     margin: 5%;
     margin-top: 0%;
+    margin-left: 0;
 }
 
 .form-group label{
@@ -30,6 +38,9 @@
     flex-direction: column;
     align-items: flex-start;
 }
+.inputs{
+    width: 80%;
+}
 .inputs-inline{
     display: flex;
 
@@ -38,4 +49,13 @@
 .control-label{
     display: flex;
     width: 101%;
+}
+
+.boutons-modes{
+    display: flex;
+    width: 100%;
+}
+
+.boutons-modes button{
+    margin-right: 3%;
 }

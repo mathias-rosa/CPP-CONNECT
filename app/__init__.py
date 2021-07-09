@@ -186,14 +186,14 @@ def admin():
                                 darkmode_status=darkmode_status,
                                 )
 
-@app.route('/profile/', methods=['GET', 'POST'])
+@app.route('/settings/', methods=['GET', 'POST'])
 @login_required
-def profile():
+def settings():
     darkmode_status = "lightmode"
     if current_user.darkmode == True:
         darkmode_status = 'darkmode'
     form = ChangeSelfInformationsForm()
-    return render_template('profile.html', 
+    return render_template('settings.html', 
                             form=form,
                             darkmode_status=darkmode_status,
                             )

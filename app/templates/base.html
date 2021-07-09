@@ -24,14 +24,19 @@
                 <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
             </a>
             {% else %}
-                <a href="{{ url_for('dashboard') }}">
+                <a href="{{ url_for('dashboard') }}" id="profile">
                     <h2>{{current_user.name}} {{current_user.surname}}</h2>
-                    <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
                 </a>
+                    <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
+                    <i class="material-icons">expand_more</i>
                 <div class="dropdown-menu">
-                    <a href="{{ url_for('logout') }}" class="item" >
-                        <i class="material-icons">logout</i>
-                        <p>OJCNNJCZEOCIJJOP ojncozekes</p>
+                    <a href="{{ url_for('dashboard') }}" class="item" >
+                        <i class="material-icons">dashboard</i>
+                        <p>Tableau de bord</p>
+                    </a>
+                    <a href="{{ url_for('settings') }}" class="item" >
+                        <i class="material-icons">settings</i>
+                        <p>Paramètres</p>
                     </a>
                     <a href="{{ url_for('logout') }}" class="item" >
                         <i class="material-icons">logout</i>
@@ -47,5 +52,6 @@
     {% include 'footer.html' %}
     {% include 'darkmode.html' %}
     
+    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
 </body>
 </html>
