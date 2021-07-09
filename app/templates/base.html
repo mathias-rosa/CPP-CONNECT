@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -27,6 +28,16 @@
                     <h2>{{current_user.name}} {{current_user.surname}}</h2>
                     <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
                 </a>
+                <div class="dropdown-menu">
+                    <a href="{{ url_for('logout') }}" class="item" >
+                        <i class="material-icons">logout</i>
+                        <p>OJCNNJCZEOCIJJOP ojncozekes</p>
+                    </a>
+                    <a href="{{ url_for('logout') }}" class="item" >
+                        <i class="material-icons">logout</i>
+                        <p>Se déconnecter</p>
+                    </a>
+                </div>
             {% endif %}
         </div>
     </div>

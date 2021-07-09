@@ -45,11 +45,13 @@ class RegisterForm(FlaskForm):
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
 
 
-class ChangeSelfInformationsForm(FlaskForm) :
-    email = StringField('', validators=[Email(message='Invalid email'), Length(max=50)])
-    new_password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
-    new_password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
-    current_password = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+class ChangeSelfInformationsForm(FlaskForm):
+    name = StringField('Nom')
+    surname = StringField('Prénom')
+    email = StringField('Email', validators=[Email(message='Invalid email'), Length(max=50)])
+    new_password = PasswordField('Nouveau mot de passe', validators=[Length(min=6, max=80)])
+    new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Length(min=6, max=80)])
+    current_password = PasswordField('Mot de passe actuel', validators=[InputRequired(), Length(min=6, max=80)])
 
 
 @app.route('/favicon.ico')
@@ -184,7 +186,8 @@ def admin():
                                 darkmode_status=darkmode_status,
                                 )
 
-@app.route('/profile', methods=['GET', 'POST'])
+@app.route('/profile/', methods=['GET', 'POST'])
+@login_required
 def profile():
     darkmode_status = "lightmode"
     if current_user.darkmode == True:
@@ -214,6 +217,18 @@ def page_not_found(e):
     return render_template('404.html',
                             darkmode_status=darkmode_status,
                             ), 404
+
+def chatapp():
+    darkmode_status = "lightmode"
+    try:
+        if current_user.darkmode == True:
+            darkmode_status = 'darkmode'
+    except:
+        print("current_user n'existe pas")
+    return render_template('chatapp.html', 
+                            year=datetime.date.today().year,
+                            darkmode_status=darkmode_status,
+                            )
 
 
 if __name__ == '__main__':

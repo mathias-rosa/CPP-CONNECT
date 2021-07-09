@@ -1,0 +1,41 @@
+.div-input{
+    display: flex;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 var(--gris-clair);
+    flex-direction: column;
+    border: 0.1em solid var(--gris-clair);
+    backdrop-filter: blur(1em);
+    border-radius: 1em;
+    padding: 5%;
+    padding-top: 0;
+    padding-bottom: 1%;
+}
+.form-control{
+    display: flex;
+    border: solid 0.14em var(--gris-clair);
+    font-family: 'Poppins';
+    color: var(--gris-profond);
+    border-radius: 0.3em;
+}
+.form-group{
+    margin: 5%;
+    margin-top: 0%;
+}
+
+.form-group label{
+    color: var(--gris-profond)
+}
+.form-profile{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+.inputs-inline{
+    display: flex;
+
+}   
+
+.control-label{
+    display: flex;
+    width: 101%;
+}
