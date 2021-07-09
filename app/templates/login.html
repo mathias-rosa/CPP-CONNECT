@@ -14,7 +14,7 @@
     <div class="header">
         <div class="header-left">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/cpp_connect.svg') }}" alt="logo" class="logo">
+                <img src="{{ url_for('static', filename='img/' + theaming + '/cpp_connect.svg') }}" alt="logo" class="logo">
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
@@ -27,7 +27,7 @@
                 <h1>Se connecter</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur ou email", class_="user", id="user") }}
+                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur ou email", class_="email", id="email") }}
                     {{ wtf.form_field(form.password, placeholder="Mot de passe", class_="password", id="password") }}
                 </div>
                 <div class="options">

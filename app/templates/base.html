@@ -13,7 +13,7 @@
     <div class="header">
         <div class="header-left">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/cpp_connect.svg') }}" alt="logo" class="logo">
+                <img src="{{ url_for('static', filename='img/' + theaming + '/cpp_connect.svg') }}" alt="logo" class="logo">
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
@@ -21,14 +21,16 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">
                 <h2>Se connecter</h2>
-                <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
+                <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img">    
             </a>
             {% else %}
                 <a href="{{ url_for('dashboard') }}" id="profile">
-                    <h2>{{current_user.name}} {{current_user.surname}}</h2>
+                    <h2>{{current_user.surname}} {{current_user.name}}</h2>
                 </a>
-                    <img src="{{ url_for('static', filename='img/' + darkmode_status + '/user_connect.svg') }}" alt="logo" class="login-img">    
-                    <i class="material-icons">expand_more</i>
+                <div class="menu">
+                    <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img">    
+                    <i class="material-icons">arrow_drop_down</i>
+                </div>
                 <div class="dropdown-menu">
                     <a href="{{ url_for('dashboard') }}" class="item" >
                         <i class="material-icons">dashboard</i>

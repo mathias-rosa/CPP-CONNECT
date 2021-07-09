@@ -24,6 +24,13 @@
     font-family: 'Poppins';
     color: var(--gris-profond);
 }
+.form-control:focus-visible{
+    outline: none;
+    border-bottom: solid var(--couleur-accentuation);
+}
+#password.form-control{
+    width: 18em;
+}
 .form-group{
     margin: 5%;
     margin-top: 0%;
@@ -38,14 +45,15 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
 .inputs{
-    width: 80%;
+    width: 100%;
 }
 .inputs-inline{
     display: flex;
-
+    align-items: flex-end;
+    width: 100%;
 }   
-
 .control-label{
     display: flex;
     width: 101%;
@@ -54,8 +62,33 @@
 .boutons-modes{
     display: flex;
     width: 100%;
+    margin: 5%;
+    margin-top: 0%;
+    margin-left: 0;
+}
+.radio{
+    margin-right: 3%;
+    width: 10em;
+    height: 3em;
+}
+.boutons-modes label{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    border-radius: 1em;
+    height: 100%;
+    width: 100%;
+    color: var(--gris-profond);
+    background-color: var(--bleu-cpp);
+    cursor: pointer;
+}
+.boutons-modes input[type="radio"]{
+    display: block;
 }
 
-.boutons-modes button{
-    margin-right: 3%;
+.boutons-modes input[type="radio"]:checked + label{
+    background-color: var(--couleur-accentuation);
 }
+*/

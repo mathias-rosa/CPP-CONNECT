@@ -17,17 +17,18 @@
     <div class="div-box">
         <form class="form-profile" method="POST" action="/settings">
             <h1>Modifier vos informations</h2>
-            {{ form.hidden_tag() }}
+            {{ profileForm.hidden_tag() }}
             <div class="inputs">
                 <div class="inputs-inline">
-                    {{ wtf.form_field(form.name, placeholder=current_user.name, id="name") }}
-                    {{ wtf.form_field(form.surname, placeholder=current_user.surname, id="surname") }}
+                    {{ wtf.form_field(profileForm.name, placeholder=current_user.name, id="name") }}
+                    {{ wtf.form_field(profileForm.surname, placeholder=current_user.surname, id="surname") }}
                 </div>
-                {{ wtf.form_field(form.email, placeholder=current_user.email, id="email") }}
-                {{ wtf.form_field(form.current_password, placeholder="Mot de passe actuel", id="password") }}
+                {{ wtf.form_field(profileForm.username, placeholder=current_user.username, id="username") }}
+                {{ wtf.form_field(profileForm.email, placeholder=current_user.email, id="email",) }}
+                {{ wtf.form_field(profileForm.current_password, placeholder="Mot de passe actuel", id="password") }}
                 <div class="inputs-inline">
-                    {{ wtf.form_field(form.new_password, placeholder="Nouveau mot de passe", id="password") }}
-                    {{ wtf.form_field(form.new_password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
+                    {{ wtf.form_field(profileForm.new_password, placeholder="Nouveau mot de passe", id="password") }}
+                    {{ wtf.form_field(profileForm.new_password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
                 </div>
                 
             </div>
@@ -38,11 +39,11 @@
     <div class="div-box">
         <form class="form-profile" method="POST" action="/settings">
             <h1>Apparance</h2>
-            {{ form.hidden_tag() }}
+            {{ TheamingForm.hidden_tag() }}
             <div class="boutons-modes">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Mode Clair</button>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Mode Sombre</button>
+                {{ wtf.form_field(TheamingForm.theme, class="btn btn-primary", placeholder="", id="theaming-form") }}
             </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
         </form>
     </div> 
 

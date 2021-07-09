@@ -2,8 +2,8 @@ import os
 from flask import Flask, render_template, redirect, url_for, send_from_directory, request
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
-from wtforms import StringField, PasswordField, BooleanField
-from wtforms.validators import InputRequired, Email, Length
+from wtforms import StringField, PasswordField, BooleanField, RadioField
+from wtforms.validators import InputRequired, Email, Length, Optional
 from flask_sqlalchemy  import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
@@ -48,10 +48,14 @@ class RegisterForm(FlaskForm):
 class ChangeSelfInformationsForm(FlaskForm):
     name = StringField('Nom')
     surname = StringField('Prénom')
-    email = StringField('Email', validators=[Email(message='Invalid email'), Length(max=50)])
-    new_password = PasswordField('Nouveau mot de passe', validators=[Length(min=6, max=80)])
-    new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Length(min=6, max=80)])
+    username = StringField("Nom d'utilisateur")
+    email = StringField('Email', validators=[Optional(), Email(message='Invalid email'), Length(max=50)])
     current_password = PasswordField('Mot de passe actuel', validators=[InputRequired(), Length(min=6, max=80)])
+    new_password = PasswordField('Nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
+    new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
+
+class TheamingForm(FlaskForm):
+    theme = RadioField('Thème', choices=[('lightmode','Thème Clair'), ('darkmode','Thème Sombre')], default='lightmode')
 
 
 @app.route('/favicon.ico')
@@ -60,24 +64,24 @@ def fav():
 
 @app.route('/')
 def index():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     try:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
     except:
         print("current_user n'existe pas")
     return render_template('index.html', 
                             year=datetime.date.today().year,
-                            darkmode_status=darkmode_status,
+                            theaming=theaming,
                             )
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     error = None
     try:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
     except:
         print("current_user n'existe pas")
     form = RegisterForm()
@@ -89,7 +93,7 @@ def signup():
                 return render_template('signup.html', 
                                         form=form,
                                         error=error,
-                                        darkmode_status=darkmode_status,
+                                        theaming=theaming,
                                         )
             hashed_password = generate_password_hash(form.password.data, method='sha256')
             username = form.surname.data.lower() + "." + form.name.data.lower()
@@ -109,23 +113,23 @@ def signup():
         return render_template('signup.html', 
                             form=form,
                             error=error,
-                            darkmode_status=darkmode_status,
+                            theaming=theaming,
                             )
 
     return render_template('signup.html', 
                             form=form,
                             error=error,
-                            darkmode_status=darkmode_status,
+                            theaming=theaming,
                             )
 
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     error = None
     try:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
     except:
         print("current_user n'existe pas")
     form = LoginForm()
@@ -141,61 +145,99 @@ def login():
                 login_user(user, remember=form.remember.data)
                 return redirect(url_for('dashboard'))
 
-        error = "Mot de passe incorrect"        
+        error = "Mot de passe ou nom d'utilisateur incorrect"        
         return render_template('login.html', 
                                 form=form,
                                 error=error,
-                                darkmode_status=darkmode_status,
+                                theaming=theaming,
                                 )
 
     return render_template('login.html', 
                             form=form,
                             error=error,
-                            darkmode_status=darkmode_status,
+                            theaming=theaming,
                             )
 
 
-@app.route('/dashboard/')
+@app.route('/dashboard')
 @login_required
 def dashboard():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     if current_user.admin == 1:
         return redirect(url_for("admin"))
     else:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
         return render_template('dashboard.html', 
                                 current_user=current_user,
-                                darkmode_status=darkmode_status,
+                                theaming=theaming,
                                 )
 
 
-@app.route('/admin-dashboard/')
+@app.route('/admin-dashboard')
 @login_required
 def admin():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     if current_user.admin == 0:
         return redirect(url_for("dashboard"))
     else:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
         userlist = [user for user in db.session.query(User)]
         return render_template('admin.html', 
                                 current_user=current_user,
                                 userlist=userlist,
-                                darkmode_status=darkmode_status,
+                                theaming=theaming,
                                 )
 
-@app.route('/settings/', methods=['GET', 'POST'])
+@app.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     if current_user.darkmode == True:
-        darkmode_status = 'darkmode'
-    form = ChangeSelfInformationsForm()
+        theaming = 'darkmode'
+    profileForm = ChangeSelfInformationsForm()
+    if profileForm.validate_on_submit():
+        if check_password_hash(current_user.password, profileForm.current_password.data):
+            if profileForm.name.data != "":
+                current_user.name = profileForm.name.data
+            if profileForm.surname.data != "":
+                current_user.surname = profileForm.surname.data
+            if profileForm.username.data != "":
+                current_user.username = profileForm.username.data
+            if profileForm.email.data != "":
+                current_user.email = profileForm.email.data
+            if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
+                current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
+        
+            db.session.commit()
+            print(profileForm.name.data, profileForm.surname.data, profileForm.username.data, profileForm.email.data)
+            return render_template('settings.html', 
+                            profileForm=profileForm,
+                            TheamingForm=theamingForm,
+                            theaming=theaming,
+                            )
+        print(current_user.password, generate_password_hash(profileForm.current_password.data, method='sha256'))
+        return "Mot de passe incorect"
+
+    theamingForm = TheamingForm()
+    if theamingForm.validate_on_submit():
+        theaming = theamingForm.theme.data
+        if theaming == "darkmode":
+            current_user.darkmode = True
+        else:
+            current_user.darkmode = False
+        db.session.commit()
+        return render_template('settings.html', 
+                            profileForm=profileForm,
+                            TheamingForm=theamingForm,
+                            theaming=theaming,
+                            )
+
     return render_template('settings.html', 
-                            form=form,
-                            darkmode_status=darkmode_status,
+                            profileForm=profileForm,
+                            TheamingForm=theamingForm,
+                            theaming=theaming,
                             )
 
 @app.route('/logout')
@@ -207,27 +249,27 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     try:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
     except:
         print("current_user n'existe pas")
 
     return render_template('404.html',
-                            darkmode_status=darkmode_status,
+                            theaming=theaming,
                             ), 404
 
 def chatapp():
-    darkmode_status = "lightmode"
+    theaming = "lightmode"
     try:
         if current_user.darkmode == True:
-            darkmode_status = 'darkmode'
+            theaming = 'darkmode'
     except:
         print("current_user n'existe pas")
     return render_template('chatapp.html', 
                             year=datetime.date.today().year,
-                            darkmode_status=darkmode_status,
+                            theaming=theaming,
                             )
 
 
