@@ -91,4 +91,3 @@
 .boutons-modes input[type="radio"]:checked + label{
     background-color: var(--couleur-accentuation);
 }
-*/
