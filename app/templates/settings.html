@@ -37,13 +37,30 @@
     </div>
 
     <div class="div-box">
-        <form class="form-profile" method="POST" action="/settings">
+        <form class="theaming-form" action="{{ url_for('settings') }}" method="POST">
             <h1>Apparance</h2>
-            {{ TheamingForm.hidden_tag() }}
-            <div class="boutons-modes">
-                {{ wtf.form_field(TheamingForm.theme, class="btn btn-primary", placeholder="", id="theaming-form") }}
+            <div class="boutons-modes" role="radiogroup">
+                <div class="radio">
+                    <label for="light-theme">
+                        <img src="{{ url_for('static', filename='img/light-theme.svg') }}" alt="theme-preview">
+                        <div class="span-et-input">
+                            <input type="radio" name="theme" id="light-theme" value="light-theme" checked>
+                            <span>Thème clair</span>
+                        </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="dark-theme">
+                        <img src="{{ url_for('static', filename='img/dark-theme.svg') }}" alt="theme-preview">
+                        <div class="span-et-input">
+                            <input type="radio" name="theme" id="dark-theme" value="dark-theme">
+                            <span>Thème sombre</span>
+                        </div>
+                    </div>
+                    </label>
+                </div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
             </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
         </form>
     </div> 
 

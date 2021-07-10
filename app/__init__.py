@@ -54,9 +54,6 @@ class ChangeSelfInformationsForm(FlaskForm):
     new_password = PasswordField('Nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
     new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
 
-class TheamingForm(FlaskForm):
-    theme = RadioField('Thème', choices=[('lightmode','Thème Clair'), ('darkmode','Thème Sombre')], default='lightmode')
-
 
 @app.route('/favicon.ico')
 def fav():
@@ -211,34 +208,28 @@ def settings():
                 current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
         
             db.session.commit()
-            print(profileForm.name.data, profileForm.surname.data, profileForm.username.data, profileForm.email.data)
             return render_template('settings.html', 
                             profileForm=profileForm,
-                            TheamingForm=theamingForm,
                             theaming=theaming,
                             )
-        print(current_user.password, generate_password_hash(profileForm.current_password.data, method='sha256'))
         return "Mot de passe incorect"
 
-    theamingForm = TheamingForm()
-    if theamingForm.validate_on_submit():
-        theaming = theamingForm.theme.data
-        if theaming == "darkmode":
+    try:
+        theme = request.form['theme']
+        if theme == "dark-theme" and theme != theaming:
             current_user.darkmode = True
-        else:
+        elif theme == "light-theme" and theme != theaming:
             current_user.darkmode = False
+        
         db.session.commit()
-        return render_template('settings.html', 
-                            profileForm=profileForm,
-                            TheamingForm=theamingForm,
-                            theaming=theaming,
-                            )
 
+    except:
+        pass
     return render_template('settings.html', 
                             profileForm=profileForm,
-                            TheamingForm=theamingForm,
                             theaming=theaming,
                             )
+                            
 
 @app.route('/logout')
 @login_required
