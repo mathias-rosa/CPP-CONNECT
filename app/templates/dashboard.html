@@ -9,7 +9,65 @@
 
 <div class="content">
 
-    <h1>Bonjour {{ current_user.surname }}</h1>
+    <div class="widget">
+
+        <div class="pannel" id="profile">
+            <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="">
+        </div>
+        <div class="pannel" id="menu">
+
+            <h1 id="welcome">Bonjour {{ current_user.surname }}</h1>
+            
+            <div class="tile" id="settings">
+                <i class="material-icons">settings</i>
+                <p>Paramètres</p>
+            </div>
+            <div class="tile" id="lorem">
+                <p>Lorem</p>
+            </div>
+            <div class="tile" id="ipsum">
+                <p>Imsum</p>
+            </div>
+        </div>
+    </div>
+
+<!--Dashboard en plus pour les Admins-->
+
+{% if current_user.admin == 1 %}
+
+    <h1>Voici la liste des utilisateurs</h1>
+
+    <div class="row" id="titre">
+        <h2 id="name">Nom</h2>
+        <h2 id="surname">Prénom</h2>
+        <h2 id="username">Nom d'utilisateur</h2>
+        <h2 id="email">Adresse email</h2>
+        <h2 id="rang">Admin</h2>
+    </div>
+
+
+    {% for user in userlist %}
+
+    <div class="row" id="{{user.username}}">
+        <h2 id="name">{{user.name}}</h2>
+        <h2 id="surname">{{user.surname}}</h2>
+        <h2 id="username">{{user.username}}</h2>
+        <h2 id="email">{{user.email}}</h2>
+        <h2 id="rang">
+            {% if user.admin == 1 %}
+            Admin
+            {% elif user.admin == 2 %}
+            Délégué
+            {% else %}
+            Lambda
+            {% endif %}
+        </h2>
+    </div>
+
+    {% endfor %}
+
+{% endif %}
+
 
 </div>
 

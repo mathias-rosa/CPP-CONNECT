@@ -160,32 +160,16 @@ def login():
 @login_required
 def dashboard():
     theaming = "lightmode"
-    if current_user.admin == 1:
-        return redirect(url_for("admin"))
-    else:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-        return render_template('dashboard.html', 
-                                current_user=current_user,
-                                theaming=theaming,
-                                )
+    if current_user.darkmode == True:
+        theaming = 'darkmode'
+    userlist = [user for user in db.session.query(User)]
+    return render_template('dashboard.html', 
+                            current_user=current_user,
+                            userlist=userlist,
+                            theaming=theaming,
+                            )
 
 
-@app.route('/admin-dashboard')
-@login_required
-def admin():
-    theaming = "lightmode"
-    if current_user.admin == 0:
-        return redirect(url_for("dashboard"))
-    else:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-        userlist = [user for user in db.session.query(User)]
-        return render_template('admin.html', 
-                                current_user=current_user,
-                                userlist=userlist,
-                                theaming=theaming,
-                                )
 
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
