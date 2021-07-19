@@ -21,7 +21,7 @@
 }
 .texte-accueil h1{
     display: flex;
-    color: var(--couleur-accentuation);
+    color: var(--accent-color);
     font-size: 3em;
     margin: 0.5em;
     margin-left: 0;
@@ -63,12 +63,12 @@
 }
 .liste-fontions-texte h1{
     display: flex;
-    color: var(--couleur-accentuation);
+    color: var(--accent-color);
     font-size: 3em;
 }
 
 #dessin{
-    color: var(--bleu-cpp);
+    color: var(--second-accent-color);
 }
 
 .fiche-1{
@@ -121,7 +121,7 @@
     margin-top: -0.3em;
     line-height: 1.1em;
     font-size: 2.5em;
-    color: var(--bleu-cpp);
+    color: var(--second-accent-color);
     height: 2.35em;
     overflow: auto;
 }
@@ -140,7 +140,7 @@
     margin-top: -0.3em;
     line-height: 1.1em;
     font-size: 2.5em;
-    color: var(--bleu-cpp);
+    color: var(--second-accent-color);
     height: 2.35em;
     overflow: auto;
 }

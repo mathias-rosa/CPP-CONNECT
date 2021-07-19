@@ -56,6 +56,15 @@
                             <input type="radio" name="theme" id="dark-theme" value="dark-theme">
                             <span>Thème sombre</span>
                         </div>
+                    </label>
+                </div>
+                <div class="radio">
+                    <label for="pink-pastel">
+                        <img src="{{ url_for('static', filename='img/pink-pastel.svg') }}" alt="theme-preview">
+                        <div class="span-et-input">
+                            <input type="radio" name="theme" id="pink-pastel" value="pink-pastel">
+                            <span>Pastel rose</span>
+                        </div>
                     </div>
                     </label>
                 </div>
@@ -64,7 +73,7 @@
         </form>
     </div> 
 
-    {% if current_user.admin == 1 %}
+    {% if current_user.admin == True %}
 
         <h1>Je suis admin</h1>
 

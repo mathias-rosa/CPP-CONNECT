@@ -30,7 +30,7 @@
     align-items: center;
 }
 .tile{
-    background-color: var(--blanco);
+    background-color: var(--main-color);
     border-radius: 1em;
     padding: 5%;
 }
@@ -65,7 +65,7 @@
     text-align: center;
 }
 .row h2{
-    border: 0.1em solid var(--gris-profond);
+    border: 0.1em solid var(--second-color);
     margin: 0;
 }
 

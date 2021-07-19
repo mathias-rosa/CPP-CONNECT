@@ -20,18 +20,18 @@ body{
 }
 .login-box{
     background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 var(--gris-clair);
+    box-shadow: 0 8px 32px 0 var(--third-color);
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
-    border: 0.1em solid var(--gris-clair);
+    border: 0.1em solid var(--third-color);
     width: 20em;
     padding: 1.5em;
     padding-bottom: 1.25em;
 }
 .login-box h1{
     margin: 0;
-    color: var(--couleur-accentuation);
+    color: var(--accent-color);
 }
 
 .form-group{
@@ -52,17 +52,17 @@ body{
     padding-left: 0.5em;
     height: 2.3em;
     background-color: transparent;
-    border: solid 0.14em var(--gris-clair);
+    border: solid 0.14em var(--third-color);
     border-radius: 0.3em;
     font-family: 'Poppins';
-    color: var(--gris-profond);
+    color: var(--second-color);
 }
 .inputs input:focus-visible{
     outline: none;
-    border-bottom: solid var(--couleur-accentuation);
+    border-bottom: solid var(--accent-color);
 }
 .inputs label{
-    color: var(--gris-profond);
+    color: var(--second-color);
 }
 .help-block{
     display: flex;
@@ -92,7 +92,7 @@ body{
     padding: 0.4em;
     border-radius: 0.5em;
     border: none;
-    background-color: var(--bleu-cpp);
+    background-color: var(--second-accent-color);
     color: white;
     width: 10em;
     justify-content: center;
@@ -102,13 +102,13 @@ body{
     cursor: pointer;
 }
 .btn:hover{
-    background-color: var(--couleur-accentuation);
+    background-color: var(--accent-color);
     transition: 100ms ease;
 }
 .inscription{
     display: flex;
     justify-content: center;
-    color: var(--gris-profond);
+    color: var(--second-color);
     font-size: 0.65em;
     text-decoration: none;
     font-weight: 400;
@@ -124,14 +124,14 @@ body{
 .inscription:hover{
     text-decoration: underline solid 0.2em;
     text-underline-offset: 0.2em;
-    color: var(--bleu-cpp);
+    color: var(--second-accent-color);
     transition: 100ms ease;
 }
 .options{
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
-    color: var(--bleu-cpp);
+    color: var(--second-accent-color);
     font-size: 0.8em;
     font-weight: 300;
     margin-top: 1em;

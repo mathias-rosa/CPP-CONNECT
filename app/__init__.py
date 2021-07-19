@@ -4,7 +4,8 @@ from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField, RadioField
 from wtforms.validators import InputRequired, Email, Length, Optional
-from flask_sqlalchemy  import SQLAlchemy
+
+import pymongo
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import datetime
@@ -13,24 +14,24 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db.db'
 bootstrap = Bootstrap(app)
-db = SQLAlchemy(app)
+client = pymongo.MongoClient('localhost', 27017)
+mongodb = client.cpp_connect
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(25), unique=True)
-    surname = db.Column(db.String(25), unique=True)
-    username = db.Column(db.String(15), unique=True)
-    email = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(80))
-    admin = db.Column(db.Boolean)
-    darkmode = db.Column(db.Boolean)
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
+class User(UserMixin):
+    def __init__(self, user_dict):
+        self.id = user_dict.get('_id')
+        self.name = user_dict.get('name')
+        self.surname = user_dict.get('surname')
+        self.username = user_dict.get('username')
+        self.email = user_dict.get('email')
+        self.password = user_dict.get('password')
+        self.theaming = user_dict.get('theaming')
+    
+    def get_id(self):
+        return str(self.id)
 
 class LoginForm(FlaskForm):
     username = StringField("Nom d'utilisateur ou Email", validators=[InputRequired()])
@@ -55,18 +56,22 @@ class ChangeSelfInformationsForm(FlaskForm):
     new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    user = User(mongodb.db.Users.find_one({"_id": int(user_id)}))
+    if user:
+        return user
+
 @app.route('/favicon.ico')
 def fav():
     return send_from_directory(os.path.join(app.root_path, 'static'),'favicon.ico')
 
 @app.route('/')
 def index():
-    theaming = "lightmode"
-    try:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-    except:
-        print("current_user n'existe pas")
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
     return render_template('index.html', 
                             year=datetime.date.today().year,
                             theaming=theaming,
@@ -74,17 +79,15 @@ def index():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    theaming = "lightmode"
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
     error = None
-    try:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-    except:
-        print("current_user n'existe pas")
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data == form.password_confirm.data:
-            user = User.query.filter_by(email=form.email.data).first()
+            user = mongodb.db.Users.find_one({"email": form.email.data})
             if user:
                 error = "Cet utilisateur existe déjà"
                 return render_template('signup.html', 
@@ -94,16 +97,18 @@ def signup():
                                         )
             hashed_password = generate_password_hash(form.password.data, method='sha256')
             username = form.surname.data.lower() + "." + form.name.data.lower()
-            new_user = User(name=form.name.data.upper(),
-                            surname=form.surname.data,
-                            username=username,
-                            email=form.email.data,
-                            password=hashed_password,
-                            admin=False)
-            db.session.add(new_user)
-            db.session.commit()
-            user = User.query.filter_by(username=username).first()
-            login_user(user)
+            id  = int(str(int(generate_password_hash(form.name.data.upper() + form.surname.data, method='MD5')[22:], base=16))[:18])
+            new_user = {"_id": id, 
+                        "name": form.name.data.upper(),
+                        "surname": form.surname.data,
+                        "username": username,
+                        "email": form.email.data,
+                        "password": hashed_password,
+                        "theaming": False,
+                        "admin": False}
+            mongodb.db.Users.insert_one(new_user)
+            user = mongodb.db.Users.find_one({"email": form.email.data})
+            login_user(User(user))
             return redirect(url_for('dashboard'))
 
         error = "Les mots de passe ne correspondent pas"
@@ -122,21 +127,18 @@ def signup():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    theaming = "lightmode"
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
     error = None
-    try:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-    except:
-        print("current_user n'existe pas")
     form = LoginForm()
-
     if form.validate_on_submit():
         username = form.username.data
         if "@" in username:
-            user = User.query.filter_by(email=username).first()
+            user = User(mongodb.db.Users.find_one({"email": username}))
         else:
-            user = User.query.filter_by(username=username).first()
+            user = User(mongodb.db.Users.find_one({"username": username}))
         if user:
             if check_password_hash(user.password, form.password.data):
                 login_user(user, remember=form.remember.data)
@@ -159,10 +161,12 @@ def login():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-    theaming = "lightmode"
-    if current_user.darkmode == True:
-        theaming = 'darkmode'
-    userlist = [user for user in db.session.query(User)]
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+    #userlist = [user for user in db.session.query(User)]
+    userlist = []
     return render_template('dashboard.html', 
                             current_user=current_user,
                             userlist=userlist,
@@ -174,9 +178,10 @@ def dashboard():
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():
-    theaming = "lightmode"
-    if current_user.darkmode == True:
-        theaming = 'darkmode'
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
     profileForm = ChangeSelfInformationsForm()
     if profileForm.validate_on_submit():
         if check_password_hash(current_user.password, profileForm.current_password.data):
@@ -191,7 +196,18 @@ def settings():
             if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
                 current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
         
-            db.session.commit()
+            mongodb.db.Users.update_one(
+                {"_id": current_user.id},
+                {'$set': 
+                    {
+                        "name": current_user.name,
+                        "surname": current_user.surname,
+                        "username": current_user.username,
+                        "email": current_user.email,
+                        "password": current_user.password
+                    }
+                }
+            )
             return render_template('settings.html', 
                             profileForm=profileForm,
                             theaming=theaming,
@@ -201,11 +217,23 @@ def settings():
     try:
         theme = request.form['theme']
         if theme == "dark-theme" and theme != theaming:
-            current_user.darkmode = True
+            theaming = "dark-theme"
+            mongodb.db.Users.update_one(
+                {"username": current_user.username},
+                {'$set': {'theaming': "dark-theme"}}, upsert=False
+            )
         elif theme == "light-theme" and theme != theaming:
-            current_user.darkmode = False
-        
-        db.session.commit()
+            theaming = "light-theme"
+            mongodb.db.Users.update_one(
+                {"username": current_user.username},
+                {'$set': {'theaming': "light-theme"}}, upsert=False
+            )
+        elif theme == "pink-pastel" and theme != theaming:
+            theaming = "pink-pastel"
+            mongodb.db.Users.update_one(
+                {"username": current_user.username},
+                {'$set': {'theaming': "pink-pastel"}}, upsert=False
+            )
 
     except:
         pass
@@ -224,28 +252,13 @@ def logout():
 
 @app.errorhandler(404)
 def page_not_found(e):
-    theaming = "lightmode"
-    try:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-    except:
-        print("current_user n'existe pas")
-
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
     return render_template('404.html',
                             theaming=theaming,
                             ), 404
-
-def chatapp():
-    theaming = "lightmode"
-    try:
-        if current_user.darkmode == True:
-            theaming = 'darkmode'
-    except:
-        print("current_user n'existe pas")
-    return render_template('chatapp.html', 
-                            year=datetime.date.today().year,
-                            theaming=theaming,
-                            )
 
 
 if __name__ == '__main__':

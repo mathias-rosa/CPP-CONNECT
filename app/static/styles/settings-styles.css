@@ -1,9 +1,9 @@
 .div-box{
     display: flex;
     background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 var(--gris-clair);
+    box-shadow: 0 8px 32px 0 var(--third-color);
     flex-direction: column;
-    border: 0.1em solid var(--gris-clair);
+    border: 0.1em solid var(--third-color);
     backdrop-filter: blur(1em);
     border-radius: 1em;
     padding: 5%;
@@ -19,14 +19,14 @@
     padding-left: 0.5em;
     height: 2.3em;
     background-color: transparent;
-    border: solid 0.14em var(--gris-clair);
+    border: solid 0.14em var(--third-color);
     border-radius: 0.3em;
     font-family: 'Poppins';
-    color: var(--gris-profond);
+    color: var(--second-color);
 }
 .form-control:focus-visible{
     outline: none;
-    border-bottom: solid var(--couleur-accentuation);
+    border-bottom: solid var(--accent-color);
 }
 #password.form-control{
     width: 18em;
@@ -38,7 +38,7 @@
 }
 
 .form-group label{
-    color: var(--gris-profond)
+    color: var(--paragraph-color)
 }
 .form-profile{
     display: flex;
@@ -63,7 +63,7 @@
     display: flex;
     width: 100%;
     margin: 5%;
-    margin-top: 0%;
+    /*margin-top: 0;*/
     margin-left: 0;
 }
 .radio{
@@ -72,8 +72,8 @@
     height: 9em;
     overflow: hidden;
     border-radius: 0.75em;
-    background-color: var(--blanco);
-    border: var(--gris-clair) 0.1em solid;
+    background-color: var(--main-color);
+    border: var(--third-color) 0.1em solid;
 }
 .boutons-modes label{
     display: flex;
@@ -84,7 +84,7 @@
     border-radius: 1em;
     height: 100%;
     width: 100%;
-    color: var(--gris-profond);
+    color: var(--paragraph-color);
     cursor: pointer;
 }
 .span-et-input{
@@ -95,16 +95,16 @@
     height: 100%;
     padding: 3%;
     padding-left: 15%;
-    border: var(--gris-clair) 0.1em solid;
 }
 label img{
     max-width: 100%;
     max-height: 100%;
+    border-bottom: var(--third-color) 0.1em solid;
 }
 input{
     margin-right: 5%;
 }
 
 .radio:hover{
-    border-color: var(--gris-profond);
+    border-color: var(--second-color);
 }
