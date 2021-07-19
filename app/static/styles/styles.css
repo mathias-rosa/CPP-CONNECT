@@ -182,7 +182,15 @@ p, h1, h2{
 .cpp-bouton:hover {
     background-color: var(--accent-color);
     transition: 100ms ease;
+    box-shadow: 0 0 0 0 var(--couleur-accentuation);
+    animation: pulse 0.75s 1;
 }
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 1em rgb(0, 0, 0, 0.01);
+    }
+}
+
 .cpp-bouton h1{
     margin: 0.2em;
     color: white;
