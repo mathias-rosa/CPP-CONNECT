@@ -3,7 +3,8 @@ let dropdownMenu = document.querySelector(".dropdown-menu");
 let headerRightLink = document.querySelector(".header-right");
 let menu = document.querySelector(".menu");
 let arrow = document.querySelector(".menu i");
- /*
+ 
+/*
 headerRightLink.addEventListener('mouseover', () => {
     dropdownMenu.style.display = "flex";
     arrow.textContent = "arrow_drop_up";
