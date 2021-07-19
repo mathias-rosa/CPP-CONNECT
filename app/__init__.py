@@ -11,10 +11,11 @@ from flask_login import LoginManager, UserMixin, login_user, login_required, log
 import datetime
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'Thisissupposedtobesecret!'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///./db.db'
 bootstrap = Bootstrap(app)
-client = pymongo.MongoClient('localhost', 27017)
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/cpp_connect')
+client = pymongo.MongoClient(host=host)
 mongodb = client.cpp_connect
 login_manager = LoginManager()
 login_manager.init_app(app)
