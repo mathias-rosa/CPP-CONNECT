@@ -105,7 +105,7 @@ def signup():
                         "username": username,
                         "email": form.email.data,
                         "password": hashed_password,
-                        "theaming": False,
+                        "theaming": "light-theme",
                         "admin": False}
             mongodb.db.Users.insert_one(new_user)
             user = mongodb.db.Users.find_one({"email": form.email.data})
