@@ -65,17 +65,18 @@
                             <input type="radio" name="theme" id="pink-pastel" value="pink-pastel">
                             <span>Pastel rose</span>
                         </div>
-                    </div>
                     </label>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
             </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
         </form>
     </div> 
 
     {% if current_user.admin == True %}
 
-        <h1>Je suis admin</h1>
+    <div class="div-box">
+        <h1 style="margin: 0;">Je suis admin</h1>
+    </div> 
 
     {% endif %}
 </div>

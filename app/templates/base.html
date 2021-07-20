@@ -25,7 +25,7 @@
             </a>
             {% else %}
                 <a href="{{ url_for('dashboard') }}" id="profile">
-                    <h2>{{current_user.surname}} {{current_user.name}}</h2>
+                    <h2>{{current_user.name}} {{current_user.surname}}</h2>
                 </a>
                 <div class="menu">
                     <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img">    

@@ -28,6 +28,7 @@ class User(UserMixin):
         self.username = user_dict.get('username')
         self.email = user_dict.get('email')
         self.password = user_dict.get('password')
+        self.admin = user_dict.get('admin')
         self.theaming = user_dict.get('theaming')
     
     def get_id(self):
@@ -39,16 +40,16 @@ class LoginForm(FlaskForm):
     remember = BooleanField('Se rappeller de moi')
 
 class RegisterForm(FlaskForm):
-    name = StringField('Nom', validators=[InputRequired()])
-    surname = StringField('Prénom', validators=[InputRequired()])
+    name = StringField('Prénom', validators=[InputRequired()])
+    surname = StringField('Nom', validators=[InputRequired()])
     email = StringField('Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('Mot de passe', validators=[InputRequired(), Length(min=6, max=80)])
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
 
 
 class ChangeSelfInformationsForm(FlaskForm):
-    name = StringField('Nom')
-    surname = StringField('Prénom')
+    name = StringField('Prénom')
+    surname = StringField('Nom')
     username = StringField("Nom d'utilisateur")
     email = StringField('Email', validators=[Optional(), Email(message='Invalid email'), Length(max=50)])
     current_password = PasswordField('Mot de passe actuel', validators=[InputRequired(), Length(min=6, max=80)])
@@ -96,11 +97,11 @@ def signup():
                                         theaming=theaming,
                                         )
             hashed_password = generate_password_hash(form.password.data, method='sha256')
-            username = form.surname.data.lower() + "." + form.name.data.lower()
+            username = form.name.data.lower() + "." + form.surname.data.lower()
             id  = int(str(int(generate_password_hash(form.name.data.upper() + form.surname.data, method='MD5')[22:], base=16))[:18])
             new_user = {"_id": id, 
-                        "name": form.name.data.upper(),
-                        "surname": form.surname.data,
+                        "name": form.name.data,
+                        "surname": form.surname.data.upper(),
                         "username": username,
                         "email": form.email.data,
                         "password": hashed_password,
@@ -165,8 +166,7 @@ def dashboard():
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
-    #userlist = [user for user in db.session.query(User)]
-    userlist = []
+    userlist = [User(user) for user in mongodb.db.Users.find({})]
     return render_template('dashboard.html', 
                             current_user=current_user,
                             userlist=userlist,

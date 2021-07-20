@@ -11,62 +11,69 @@
 
     <div class="widget">
 
-        <div class="pannel" id="profile">
-            <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="">
+        <div class="pannel" id="profile-box">
+            <img src="{{ url_for('static', filename='img/profile_pict_1.svg') }}" alt="">
+            <h1>{{current_user.name}}</h1>
+            <h2>{{current_user.surname}}</h2>
         </div>
         <div class="pannel" id="menu">
-
-            <h1 id="welcome">Bonjour {{ current_user.surname }}</h1>
-            
-            <div class="tile" id="settings">
+            <div class="tile" id="welcome">
+                <h1>Bonjour {{ current_user.name }}</h1>
+            </div>
+            <a class="tile" id="settings"  href="{{ url_for('settings') }}">
                 <i class="material-icons">settings</i>
                 <p>Paramètres</p>
-            </div>
-            <div class="tile" id="lorem">
+            </a>
+            <a class="tile" id="lorem"  href="{{ url_for('index') }}">
+                <i class="material-icons">turned_in_not</i>
                 <p>Lorem</p>
-            </div>
-            <div class="tile" id="ipsum">
+            </a>
+            <a class="tile" id="ipsum" href="{{ url_for('index') }}">
+                <i class="material-icons">turned_in_not</i>
                 <p>Imsum</p>
-            </div>
+            </a>
         </div>
-    </div>
 
-<!--Dashboard en plus pour les Admins-->
+        <!--Dashboard en plus pour les Admins-->
 
-{% if current_user.admin == 1 %}
+        <div class="pannel" id="admin">
+            {% if current_user.admin == True %}
 
-    <h1>Voici la liste des utilisateurs</h1>
-
-    <div class="row" id="titre">
-        <h2 id="name">Nom</h2>
-        <h2 id="surname">Prénom</h2>
-        <h2 id="username">Nom d'utilisateur</h2>
-        <h2 id="email">Adresse email</h2>
-        <h2 id="rang">Admin</h2>
-    </div>
-
-
-    {% for user in userlist %}
-
-    <div class="row" id="{{user.username}}">
-        <h2 id="name">{{user.name}}</h2>
-        <h2 id="surname">{{user.surname}}</h2>
-        <h2 id="username">{{user.username}}</h2>
-        <h2 id="email">{{user.email}}</h2>
-        <h2 id="rang">
-            {% if user.admin == 1 %}
-            Admin
-            {% elif user.admin == 2 %}
-            Délégué
-            {% else %}
-            Lambda
+            <h1>Liste des utilisateurs</h1>
+    
+            <table>
+                <tr id="titre">
+                    <td id="surname">Nom</td>
+                    <td id="name">Prénom</td>
+                    <td id="username">Nom d'utilisateur</td>
+                    <td id="email">Adresse email</td>
+                    <td id="type">Type d'utilisateur</td>
+                    <td id="mod"></td>
+                </tr>
+                {% for user in userlist %}
+                <tr id="{{user.username}}">
+                    <td id="surname">{{user.surname}}</td>
+                    <td id="name">{{user.name}}</td>
+                    <td id="username">{{user.username}}</td>
+                    <td id="email">{{user.email}}</td>
+                    <td id="rang"> {% if user.admin == True %}
+                        Admin
+                        {% elif user.admin == 2 %}
+                        Délégué
+                        {% else %}
+                        Lambda
+                        {% endif %}
+                    </td>
+                    <td id="mod"><a  href="{{ url_for('index') }}"><i class="material-icons">edit</i></a></td>
+                </tr>
+                {% endfor %}
+            </table>
+    
+    
             {% endif %}
-        </h2>
+        </div>
+
     </div>
-
-    {% endfor %}
-
-{% endif %}
 
 
 </div>
