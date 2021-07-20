@@ -12,8 +12,7 @@ import datetime
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
-SECRET_KEY = os.urandom(32)
-app.config['SECRET_KEY'] = SECRET_KEY
+app.config['SECRET_KEY'] = 'VERY_SECRET_KEY'
 host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/cpp_connect')
 client = pymongo.MongoClient(host=host)
 mongodb = client.cpp_connect
