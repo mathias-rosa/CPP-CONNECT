@@ -113,9 +113,7 @@ table{
 }
 
 td{
-    padding: 1%;
     overflow-x: auto;
-    padding: 1%;
     color: var(--paragraph-color);
     border-bottom: 0.1em solid var(--third-color);
 }
@@ -138,5 +136,33 @@ td{
     transition: ease 200ms;
 }
 #mod i:hover{
-    background-color: var(--third-color);
+    background-color: var(--main-color);
+}
+
+#name, #surname, #password{
+    max-width: 8em;
+}
+#username{
+    max-width: 10em;
+}
+
+tr input, #select-rang{
+    font: inherit;
+    color: inherit;
+    width: 90%;
+    height: 90%;
+    margin: 2%;
+    margin-left: 0;
+    padding: 2%;
+    padding-left: 4%;
+    border: none;
+    outline: none;
+    border-radius: 0.5em;
+}
+tr input:focus-visible{
+    background-color: var(--main-color);
+}
+
+#select-rang:not(:-internal-list-box){
+    border-radius: 0.5em;
 }

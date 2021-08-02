@@ -53,10 +53,10 @@
             </a>
         </div>
 
+        {% if current_user.admin == True %}
         <!--Dashboard en plus pour les Admins-->
 
         <div class="pannel" id="admin">
-            {% if current_user.admin == True %}
 
             <h1>Liste des utilisateurs</h1>
     
@@ -66,31 +66,81 @@
                     <td id="name">Prénom</td>
                     <td id="username">Nom d'utilisateur</td>
                     <td id="email">Adresse email</td>
+                    <td id="password">Mot de Passe</td>
                     <td id="type">Type d'utilisateur</td>
                     <td id="mod"></td>
                 </tr>
                 {% for user in userlist %}
                 <tr id="{{user.username}}">
-                    <td id="surname">{{user.surname}}</td>
-                    <td id="name">{{user.name}}</td>
-                    <td id="username">{{user.username}}</td>
-                    <td id="email">{{user.email}}</td>
-                    <td id="rang"> {% if user.admin == True %}
-                        Admin
-                        {% elif user.admin == 2 %}
-                        Délégué
-                        {% else %}
-                        Lambda
-                        {% endif %}
+                    <td id="surname"><input type="text" value="{{user.surname}}"></td>
+                    <td id="name"><input type="text" value="{{user.name}}"></td>
+                    <td id="username"><input type="email" value="{{user.username}}"></td>
+                    <td id="email"><input type="email" value="{{user.email}}"></td>
+                    <td id="password"><input type="password" placeholder="..."></td>
+                    <td id="rang">
+                        <select id="select-rang">
+                            <option value="Admin" {% if user.admin == True %}selected{% endif %}>Admin</option>
+                            <option value="Lambda" {% if user.admin == False %}selected{% endif %}>Lambda</option>
+                      </select>
                     </td>
-                    <td id="mod"><a  href="{{ url_for('index') }}"><i class="material-icons">edit</i></a></td>
+                    <td id="mod"><i id="{{user.username}}" class="material-icons" onclick="mod('{{user.username}}')">edit</i></td>
                 </tr>
                 {% endfor %}
             </table>
     
-    
-            {% endif %}
         </div>
+
+        <script>
+
+            function mod(userName) {
+                let user = document.getElementById(userName);
+
+                //get inputs values
+
+                oldUserName = userName.replace(".", "\\.")
+                let newSurname = document.querySelector("#" + oldUserName + " #surname input").value;
+                let newName = document.querySelector("#" + oldUserName + " #name input").value;
+                let newUsername = document.querySelector("#" + oldUserName + " #username input").value;
+                let newEmail = document.querySelector("#" + oldUserName + " #email input").value;
+                let newPassword = document.querySelector("#" + oldUserName + " #password input").value;
+                let newRang = document.querySelector("#" + oldUserName + " #rang select").value;
+
+                if (newRang === "Admin") {
+                    admin = "True"
+                }else{
+                    admin = "False"
+                }
+
+                let url = "{{ baseURL }}".replace("/dashboard", "/update_user");
+                
+                url += "?username=" + userName
+                url += "&newSurname=" + newSurname;
+                url += "&newName=" + newName;
+                url += "&newUsername=" + newUsername;
+                url += "&newEmail=" + newEmail;
+                url += "&newPassword=" + newPassword;
+                url += "&admin=" + admin;
+
+                fetch(url)
+                    .then( (resp) => {
+                        let icon = document.querySelector("#" + oldUserName + " #mod i"); 
+                        icon.textContent = "published_with_changes"
+                        icon.style.color = "var(--second-accent-color)";
+                        icon.style.backgroundColor = "var(--second-color)";
+                        setTimeout(() => { 
+                            icon.textContent = "edit"
+                            icon.removeAttribute("style");
+                        }, 1000);
+                    })
+                    .catch( (err) => {
+                        console.log(err);
+                    });
+
+            };
+
+        </script>
+
+        {% endif %}
 
     </div>
 

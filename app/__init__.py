@@ -171,6 +171,7 @@ def dashboard():
                             current_user=current_user,
                             userlist=userlist,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 
@@ -242,12 +243,36 @@ def settings():
                             theaming=theaming,
                             )
                             
+@app.route('/update_user')
+def update_user():
+
+    if request.args['newPassword']:
+        newPassword = generate_password_hash(request.args['newPassword'], method='sha256')
+    else:
+        newPassword = User(mongodb.db.Users.find_one({"username": request.args['username']})).password
+
+    mongodb.db.Users.update_one(
+                {"username": request.args['username']},
+                {'$set': 
+                    {
+                        "name": request.args['newName'],
+                        "surname": request.args['newSurname'],
+                        "username": request.args['newUsername'],
+                        "email": request.args['newEmail'],
+                        "password": newPassword,
+                        "admin": bool(request.args['admin'])
+                    }
+                }
+            )
+
+    return "bonjour"
 
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
 
 
 @app.errorhandler(404)
