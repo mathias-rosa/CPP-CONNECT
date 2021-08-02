@@ -224,11 +224,14 @@ p, h1, h2{
     padding-top: 1%;
     background-color: var(--second-color);
     flex-direction: column;
+    justify-content: flex-end;
 }
 .footer h1{
     display: flex;
     color: var(--third-color);
     font-weight: 600; 
+    justify-content: flex-end;
+    margin-bottom: 0;
 }
 .footer p, .footer h2{
     color: var(--third-color);
@@ -251,6 +254,11 @@ p, h1, h2{
     text-underline-offset: 0.2em;
     color: var(--third-color);
     transition: 100ms ease;
+}
+
+.footer h2 a{
+    font: inherit;
+    margin: 0;
 }
 
 
