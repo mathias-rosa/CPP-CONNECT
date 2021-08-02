@@ -48,9 +48,8 @@
     display: flex;
     font-size: 1.5em;
     margin: 0;
-    margin-left: 3%;
+    margin-left: 5%;
     flex: 1;
-    word-break: break-all;
     line-height: 1;
     color: inherit;
 }
@@ -69,6 +68,15 @@
     margin: 0;
 }
 
+#ressources{
+    width: 100%;
+    max-width: 20em;
+}
+#guiness{
+    width: 100%;
+    max-width: 15em;
+}
+
 
 #profile-box{
     display: flex;
@@ -82,7 +90,7 @@
     align-items: center;
 }
 #profile-box img{
-    height: 30%;
+    height: 8em;
     clip-path:ellipse(50% 50%);
 }
 #profile-box h1{
