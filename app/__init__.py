@@ -244,6 +244,7 @@ def settings():
                             )
                             
 @app.route('/update_user')
+@login_required
 def update_user():
 
     if request.args['newPassword']:
@@ -265,7 +266,7 @@ def update_user():
                 }
             )
 
-    return "bonjour"
+    return "fait"
 
 @app.route('/logout')
 @login_required
