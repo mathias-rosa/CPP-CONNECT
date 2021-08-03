@@ -16,7 +16,7 @@
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
             <div class="calendar">
-                <h2>Calendrier</h2>
+                <!---h2>Calendrier</h2--->
             </div>
         </div>
         <div class="pannel" id="menu">
@@ -31,23 +31,23 @@
                 <i class="material-icons">settings</i>
                 <p>Paramètres</p>
             </a>
-            <a class="tile" id="moyenne"  href="{{ url_for('index') }}">
+            <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
                 <i class="material-icons">calculate</i>
                 <p>Calcul de Moyenne</p>
             </a>
-            <a class="tile" id="links"  href="{{ url_for('index') }}">
+            <a class="tile" id="links"  href="{{ url_for('links') }}">
                 <i class="material-icons">architecture</i>
                 <p>Liens Utiles</p>
             </a>
-            <a class="tile" id="adress"  href="{{ url_for('index') }}">
+            <a class="tile" id="adress"  href="{{ url_for('adress') }}">
                 <i class="material-icons">restaurant_menu</i>
                 <p>Le Petit CPP</p>
             </a>
-            <a class="tile" id="guiness" href="{{ url_for('index') }}">
+            <a class="tile" id="guiness" href="{{ url_for('guiness') }}">
                 <i class="material-icons">grade</i>
                 <p>CPP's Business Records</p>
             </a>
-            <a class="tile" id="ressources" href="{{ url_for('index') }}">
+            <a class="tile" id="ressources" href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">
                 <i class="material-icons">turned_in_not</i>
                 <p>Ressources des années précedentes</p>
             </a>

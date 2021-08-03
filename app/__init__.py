@@ -52,7 +52,7 @@ class ChangeSelfInformationsForm(FlaskForm):
     surname = StringField('Nom')
     username = StringField("Nom d'utilisateur")
     email = StringField('Email', validators=[Optional(), Email(message='Invalid email'), Length(max=50)])
-    current_password = PasswordField('Mot de passe actuel', validators=[InputRequired(), Length(min=6, max=80)])
+    current_password = PasswordField('Mot de passe actuel *', validators=[InputRequired(), Length(min=6, max=80)])
     new_password = PasswordField('Nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
     new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
 
@@ -175,6 +175,54 @@ def dashboard():
                             )
 
 
+@app.route('/links')
+@login_required
+def links():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+    return render_template('links.html', 
+                            current_user=current_user,
+                            theaming=theaming,
+                            )
+
+@app.route('/adress')
+@login_required
+def adress():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+    return render_template('adress.html', 
+                            current_user=current_user,
+                            theaming=theaming,
+                            )
+
+@app.route('/guiness')
+@login_required
+def guiness():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+    return render_template('guiness.html', 
+                            current_user=current_user,
+                            theaming=theaming,
+                            )
+
+@app.route('/notes')
+@login_required
+def notes():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+    return render_template('notes.html', 
+                            current_user=current_user,
+                            theaming=theaming,
+                            )
+
 
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
@@ -242,7 +290,8 @@ def settings():
                             profileForm=profileForm,
                             theaming=theaming,
                             )
-                            
+
+
 @app.route('/update_user')
 @login_required
 def update_user():

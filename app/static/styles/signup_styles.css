@@ -61,7 +61,7 @@ body{
     border-bottom: solid var(--accent-color);
 }
 .inputs label{
-    color: var(--second-color);
+    color: var(--paragraph-color);
 }
 .help-block{
     display: flex;
