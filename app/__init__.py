@@ -9,6 +9,8 @@ import pymongo
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
 import datetime
+import requests
+from bs4 import BeautifulSoup
 
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
@@ -33,6 +35,30 @@ class User(UserMixin):
     
     def get_id(self):
         return str(self.id)
+
+class Site():
+    def __init__(self, site_dict):
+        self.id = site_dict.get('_id')
+        self.name = site_dict.get('name')
+        self.description = site_dict.get('description')
+        self.url = site_dict.get('url')
+        self.image = self.get_image()
+    
+    def get_id(self):
+        return str(self.id)
+    
+    def get_image(self):
+        response = requests.get(self.url)
+        soup = BeautifulSoup(response.text, features="html.parser")
+        metas = soup.find_all('meta')
+        try:
+            image = [ meta.attrs['content'] for meta in metas if 'content' in meta.attrs and 'property' in meta.attrs and meta.attrs['property'] == 'og:image' ][0]
+            if "https" in image:
+                return image
+            else:
+                return self.url + image
+        except:
+            return url_for("static", "{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}")
 
 class LoginForm(FlaskForm):
     username = StringField("Nom d'utilisateur ou Email", validators=[InputRequired()])
@@ -182,9 +208,13 @@ def links():
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
+    
+    sites_list = [Site(site) for site in mongodb.db.Sites.find({})]
+
     return render_template('links.html', 
                             current_user=current_user,
                             theaming=theaming,
+                            sites_list=sites_list,
                             )
 
 @app.route('/adress')
