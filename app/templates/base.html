@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -29,19 +29,19 @@
                 </a>
                 <div class="menu">
                     <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img">    
-                    <i class="material-icons">arrow_drop_down</i>
+                    <i class="material-icons-round">arrow_drop_down</i>
                 </div>
                 <div class="dropdown-menu">
                     <a href="{{ url_for('dashboard') }}" class="item" >
-                        <i class="material-icons">dashboard</i>
+                        <i class="material-icons-round">dashboard</i>
                         <p>Tableau de bord</p>
                     </a>
                     <a href="{{ url_for('settings') }}" class="item" >
-                        <i class="material-icons">settings</i>
+                        <i class="material-icons-round">settings</i>
                         <p>Paramètres</p>
                     </a>
                     <a href="{{ url_for('logout') }}" class="item" >
-                        <i class="material-icons">logout</i>
+                        <i class="material-icons-round">logout</i>
                         <p>Se déconnecter</p>
                     </a>
                 </div>

@@ -167,3 +167,44 @@ tr input:focus-visible{
 #select-rang:not(:-internal-list-box){
     border-radius: 0.5em;
 }
+
+@media only screen and (max-width: 600px) {
+    .widget{
+        flex-direction: column;
+    }
+    #profile-box{
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 1.5em;
+        margin-top: 3%;
+    }
+    #welcome{
+        display: none;
+        justify-content: center;
+        margin-top: 1em;
+        margin-right: 1.5em;
+    }
+    #menu{
+        margin-top: 2em;
+        margin: 0;
+    }
+    .tile{
+        width: 100%;
+        margin-right: 0;
+    }
+    #guiness, #ressources{
+        max-width: 100%;
+    }
+    td{
+        min-width: 5em;
+    }
+    table{
+        display: flex;
+        box-sizing: border-box;
+        overflow-x: auto;
+    }
+    #username, #titre, #email{
+        min-width: 10em;
+    }
+  }

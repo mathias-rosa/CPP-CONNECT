@@ -10,21 +10,26 @@
 
 <div class="content">
 
-<h1 id="title">Quelques outils pour vous faciliter la vie…</h1>
+<h1 id="title">Quelques bonnes adresses (quand vous avez le temps lol)</h1>
 
 {% for address in addresses_list %}
 
 <div class="container">
 
-    <a href="{{ address.url }}">
-        <img src="{{ address.image }}" alt="a-img" class="address-img">
-    </a>
+    <iframe class="map" src="{{ address.maps }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
     <div class="description">
         <a class="element-title" href="{{ address.url }}"><h1>{{ address.name }}</h1></a>
         <p>
             {{ address.description }}
         </p>
-        <a href="{{ address.maps }}" class="url"><h2>{{ address.maps }}</h2></a>
+        <div class="stars">
+            {% for star in range(address.stars|int) %}
+                <i class="material-icons-round">star_rate</i>
+            {% endfor %}
+            {% for star in range(5 - address.stars|int) %}
+                <i class="material-icons-round">star_outline</i>
+            {% endfor %}
+        </div>
     </div>
 
 </div>

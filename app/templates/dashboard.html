@@ -24,31 +24,31 @@
                 <h1>Bonjour {{ current_user.name }}</h1>
             </div>
             <a class="tile" id="home"  href="{{ url_for('index') }}">
-                <i class="material-icons">home</i>
+                <i class="material-icons-round">home</i>
                 <p>Accueil</p>
             </a>
             <a class="tile" id="settings"  href="{{ url_for('settings') }}">
-                <i class="material-icons">settings</i>
+                <i class="material-icons-round">settings</i>
                 <p>Paramètres</p>
             </a>
             <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
-                <i class="material-icons">calculate</i>
+                <i class="material-icons-round">calculate</i>
                 <p>Calcul de Moyenne</p>
             </a>
             <a class="tile" id="tools"  href="{{ url_for('tools') }}">
-                <i class="material-icons">architecture</i>
+                <i class="material-icons-round">architecture</i>
                 <p>Outils</p>
             </a>
             <a class="tile" id="addresses"  href="{{ url_for('addresses') }}">
-                <i class="material-icons">restaurant_menu</i>
+                <i class="material-icons-round">restaurant_menu</i>
                 <p>Le Petit CPP</p>
             </a>
             <a class="tile" id="guiness" href="{{ url_for('guiness') }}">
-                <i class="material-icons">grade</i>
+                <i class="material-icons-round">grade</i>
                 <p>CPP's Business Records</p>
             </a>
             <a class="tile" id="ressources" href="https://drive.google.com/drive/folders/1JzO5Pbek--fbNGhzBTdJvNYxJXvUp7rV?usp=sharing">
-                <i class="material-icons">turned_in_not</i>
+                <i class="material-icons-round">turned_in_not</i>
                 <p>Ressources des années précedentes</p>
             </a>
         </div>
@@ -65,7 +65,7 @@
                     <td id="surname">Nom</td>
                     <td id="name">Prénom</td>
                     <td id="username">Nom d'utilisateur</td>
-                    <td id="email">Addressese email</td>
+                    <td id="email">Adresses email</td>
                     <td id="password">Mot de Passe</td>
                     <td id="type">Type d'utilisateur</td>
                     <td id="mod"></td>
@@ -83,7 +83,7 @@
                             <option value="Lambda" {% if user.admin == False %}selected{% endif %}>Lambda</option>
                       </select>
                     </td>
-                    <td id="mod"><i id="{{user.username}}" class="material-icons" onclick="mod('{{user.username}}')">edit</i></td>
+                    <td id="mod"><i id="{{user.username}}" class="material-icons-round" onclick="mod('{{user.username}}')">edit</i></td>
                 </tr>
                 {% endfor %}
             </table>

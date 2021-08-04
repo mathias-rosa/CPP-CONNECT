@@ -264,8 +264,29 @@ p, h1, h2{
 
 
 @media only screen and (max-width: 600px) {
-    body {
-      font-size: 0.51em;
+    .content{
+        padding: 3%;
+    }
+    .header h1{
+        display: none;
+    }
+    .header{
+        padding-left: 3%;
+        padding-right: 3%;
+    }
+    .dropdown-menu{
+        width: 14em;
+        padding: 3%;
+        padding-bottom: 0;
+    }
+    .dropdown-menu a{
+        min-height: 3.5em;
+    }
+    #creator{
+        font-size: 1em;
+    }
+    .footer h2{
+        font-size: 0.8em;
     }
   }
 

@@ -14,10 +14,10 @@
     margin-bottom: 3%;
 }
 
-.tool-img{
+.tool-img, .map{
     border-radius: 2em;
-    height: 12em;
-    width: 12em
+    height: 13em;
+    width: 13em
 }
 
 .description{
@@ -63,3 +63,19 @@
 .url h2:hover{
     color: var(--second-accent-color);
 }
+
+.stars {
+    display:flex;
+    margin-top: 2%
+}
+.stars i{
+    color: var(--second-accent-color);
+}
+@media only screen and (max-width: 600px) {
+    #title{
+        font-size: 1.3em
+    }
+    .header h2{
+        font-size:1em;
+    }
+  }
