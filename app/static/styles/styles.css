@@ -58,6 +58,7 @@ p, h1, h2{
 .header h2{
     font-size: 1.5em;
     white-space: nowrap;
+    font-weight: 400;
     color: var(--second-color);
 }
 .header-left{
