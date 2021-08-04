@@ -3,7 +3,7 @@
     color: var(--accent-color);
 }
 
-.sites{
+.tool{
     display: flex;
     background: var(--blanc-ou-noir);
     box-shadow: 0 8px 32px 0 var(--third-color);
@@ -14,7 +14,7 @@
     margin-bottom: 3%;
 }
 
-.site-favicon{
+.tool-img{
     border-radius: 2em;
     height: 12em;
     width: 12em
@@ -24,17 +24,17 @@
     padding-left: 3%;
 }
 
-.site-title{
+.tool-title{
     display: flex;
     color: var(--accent-color);
     text-decoration: none;
     
 }
-.site-title h1{
+.tool-title h1{
     margin: 0;
     color: var(--accent-color);
 }
-.site-title h1:hover{
+.tool-title h1:hover{
     text-decoration: underline solid 0.15rem;
     text-underline-offset: 0.2em;
     transition: 100ms ease;
@@ -44,13 +44,13 @@
     font-weight: 400;
     margin-top: 1%;
     margin-bottom: 1%;    
-    height: 4.5em;
+    max-height: 4.5em;
     overflow-y: auto;
 }
-a{
+.url{
     text-decoration: none;
 }
-a h2{
+.url h2{
     font-size: 1.1em;
     font-weight: 400;
     margin-top: 3%;
@@ -60,6 +60,6 @@ a h2{
     text-underline-offset: 0.2em;
     transition: 100ms ease;
 }
-a h2:hover{
+.url h2:hover{
     color: var(--second-accent-color);
 }

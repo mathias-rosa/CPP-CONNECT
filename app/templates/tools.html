@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/tools_and_addresses_styles.css') }}">
+<title>Outils</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+<h1 id="title">Quelques outils pour vous faciliter la vie…</h1>
+
+{% for tool in tools_list %}
+
+<div class="tool">
+
+    <a href="{{ tool.url }}">
+        <img src="{{ tool.image }}" alt="tool-img" class="tool-img">
+    </a>
+    <div class="description">
+        <a class="tool-title" href="{{ tool.url }}"><h1>{{ tool.name }}</h1></a>
+        <p>
+            {{ tool.description }}
+        </p>
+        <a href="{{ tool.url }}" class="url"><h2>{{ tool.url }}</h2></a>
+    </div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

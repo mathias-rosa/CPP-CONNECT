@@ -36,12 +36,12 @@ class User(UserMixin):
     def get_id(self):
         return str(self.id)
 
-class Site():
-    def __init__(self, site_dict):
-        self.id = site_dict.get('_id')
-        self.name = site_dict.get('name')
-        self.description = site_dict.get('description')
-        self.url = site_dict.get('url')
+class Tool():
+    def __init__(self, tool_dict):
+        self.id = tool_dict.get('_id')
+        self.name = tool_dict.get('name')
+        self.description = tool_dict.get('description')
+        self.url = tool_dict.get('url')
         self.image = self.get_image()
     
     def get_id(self):
@@ -58,7 +58,7 @@ class Site():
             else:
                 return self.url + image
         except:
-            return url_for("static", "{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}")
+            return url_for('static', filename='img/Avatar/profile_pict_1.svg')
 
 class LoginForm(FlaskForm):
     username = StringField("Nom d'utilisateur ou Email", validators=[InputRequired()])
@@ -201,30 +201,30 @@ def dashboard():
                             )
 
 
-@app.route('/links')
+@app.route('/tools')
 @login_required
-def links():
+def tools():
     if not current_user.is_anonymous:
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
     
-    sites_list = [Site(site) for site in mongodb.db.Sites.find({})]
+    tools_list = [Tool(tool) for tool in mongodb.db.Tools.find({})]
 
-    return render_template('links.html', 
+    return render_template('tools.html', 
                             current_user=current_user,
                             theaming=theaming,
-                            sites_list=sites_list,
+                            tools_list=tools_list,
                             )
 
-@app.route('/adress')
+@app.route('/addresses')
 @login_required
-def adress():
+def addresses():
     if not current_user.is_anonymous:
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
-    return render_template('adress.html', 
+    return render_template('addresses.html', 
                             current_user=current_user,
                             theaming=theaming,
                             )
