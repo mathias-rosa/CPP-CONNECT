@@ -164,4 +164,7 @@
     .texte-accueil h1{
         margin: 0.4em;
     }
+    .content{
+        font-size: 0.6em;
+    }
   }
