@@ -43,9 +43,7 @@ class Tool():
         self.description = tool_dict.get('description')
         self.url = tool_dict.get('url')
         self.image = self.get_image()
-    
-    def get_id(self):
-        return str(self.id)
+
     
     def get_image(self):
         response = requests.get(self.url)
@@ -59,6 +57,15 @@ class Tool():
                 return self.url + image
         except:
             return url_for('static', filename='img/Avatar/profile_pict_1.svg')
+
+class Addresses():
+    def __init__(self, addresses_dict):
+        self.id = addresses_dict.get('_id')
+        self.name = addresses_dict.get('name')
+        self.description = addresses_dict.get('description')
+        self.stars = addresses_dict.get('stars')
+        self.maps = addresses_dict.get('maps')
+    
 
 class LoginForm(FlaskForm):
     username = StringField("Nom d'utilisateur ou Email", validators=[InputRequired()])
@@ -224,9 +231,13 @@ def addresses():
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
+    
+    addresses_list = [Addresses(address) for address in mongodb.db.Addresses.find({})]
+
     return render_template('addresses.html', 
                             current_user=current_user,
                             theaming=theaming,
+                            addresses_list=addresses_list,
                             )
 
 @app.route('/guiness')
@@ -326,6 +337,9 @@ def settings():
 @login_required
 def update_user():
 
+    if current_user.admin == False:
+        return "Forbidden"
+
     if request.args['newPassword']:
         newPassword = generate_password_hash(request.args['newPassword'], method='sha256')
     else:
@@ -340,7 +354,7 @@ def update_user():
                         "username": request.args['newUsername'],
                         "email": request.args['newEmail'],
                         "password": newPassword,
-                        "admin": bool(request.args['admin'])
+                        "admin": request.args['admin'] in ("True")
                     }
                 }
             )

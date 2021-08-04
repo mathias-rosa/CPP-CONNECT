@@ -14,13 +14,13 @@
 
 {% for tool in tools_list %}
 
-<div class="tool">
+<div class="container">
 
     <a href="{{ tool.url }}">
         <img src="{{ tool.image }}" alt="tool-img" class="tool-img">
     </a>
     <div class="description">
-        <a class="tool-title" href="{{ tool.url }}"><h1>{{ tool.name }}</h1></a>
+        <a class="element-title" href="{{ tool.url }}"><h1>{{ tool.name }}</h1></a>
         <p>
             {{ tool.description }}
         </p>
