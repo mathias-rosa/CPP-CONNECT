@@ -170,21 +170,22 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         username = form.username.data
-        if "@" in username:
-            user = User(mongodb.db.Users.find_one({"email": username}))
-        else:
-            user = User(mongodb.db.Users.find_one({"username": username}))
-        if user:
-            if check_password_hash(user.password, form.password.data):
-                login_user(user, remember=form.remember.data)
-                return redirect(url_for('dashboard'))
+        try:
+            if "@" in username:
+                user = User(mongodb.db.Users.find_one({"email": username}))
+            else:
+                user = User(mongodb.db.Users.find_one({"username": username}))
+        except:
+            error = "Mot de passe ou nom d'utilisateur incorrect"        
+            return render_template('login.html', 
+                                    form=form,
+                                    error=error,
+                                    theaming=theaming,
+                                    )
 
-        error = "Mot de passe ou nom d'utilisateur incorrect"        
-        return render_template('login.html', 
-                                form=form,
-                                error=error,
-                                theaming=theaming,
-                                )
+        if check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            return redirect(url_for('dashboard'))
 
     return render_template('login.html', 
                             form=form,
