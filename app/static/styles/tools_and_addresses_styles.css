@@ -59,6 +59,7 @@
     text-decoration: underline solid 0.15rem;
     text-underline-offset: 0.2em;
     transition: 100ms ease;
+    overflow-wrap: anywhere;
 }
 .url h2:hover{
     color: var(--second-accent-color);
@@ -72,10 +73,20 @@
     color: var(--second-accent-color);
 }
 @media only screen and (max-width: 600px) {
-    #title{
-        font-size: 1.3em
-    }
     .header h2{
         font-size:1em;
+    }
+    .container{
+        flex-direction: column;
+        padding: 3%;
+        padding-bottom: 5%;
+        margin-bottom: 5%;
+    }
+    .tool-img{
+        height: 100%;
+        width: 100%;
+    }
+    .map{
+        width: 100%;
     }
   }
