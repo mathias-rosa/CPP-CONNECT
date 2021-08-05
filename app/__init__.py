@@ -132,6 +132,7 @@ def signup():
                                         )
             hashed_password = generate_password_hash(form.password.data, method='sha256')
             username = form.name.data.lower() + "." + form.surname.data.lower()
+            username = username.replace(" ", "")
             id  = int(str(int(generate_password_hash(form.name.data.upper() + form.surname.data, method='MD5')[22:], base=16))[:18])
             new_user = {"_id": id, 
                         "name": form.name.data,
@@ -353,7 +354,7 @@ def update_user():
                     {
                         "name": request.args['newName'],
                         "surname": request.args['newSurname'],
-                        "username": request.args['newUsername'],
+                        "username": request.args['newUsername'].replace(" ", ""),
                         "email": request.args['newEmail'],
                         "password": newPassword,
                         "admin": request.args['admin'] in ("True")
