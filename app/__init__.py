@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, url_for, send_from_directory, request
+from flask import Flask, render_template, redirect, url_for, send_from_directory, request, jsonify
 from flask_bootstrap import Bootstrap
 from flask_wtf import FlaskForm 
 from wtforms import StringField, PasswordField, BooleanField, RadioField
@@ -42,21 +42,7 @@ class Tool():
         self.name = tool_dict.get('name')
         self.description = tool_dict.get('description')
         self.url = tool_dict.get('url')
-        self.image = self.get_image()
 
-    
-    def get_image(self):
-        response = requests.get(self.url)
-        soup = BeautifulSoup(response.text, features="html.parser")
-        metas = soup.find_all('meta')
-        try:
-            image = [ meta.attrs['content'] for meta in metas if 'content' in meta.attrs and 'property' in meta.attrs and meta.attrs['property'] == 'og:image' ][0]
-            if "https" in image:
-                return image
-            else:
-                return self.url + image
-        except:
-            return url_for('static', filename='img/Avatar/profile_pict_1.svg')
 
 class Addresses():
     def __init__(self, addresses_dict):
@@ -225,7 +211,24 @@ def tools():
                             current_user=current_user,
                             theaming=theaming,
                             tools_list=tools_list,
+                            baseURL=request.base_url,
                             )
+
+@app.route('/tools/get_image')
+@login_required
+def get_image():
+    url = request.args['url']
+    response = requests.get(url)
+    soup = BeautifulSoup(response.text, features="html.parser")
+    metas = soup.find_all('meta')
+    try:
+        image = [ meta.attrs['content'] for meta in metas if 'content' in meta.attrs and 'property' in meta.attrs and meta.attrs['property'] == 'og:image' ][0]
+        if "https" in image:
+            return {"imageURL" : image}
+        else:
+            return {"imageURL" : url + image}
+    except:
+        return {"imageURL" : url_for('static', filename='img/Avatar/profile_pict_1.svg')}
 
 @app.route('/addresses')
 @login_required

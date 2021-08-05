@@ -17,7 +17,7 @@
 <div class="container">
 
     <a href="{{ tool.url }}">
-        <img src="{{ tool.image }}" alt="tool-img" class="tool-img">
+        <img src="{{ url_for('static', filename='img/' + theaming + '/loading.svg') }}" alt="tool-img" class="tool-img" id="{{ tool.url }}">
     </a>
     <div class="description">
         <a class="element-title" href="{{ tool.url }}"><h1>{{ tool.name }}</h1></a>
@@ -32,5 +32,29 @@
 {% endfor %}
 
 </div>
+
+<script>
+
+async function getImage(url) {
+    let img = document.getElementById(url);
+    fetch('{{ baseURL + "/get_image?url="}}' + url)
+    .then((promise) => {
+        promise.json().then( (resp) => {
+            img.setAttribute("src", resp["imageURL"]);
+        })
+    })
+    .catch((err) => {
+        console.log(err);
+    })
+}
+
+    //{% for tool in tools_list %}
+
+    getImage("{{ tool.url }}")
+
+    //{% endfor %}
+
+
+</script>
 
 {% endblock %}
