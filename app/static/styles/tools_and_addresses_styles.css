@@ -89,4 +89,7 @@
     .map{
         width: 100%;
     }
+    .description p{
+        max-height: 8.5em;
+    }
   }
