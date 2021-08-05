@@ -1,0 +1,43 @@
+.ranking{
+    display: flex;
+    border-radius: 1em;
+    background-color: var(--blanc-ou-noir);
+    flex-direction: column;
+    padding: 2%;
+    width: 20em;
+}
+
+.ranking_top{
+    display: flex;
+    justify-content: space-between;
+}
+.ranking_title{
+    background-color: var(--second-accent-color);
+    border-radius: 1em;
+    padding-right: 10%;
+    padding-left: 3%;
+    width: 100%;
+    margin-right: 5%;
+}
+
+.ranking_title h1{
+    color: var(--blanc-ou-noir);
+    font-size: 1.3em
+}
+
+.ranking_top a{
+    background-color: var(--paragraph-color);
+    border-radius: 1em; 
+    padding: 3%;
+}
+
+.ranking_top i{
+    font-size: 3em;
+}
+.user_ranking{
+    display: flex;
+    justify-content: space-between;
+}
+.number{
+    padding-left: 3%;
+}

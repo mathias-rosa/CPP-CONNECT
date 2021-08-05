@@ -1,38 +1,40 @@
-
 .salut{
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-rows: 1fr 3fr;
+    max-height: 23em;
+
 }
-.texte-accueil{
-    margin-left: 4%;
-}
-.illustration-1{
+#hexagon {
     display: flex;
-    height: fit-content;
-    margin-left: 3%;
+    height: 23em;
+    width: auto;
+    grid-column: 1;
+    grid-row: 1/3;
 }
-#hexagon{
-    display: flex;
-    width: 23em;
-}
-.texte-accueil, .paragraph{
-    display: flex;
-    flex-direction: column;
-}
-.texte-accueil h1{
-    display: flex;
-    color: var(--accent-color);
+.salut h1{
+    margin: 0;
+    margin-left: 8%;
+    margin-top: 5%;
     font-size: 3em;
-    margin: 0.5em;
-    margin-left: 0;
-    margin-top: 1em;
-    margin-bottom: 0;
+    color: var(--accent-color);
+    grid-column: 2;
+    grid-row: 1;
+}
+.paragraph{
+    margin-left: 8%;
+    grid-column: 2;
+    grid-row: 2;
 }
 .paragraph p{
     display: flex;
-    margin: 0.3em;
+    margin-top: 0.3em;
+    margin-right: 0.3em;
+    margin-bottom: 0.3em;
     margin-left: 0;
     font-size: 1.2em;
+}
+.liste-fontions-texte h1 {
+    margin-top: 0;
 }
 .connection{
     display: flex;
@@ -161,14 +163,72 @@
 }
 
 @media only screen and (max-width: 600px) {
+    .salut{
+        grid-template-columns: 1fr 2fr;
+    }
     #hexagon {
         height: 10em;
-        width: auto;
+        grid-row: 1;
     }
-    .texte-accueil h1{
-        margin: 0.4em;
+    .salut h1{
+        margin-top: 0.8em;
     }
-    .content{
-        font-size: 0.6em;
+    .paragraph{
+        font-size: 0.8em;
+        grid-column: 1/3;
+        grid-row: 2;
+        margin-top: 3%;
+        margin-left: 0;
+    }
+    .connection{
+        margin-top: 0;
+    }
+    .liste-fontions-texte h1{
+        font-size: 2em;
+    }
+
+    .fiche-1, .fiche-2{
+        display: block;
+        background: var(--blanc-ou-noir);
+        box-shadow: 0 8px 32px 0 var(--third-color);
+        border: 0.1em solid var(--third-color);
+        backdrop-filter: blur(1em);
+        border-radius: 2em;
+        padding: 6%;
+    }
+
+    .fiche-image{
+        display: none;
+    }
+
+    .fiche-texte-1, .fiche-texte-2 {
+        position: relative;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .fiche-texte-2{
+        text-align: start;
+    }
+
+    .fiche-texte-1 h1, .fiche-texte-2 h1 {
+        margin: 0;
+        width: 100%;
+        line-height: 1.1em;
+        font-size: 1.7em;
+        height: 100%;
+        overflow: hidden;
+    }
+
+    .fiche-texte-1 p, .fiche-texte-2 p{
+        margin: 0;
+        margin-top: 4%;
+        overflow-y: auto;
+        font-size: 1em;
+        width: 100%;
+        height: 100%;
+    }
+    br{
+        display: none;
     }
   }
