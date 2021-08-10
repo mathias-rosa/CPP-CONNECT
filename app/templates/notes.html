@@ -12,13 +12,53 @@
 
     <h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
 
-    <div class="semestrer">
-        
-                
+<!---
 
+    <div class="semester-gepi">
+        <div class="semester-div">
+            <a href="{{ url_for('notes') }}" class="semester">
+                <div><h1>Semestre 1</h1></div>
+            </a>
+            <a href="{{ url_for('notes') }}" class="semester">
+                <div><h1>Semestre 2</h1></div>
+            </a>
+            <a href="{{ url_for('notes') }}" class="semester">
+                <div><h1>Semestre 3</h1></div>
+            </a>
+        </div>
+        <div class="gepi">
+            <h1>Télécharger les notes de GEPI</h1>
+            <i class="material-icons-round">
+                file_download
+            </i>
+        </div>
     </div>
 
+-->
+
 </div>
-<script src="{{ url_for('static', filename='script/notes.js') }}"></script>
+
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script>
+
+function createCookie(obj) {
+    /**
+    Fonction qui crée un cookie contenant le nom d'utilisateur gepi et son mot de passe
+     * @param  {[object]} obj {
+         UserID: "Gepi id"
+         password: "Gepi password"
+     }
+     */
+    document.cookie = `GEPI={UserID: ${obj.UserID}, password: ${obj.password}}`
+}
+
+function getGEPI() {
+
+  console.log(document.cookie)
+
+}
+
+
+</script>
 
 {% endblock %}

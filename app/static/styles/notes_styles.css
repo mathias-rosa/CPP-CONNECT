@@ -1,0 +1,51 @@
+.semester-gepi {
+    display: flex;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 var(--third-color);
+    border: 0.1em solid var(--third-color);
+    backdrop-filter: blur(1em);
+    border-radius: 1.5em;
+    padding: 1.5%;
+    margin-bottom: 3%;
+    justify-content: space-between;
+    align-items: center;
+}
+.semester-div h1{
+    display: flex;
+    font-size: 1.2em;
+    margin: 0;
+    color: var(--main-color);
+}
+.semester-div {
+    display: flex;
+    flex-direction: line;
+    width: 50%;
+}
+.semester-div a{
+    display: flex;
+    align-content: space-around;
+    margin-right: 4%;
+    background: var(--second-accent-color);
+    box-shadow: 0 8px 32px 0 var(--third-color);
+    border: 0.1em solid var(--third-color);
+    border-radius: 0.6em;
+    min-width: 9em;
+    padding: 1%;
+    text-decoration: none;
+}
+.semester div{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.gepi {
+    display: flex;
+    align-items: center;
+}
+.gepi h1{
+    font-size: 1em
+}
+.gepi i{
+    margin-left: 0.5em;
+}
