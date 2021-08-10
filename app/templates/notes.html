@@ -36,6 +36,20 @@
 
 -->
 
+<!---
+<form x-data="{ username : '', password : '' }" class="gepi-form" autocomplete="gepi">
+    <input type="text" x-model="username" name="gepi-username" placeholder="Nom d'utilisateur GEPI">
+    <input type="password" x-model="password" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password">
+    <button type="button" @click="
+    createCookie({
+        UserID: username,
+        password: password
+    });
+    GEPI()
+    ">Télécharger mes notes</button>
+</form>
+-->
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
@@ -52,7 +66,7 @@ function createCookie(obj) {
     document.cookie = `GEPI={UserID: ${obj.UserID}, password: ${obj.password}}`
 }
 
-function getGEPI() {
+function GEPI() {
 
   console.log(document.cookie)
 

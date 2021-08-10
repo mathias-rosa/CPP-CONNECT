@@ -1,4 +1,4 @@
-.semester-gepi {
+.semester-gepi{
     display: flex;
     background: var(--blanc-ou-noir);
     box-shadow: 0 8px 32px 0 var(--third-color);
@@ -48,4 +48,20 @@
 }
 .gepi i{
     margin-left: 0.5em;
+}
+
+form{
+    display: flex;
+    background: var(--blanc-ou-noir);
+    border-radius: 1.5em;
+    padding: 1.5%;
+    max-width: 100%;
+    width: 30em;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+form input{
+    width: 10em;
+    margin-right: 3%;
 }
