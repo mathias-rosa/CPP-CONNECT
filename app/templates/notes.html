@@ -12,7 +12,7 @@
 
     <h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
 
-<!---
+<!----
 
     <div class="semester-gepi">
         <div class="semester-div">
@@ -36,7 +36,7 @@
 
 
     <div class="popup" x-show="visible === true">
-        <form x-data="{ username : '', password : ''}" class="gepi-form" autocomplete="gepi">
+        <form x-data="{ username : '', password : ''}" x-on:submit.prevent="GEPI()" class="gepi-form" autocomplete="gepi">
             <h1>Connection à gepi</h1>
             <div id="gepi-username">
                 <h2>Nom d'utilisateur GEPI</h2>
@@ -45,17 +45,17 @@
             </div>
             <div id="gepi-password">
                 <h2>Mot de passe GEPI</h2>
-                <input type="password" x-model="password" @keydown.enter="GEPI()" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password" required>
+                <input type="password" x-model="password" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password" required>
                 <p style="display: none;" x-text="password">
             </div>
             <div class="buttons">
-                <button id="download" type="button" @click="GEPI()">Télécharger mes notes</button>
+                <button id="download" @click="GEPI()">Télécharger mes notes</button>
                 <button id="cancel" type="button" @click="document.querySelector('.content').__x.$data.visible = false">Annuler</button>
             </div>
         </form>
     </div>
 
---->
+---->
 
 </div>
 
