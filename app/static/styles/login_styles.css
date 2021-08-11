@@ -20,11 +20,11 @@ body{
 }
 .login-box{
     background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 var(--third-color);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
-    border: 0.1em solid var(--third-color);
+    border: 0.1em solid hsl(var(--third-color));
     width: 24em;
     padding: 1.5em;
     padding-bottom: 1.25em;
@@ -32,7 +32,7 @@ body{
 }
 .login-box h1{
     margin: 0;
-    color: var(--accent-color);
+    color: hsl(var(--accent-color));
 }
 
 .form-group{
@@ -53,17 +53,17 @@ body{
     padding-left: 0.5em;
     height: 2.3em;
     background-color: transparent;
-    border: solid 0.14em var(--third-color);
+    border: solid 0.14em hsl(var(--third-color));
     border-radius: 0.3em;
     font-family: 'Poppins';
-    color: var(--second-color);
+    color: hsl(var(--second-color));
 }
 .inputs input:focus-visible{
     outline: none;
-    border-bottom: solid var(--accent-color);
+    border-bottom: solid hsl(var(--accent-color));
 }
 .inputs label{
-    color: var(--paragraph-color);
+    color: hsl(var(--paragraph-color));
 }
 .help-block{
     display: flex;
@@ -93,7 +93,7 @@ body{
     padding: 0.4em;
     border-radius: 0.5em;
     border: none;
-    background-color: var(--second-accent-color);
+    background-color: hsl(var(--second-accent-color));
     color: white;
     width: 10em;
     justify-content: center;
@@ -103,13 +103,13 @@ body{
     cursor: pointer;
 }
 .btn:hover{
-    background-color: var(--accent-color);
+    background-color: hsl(var(--accent-color));
     transition: 100ms ease;
 }
 .inscription{
     display: flex;
     justify-content: center;
-    color: var(--second-color);
+    color: hsl(var(--second-color));
     font-size: 0.65em;
     text-decoration: none;
     font-weight: 400;
@@ -125,14 +125,14 @@ body{
 .inscription:hover{
     text-decoration: underline solid 0.2em;
     text-underline-offset: 0.2em;
-    color: var(--second-accent-color);
+    color: hsl(var(--second-accent-color));
     transition: 100ms ease;
 }
 .options{
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
-    color: var(--second-accent-color);
+    color: hsl(var(--second-accent-color));
     font-size: 0.8em;
     font-weight: 300;
     margin-top: 1em;

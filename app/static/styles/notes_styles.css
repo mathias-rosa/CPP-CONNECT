@@ -1,8 +1,8 @@
 .semester-gepi{
     display: flex;
     background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 var(--third-color);
-    border: 0.1em solid var(--third-color);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
     backdrop-filter: blur(1em);
     border-radius: 1.5em;
     padding: 1.5%;
@@ -14,20 +14,18 @@
     display: flex;
     font-size: 1.2em;
     margin: 0;
-    color: var(--main-color);
+    color: hsl(var(--main-color));
 }
 .semester-div {
     display: flex;
-    flex-direction: line;
     width: 50%;
+    overflow-x: auto;
 }
 .semester-div a{
     display: flex;
     align-content: space-around;
     margin-right: 4%;
-    background: var(--second-accent-color);
-    box-shadow: 0 8px 32px 0 var(--third-color);
-    border: 0.1em solid var(--third-color);
+    background: hsl(var(--second-accent-color));
     border-radius: 0.6em;
     min-width: 9em;
     padding: 1%;
@@ -42,6 +40,7 @@
 .gepi {
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 .gepi h1{
     font-size: 1em
@@ -50,18 +49,125 @@
     margin-left: 0.5em;
 }
 
-form{
+.popup{
+    display: block;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: hsla(var(--second-color), 0.3);
+    backdrop-filter: blur(0.1em);
+}
+
+.gepi-form{
     display: flex;
+    position: absolute;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    height: fit-content;
     background: var(--blanc-ou-noir);
     border-radius: 1.5em;
-    padding: 1.5%;
+    padding: 2%;
     max-width: 100%;
     width: 30em;
     align-content: center;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
 }
-form input{
+.gepi-form input{
     width: 10em;
     margin-right: 3%;
+}
+.gepi-form div{
+    width: 100%;
+}
+.gepi-form h1{
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: hsl(var(--accent-color));
+}
+.gepi-form h2{
+    width: 100%;
+    font-size: 1em;
+    color: hsl(var(--paragraph-color));
+}
+
+.gepi-form input{
+    display: flex;
+    padding-top: 0.2em;
+    margin-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    height: 2.3em;
+    min-width: 15em;
+    background-color: transparent;
+    border: solid 0.14em hsl(var(--third-color));
+    border-radius: 0.3em;
+    font-family: 'Poppins';
+    color: hsl(var(--second-color));
+}
+.gepi-form input:focus-visible{
+    outline: none;
+    border-bottom: solid hsl(var(--accent-color));
+}
+.buttons{
+    display: flex;
+    margin-top: 3%;
+}
+.buttons #download{
+    display: flex;
+    padding-top: 0;
+    padding: 0.4em;
+    margin-top: 3%;
+    border-radius: 0.5em;
+    border: none;
+    background-color: hsl(var(--second-accent-color));
+    color: white;
+    width: 13em;
+    justify-content: center;
+    font-family: 'Poppins';
+    font-size: 1.1em;
+    font-weight: 800;
+    cursor: pointer;
+    margin-right: 4%;
+}
+.buttons #cancel{
+    display: flex;
+    padding-top: 0;
+    padding: 0.4em;
+    margin-top: 3%;
+    border: none;
+    color: hsl(var(--accent-color));
+    background-color: transparent;
+    justify-content: center;
+    font-family: 'Poppins';
+    font-size: 1.1em;
+    font-weight: 400;
+    cursor: pointer;
+    margin-right: 4%;
+    align-items: center;
+}
+.buttons #cancel:hover{
+    text-decoration: underline 0.1em solid;
+}
+
+@media only screen and (max-width: 600px) {
+    .gepi-form{
+        top: auto;
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        padding: 3%;
+        padding-bottom: 5%;
+        width: 100%;
+        box-sizing: border-box;
+    }
 }

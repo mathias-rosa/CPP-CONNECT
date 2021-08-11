@@ -1,9 +1,9 @@
 .div-box{
     display: flex;
     background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 var(--third-color);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     flex-direction: column;
-    border: 0.1em solid var(--third-color);
+    border: 0.1em solid hsl(var(--third-color));
     backdrop-filter: blur(1em);
     border-radius: 1em;
     padding: 5%;
@@ -22,14 +22,14 @@
     padding-left: 0.5em;
     height: 2.3em;
     background-color: transparent;
-    border: solid 0.14em var(--third-color);
+    border: solid 0.14em hsl(var(--third-color));
     border-radius: 0.3em;
     font-family: 'Poppins';
-    color: var(--second-color);
+    color: hsl(var(--second-color));
 }
 .form-control:focus-visible{
     outline: none;
-    border-bottom: solid var(--accent-color);
+    border-bottom: solid hsl(var(--accent-color));
 }
 #password.form-control{
     width: 18em;
@@ -41,7 +41,7 @@
 }
 
 .form-group label{
-    color: var(--paragraph-color)
+    color: hsl(var(--paragraph-color))
 }
 .form-profile{
     display: flex;
@@ -75,8 +75,8 @@
     height: 9em;
     overflow: hidden;
     border-radius: 0.75em;
-    background-color: var(--main-color);
-    border: var(--third-color) 0.1em solid;
+    background-color: hsl(var(--main-color));
+    border: hsl(var(--third-color)) 0.1em solid;
 }
 .boutons-modes label{
     display: flex;
@@ -87,7 +87,7 @@
     border-radius: 1em;
     height: 100%;
     width: 100%;
-    color: var(--paragraph-color);
+    color: hsl(var(--paragraph-color));
     cursor: pointer;
 }
 .span-et-input{
@@ -102,12 +102,12 @@
 label img{
     max-width: 100%;
     max-height: 100%;
-    border-bottom: var(--third-color) 0.1em solid;
+    border-bottom: hsl(var(--third-color)) 0.1em solid;
 }
 input{
     margin-right: 5%;
 }
 
 .radio:hover{
-    border-color: var(--second-color);
+    border-color: hsl(var(--second-color));
 }

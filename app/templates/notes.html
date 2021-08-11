@@ -8,7 +8,7 @@
 
 {% block content %}
 
-<div class="content">
+<div class="content" x-data="{visible: false}">
 
     <h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
 
@@ -26,29 +26,36 @@
                 <div><h1>Semestre 3</h1></div>
             </a>
         </div>
-        <div class="gepi">
+        <button class="gepi" @click="GEPI()">
             <h1>Télécharger les notes de GEPI</h1>
             <i class="material-icons-round">
                 file_download
             </i>
-        </div>
+        </button>
     </div>
 
--->
 
-<!---
-<form x-data="{ username : '', password : '' }" class="gepi-form" autocomplete="gepi">
-    <input type="text" x-model="username" name="gepi-username" placeholder="Nom d'utilisateur GEPI">
-    <input type="password" x-model="password" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password">
-    <button type="button" @click="
-    createCookie({
-        UserID: username,
-        password: password
-    });
-    GEPI()
-    ">Télécharger mes notes</button>
-</form>
--->
+    <div class="popup" x-show="visible === true">
+        <form x-data="{ username : '', password : ''}" class="gepi-form" autocomplete="gepi">
+            <h1>Connection à gepi</h1>
+            <div id="gepi-username">
+                <h2>Nom d'utilisateur GEPI</h2>
+                <input type="text" x-model="username" name="gepi-username" placeholder="Nom d'utilisateur GEPI" required>
+                <p style="display: none;" x-text="username">
+            </div>
+            <div id="gepi-password">
+                <h2>Mot de passe GEPI</h2>
+                <input type="password" x-model="password" @keydown.enter="GEPI()" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password" required>
+                <p style="display: none;" x-text="password">
+            </div>
+            <div class="buttons">
+                <button id="download" type="button" @click="GEPI()">Télécharger mes notes</button>
+                <button id="cancel" type="button" @click="document.querySelector('.content').__x.$data.visible = false">Annuler</button>
+            </div>
+        </form>
+    </div>
+
+--->
 
 </div>
 
@@ -68,7 +75,22 @@ function createCookie(obj) {
 
 function GEPI() {
 
-  console.log(document.cookie)
+    if (document.cookie) {
+        document.querySelector(".content").__x.$data.visible = false;
+        console.log(document.cookie)
+    } else {
+
+        document.querySelector(".content").__x.$data.visible = true;
+
+        let gepiID = document.querySelector("#gepi-username p").textContent
+        let gepiPassword = document.querySelector("#gepi-password p").textContent
+        if (gepiID !== "" && gepiPassword !== " ") {
+            createCookie({
+                UserID: gepiID,
+                password: gepiPassword
+            })
+        }
+    }
 
 }
 

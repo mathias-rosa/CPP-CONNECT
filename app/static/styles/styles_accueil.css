@@ -16,7 +16,7 @@
     margin-left: 8%;
     margin-top: 5%;
     font-size: 3em;
-    color: var(--accent-color);
+    color: hsl(var(--accent-color));
     grid-column: 2;
     grid-row: 1;
 }
@@ -65,12 +65,12 @@
 }
 .liste-fontions-texte h1{
     display: flex;
-    color: var(--accent-color);
+    color: hsl(var(--accent-color));
     font-size: 3em;
 }
 
 #dessin{
-    color: var(--second-accent-color);
+    color: hsl(var(--second-accent-color));
 }
 
 .fiche-1{
@@ -126,7 +126,7 @@
     margin-top: -0.3em;
     line-height: 1.1em;
     font-size: 2.5em;
-    color: var(--second-accent-color);
+    color: hsl(var(--second-accent-color));
     height: 2.35em;
     overflow: auto;
     
@@ -146,7 +146,7 @@
     margin-top: -0.3em;
     line-height: 1.1em;
     font-size: 2.5em;
-    color: var(--second-accent-color);
+    color: hsl(var(--second-accent-color));
     height: 2.35em;
     overflow: auto;
 }
@@ -190,8 +190,8 @@
     .fiche-1, .fiche-2{
         display: block;
         background: var(--blanc-ou-noir);
-        box-shadow: 0 8px 32px 0 var(--third-color);
-        border: 0.1em solid var(--third-color);
+        box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+        border: 0.1em solid hsl(var(--third-color));
         backdrop-filter: blur(1em);
         border-radius: 2em;
         padding: 6%;

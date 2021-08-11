@@ -125,8 +125,8 @@
                     .then( (resp) => {
                         let icon = document.querySelector("#" + oldUserName + " #mod i"); 
                         icon.textContent = "published_with_changes"
-                        icon.style.color = "var(--second-accent-color)";
-                        icon.style.backgroundColor = "var(--second-color)";
+                        icon.style.color = "hsl(var(--second-accent-color))";
+                        icon.style.backgroundColor = "hsl(var(--second-color))";
                         setTimeout(() => { 
                             icon.textContent = "edit"
                             icon.removeAttribute("style");

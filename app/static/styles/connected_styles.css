@@ -37,12 +37,12 @@
     width: 12em;
     align-items: center;
     transition: ease 200ms;
-    color: var(--paragraph-color);
+    color: hsl(var(--paragraph-color));
     text-decoration: none;
 }
 .tile:hover{
-    background-color: var(--paragraph-color);
-    color: var(--main-color);
+    background-color: hsl(var(--paragraph-color));
+    color: hsl(var(--main-color));
 }
 .tile p{
     display: flex;
@@ -114,12 +114,12 @@ table{
 
 td{
     overflow-x: auto;
-    color: var(--paragraph-color);
-    border-bottom: 0.1em solid var(--third-color);
+    color: hsl(var(--paragraph-color));
+    border-bottom: 0.1em solid hsl(var(--third-color));
 }
 #titre td{
     font-size: 1.2em;
-    color: var(--accent-color);
+    color: hsl(var(--accent-color));
 }
 
 #mod{
@@ -129,14 +129,14 @@ td{
     text-align: center;
 }
 #mod i{
-    color: var(--paragraph-color);
+    color: hsl(var(--paragraph-color));
     cursor: pointer;
     padding: 12%;
     clip-path: ellipse(50% 50%);
     transition: ease 200ms;
 }
 #mod i:hover{
-    background-color: var(--main-color);
+    background-color: hsl(var(--main-color));
 }
 
 #name, #surname, #password{
@@ -161,7 +161,7 @@ tr input, #select-rang{
     border-radius: 0.5em;
 }
 tr input:focus-visible{
-    background-color: var(--main-color);
+    background-color: hsl(var(--main-color));
 }
 
 #select-rang:not(:-internal-list-box){

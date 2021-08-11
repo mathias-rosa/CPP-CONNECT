@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root{
-    --accent-color: hsl(1, 80%, 68%);
-    --second-accent-color: hsl(215, 50%, 23%);
-    --main-color: hsl(260, 43%, 97%);
-    --second-color: hsl(218, 13%, 12%);
-    --third-color: hsl(240, 18%, 90%);
-    --paragraph-color: hsl(218, 13%, 12%);
+    --accent-color: 1, 80%, 68%;
+    --second-accent-color: 215, 50%, 23%;
+    --main-color: 260, 43%, 97%;
+    --second-color: 218, 13%, 12%;
+    --third-color: 240, 18%, 90%;
+    --paragraph-color: 218, 13%, 12%;
     --blanc-ou-noir: white
 }
 
@@ -19,14 +19,14 @@ body{
     margin: 0;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    background-color: var(--main-color);
+    background-color: hsl(var(--main-color));
 }
 p, h1, h2{
-    color: var(--paragraph-color);
+    color: hsl(var(--paragraph-color));
 }
 .footer-text{
     display: flex;
-    color: var(--main-color);
+    color: hsl(var(--main-color));
 }
 #creator{
     display: flex;
@@ -39,7 +39,7 @@ p, h1, h2{
     flex: 1;
     align-items: center;
     height: 4.5em;
-    background-color: var(--third-color);
+    background-color: hsl(var(--third-color));
     padding-left: 2%;
     padding-right: 2%;
     padding-top: 0;
@@ -53,13 +53,13 @@ p, h1, h2{
 .header h1{
     font-size: 2em;
     white-space: nowrap;
-    color: var(--second-color);
+    color: hsl(var(--second-color));
 }
 .header h2{
     font-size: 1.5em;
     white-space: nowrap;
     font-weight: 400;
-    color: var(--second-color);
+    color: hsl(var(--second-color));
 }
 .header-left{
     display: flex;
@@ -92,7 +92,7 @@ p, h1, h2{
     justify-content: flex-end;
     align-self: flex-end;
     height: inherit;
-    color: var(--second-color);
+    color: hsl(var(--second-color));
 }
 .header-right a{
     justify-content: flex-end;
@@ -125,11 +125,11 @@ p, h1, h2{
     right: 2%;
     top: 3.3em;
     background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 var(--third-color);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
-    border: 0.1em solid var(--third-color);
+    border: 0.1em solid hsl(var(--third-color));
     padding: 2%;
     padding-bottom: 0;
     z-index: 3;
@@ -142,10 +142,10 @@ p, h1, h2{
     min-height: 2.5em;
     height: fit-content;
     border-radius: 0.8em;
-    background-color: var(--main-color);
+    background-color: hsl(var(--main-color));
     padding-left: 5%;
     margin-bottom: 7%;
-    color: var(--paragraph-color);
+    color: hsl(var(--paragraph-color));
 }
 .dropdown-menu p{
     font-size: 1em;
@@ -156,7 +156,7 @@ p, h1, h2{
 }
 .dropdown-menu a:hover{
     text-decoration: none;
-    background-color: var(--accent-color);
+    background-color: hsl(var(--accent-color));
     color: white;
 }
 
@@ -172,7 +172,7 @@ p, h1, h2{
     font-size: 0.7em;
     justify-content: center;
     border-radius: 0.6em;
-    background-color: var(--second-accent-color); 
+    background-color: hsl(var(--second-accent-color)); 
     text-decoration: inherit;
     width: fit-content;
     width: -moz-fit-content;
@@ -181,7 +181,7 @@ p, h1, h2{
     margin-top: 1em;
 }
 .cpp-bouton:hover {
-    background-color: var(--accent-color);
+    background-color: hsl(var(--accent-color));
     transition: 100ms ease;
     box-shadow: var(--couleur-accentuation);
     animation: pulse 1.5s 1;
@@ -211,7 +211,7 @@ p, h1, h2{
     padding: 0.4em;
     border-radius: 0.5em;
     border: none;
-    background-color: var(--second-accent-color);
+    background-color: hsl(var(--second-accent-color));
     color: white;
     width: 7em;
     justify-content: center;
@@ -221,7 +221,7 @@ p, h1, h2{
     cursor: pointer;
 }
 .btn:hover{
-    background-color: var(--accent-color);
+    background-color: hsl(var(--accent-color));
     transition: 100ms ease;
 }
 
@@ -231,24 +231,24 @@ p, h1, h2{
     font-size: 0.5em;
     padding: 2%;
     padding-top: 1%;
-    background-color: var(--second-color);
+    background-color: hsl(var(--second-color));
     flex-direction: column;
     justify-content: flex-end;
 }
 .footer h1{
     display: flex;
-    color: var(--third-color);
+    color: hsl(var(--third-color));
     font-weight: 600; 
     justify-content: flex-end;
     margin-bottom: 0;
 }
 .footer p, .footer h2{
-    color: var(--third-color);
+    color: hsl(var(--third-color));
 }
 .footer a{
     display: flex;
     justify-content: center;
-    color: var(--third-color);
+    color: hsl(var(--third-color));
     font-size: 01em;
     text-decoration: none;
     font-weight: 400;
@@ -261,7 +261,7 @@ p, h1, h2{
 .footer a:hover{
     text-decoration: underline solid 0.2em;
     text-underline-offset: 0.2em;
-    color: var(--third-color);
+    color: hsl(var(--third-color));
     transition: 100ms ease;
 }
 
