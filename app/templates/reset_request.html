@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles/login_styles.css') }}">
-    <title>Se connecter</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/signup_styles.css') }}">
+    <title>Mot de passe oublié</title>
 </head>
 <body>
 
@@ -22,26 +22,19 @@
     </div>
 
     <div class="content">
-        <form class="form-signin" method="POST" action="/login">
-            <div class="login-box">
-                <h1>Se connecter</h1>
+        <form class="form-signin" method="POST" action="reset-password">
+            <div class="signup-box">
+                <h1>Réinitialisez votre mot de passe</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur ou email", class_="email", id="email") }}
-                    {{ wtf.form_field(form.password, placeholder="Mot de passe", class_="password", id="password") }}
-                </div>
-                <div class="options">
-                    <a href="{{ url_for('reset_request') }}" class="inscription" id="mdp_oublie" ><div class="bouton">
-                        <h2>Mot de passe oublié ?</h2>
-                    </div></a>
-                    {{ wtf.form_field(form.remember) }}
+                    {{ wtf.form_field(form.email, placeholder="Adresse Email", id="email") }}
                 </div>
                 <div class="connect">
-                    <a href="{{ url_for('signup') }}" class="inscription" ><div class="bouton">
-                        <h2>Ou s'inscrire</h2>
-                    </div></a>
-                    <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+                    <button class="btn btn-lg btn-primary btn-block" type='submit'>Réinitialiser mon mot de passe</button>
                 </div>
+                <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
+                    <h2>En fait, non. Me connecter</h2>
+                </div></a>
                 {% if error is not none %}
                     <div>
                         <p class="help-block" id="error">{{ error }}</p>
@@ -54,7 +47,7 @@
                 {% endif %}
                 {% if warning is not none %}
                     <div>
-                    <p class="help-block" id="warning">{{ warning }}</p>
+                        <p class="help-block" id="warning">{{ warning }}</p>
                     </div>
                 {% endif %}
             </div>
