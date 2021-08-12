@@ -137,6 +137,7 @@ def login():
 
 
 def send_reset_email(user):
+    print(os.environ.get('EMAIL_USER'), os.environ.get('EMAIL_PASS'))
     token = user.get_reset_token()
     msg = Message('Password Reset Request',
                   sender='cpp.reunion.promo11@gmail.com',
