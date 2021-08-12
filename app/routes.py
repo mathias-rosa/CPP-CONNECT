@@ -141,16 +141,14 @@ def send_reset_email(user):
     msg = Message('Password Reset Request',
                   sender='cpp.reunion.promo11@gmail.com',
                   recipients=[user.email])
-    msg.body = f'''
-    
-    Bonjour, Vous recevez ce mail car vous avez effectué une demande de modification de votre mot de passe.
-    Afin de modifier votre mot de passe, cliquez sur le lien ci-dessous :
-    {url_for('reset_token', token=token, _external=True)}
+    msg.body = f'''Bonjour,\n\nVous recevez ce mail car vous avez effectué une demande de modification de votre mot de passe.
+Afin de modifier votre mot de passe, cliquez sur le lien ci-dessous :
+{url_for('reset_token', token=token, _external=True)}
 
-    Bonne journée,
-    L'équipe des comptes cpp-connect.
+Bonne journée,
+L'équipe des comptes cpp-connect.
 
-    Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
+Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
 
     '''
     mail.send(msg)
