@@ -21,6 +21,7 @@ app.config['MAIL_USE_SSL'] = True
 app.config['MAIL_USERNAME'] = os.environ.get('EMAIL_USER')
 app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 
+print(os.environ.get('EMAIL_USER'), os.environ.get('EMAIL_PASS'))
 mail = Mail(app)
 
 from app import routes
