@@ -138,8 +138,8 @@ def login():
 
 def send_reset_email(user):
     token = user.get_reset_token()
-    msg = Message('Password Reset Request',
-                  sender='cpp.reunion.promo11@gmail.com',
+    msg = Message('Rénitialisation du mot de passe',
+                  sender=("Equipe des comptes CPP-CONNECT", 'cpp.reunion.promo11@gmail.com'),
                   recipients=[user.email])
     msg.body = f'''Bonjour,\n\nVous recevez ce mail car vous avez effectué une demande de modification de votre mot de passe.
 Afin de modifier votre mot de passe, cliquez sur le lien ci-dessous :
@@ -152,6 +152,7 @@ Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
 
     '''
     mail.send(msg)
+    
 
 
 @app.route('/reset-password', methods=['GET', 'POST'])
