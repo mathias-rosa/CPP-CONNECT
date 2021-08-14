@@ -10,11 +10,14 @@
 
 <div class="content" x-data="{visible: false}">
 
-    <h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
+<h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
+<style>
+    .content{
+        height: 60vh;
+    }
+</style>
 
-<!----
-
-    <div class="semester-gepi">
+    <!---div class="semester-gepi">
         <div class="semester-div">
             <a href="{{ url_for('notes') }}" class="semester">
                 <div><h1>Semestre 1</h1></div>
@@ -34,6 +37,17 @@
         </button>
     </div>
 
+    <div class="notes">
+        <div class="titre-notes">  
+            <h1>Notes</h1>
+        </div>
+        <div class="moyenne-générale">
+            <h1>Moyenne Générale</h1>
+            <div class="note-mg">
+                <h1>19.67</h1>
+            </div>
+        </div>
+    </div>
 
     <div class="popup" x-show="visible === true">
         <form x-data="{ username : '', password : ''}" x-on:submit.prevent="GEPI()" class="gepi-form" autocomplete="gepi">
@@ -53,14 +67,21 @@
                 <button id="cancel" type="button" @click="document.querySelector('.content').__x.$data.visible = false">Annuler</button>
             </div>
         </form>
-    </div>
-
----->
+    </div--->
 
 </div>
 
 <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
 <script>
+
+function getCookie(name) {
+    let cookie = {};
+    document.cookie.split(';').forEach(function(el) {
+        let [k,v] = el.split('=');
+        cookie[k.trim()] = v;
+    })
+    return cookie[name];
+    }
 
 function createCookie(obj) {
     /**
@@ -75,7 +96,7 @@ function createCookie(obj) {
 
 function GEPI() {
 
-    if (document.cookie) {
+    if (getCookie("GEPI")) {
         document.querySelector(".content").__x.$data.visible = false;
         console.log(document.cookie)
     } else {

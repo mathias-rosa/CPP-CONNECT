@@ -10,9 +10,14 @@
 .ranking_top{
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 .ranking_title{
     background-color: hsl(var(--second-accent-color));
+    border-radius: 1em;
+    padding: 3%;
+    width: 100%;
+    margin-right: 5%;    
     border-radius: 1em;
     padding-right: 10%;
     padding-left: 3%;
@@ -21,14 +26,30 @@
 }
 
 .ranking_title h1{
-    color: var(--blanc-ou-noir);
-    font-size: 1.3em
+    color: white;
+    font-size: 1.2em;
+    margin: 0;;
+    
 }
 
 .ranking_top a{
     background-color: hsl(var(--paragraph-color));
-    border-radius: 1em; 
-    padding: 3%;
+    color: hsl(var(--main-color));
+    border-radius: 1em;
+    padding: 2%;
+    display: flex;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-decoration: none;
+    width: 25%;
+    font-size: 0.8em;
+    transition: ease 200ms
+}
+
+.ranking_top a:hover{
+    background-color: hsl(var(--accent-color));
+    color: hsl(var(white));
 }
 
 .ranking_top i{
@@ -36,8 +57,53 @@
 }
 .user_ranking{
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    padding: 3%;
+    padding-top: 5%;
+    border-bottom: 0.2em solid hsl(var(--paragraph-color));
+    padding-bottom: 0;
 }
 .number{
+    margin-right: 3%;
+    border-right: 0.3em solid hsl(var(--accent-color));;
+    padding-right: 4%;
+    height: 4em;
+    display: flex;
+    align-items: center;
+}
+.number h1{
+    color: hsl(var(--accent-color));
+}
+
+.user{
+    overflow-x: auto;
+}
+.user h1{
+    margin: 0;
+    padding-top: 2%;
+    font-size: 1.7em;
+}
+
+.user h2{
+    margin: 0;
+    font-size: 1em;
+    margin-top: -0.4em;
+    color: hsl(var(--second-accent-color));
+}
+
+.score{
+    margin-left: auto;
     padding-left: 3%;
+}
+
+.score h1{
+    font-size: 1.7em;
+}
+
+@media only screen and (max-width: 600px) {
+    .ranking{
+        padding: 4%;
+        box-sizing: border-box;
+        width: 100%;
+    }
 }

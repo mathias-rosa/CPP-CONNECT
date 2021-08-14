@@ -31,6 +31,11 @@
     padding: 1%;
     text-decoration: none;
 }
+.semester:hover {
+    background-color: hsl(var(--accent-color));
+    transition: 100ms ease;
+    box-shadow: var(--couleur-accentuation);
+}
 .semester div{
     width: 100%;
     display: flex;
@@ -72,6 +77,7 @@
     top: 0;
     bottom: 0;
     height: fit-content;
+    height: -moz-fit-content;
     background: var(--blanc-ou-noir);
     border-radius: 1.5em;
     padding: 2%;
@@ -159,7 +165,52 @@
 .buttons #cancel:hover{
     text-decoration: underline 0.1em solid;
 }
-
+.notes{
+    display: flex;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
+    backdrop-filter: blur(1em);
+    border-radius: 1.5em;
+    flex-direction: column;
+    width: 50em;
+}
+.titre-notes{
+    margin-left: 1em;
+    background-color: hsl(var(--second-accent-color));
+    width: 30em;
+    height: 3em;
+    margin-top: 1em;
+    border-radius: 0.5em;
+}
+.titre-notes h1{
+    margin-top: 0;
+    margin-left: 0.5em;
+    color: hsl(var(--main-color));
+}
+.moyenne-générale {
+    display: flex;
+    margin-left: 1em;
+}
+.moyenne-générale h1{
+    font-size: 1.5em;
+    color: hsl(var(--accent-color));
+}
+.note-mg{
+    margin-left: 20em;
+    background-color: hsl(var(--accent-color));
+    height: 2.5em;
+    margin-top: 0.7em;
+    border-radius: 0.5em;
+    width: 5em;
+}
+.note-mg h1{
+    font-size: 1.5em;
+    color: hsl(var(--main-color));
+    margin-top: 0.1em;
+    margin-left: 0.4em;
+}
+/* ne s'adapte pas en fonction des notes*/
 @media only screen and (max-width: 600px) {
     .gepi-form{
         top: auto;
