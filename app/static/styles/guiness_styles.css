@@ -1,10 +1,17 @@
 
+#title{
+    color: hsl(var(--accent-color));
+}
 .content{
     padding-bottom: 0;
 }
 
 .inline-content{
     display: flex;
+}
+
+input:focus-visible{
+    outline: none;
 }
 
 .ranking{
@@ -18,6 +25,10 @@
     margin-bottom: 4%;
     height: fit-content;
     height: -moz-fit-content;
+}
+
+#new{
+    background-color: hsl(var(--main-color));
 }
 
 .ranking_top{
@@ -41,11 +52,10 @@
 .ranking_title h1{
     color: white;
     font-size: 1.2em;
-    margin: 0;;
-    
+    margin: 0;
 }
 
-.ranking_top a{
+.ranking_top button{
     background-color: hsl(var(--paragraph-color));
     color: hsl(var(--main-color));
     border-radius: 1em;
@@ -57,10 +67,12 @@
     text-decoration: none;
     width: 25%;
     font-size: 0.8em;
-    transition: ease 200ms
+    transition: ease 200ms;
+    border: none;
+    cursor: pointer;
 }
 
-.ranking_top a:hover{
+.ranking_top button:hover{
     background-color: hsl(var(--accent-color));
     color: hsl(var(white));
 }
@@ -82,16 +94,30 @@
     border-right: 0.3em solid hsl(var(--accent-color));
     height: 4em;
     width: 2.3em;
-    display: flex;
     align-items: center;
     overflow-x: auto;
     justify-content: center;
+}
+
+#new .number{
+    width: 5em;
 }
 .number h1{
     color: hsl(var(--accent-color));
     margin: 0;
 }
 
+.number input{
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+    font: inherit;
+    font-size: 1.8em;
+    border: none;
+    border-top-left-radius: 0.3em;
+    color: hsl(var(--accent-color));
+}
 .user{
     overflow-x: auto;
 }
@@ -108,13 +134,50 @@
     color: hsl(var(--second-accent-color));
 }
 
+.user input{
+    width: 100%;
+    box-sizing: border-box;
+    text-align: start;
+    font: inherit;
+    overflow-x: auto;
+    border: none;
+    padding: 0;
+    padding-left: 3%;
+}
+
+.user #name{
+    font-size: 1.5em;
+    border-top-right-radius: 0.3em;
+    border-top-left-radius: 0.3em;
+    margin-bottom: 3%;
+
+}
+.user #promo{
+    font-size: 1em;
+    color: hsl(var(--second-accent-color));
+}
+
 .score{
     margin-left: auto;
     padding-left: 3%;
+    height: 4em;
 }
 
 .score h1{
     font-size: 1.7em;
+}
+
+.score input{
+    width: 2em;
+    box-sizing: border-box;
+    height: 100%;
+    text-align: center;
+    font: inherit;
+    font-size: 1.8em;
+    border: none;
+    border-top-left-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+    overflow-x: auto;
 }
 
 @media only screen and (max-width: 600px) {

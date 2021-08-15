@@ -10,6 +10,15 @@
     --blanc-ou-noir: white
 }
 
+::-webkit-scrollbar {
+    width: 12px;
+}
+::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--second-accent-color));
+    border-radius: 10px;
+    border: 0.2em solid hsl(var(--main-color));
+}
+
 html{
     height: 100%;
 }
@@ -118,7 +127,7 @@ p, h1, h2{
     height: 100%;
 }
 .dropdown-menu{
-    display: none;
+    display: flex;
     flex-direction: column;
     position: fixed;
     width: 12em;
@@ -300,6 +309,7 @@ p, h1, h2{
         width: 14em;
         padding: 3%;
         padding-bottom: 0;
+        top: 4em;
     }
     .dropdown-menu a{
         min-height: 3.5em;

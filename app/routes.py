@@ -307,7 +307,11 @@ def guiness():
     else:
         theaming = "light-theme"
 
-    record_list = [record for record in mongodb.db.Guiness.find({})]
+    record_list = []
+
+    for record in mongodb.db.Guiness.find({}):
+        record["content"].sort(key=lambda k: k['rank'])
+        record_list.append(record)
 
     
     return render_template('guiness.html', 

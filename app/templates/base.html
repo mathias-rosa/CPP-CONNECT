@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <script defer src="https://unpkg.com/alpinejs@3.2.2/dist/cdn.min.js"></script>
     {% block head %}{% endblock %}
 </head>
 <body>
@@ -17,7 +18,7 @@
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
-        <div class="header-right">
+        <div class="header-right" x-data="{ showMenu: false, arrow: 'arrow_drop_down' }">
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">
                 <h2>Se connecter</h2>
@@ -27,11 +28,12 @@
                 <a href="{{ url_for('dashboard') }}" id="profile">
                     <h2>{{current_user.name}} {{current_user.surname}}</h2>
                 </a>
-                <div class="menu">
+                <div class="menu" @click="showMenu = true; arrow = 'arrow_drop_up'" @mouseenter="showMenu = true; arrow = 'arrow_drop_up'" >
                     <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img">    
-                    <i class="material-icons-round">arrow_drop_down</i>
+                    <i class="material-icons-round" x-text="arrow"></i>
                 </div>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu" x-show="showMenu" @click.away="showMenu = false; arrow= 'arrow_drop_down'" 
+                     x-transition @mouseleave="showMenu = false; arrow= 'arrow_drop_down'" >
                     <a href="{{ url_for('dashboard') }}" class="item" >
                         <i class="material-icons-round">dashboard</i>
                         <p>Tableau de bord</p>
@@ -53,7 +55,5 @@
 
     {% include 'footer.html' %}
     {% include 'theaming.html' %}
-    
-    <script src="{{ url_for('static', filename='script/script.js') }}"></script>
 </body>
 </html>

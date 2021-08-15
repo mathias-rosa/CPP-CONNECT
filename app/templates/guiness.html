@@ -16,34 +16,49 @@
 
         {% for record in record_list %}
 
-        <div class="ranking">
+        <div class="ranking" x-data="{ add: false, icon: 'add', rank: '', name: '', promo:'', score:''  }">
             <div class="ranking_top">
                 <div class="ranking_title">
                     <h1>{{ record.title }}</h1>
                 </div>
-                <a href="">
-                    <i class="material-icons-round">add</i>
-                </a>
+                <button @click="add = true; icon = 'done'">
+                    <i class="material-icons-round" x-text="icon"></i>
+                </button>
             </div>
-
-            
 
             {% for student in record.content %}
 
-            <div class="user_ranking">
+                <div class="user_ranking">
+                    <div class="number">
+                        <h1>{{ student.rank }}</h1>
+                    </div>
+                    <div class="user">
+                        <h1>{{ student.name }}</h1>
+                        <h2>{{ student.promo }}</h2>
+                    </div>
+                    <div class="score">
+                        <h1>{{ student.score }}</h1>
+                    </div>
+                </div>
+
+            {% endfor %}
+
+            <div class="user_ranking" id="new" x-show="add" 
+                 x-transition:enter.duration.300ms
+                 x-transition:leave.duration.200ms 
+                 @click.away="add = false; icon = 'add'; newRecord(rank, name, promo, score); rank = name = promo = score = ''">
                 <div class="number">
-                    <h1>{{ student.rank }}</h1>
+                    <input name="rank" placeholder="X" required x-model="rank">
                 </div>
                 <div class="user">
-                    <h1>{{ student.name }}</h1>
-                    <h2>{{ student.promo }}</h2>
+                    <input id="name" name="name" placeholder="Jeremy" required x-model="name">
+                    <input id="promo" name="promo" placeholder="Promo X" required x-model="promo">
                 </div>
                 <div class="score">
-                    <h1>{{ student.score }}</h1>
+                    <input name="score" placeholder="X" required x-model="score">
                 </div>
             </div>
 
-            {% endfor %}
         </div>
 
     {% endfor %}
@@ -52,5 +67,16 @@
     </div>
 
 </div>
+
+
+<script>
+
+    function newRecord(rank, name, promo, score) {
+        if (rank && name && promo && score){
+            console.log(rank, name, promo, score)
+        }
+    }
+
+</script>
 
 {% endblock %}
