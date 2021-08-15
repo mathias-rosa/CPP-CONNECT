@@ -10,53 +10,46 @@
 
 <div class="content">
 
-<h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
-<style>
-    .content{
-        height: 60vh;
-    }
-</style>
-    
-    <!---div class="ranking">
-        <div class="ranking_top">
-            <div class="ranking_title">
-                <h1>Le plus de temps <br> passé au tableau</h1>
+    <h1 id="title">CPP Buisness Record. Les records du CPP</h1>
+
+    <div class="inline-content">
+
+        {% for record in record_list %}
+
+        <div class="ranking">
+            <div class="ranking_top">
+                <div class="ranking_title">
+                    <h1>{{ record.title }}</h1>
+                </div>
+                <a href="">
+                    <i class="material-icons-round">add</i>
+                </a>
             </div>
-            <a href="">
-                <i class="material-icons-round">add</i>
-            </a>
+
+            
+
+            {% for student in record.content %}
+
+            <div class="user_ranking">
+                <div class="number">
+                    <h1>{{ student.rank }}</h1>
+                </div>
+                <div class="user">
+                    <h1>{{ student.name }}</h1>
+                    <h2>{{ student.promo }}</h2>
+                </div>
+                <div class="score">
+                    <h1>{{ student.score }}</h1>
+                </div>
+            </div>
+
+            {% endfor %}
         </div>
-        <div class="user_ranking">
-            <div class="number">
-                <h1>1</h1>
-            </div>
-            <div class="user">
-                <h1>Jérémy</h1>
-                <h2>Promo 12</h2>
-            </div>
-            <div class="score">
-                <h1>1'5</h1>
-            </div>
-        </div>
-        <div class="user_ranking">
-            <div class="number">
-                <h1>1</h1>
-            </div>
-            <div class="user">
-                <h1>Jérémy</h1>
-                <h2>Promo 12</h2>
-            </div>
-            <div class="score">
-                <h1>1'5</h1>
-            </div>
-        </div>
-    </div--->
 
-    <script>
+    {% endfor %}
+        
 
-
-
-    </script>
+    </div>
 
 </div>
 

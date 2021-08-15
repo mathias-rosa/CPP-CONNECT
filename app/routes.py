@@ -306,9 +306,14 @@ def guiness():
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
+
+    record_list = [record for record in mongodb.db.Guiness.find({})]
+
+    
     return render_template('guiness.html', 
                             current_user=current_user,
                             theaming=theaming,
+                            record_list=record_list
                             )
 
 @app.route('/notes')
