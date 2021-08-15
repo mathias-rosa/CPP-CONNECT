@@ -16,10 +16,10 @@
 
         {% for record in record_list %}
 
-        <div class="ranking" x-data="{ add: false, icon: 'add', rank: '', name: '', promo:'', score:''  }">
+        <div class="ranking" x-data="{ add: false, icon: 'add', title:'{{ record.title }}', rank: '', name: '', promo:'', score:'' }">
             <div class="ranking_top">
                 <div class="ranking_title">
-                    <h1>{{ record.title }}</h1>
+                    <h1 x-text="title">
                 </div>
                 <button @click="add = true; icon = 'done'">
                     <i class="material-icons-round" x-text="icon"></i>
@@ -46,16 +46,16 @@
             <div class="user_ranking" id="new" x-show="add" 
                  x-transition:enter.duration.300ms
                  x-transition:leave.duration.200ms 
-                 @click.away="add = false; icon = 'add'; newRecord(rank, name, promo, score); rank = name = promo = score = ''">
+                 @click.away="add = false; icon = 'add'; newRecord(title, rank, name, promo, score); rank = name = promo = score = ''">
                 <div class="number">
-                    <input name="rank" placeholder="X" required x-model="rank">
+                    <input name="rank" placeholder="." required x-model="rank">
                 </div>
                 <div class="user">
-                    <input id="name" name="name" placeholder="Jeremy" required x-model="name">
-                    <input id="promo" name="promo" placeholder="Promo X" required x-model="promo">
+                    <input id="name" name="name" placeholder="..." required x-model="name">
+                    <input id="promo" name="promo" placeholder="..." required x-model="promo">
                 </div>
                 <div class="score">
-                    <input name="score" placeholder="X" required x-model="score">
+                    <input name="score" placeholder="." required x-model="score">
                 </div>
             </div>
 
@@ -71,10 +71,24 @@
 
 <script>
 
-    function newRecord(rank, name, promo, score) {
+    function newRecord(title, rank, name, promo, score) {
         if (rank && name && promo && score){
             console.log(rank, name, promo, score)
-        }
+
+            url = "{{ baseURL }}" + "add-record?title=" + title + "&rank=" + rank + "&name=" + name + "&promo=" + promo + "&score=" + score;
+
+            fetch(url)
+                    .then( (resp) => {
+                        console.log(resp)
+                        document.location.reload()
+                    })
+                    .catch( (err) => {
+                        console.log(err);
+                    });
+                    
+
+        };
+
     }
 
 </script>

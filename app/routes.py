@@ -313,12 +313,38 @@ def guiness():
         record["content"].sort(key=lambda k: k['rank'])
         record_list.append(record)
 
-    
     return render_template('guiness.html', 
-                            current_user=current_user,
-                            theaming=theaming,
-                            record_list=record_list
-                            )
+                        current_user=current_user,
+                        theaming=theaming,
+                        record_list=record_list
+                        )
+
+@app.route('/add-record')
+@login_required
+def add_record():
+    
+    if request.args['title'] and request.args['rank'] and request.args['name'] and request.args['promo'] and request.args['score']:
+        
+        record = mongodb.db.Guiness.find_one({"title": request.args['title']})
+
+
+        mongodb.db.Guiness.update_one(
+                {"title": request.args['title']},
+                {'$set': 
+                    {
+                        "content": record["content"] + [{
+                            "name": request.args['name'],
+                            "promo": request.args['promo'],
+                            "score": request.args['score'],
+                            "rank": request.args['rank']
+                        }]
+                    }
+                }
+            )
+
+        return "Done"
+    return "Invalid args"
+        
 
 @app.route('/notes')
 @login_required
@@ -330,6 +356,7 @@ def notes():
     return render_template('notes.html', 
                             current_user=current_user,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 
