@@ -74,6 +74,9 @@
 <script>
 
 function getCookie(name) {
+
+    // permet de récuperer le cookie ayant pour nom name : String passé en argument
+
     let cookie = {};
     document.cookie.split(';').forEach(function(el) {
         let [k,v] = el.split('=');
@@ -95,6 +98,11 @@ function createCookie(obj) {
 
 function GEPI() {
 
+    /*
+        Fonction qui permet de récuperer les notes sur GEPI si les identifiants de l'utilisateur
+        sont enregistrés dans le cookie "GEPI" et sinon d'enregistrer les identifiants de l'utilisateur
+        dans un noouveau cookie "GEPI" puis de recupérer les notes sur GEPI
+    */
     if (getCookie("GEPI")) {
         document.querySelector(".content").__x.$data.visible = false;
         console.log(document.cookie)

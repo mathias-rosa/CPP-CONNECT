@@ -6,6 +6,8 @@ from flask_mail import Mail
 
 import pymongo
 
+# Configuration génerale de l'application
+
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = 'VERY_SECRET_KEY'
@@ -16,6 +18,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
+# configuration de flask_mail
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
