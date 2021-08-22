@@ -86,7 +86,7 @@ def signup():
                         "email": form.email.data.lower(),
                         "password": hashed_password,
                         "theaming": "light-theme",
-                        "admin": False}
+                        "accountType": "élève"}
             mongodb.db.Users.insert_one(new_user)
             user = mongodb.db.Users.find_one({"email": form.email.data})
             login_user(User(user))
@@ -519,7 +519,7 @@ def update_user():
         Api destinée aux admins qui permet de modifier les informations d'un utilisateur.
     """
 
-    if current_user.admin == False:
+    if current_user.accountType != "admin":
         return "Forbidden"
 
     # Si l'utilisateur souhaite modofier son mot de passe, On le hache. Sinon, on defini newPassword comme
@@ -538,7 +538,7 @@ def update_user():
                         "username": request.args['newUsername'].replace(" ", ""),
                         "email": request.args['newEmail'],
                         "password": newPassword,
-                        "admin": request.args['admin'] in ("True")
+                        "accountType": request.args['accountType']
                     }
                 }
             )
