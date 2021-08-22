@@ -122,20 +122,20 @@ td{
     color: hsl(var(--accent-color));
 }
 
-#mod{
+#mod, #del{
     padding: 0;
     overflow: hidden;
     width: 2.5em;
     text-align: center;
 }
-#mod i{
+#mod i, #del i{
     color: hsl(var(--paragraph-color));
     cursor: pointer;
     padding: 12%;
     clip-path: ellipse(50% 50%);
     transition: ease 200ms;
 }
-#mod i:hover{
+#mod i:hover, #del i:hover{
     background-color: hsl(var(--main-color));
 }
 

@@ -69,6 +69,7 @@
                     <td id="password">Mot de Passe</td>
                     <td id="type">Type d'utilisateur</td>
                     <td id="mod"></td>
+                    <td id="del"></td>
                 </tr>
                 {% for user in userlist %}
                 <tr id="{{user.username}}">
@@ -84,6 +85,7 @@
                       </select>
                     </td>
                     <td id="mod"><i id="{{user.username}}" class="material-icons-round" onclick="mod('{{user.username}}')">edit</i></td>
+                    <td id="del"><i id="{{user.username}}" class="material-icons-round" onclick="del('{{user.username}}')">delete_outline</i></td>
                 </tr>
                 {% endfor %}
             </table>
@@ -124,6 +126,7 @@
                 fetch(url)
                     .then( (resp) => {
                         let icon = document.querySelector("#" + oldUserName + " #mod i"); 
+                        console.log("#" + oldUserName + " #del i", icon);
                         icon.textContent = "published_with_changes"
                         icon.style.color = "hsl(var(--second-accent-color))";
                         icon.style.backgroundColor = "hsl(var(--second-color))";
@@ -137,6 +140,27 @@
                     });
 
             };
+
+            function del(userName) {
+
+                let url = "{{ baseURL }}".replace("/dashboard", "/delete_user");
+                url += "?username=" + userName;
+
+                fetch(url)
+                    .then( (resp) => {
+                        let icon = document.querySelector("#" + userName.replace(".", "\\.") + " #del i"); 
+                        console.log("#" + userName + " #del i", icon);
+                        icon.textContent = "published_with_changes"
+                        icon.style.color = "hsl(var(--second-accent-color))";
+                        icon.style.backgroundColor = "hsl(var(--second-color))";
+                        setTimeout(() => { 
+                            document.location.reload();
+                        }, 1000);
+                    })
+                    .catch( (err) => {
+                        console.log(err);
+                    });
+            }
 
         </script>
 

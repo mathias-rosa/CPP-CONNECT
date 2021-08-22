@@ -51,7 +51,8 @@ def signup():
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data == form.password_confirm.data:
-            user = mongodb.db.Users.find_one({"email": form.email.data})
+            email = form.email.data.replace(" ", "").lower()
+            user = mongodb.db.Users.find_one({"email": email})
             if user:
                 error = "Cet utilisateur existe déjà"
                 return render_template('signup.html', 
@@ -83,12 +84,12 @@ def signup():
                         "name": form.name.data,
                         "surname": form.surname.data.upper(),
                         "username": username,
-                        "email": form.email.data.lower(),
+                        "email": email,
                         "password": hashed_password,
                         "theaming": "light-theme",
                         "accountType": "élève"}
             mongodb.db.Users.insert_one(new_user)
-            user = mongodb.db.Users.find_one({"email": form.email.data})
+            user = mongodb.db.Users.find_one({"email": email})
             login_user(User(user))
             return redirect(url_for('dashboard'))
 
@@ -128,7 +129,7 @@ def login():
     if form.validate_on_submit():
         # On peut identifier les utilisateurs par leur email ou leur nom d'utilisateur.
         # On le récupère ce que l'utilisateur a rentré puis on determine comment il a souhaité s'identifier.
-        username = form.username.data
+        username = form.username.data.replace(" ", "").lower()
         try:
             if "@" in username:
                 # par email
@@ -545,12 +546,30 @@ def update_user():
 
     return "fait"
 
+
+@app.route('/delete_user')
+@login_required
+def delete_user():
+
+    """
+        Api destinée aux admins qui permet de supprimer un utilisateur
+    """
+
+    if current_user.accountType != "admin":
+        return "Forbidden"
+
+
+    mongodb.db.Users.delete_one({"username": request.args['username']})
+
+    return "fait"
+
+
+
 @app.route('/logout')
 @login_required
 def logout():
     logout_user()
     return redirect(url_for('index'))
-
 
 
 @app.errorhandler(404)
