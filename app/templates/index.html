@@ -26,12 +26,23 @@
 
     <div class="connection">
         <div class="connection-text">
-            <p>
-                Alors connecte-toi vite pour commencer…​
-            </p>
-            <a href="{{ url_for('login') }}" class="cpp-bouton"><div>
-                <h1>Se connecter</h1>
-            </div></a>
+            {% if current_user.is_anonymous %}
+                <p>
+                    Alors connecte-toi vite pour commencer…​
+                </p>
+                <a href="{{ url_for('login') }}" class="cpp-bouton"><div>
+                    <h1>Se connecter</h1>
+                </div></a>
+            {% else %}
+
+                <p>
+                    Se diriger vers mon tableau de board
+                </p>
+                <a href="{{ url_for('dashboard') }}" class="cpp-bouton"><div>
+                    <h1>Tableau de board</h1>
+                </div></a>
+            
+            {% endif %}
         </div>
         <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/contents.svg') }}" alt="queuleuleu" id="dessin">
     </div>
