@@ -29,7 +29,7 @@
                 <div><h1>Semestre 3</h1></div>
             </a>
         </div>
-        <button class="gepi" @click="GEPI()">
+        <button class="gepi" @click="GEPI(), visible = true">
             <h1>Télécharger les notes de GEPI</h1>
             <i class="material-icons-round">
                 file_download
@@ -41,7 +41,7 @@
         <div class="titre-notes">  
             <h1>Notes</h1>
         </div>
-        <div class="moyenne-générale">
+        <div class="moyenne-générale" id="matiere">
             <h1>Moyenne Générale</h1>
             <div class="note-mg">
                 <h1>19.67</h1>
@@ -63,13 +63,13 @@
                 <p style="display: none;" x-text="password">
             </div>
             <div class="buttons">
-                <button id="download" @click="GEPI()">Télécharger mes notes</button>
-                <button id="cancel" type="button" @click="document.querySelector('.content').__x.$data.visible = false">Annuler</button>
+                <button id="download" @click="GEPI(), visible = false">Télécharger mes notes</button>
+                <button id="cancel" type="button" @click="visible = false">Annuler</button>
             </div>
         </form>
-    </div--->
+    </div>
 
-</div>
+</div--->
 
 <script>
 
@@ -104,11 +104,10 @@ function GEPI() {
         dans un noouveau cookie "GEPI" puis de recupérer les notes sur GEPI
     */
     if (getCookie("GEPI")) {
-        document.querySelector(".content").__x.$data.visible = false;
-        console.log(document.cookie)
-    } else {
+        console.log(getCookie("GEPI"))
 
-        document.querySelector(".content").__x.$data.visible = true;
+
+    } else {
 
         let gepiID = document.querySelector("#gepi-username p").textContent
         let gepiPassword = document.querySelector("#gepi-password p").textContent
@@ -122,6 +121,41 @@ function GEPI() {
 
 }
 
+function getNotesFromGepi(){
+    
+    if (getCookie("GEPI")){
+        let GepiUser = parseCookie(getCookie("GEPI"))
+        let url = "{{ baseURL }}" + "/get_notes";
+        url = url + "?GEPI_LOGIN=" + GepiUser.UserID;
+        url = url + "&GEPI_PASSWORD=" + GepiUser.password;
+    
+        console.log(url)
+
+        fetch(url)
+        .then((promise) => {
+            promise.json().then( (resp) => {
+                console.log(resp)
+            })
+        })
+            .catch( (err) => {
+                console.log(err);
+            });
+    }
+
+}
+
+function parseCookie(str) {
+    let obj = {};
+    str = str.replace("{", "").replace("}", "");
+    let list = str.split(",");
+    list.forEach((elem) => {
+        keyAndValue =  elem.split(":")
+        obj[keyAndValue[0].replace(" ", "")] = keyAndValue[1].replace(" ", "");
+    })
+    return obj
+}
+
+getNotesFromGepi()
 
 </script>
 

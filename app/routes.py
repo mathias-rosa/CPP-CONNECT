@@ -12,6 +12,11 @@ import datetime
 import requests
 from bs4 import BeautifulSoup
 
+from time import sleep
+from selenium import webdriver
+from selenium.webdriver.firefox.options import Options
+from selenium.webdriver.common.keys import Keys
+
 from flask_mail import Message
 
 from app import mongodb, mail
@@ -315,6 +320,7 @@ def tools():
                             baseURL=request.base_url,
                             )
 
+
 @app.route('/tools/get_image')
 @login_required
 def get_image():
@@ -427,6 +433,77 @@ def notes():
                             theaming=theaming,
                             baseURL=request.base_url
                             )
+
+
+@app.route('/notes/get_notes')
+@login_required
+def get_notes():
+
+    """
+        Api qui permet de recuperere les notes
+    """
+
+    try:
+        GEPI_LOGIN = request.args['GEPI_LOGIN']
+        GEPI_PASSWORD = request.args['GEPI_PASSWORD']
+    
+    except:
+        return "login ou mot de passe gepi invalide ou non passé en argument"
+
+    # On crée une instance du web-driver Firefox (environement de production)
+
+    options = Options()
+    options.headless = False
+    driver = webdriver.Firefox(options=options)
+    """
+    # On crée une instance du web-driver chrome (environement de déploiment)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    """
+    # On va sur https://cppreunion.fr/gepi/login.php
+    driver.get("https://cppreunion.fr/gepi/login.php")
+    # En fonction de notre connection et des performance de notre machine il faudra attendre
+
+    # que la page charge avant de passer à la suite
+    sleep(2)
+
+    # login
+    login_box = driver.find_element_by_css_selector("input#login")
+    login_box.send_keys(GEPI_LOGIN)
+
+    password_box = driver.find_element_by_css_selector("input#no_anti_inject_password")
+    password_box.send_keys(GEPI_PASSWORD)
+
+    login_button = driver.find_element_by_css_selector("input#soumettre")
+    login_button.send_keys(Keys.ENTER)
+
+    sleep(5)
+
+    detail_des_notes = driver.find_element_by_xpath("/html/body/div[4]/div[3]/div[1]/a")
+    detail_des_notes.send_keys(Keys.ENTER)
+
+    sleep(2)
+
+    selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
+
+    notes = {}
+    matiere = ""
+    raw_notes = []
+    for note in selenium_notes:
+        if len(note.text) > 5:
+            matiere = note.text
+            notes[matiere] = []
+        else:
+            notes[matiere].append(float(note.text))
+            raw_notes.append(float(note.text))
+
+    #notes = {'Physique Chimie': [8.5], 'Mathématiques': [11.5, 5.0, 20.0], 'Informatique': [], 'Chimie': [], 'Biologie': [], 'Colles de mathématiques': [13.0, 14.0, 12.0, 15.0, 14.0], 'Colles de physique': [], 'Anglais': [], 'TP de Physique': [], 'Allemand': [], 'Communication': [], 'Economie': [], 'Espagnol': [13.0, 19.4, 9.0, 12.0, 19.0, 16.0], 'Education physique et sportive': []}
+    #raw_notes = [8.5, 11.5, 5.0, 20.0, 13.0, 14.0, 12.0, 15.0, 14.0, 13.0, 19.4, 9.0, 12.0, 19.0, 16.0]    
+    return (notes, len(raw_notes))
 
 
 @app.route('/settings', methods=['GET', 'POST'])
@@ -562,7 +639,6 @@ def delete_user():
     mongodb.db.Users.delete_one({"username": request.args['username']})
 
     return "fait"
-
 
 
 @app.route('/logout')
