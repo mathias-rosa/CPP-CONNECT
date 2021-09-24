@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/anciens.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/guiness_styles.css') }}">
+<title>Les écoles qu'ont eu les vieux</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+<h1 id="title">Les performances des anciens</h1>
+
+{% for anciens in anciens_list %}
+
+<div class="promo">
+    <h1>Promo {{anciens.promo}}</h1>
+
+    {% for eleves in anciens.eleves %}
+
+        <div class="user_ranking">
+            <div class="user">
+                <h1>{{ eleves.name }} {{ eleves.surname }}</h1>
+                <h2>Moyenne : {{ eleves.moyenne }}</h2>
+            </div>
+            <div class="score">
+                <h1>{{ eleves.ecole }}</h1>
+            </div>
+        </div>
+
+    {% endfor %}
+
+</div>
+
+
+{% endfor %}
+
+</div>
+
+{% endblock %}

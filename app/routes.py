@@ -420,6 +420,24 @@ def add_record():
         return "Done"
     return "Invalid args"
         
+@app.route('/anciens')
+@login_required
+def anciens():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+
+    # On récupère la liste des anciens étudiants et les écoles qu'ils ont eu dans la base de donnée.
+    anciens_list = [ancien for ancien in mongodb.db.Anciens.find({})]
+
+    return render_template('anciens.html', 
+                            current_user=current_user,
+                            theaming=theaming,
+                            anciens_list=anciens_list,
+                            baseURL=request.base_url
+                            )
+
 
 @app.route('/notes')
 @login_required
@@ -450,7 +468,7 @@ def get_notes():
     except:
         return "login ou mot de passe gepi invalide ou non passé en argument"
 
-    """
+    # """
     # On crée une instance du web-driver Firefox (environement de production)
 
     options = Options()
@@ -464,6 +482,9 @@ def get_notes():
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    
+    """
+    
     # On va sur https://cppreunion.fr/gepi/login.php
     driver.get("https://cppreunion.fr/gepi/login.php")
     # En fonction de notre connection et des performance de notre machine il faudra attendre
