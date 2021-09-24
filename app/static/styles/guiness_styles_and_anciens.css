@@ -14,7 +14,7 @@ input:focus-visible{
     outline: none;
 }
 
-.ranking{
+.outer_box{
     display: flex;
     border-radius: 1em;
     background-color: var(--blanc-ou-noir);
@@ -27,6 +27,10 @@ input:focus-visible{
     height: -moz-fit-content;
 }
 
+#anciens.outer_box{
+    width: 40em;
+}
+
 #new{
     background-color: hsl(var(--main-color));
 }
@@ -35,6 +39,8 @@ input:focus-visible{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-sizing: border-box;
+    color: hsl(var(white));
 }
 .ranking_title{
     background-color: hsl(var(--second-accent-color));
@@ -47,6 +53,7 @@ input:focus-visible{
     padding-left: 3%;
     width: 100%;
     margin-right: 5%;
+    box-sizing: border-box;
 }
 
 .ranking_title h1{
@@ -80,7 +87,7 @@ input:focus-visible{
 .ranking_top i{
     font-size: 3em;
 }
-.user_ranking{
+.inner_box{
     display: flex;
     align-items: center;
     padding: 3%;

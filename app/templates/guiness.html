@@ -2,7 +2,7 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
-<link rel="stylesheet" href="{{ url_for('static', filename='styles/guiness_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/guiness_styles_and_anciens.css') }}">
 <title>CPP Buisness records</title>
 {% endblock %}
 
@@ -16,7 +16,7 @@
 
         {% for record in record_list %}
 
-        <div class="ranking" x-data="{ add: false, icon: 'add', title:'{{ record.title }}', rank: '', name: '', promo:'', score:'' }">
+        <div class="outer_box" x-data="{ add: false, icon: 'add', title:'{{ record.title }}', rank: '', name: '', promo:'', score:'' }">
             <div class="ranking_top">
                 <div class="ranking_title">
                     <h1 x-text="title">
@@ -28,7 +28,7 @@
 
             {% for student in record.content %}
 
-                <div class="user_ranking">
+                <div class="inner_box">
                     <div class="number">
                         <h1>{{ student.rank }}</h1>
                     </div>
@@ -43,7 +43,7 @@
 
             {% endfor %}
 
-            <div class="user_ranking" id="new" x-show="add" 
+            <div class="inner_box" id="new" x-show="add" 
                  x-transition:enter.duration.300ms
                  x-transition:leave.duration.200ms 
                  @click.away="add = false; icon = 'add'; newRecord(title, rank, name, promo, score); rank = name = promo = score = ''">
