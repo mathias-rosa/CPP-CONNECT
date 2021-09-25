@@ -493,7 +493,6 @@ def get_notes():
     # que la page charge avant de passer à la suite
     sleep(2)
 
-    print("ça marche")
 
     # login
     login_box = driver.find_element_by_css_selector("input#login")
@@ -505,7 +504,7 @@ def get_notes():
     login_button = driver.find_element_by_css_selector("input#soumettre")
     login_button.send_keys(Keys.ENTER)
 
-    sleep(5)
+    sleep(4)
 
     print("on est connecté")
 
@@ -514,22 +513,32 @@ def get_notes():
 
     sleep(2)
 
-    selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
+    try:
 
-    notes = {}
-    matiere = ""
-    raw_notes = []
-    for note in selenium_notes:
-        if len(note.text) > 5:
-            matiere = note.text
-            notes[matiere] = []
-        else:
-            notes[matiere].append(float(note.text))
-            raw_notes.append(float(note.text))
+        selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
 
-    #notes = {'Physique Chimie': [8.5], 'Mathématiques': [11.5, 5.0, 20.0], 'Informatique': [], 'Chimie': [], 'Biologie': [], 'Colles de mathématiques': [13.0, 14.0, 12.0, 15.0, 14.0], 'Colles de physique': [], 'Anglais': [], 'TP de Physique': [], 'Allemand': [], 'Communication': [], 'Economie': [], 'Espagnol': [13.0, 19.4, 9.0, 12.0, 19.0, 16.0], 'Education physique et sportive': []}
-    #raw_notes = [8.5, 11.5, 5.0, 20.0, 13.0, 14.0, 12.0, 15.0, 14.0, 13.0, 19.4, 9.0, 12.0, 19.0, 16.0]    
-    return (notes, len(raw_notes))
+        print(selenium_notes)
+
+        notes = {}
+        matiere = ""
+        raw_notes = []
+        for note in selenium_notes:
+            if len(note.text) > 5:
+                matiere = note.text
+                notes[matiere] = []
+            else:
+                notes[matiere].append(float(note.text))
+                raw_notes.append(float(note.text))
+
+        #notes = {'Physique Chimie': [8.5], 'Mathématiques': [11.5, 5.0, 20.0], 'Informatique': [], 'Chimie': [], 'Biologie': [], 'Colles de mathématiques': [13.0, 14.0, 12.0, 15.0, 14.0], 'Colles de physique': [], 'Anglais': [], 'TP de Physique': [], 'Allemand': [], 'Communication': [], 'Economie': [], 'Espagnol': [13.0, 19.4, 9.0, 12.0, 19.0, 16.0], 'Education physique et sportive': []}
+        #raw_notes = [8.5, 11.5, 5.0, 20.0, 13.0, 14.0, 12.0, 15.0, 14.0, 13.0, 19.4, 9.0, 12.0, 19.0, 16.0]    
+        
+        print(notes, len(raw_notes))
+
+        return (notes, len(raw_notes))
+    
+    except Exception as e:
+        print(e)
 
 
 @app.route('/settings', methods=['GET', 'POST'])
