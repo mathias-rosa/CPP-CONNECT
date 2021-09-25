@@ -10,7 +10,7 @@
 
 <div class="content">
 
-<h1 id="title">Les performances des anciens</h1>
+<h1 id="title">Où sont les anciens</h1>
 
 {% for anciens in anciens_list %}
 
@@ -23,7 +23,7 @@
 
         <div class="inner_box">
             <div class="user">
-                <h1>{{ eleves.name }} {{ eleves.surname }}</h1>
+                <a id="email" href="mailto:{{ eleves.email }}"><h1>{{ eleves.name }} {{ eleves.surname }}</h1></a>
                 <h2>Moyenne : {{ eleves.moyenne }}</h2>
             </div>
             <div class="score">

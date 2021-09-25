@@ -187,6 +187,17 @@ input:focus-visible{
     overflow-x: auto;
 }
 
+a#email{
+    text-decoration: none;
+}
+
+a#email:hover{
+    text-decoration: underline solid 0.15rem;
+    text-underline-offset: 0.2em;
+    transition: 100ms ease;
+    color: hsl(var(--paragraph-color));
+}
+
 @media only screen and (max-width: 600px) {
     .inline-content{
         flex-direction: column;

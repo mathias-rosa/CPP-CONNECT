@@ -8,16 +8,16 @@
 
 {% block content %}
 
-<div class="content" x-data="{visible: false}">
+<h1 id="title">Visualisation des notes (prochainement)</h1>
+<!---div class="content" x-data="{visible: false}">
 
-<h1 id="title">Fonctionnalité non implémentée, ça arrive bientôt !</h1>
 <style>
     .content{
         height: 60vh;
     }
 </style>
 
-    <!---div class="semester-gepi">
+    <div class="semester-gepi">
         <div class="semester-div">
             <a href="{{ url_for('notes') }}" class="semester">
                 <div><h1>Semestre 1</h1></div>
@@ -104,7 +104,8 @@ function GEPI() {
         dans un noouveau cookie "GEPI" puis de recupérer les notes sur GEPI
     */
     if (getCookie("GEPI")) {
-        console.log(getCookie("GEPI"))
+        
+        getNotesFromGepi()
 
 
     } else {
