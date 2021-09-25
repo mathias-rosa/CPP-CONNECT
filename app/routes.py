@@ -474,7 +474,7 @@ def get_notes():
     options = Options()
     options.headless = False
     driver = webdriver.Firefox(options=options)
-    
+
     """
     # On crée une instance du web-driver chrome (environement de déploiment)
     chrome_options = webdriver.ChromeOptions()
@@ -493,6 +493,8 @@ def get_notes():
     # que la page charge avant de passer à la suite
     sleep(2)
 
+    print("ça marche")
+
     # login
     login_box = driver.find_element_by_css_selector("input#login")
     login_box.send_keys(GEPI_LOGIN)
@@ -504,6 +506,8 @@ def get_notes():
     login_button.send_keys(Keys.ENTER)
 
     sleep(5)
+
+    print("on est connecté")
 
     detail_des_notes = driver.find_element_by_xpath("/html/body/div[4]/div[3]/div[1]/a")
     detail_des_notes.send_keys(Keys.ENTER)
