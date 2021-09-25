@@ -504,7 +504,7 @@ def get_notes():
     login_button = driver.find_element_by_css_selector("input#soumettre")
     login_button.send_keys(Keys.ENTER)
 
-    sleep(4)
+    sleep(3)
 
 
     detail_des_notes = driver.find_element_by_css_selector("#menu_barre > div.menu_barre_container > ul > li:nth-child(2) > a")
@@ -514,9 +514,6 @@ def get_notes():
 
 
     selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
-
-    print("on a récupéré les notes")
-    print(selenium_notes)
 
     notes = {}
     matiere = ""
@@ -528,10 +525,8 @@ def get_notes():
         else:
             notes[matiere].append(float(note.text))
             raw_notes.append(float(note.text))
-
-    print(notes)
      
-    return (notes, len(raw_notes))
+    return notes
 
 
 @app.route('/settings', methods=['GET', 'POST'])
