@@ -468,7 +468,7 @@ def get_notes():
     except:
         return "login ou mot de passe gepi invalide ou non passé en argument"
 
-    """
+    # """
     # On crée une instance du web-driver Firefox (environement de production)
 
     options = Options()
@@ -484,7 +484,7 @@ def get_notes():
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     
-    # """
+    """
     
     # On va sur https://cppreunion.fr/gepi/login.php
     driver.get("https://cppreunion.fr/gepi/login.php")
@@ -508,37 +508,31 @@ def get_notes():
 
     print("on est connecté")
 
-    detail_des_notes = driver.find_element_by_xpath("/html/body/div[4]/div[3]/div[1]/a")
+    detail_des_notes = driver.find_element_by_css_selector("#menu_barre > div.menu_barre_container > ul > li:nth-child(2) > a")
     detail_des_notes.send_keys(Keys.ENTER)
 
     sleep(2)
 
-    try:
+    print("on est sur la page du buletin")
 
-        selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
+    selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
 
-        print(selenium_notes)
+    print("on a récupéré les notes")
 
-        notes = {}
-        matiere = ""
-        raw_notes = []
-        for note in selenium_notes:
-            if len(note.text) > 5:
-                matiere = note.text
-                notes[matiere] = []
-            else:
-                notes[matiere].append(float(note.text))
-                raw_notes.append(float(note.text))
+    notes = {}
+    matiere = ""
+    raw_notes = []
+    for note in selenium_notes:
+        if len(note.text) > 5:
+            matiere = note.text
+            notes[matiere] = []
+        else:
+            notes[matiere].append(float(note.text))
+            raw_notes.append(float(note.text))
 
-        #notes = {'Physique Chimie': [8.5], 'Mathématiques': [11.5, 5.0, 20.0], 'Informatique': [], 'Chimie': [], 'Biologie': [], 'Colles de mathématiques': [13.0, 14.0, 12.0, 15.0, 14.0], 'Colles de physique': [], 'Anglais': [], 'TP de Physique': [], 'Allemand': [], 'Communication': [], 'Economie': [], 'Espagnol': [13.0, 19.4, 9.0, 12.0, 19.0, 16.0], 'Education physique et sportive': []}
-        #raw_notes = [8.5, 11.5, 5.0, 20.0, 13.0, 14.0, 12.0, 15.0, 14.0, 13.0, 19.4, 9.0, 12.0, 19.0, 16.0]    
-        
-        print(notes, len(raw_notes))
-
-        return (notes, len(raw_notes))
-    
-    except Exception as e:
-        print(e)
+    #notes = {'Physique Chimie': [8.5], 'Mathématiques': [11.5, 5.0, 20.0], 'Informatique': [], 'Chimie': [], 'Biologie': [], 'Colles de mathématiques': [13.0, 14.0, 12.0, 15.0, 14.0], 'Colles de physique': [], 'Anglais': [], 'TP de Physique': [], 'Allemand': [], 'Communication': [], 'Economie': [], 'Espagnol': [13.0, 19.4, 9.0, 12.0, 19.0, 16.0], 'Education physique et sportive': []}
+    #raw_notes = [8.5, 11.5, 5.0, 20.0, 13.0, 14.0, 12.0, 15.0, 14.0, 13.0, 19.4, 9.0, 12.0, 19.0, 16.0]    
+    return (notes, len(raw_notes))
 
 
 @app.route('/settings', methods=['GET', 'POST'])
