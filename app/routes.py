@@ -468,7 +468,7 @@ def get_notes():
     except:
         return "login ou mot de passe gepi invalide ou non passé en argument"
 
-    # """
+    """
     # On crée une instance du web-driver Firefox (environement de production)
 
     options = Options()
@@ -484,7 +484,7 @@ def get_notes():
     chrome_options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     
-    """
+    # """
     
     # On va sur https://cppreunion.fr/gepi/login.php
     driver.get("https://cppreunion.fr/gepi/login.php")
