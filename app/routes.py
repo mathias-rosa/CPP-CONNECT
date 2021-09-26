@@ -446,10 +446,14 @@ def notes():
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
+
+    notes = mongodb.db.Users.find_one({"username" : "mathias.rosa"})["notes"]
+
     return render_template('notes.html', 
                             current_user=current_user,
                             theaming=theaming,
-                            baseURL=request.base_url
+                            baseURL=request.base_url,
+                            notes=notes
                             )
 
 
@@ -517,15 +521,26 @@ def get_notes():
 
     notes = {}
     matiere = ""
-    raw_notes = []
     for note in selenium_notes:
-        if len(note.text) > 5:
+        if len(note.text) > 5: # Normalement le nom d'une matière
             matiere = note.text
             notes[matiere] = []
         else:
-            notes[matiere].append(float(note.text))
-            raw_notes.append(float(note.text))
+            notes[matiere].append(float(note.text)) # Normalement une note
+    
+    for matiere in notes.copy():
+        if notes[matiere] == []:
+            del notes[matiere]
+        else:
+            notes[matiere].append([round(sum(notes[matiere])/len(notes[matiere]), 3)])
+
+    
      
+    mongodb.db.Users.update_one(
+                {"username": current_user.username},
+                {'$set': {'notes': notes}}, upsert=False
+            )
+
     return notes
 
 

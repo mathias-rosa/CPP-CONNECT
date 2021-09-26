@@ -8,17 +8,12 @@
 
 {% block content %}
 
-<h1 id="title">Visualisation des notes (prochainement)</h1>
-<!---div class="content" x-data="{visible: false}">
+<div class="content" x-data="{visible: false}">
 
-<style>
-    .content{
-        height: 60vh;
-    }
-</style>
+    <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
 
     <div class="semester-gepi">
-        <div class="semester-div">
+        <!---div class="semester-div">
             <a href="{{ url_for('notes') }}" class="semester">
                 <div><h1>Semestre 1</h1></div>
             </a>
@@ -28,8 +23,8 @@
             <a href="{{ url_for('notes') }}" class="semester">
                 <div><h1>Semestre 3</h1></div>
             </a>
-        </div>
-        <button class="gepi" @click="GEPI(), visible = true">
+        </div--->
+        <button class="gepi" @click="visible = true">
             <h1>Télécharger les notes de GEPI</h1>
             <i class="material-icons-round">
                 file_download
@@ -41,122 +36,102 @@
         <div class="titre-notes">  
             <h1>Notes</h1>
         </div>
-        <div class="moyenne-générale" id="matiere">
+        <div class="moyenne" id="generale">
+            
             <h1>Moyenne Générale</h1>
             <div class="note-mg">
-                <h1>19.67</h1>
+                <h1>N.I</h1>
             </div>
+
         </div>
+
+        {%  for matiere in notes %}
+
+        <div class="matiere">
+
+            <div class="moyenne">
+
+                <h1>{{ matiere }}</h1>
+                <div class="note-mg">
+                    <h1> 
+                        {% for note in notes[matiere] %} 
+
+                            {% if note is iterable %}
+                                {{ note[0] }}
+                            {% endif %}
+
+                        {% endfor %}
+
+                    </h1>
+
+                </div>
+
+            </div>
+
+            <div class="list-notes">
+                {% for note in notes[matiere] %} 
+
+                    <h1>
+                        {% if note is float %}
+                        {{ note }}
+                    {% endif %}
+                    </h1>
+
+
+                {% endfor %}
+            </div>
+            
+        </div>
+
+        {%  endfor %}
+
+
     </div>
 
     <div class="popup" x-show="visible === true">
-        <form x-data="{ username : '', password : ''}" x-on:submit.prevent="GEPI()" class="gepi-form" autocomplete="gepi">
+        <form x-data="{ gepiLogin : '', gepiPassword : ''}" x-on:submit.prevent="getNotesFromGepi(gepiLogin, gepiPassword)" class="gepi-form" autocomplete="gepi">
             <h1>Connection à gepi</h1>
             <div id="gepi-username">
                 <h2>Nom d'utilisateur GEPI</h2>
-                <input type="text" x-model="username" name="gepi-username" placeholder="Nom d'utilisateur GEPI" required>
-                <p style="display: none;" x-text="username">
+                <input type="text" x-model="gepiLogin" name="gepi-username" placeholder="Nom d'utilisateur GEPI" required>
+                <p style="display: none;" x-text="gepiLogin">
             </div>
             <div id="gepi-password">
                 <h2>Mot de passe GEPI</h2>
-                <input type="password" x-model="password" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password" required>
-                <p style="display: none;" x-text="password">
+                <input type="password" x-model="gepiPassword" name="gepi-password" placeholder="Mot de passe GEPI" autocomplete="new-password" required>
+                <p style="display: none;" x-text="gepiPassword">
             </div>
             <div class="buttons">
-                <button id="download" @click="GEPI(), visible = false">Télécharger mes notes</button>
+                <button id="download" @click="visible = false">Télécharger mes notes</button>
                 <button id="cancel" type="button" @click="visible = false">Annuler</button>
             </div>
         </form>
     </div>
 
-</div--->
+</div>
 
 <script>
 
-function getCookie(name) {
 
-    // permet de récuperer le cookie ayant pour nom name : String passé en argument
-
-    let cookie = {};
-    document.cookie.split(';').forEach(function(el) {
-        let [k,v] = el.split('=');
-        cookie[k.trim()] = v;
-    })
-    return cookie[name];
-    }
-
-function createCookie(obj) {
-    /**
-    Fonction qui crée un cookie contenant le nom d'utilisateur gepi et son mot de passe
-     * @param  {[object]} obj {
-         UserID: "Gepi id"
-         password: "Gepi password"
-     }
-     */
-    document.cookie = `GEPI={UserID: ${obj.UserID}, password: ${obj.password}}`
-}
-
-function GEPI() {
-
-    /*
-        Fonction qui permet de récuperer les notes sur GEPI si les identifiants de l'utilisateur
-        sont enregistrés dans le cookie "GEPI" et sinon d'enregistrer les identifiants de l'utilisateur
-        dans un noouveau cookie "GEPI" puis de recupérer les notes sur GEPI
-    */
-    if (getCookie("GEPI")) {
-        
-        getNotesFromGepi()
-
-
-    } else {
-
-        let gepiID = document.querySelector("#gepi-username p").textContent
-        let gepiPassword = document.querySelector("#gepi-password p").textContent
-        if (gepiID !== "" && gepiPassword !== " ") {
-            createCookie({
-                UserID: gepiID,
-                password: gepiPassword
-            })
-        }
-    }
-
-}
-
-function getNotesFromGepi(){
+function getNotesFromGepi(gepiLogin, gepiPassword){
     
-    if (getCookie("GEPI")){
-        let GepiUser = parseCookie(getCookie("GEPI"))
         let url = "{{ baseURL }}" + "/get_notes";
-        url = url + "?GEPI_LOGIN=" + GepiUser.UserID;
-        url = url + "&GEPI_PASSWORD=" + GepiUser.password;
+        url = url + "?GEPI_LOGIN=" + gepiLogin;
+        url = url + "&GEPI_PASSWORD=" + gepiPassword;
     
         console.log(url)
 
-        fetch(url)
+        return fetch(url)
         .then((promise) => {
             promise.json().then( (resp) => {
                 console.log(resp)
             })
         })
-            .catch( (err) => {
-                console.log(err);
-            });
-    }
-
+        .catch( (err) => {
+            console.log(err);
+        });
 }
 
-function parseCookie(str) {
-    let obj = {};
-    str = str.replace("{", "").replace("}", "");
-    let list = str.split(",");
-    list.forEach((elem) => {
-        keyAndValue =  elem.split(":")
-        obj[keyAndValue[0].replace(" ", "")] = keyAndValue[1].replace(" ", "");
-    })
-    return obj
-}
-
-//getNotesFromGepi()
 
 </script>
 
