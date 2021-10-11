@@ -67,6 +67,18 @@ def signup():
                                         theaming=theaming,
                                         )
 
+            # Afin d'éviter que n'importe qui puisse se créer un compte, on demande à l'utilisateur
+            # de rentrer un "sésame" qu'on lui aura donné au préalable. Si ce sésame est correct, il peut
+            # se créer un compte.
+            if form.sesame.data != "f(pâté)=samoussa":
+                error = "Sésame invalide."
+                return render_template('signup.html', 
+                        form=form,
+                        error=error,
+                        message=message,
+                        theaming=theaming,
+                        )
+                
             # Pour des raisons de sécurité, on hache le mot de passe de l'utilisateur avant de
             # l'enregistrer dans la base de donnée.
             hashed_password = generate_password_hash(form.password.data, method='sha256')
@@ -92,7 +104,9 @@ def signup():
                         "email": email,
                         "password": hashed_password,
                         "theaming": "light-theme",
-                        "accountType": "élève"}
+                        "accountType": "élève",
+                        "notes": {},
+                        "promo": form.promo.data}
             mongodb.db.Users.insert_one(new_user)
             user = mongodb.db.Users.find_one({"email": email})
             login_user(User(user))

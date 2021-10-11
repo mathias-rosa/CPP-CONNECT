@@ -4,7 +4,7 @@
 """
 
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
+from wtforms import StringField, IntegerField, PasswordField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Email, Length, Optional
 
 class LoginForm(FlaskForm):
@@ -15,6 +15,8 @@ class LoginForm(FlaskForm):
 class RegisterForm(FlaskForm):
     name = StringField('Prénom', validators=[InputRequired()])
     surname = StringField('Nom', validators=[InputRequired()])
+    promo = IntegerField('Promo', validators=[InputRequired()])
+    sesame = StringField("Sésame", validators=[InputRequired()])
     email = StringField('Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('Mot de passe', validators=[InputRequired(), Length(min=6, max=80)])
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
