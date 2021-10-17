@@ -29,3 +29,4 @@ app.config['MAIL_PASSWORD'] = os.environ.get('EMAIL_PASS')
 mail = Mail(app)
 
 from app import routes
+from app import api

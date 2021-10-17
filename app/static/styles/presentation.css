@@ -1,0 +1,145 @@
+.prez{
+    display: flex;
+    flex-direction: row;
+    border-radius: 0.6em;
+    background-color: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
+    overflow: hidden;
+}
+
+.prez img{
+    max-width: 21em;
+    max-height: 21em;
+    border-top-right-radius:0.7em;
+    border-bottom-right-radius: 0.7em;
+}
+
+.expo{
+    padding-left: 2%;
+}
+.expo h1{
+    display: flex;
+}
+
+.lexique{
+    margin-top: 4%;
+}
+
+.mots{
+    margin-top: 0;
+
+}
+.def{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+.def h1{
+    font-size: 1.6em;
+}
+.def p{
+    padding-left: 2%;
+}
+
+.sous-titre{
+    display: flex;
+    align-items: center;
+}
+.sous-titre h1{
+    text-decoration: underline;
+    margin: 0;
+}
+.sous-titre h2{
+    margin-left: 2%;
+    font-size: 1.1em;
+    color: hsl(var(--second-color));
+}
+
+.cours{
+    display: flex;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
+    backdrop-filter: blur(1em);
+    border-radius: 2.5em;
+    padding: 2% ;
+    margin-bottom: 3%;
+}
+
+.cours h1{
+    color: hsl(var(--accent-color));
+    border-right: 0.15em solid;
+    margin-right: 0.2em;
+    padding-right: 2%;
+    display: flex;
+    align-items: center;
+}
+
+.cours p{
+    display: flex;
+    align-items: center;
+}
+
+.horizontal-container{
+    display: flex;
+    overflow: scroll;
+    padding-bottom: 2em;
+    border-radius: 1em;
+    margin-right: -2%;
+}
+
+.prof {
+    display: flex;
+    background-color: var(--blanc-ou-noir);
+    border-radius: 1em;
+    padding: 2%;
+    margin-right: 4%;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+}
+
+.prof p{
+    width: 18em;
+    margin: 0;
+}
+
+td, th, table{
+    color: hsl(var(--paragraph-color));
+}
+
+th{
+    font-size: 1.2em;
+    color: hsl(var(--accent-color));
+}
+
+table{
+    background-color: var(--blanc-ou-noir);
+    border-radius: 1em;
+    padding: 1%;
+    width: 100%;
+}
+
+td{
+    overflow-x: auto;
+    color: hsl(var(--paragraph-color));
+    border-bottom: 0.1em solid hsl(var(--third-color));
+    padding: 2%;
+}
+
+.prof img{
+    color: hsl(var(--accent-color));
+    border-bottom: 0.2em solid;
+    margin: 0.4em;
+    width: 15em;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
+.prof h1{
+    color: hsl(var(--accent-color));
+    border-bottom: 0.1em solid;
+    margin: 0;
+    padding-bottom: 0.5em;
+    margin-bottom: 0.5em;
+}
