@@ -12,10 +12,13 @@ from flask_login import login_required, logout_user, current_user
 import requests
 from bs4 import BeautifulSoup
 
-from time import sleep
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+import re
 
 from flask_mail import Message
 
@@ -236,12 +239,13 @@ def get_notes():
     driver.get("https://cppreunion.fr/gepi/login.php")
     # En fonction de notre connection et des performance de notre machine il faudra attendre
 
-    # que la page charge avant de passer à la suite
-    sleep(2)
-
-
     # login
-    login_box = driver.find_element_by_css_selector("input#login")
+
+    wait = WebDriverWait(driver, 10)
+
+    # sert à attendre que la page charge
+    login_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#login")))
+
     login_box.send_keys(GEPI_LOGIN)
 
     password_box = driver.find_element_by_css_selector("input#no_anti_inject_password")
@@ -250,41 +254,68 @@ def get_notes():
     login_button = driver.find_element_by_css_selector("input#soumettre")
     login_button.send_keys(Keys.ENTER)
 
-    sleep(3)
+    # On va sur le détail des notes
+    detail_des_notes = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#menu_barre > div.menu_barre_container > ul > li:nth-child(2) > a")))
 
-
-    detail_des_notes = driver.find_element_by_css_selector("#menu_barre > div.menu_barre_container > ul > li:nth-child(2) > a")
     detail_des_notes.send_keys(Keys.ENTER)
 
-    sleep(2)
+    # on recupère tous les elements td.releve qui contiennent les notes et matieres
+    selenium_lines = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "td.releve")))
 
+    selenium_lines = driver.find_elements_by_css_selector("td.releve")
 
-    selenium_notes = driver.find_elements_by_css_selector("tr td.releve b")
+    liste_matiere = []
 
-    notes = {}
-    matiere = ""
-    for note in selenium_notes:
-        if len(note.text) > 5: # Normalement le nom d'une matière
-            matiere = note.text
-            notes[matiere] = []
-        else:
-            notes[matiere].append(float(note.text)) # Normalement une note
+    while selenium_lines:
+        # On récupère le nom de chaque matière
+        matiere :str = selenium_lines.pop(0).text.split("\n")[0]
+        # On récupère la liste de toutes les notes dans la matière
+        liste_notes :list = selenium_lines.pop(0).text.split("\n")
 
-    for matiere in notes.copy():
-        if notes[matiere] == []:
-            del notes[matiere]
-        else:
-            notes[matiere].append([round(sum(notes[matiere])/len(notes[matiere]), 3)])
+        # On crée une liste qui contiendra toutes les notes de la matière
+        liste_notes_matiere = [matiere]
 
+        # On transforme chaque note de la liste des notes en dictionnaire
+        for note in liste_notes:
+            nom_note = re.search(r'.+?:', note)
+            if nom_note:
+                nom_note = nom_note.group(0)[:-1]
+            else:
+                nom_note = None
 
+            note_obtenue = re.search(r': [0-9\.]+', note)
+            if note_obtenue:
+                note_obtenue = float(note_obtenue.group(0)[2:])
+            else:
+                note_obtenue = None
 
-    mongodb.db.Users.update_one(
-                {"username": current_user.username},
-                {'$set': {'notes': notes}}, upsert=False
-            )
+            coef = re.search(r'coef:[1-9]+', note)
+            if coef:
+                coef = float(coef.group(0)[5:])
+            else:
+                coef = 1.0
 
-    return notes
+            date = re.search(r'[0-9]{2}\/[0-9]{2}/[0-9]{4}', note)
+            if date:
+                date = date.group(0)
+            else:
+                date = None
 
+            dict_note = {
+                            "nom_note": nom_note,
+                            "note": note_obtenue,
+                            "coef": coef,
+                            "date": date,
+                        }
+            if dict_note["note"]:
+                liste_notes_matiere.append(dict_note)
+
+        # On ajoute la liste des notes de la matière dans la liste de toutes les matières
+        # s'il y a au moins une note dans la liste (donc pas seulement le titre)
+        if len(liste_notes_matiere) > 1:
+            liste_matiere.append(liste_notes_matiere)
+
+    return {"notes": liste_matiere}
 
 
 @app.route('/update_user')

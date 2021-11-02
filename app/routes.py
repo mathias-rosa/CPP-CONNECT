@@ -288,13 +288,10 @@ def notes():
     else:
         theaming = "light-theme"
 
-    notes = mongodb.db.Users.find_one({"username" : "mathias.rosa"})["notes"]
-
     return render_template('notes.html',
                             current_user=current_user,
                             theaming=theaming,
-                            baseURL=request.base_url,
-                            notes=notes
+                            baseURL=request.base_url
                             )
 
 

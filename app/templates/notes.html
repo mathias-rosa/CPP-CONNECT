@@ -45,23 +45,14 @@
 
         </div>
 
-        {%  for matiere in notes %}
-
         <div class="matiere">
 
             <div class="moyenne">
 
-                <h1>{{ matiere }}</h1>
+                <h1>Test</h1>
                 <div class="note-mg">
                     <h1> 
-                        {% for note in notes[matiere] %} 
-
-                            {% if note is iterable %}
-                                {{ note[0] }}
-                            {% endif %}
-
-                        {% endfor %}
-
+                        18
                     </h1>
 
                 </div>
@@ -69,21 +60,14 @@
             </div>
 
             <div class="list-notes">
-                {% for note in notes[matiere] %} 
 
                     <h1>
-                        {% if note is float %}
-                        {{ note }}
-                    {% endif %}
+                        18
                     </h1>
 
-
-                {% endfor %}
             </div>
             
         </div>
-
-        {%  endfor %}
 
 
     </div>
