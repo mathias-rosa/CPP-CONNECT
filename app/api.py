@@ -20,6 +20,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import re
 import os
+import datetime
 
 from flask_mail import Message
 
@@ -203,6 +204,38 @@ def add_record():
     return "Invalid args"
 
 
+def rajouter_note(liste_matiere, colles, maths_ou_physique):
+    """
+        Cette fonction sert à rajouter les notes de colles de maths et de physique dans les
+        moyennes de maths et de physique.
+    """
+    # On souhaite rajouter la moyenne des colles de maths dans la moyenne de maths
+    moyenne_colles = None
+    for matiere in liste_matiere:
+        if matiere[0] == colles:
+            moyenne_colles = matiere[1]
+            break
+    if moyenne_colles:
+        # Si la moyenne de mat n'existe pas encore,
+        # On crée une liste contenant le nom des matières
+        liste_matiere_nom = [matiere[0] for matiere in liste_matiere]
+        if not maths_ou_physique in liste_matiere_nom:
+            liste_matiere.append([maths_ou_physique, moyenne_colles, {
+                            "nom_note": colles,
+                            "note": moyenne_colles,
+                            "coef": 3.0,
+                            "date": datetime.date.today().strftime("%d/%m/%Y"),
+                        }])
+        else:
+            index_maths = liste_matiere_nom.index(maths_ou_physique)
+            liste_matiere[index_maths].insert(2,{
+                            "nom_note": colles,
+                            "note": moyenne_colles,
+                            "coef": 3.0,
+                            "date": datetime.date.today().strftime("%d/%m/%Y")
+                        })
+
+
 @app.route('/notes/get_notes')
 @login_required
 def get_notes():
@@ -276,6 +309,11 @@ def get_notes():
         # On crée une liste qui contiendra toutes les notes de la matière
         liste_notes_matiere = [matiere]
 
+        # On crée une variable qui servira à calculer le moyenne de la matière
+
+        somme_notes = 0
+        somme_coef = 0
+
         # On transforme chaque note de la liste des notes en dictionnaire
         for note in liste_notes:
             nom_note = re.search(r'.+?:', note)
@@ -310,11 +348,22 @@ def get_notes():
                         }
             if dict_note["note"]:
                 liste_notes_matiere.append(dict_note)
+                somme_coef += dict_note["coef"]
+                somme_notes += dict_note["note"] * dict_note["coef"]
 
         # On ajoute la liste des notes de la matière dans la liste de toutes les matières
         # s'il y a au moins une note dans la liste (donc pas seulement le titre)
         if len(liste_notes_matiere) > 1:
+            liste_notes_matiere.insert(1, round(somme_notes/somme_coef, 2))
             liste_matiere.append(liste_notes_matiere)
+
+    rajouter_note(liste_matiere, "Colles de mathématiques", "Mathématiques")
+    rajouter_note(liste_matiere, "Colles de physique", "Physique Chimie")
+
+    mongodb.db.Users.update_one(
+            {"username": current_user.username},
+            {'$set': {'notes': liste_matiere}}, upsert=False
+        )
 
     return {"notes": liste_matiere}
 

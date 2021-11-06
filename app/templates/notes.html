@@ -45,29 +45,39 @@
 
         </div>
 
+        {%  for matiere in notes %}
+
         <div class="matiere">
 
             <div class="moyenne">
 
-                <h1>Test</h1>
+                <h1>{{ matiere[0] }}</h1>
                 <div class="note-mg">
-                    <h1> 
-                        18
-                    </h1>
-
+                    <h1>{{ matiere[1] }}</h1>
                 </div>
 
             </div>
 
             <div class="list-notes">
+                {% for note in matiere[2:] %} 
 
-                    <h1>
-                        18
+                    <h1 class="nom_note">
+                        {{ note.nom_note }}
+                    </h1>
+                    <h1 class="coef">
+                        {{ note.coef }}
+                    </h1>
+                    <h1 class="note">
+                        {{ note.note }}
                     </h1>
 
+
+                {% endfor %}
             </div>
-            
+
         </div>
+
+        {%  endfor %}
 
 
     </div>
@@ -108,7 +118,8 @@ function getNotesFromGepi(gepiLogin, gepiPassword){
         return fetch(url)
         .then((promise) => {
             promise.json().then( (resp) => {
-                console.log(resp)
+                console.log(resp);
+                location.reload()
             })
         })
         .catch( (err) => {
