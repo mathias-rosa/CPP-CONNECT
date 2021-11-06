@@ -362,7 +362,7 @@ def get_notes():
     rajouter_note(liste_matiere, "Colles de physique", "Physique Chimie")
 
     mongodb.db.Users.update_one(
-            {"username": current_user.username},
+            {"username": USER},
             {'$set': {'notes': liste_matiere}}, upsert=False
         )
 

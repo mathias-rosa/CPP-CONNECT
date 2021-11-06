@@ -288,7 +288,7 @@ def notes():
     else:
         theaming = "light-theme"
 
-    notes = mongodb.db.Users.find_one({"username" : "mathias.rosa"})["notes"]
+    notes = mongodb.db.Users.find_one({"username" : current_user.username})["notes"]
 
     return render_template('notes.html',
                             current_user=current_user,
