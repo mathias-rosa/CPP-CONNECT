@@ -245,6 +245,7 @@ def get_notes():
     """
 
     try:
+        USER = request.args['USER']
         GEPI_LOGIN = request.args['GEPI_LOGIN']
         GEPI_PASSWORD = request.args['GEPI_PASSWORD']
 

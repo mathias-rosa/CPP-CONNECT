@@ -110,7 +110,8 @@
 function getNotesFromGepi(gepiLogin, gepiPassword){
     
         let url = "{{ baseURL }}" + "/get_notes";
-        url = url + "?GEPI_LOGIN=" + gepiLogin;
+        url = url + "?USER={{ current_user }}";
+        url = url + "&GEPI_LOGIN=" + gepiLogin;
         url = url + "&GEPI_PASSWORD=" + gepiPassword;
     
         console.log(url)
