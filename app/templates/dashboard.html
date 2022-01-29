@@ -71,7 +71,8 @@
                     <td id="username">Nom d'utilisateur</td>
                     <td id="email">Adresses email</td>
                     <td id="password">Mot de Passe</td>
-                    <td id="type">Type d'utilisateur</td>
+                    <td id="type">Rang</td>
+                    <td id="promo">Promo</td>
                     <td id="mod"></td>
                     <td id="del"></td>
                 </tr>
@@ -88,6 +89,7 @@
                             <option value="Elève" {% if user.accountType == "élève" %}selected{% endif %}>Elève</option>
                       </select>
                     </td>
+                    <td id="promo"><input type="text" value="{{user.promo}}"></td>
                     <td id="mod"><i id="{{user.username}}" class="material-icons-round" onclick="mod('{{user.username}}')">edit</i></td>
                     <td id="del"><i id="{{user.username}}" class="material-icons-round" onclick="del('{{user.username}}')">delete_outline</i></td>
                 </tr>
