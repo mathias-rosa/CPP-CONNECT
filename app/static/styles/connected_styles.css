@@ -139,7 +139,7 @@ td{
     background-color: hsl(var(--main-color));
 }
 #promo{
-    max-width: 1em;
+    width: 1em;
 }
 #promo input{
     text-align: center;
