@@ -122,7 +122,7 @@ td{
     color: hsl(var(--accent-color));
 }
 
-#mod, #del, #promo{
+#mod, #del{
     padding: 0;
     overflow: hidden;
     width: 2.5em;
@@ -137,6 +137,12 @@ td{
 }
 #mod i:hover, #del i:hover{
     background-color: hsl(var(--main-color));
+}
+#promo{
+    max-width: 1em;
+}
+#promo input{
+    text-align: center;
 }
 
 #name, #surname, #password{
