@@ -12,7 +12,16 @@
     <div class="widget">
 
         <div class="pannel" id="profile-box">
-            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+
+            {% if current_user.profil_pic_url == "None" %}
+
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+               
+               
+            {% else %}
+                <img src="{{ current_user.profil_pic_url }}" alt="">
+            {% endif %}
+
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
             <div class="calendar">

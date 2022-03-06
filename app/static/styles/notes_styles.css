@@ -173,7 +173,7 @@
     backdrop-filter: blur(1em);
     border-radius: 1.5em;
     flex-direction: column;
-    width: 32em;
+    max-width: 32em;
     padding: 2%;
 }
 .titre-notes{
@@ -219,6 +219,36 @@
 }
 #generale .note-mg{
     background-color: transparent;
+}
+.note_container{
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-gap: 10px;
+    grid-auto-rows: min-content;
+    font-size: 0.7em;
+}
+.nom_note{
+    grid-column: 1 / 8;
+}
+.coef{
+    grid-column: 8 / 10;  
+    justify-items: end;
+}
+.box_note{
+    grid-column: 10;   
+    justify-items: center; 
+    background-color: var(--second-color);
+    height: 3em;
+    border-radius: 0.5em;
+    margin-top: 1em;
+    width: 7em;
+}
+.note{
+    color: hsl(var(--blanc-ou-noir));
+    margin-left: 0.4em;
+    margin-right: 0.4em;
+    margin-top: 0.1em;
+    text-align: center;
 }
 
 

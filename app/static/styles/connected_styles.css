@@ -92,6 +92,8 @@
 #profile-box img{
     height: 8em;
     clip-path:ellipse(50% 50%);
+    width: 8em;
+    object-fit: cover;
 }
 #profile-box h1{
     margin-bottom: 0;

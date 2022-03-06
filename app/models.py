@@ -26,6 +26,7 @@ class User(UserMixin):
         self.accountType = user_dict.get('accountType')
         self.theaming = user_dict.get('theaming')
         self.promo = user_dict.get("promo")
+        self.profil_pic_url = user_dict.get("profil_pic_url")
     
     def get_id(self):
         return str(self.id)

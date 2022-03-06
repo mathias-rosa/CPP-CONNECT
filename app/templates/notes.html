@@ -13,7 +13,7 @@
     <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
 
     <div class="semester-gepi">
-        <!---div class="semester-div">
+        <div class="semester-div">
             <a href="{{ url_for('notes') }}" class="semester">
                 <div><h1>Semestre 1</h1></div>
             </a>
@@ -23,7 +23,7 @@
             <a href="{{ url_for('notes') }}" class="semester">
                 <div><h1>Semestre 3</h1></div>
             </a>
-        </div--->
+        </div>
         <button class="gepi" @click="visible = true">
             <h1>Télécharger les notes de GEPI</h1>
             <i class="material-icons-round">
@@ -60,17 +60,19 @@
 
             <div class="list-notes">
                 {% for note in matiere[2:] %} 
-
+                <div class="note_container">
                     <h1 class="nom_note">
                         {{ note.nom_note }}
                     </h1>
                     <h1 class="coef">
-                        {{ note.coef }}
+                        coef : {{ note.coef }}
                     </h1>
-                    <h1 class="note">
-                        {{ note.note }}
-                    </h1>
-
+                    <div class="box_note">
+                        <h1 class="note">
+                            {{ note.note }}
+                        </h1>
+                    </div>
+                </div>
 
                 {% endfor %}
             </div>
