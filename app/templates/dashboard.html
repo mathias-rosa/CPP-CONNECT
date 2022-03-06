@@ -23,21 +23,21 @@
             <div class="tile" id="welcome">
                 <h1>Bonjour {{ current_user.name }}</h1>
             </div>
-            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php">
+            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
                 <i class="material-icons-round">note_alt</i>
                 <p>Consulter mes notes</p>
             </a>
-            <a class="tile" id="home"  href="https://mail.etu.univ-lorraine.fr/">
+            <a class="tile" id="home"  href="https://mail.etu.univ-lorraine.fr/" target="_blank">
                 <i class="material-icons-round">email</i>
                 <p>Consulter mes mails</p>
-            </a>
-            <a class="tile" id="ressources" href="https://drive.google.com/drive/folders/1JzO5Pbek--fbNGhzBTdJvNYxJXvUp7rV?usp=sharing">
-                <i class="material-icons-round">turned_in_not</i>
-                <p>Ressources des années précedentes</p>
             </a>
             <a class="tile" id="tools"  href="{{ url_for('tools') }}">
                 <i class="material-icons-round">architecture</i>
                 <p>Outils</p>
+            </a>
+            <a class="tile" id="ressources" href="https://drive.google.com/drive/folders/1JzO5Pbek--fbNGhzBTdJvNYxJXvUp7rV?usp=sharing">
+                <i class="material-icons-round">turned_in_not</i>
+                <p>Ressources des années précedentes</p>
             </a>
             <a class="tile" id="settings"  href="{{ url_for('anciens') }}">
                 <i class="material-icons-round">school</i>
