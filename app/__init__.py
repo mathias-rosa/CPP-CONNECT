@@ -11,7 +11,7 @@ import pymongo
 app = Flask(__name__)
 bootstrap = Bootstrap(app)
 app.config['SECRET_KEY'] = 'VERY_SECRET_KEY'
-host = os.environ.get('mongodb+srv://matro:5BA2p68v4HZP!y6@cppconnect.fxlhu.mongodb.net/cpp_connect?retryWrites=true&w=majority', 'mongodb://localhost:27017/cpp_connect')
+host = os.environ.get('MONGODB_URI', 'mongodb://localhost:27017/cpp_connect')
 client = pymongo.MongoClient(host=host)
 mongodb = client.cpp_connect
 login_manager = LoginManager()
