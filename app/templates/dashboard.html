@@ -13,11 +13,11 @@
 
         <div class="pannel" id="profile-box">
 
-            {% if current_user.profil_pic_url == "None" %}
-
-                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-               
-               
+            {% if not ".svg" in current_user.profil_pic_url or not ".png" in current_user.profil_pic_url or not ".jpg" in current_user.profil_pic_url or not ".jpeg" in current_user.profil_pic_url or not ".gif" in current_user.profil_pic_url %}
+            
+            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+        
+        
             {% else %}
                 <img src="{{ current_user.profil_pic_url }}" alt="">
             {% endif %}
@@ -125,6 +125,7 @@
                 let newEmail = document.querySelector("#" + oldUserName + " #email input").value;
                 let newPassword = document.querySelector("#" + oldUserName + " #password input").value;
                 let newRang = document.querySelector("#" + oldUserName + " #rang select").value;
+                let newPromo = document.querySelector("#" + oldUserName + " #promo input").value;
 
                 if (newRang === "Admin") {
                     accountType = "admin"
@@ -141,6 +142,7 @@
                 url += "&newEmail=" + newEmail;
                 url += "&newPassword=" + newPassword;
                 url += "&accountType=" + accountType;
+                url += "&newPromo=" + newPromo;
 
                 fetch(url)
                     .then( (resp) => {

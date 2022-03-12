@@ -328,7 +328,9 @@ def settings():
                 current_user.email = profileForm.email.data
             if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
                 current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
-
+            if profileForm.profile_pic.data != "":
+                current_user.profil_pic_url = profileForm.profile_pic.data
+                
             mongodb.db.Users.update_one(
                 {"_id": current_user.id},
                 {'$set':
@@ -337,7 +339,8 @@ def settings():
                         "surname": current_user.surname,
                         "username": current_user.username,
                         "email": current_user.email,
-                        "password": current_user.password
+                        "password": current_user.password,
+                        "profil_pic_url" : current_user.profil_pic_url
                     }
                 }
             )

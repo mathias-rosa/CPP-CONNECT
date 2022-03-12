@@ -30,6 +30,7 @@ class ChangeSelfInformationsForm(FlaskForm):
     current_password = PasswordField('Mot de passe actuel *', validators=[InputRequired(), Length(min=6, max=80)])
     new_password = PasswordField('Nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
     new_password_confirm = PasswordField('Confirmer votre nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])
+    profile_pic = StringField("Changer votre photo de profil")
 
 class RequestResetPasswordForm(FlaskForm):
     email = StringField("Email", validators=[InputRequired()])

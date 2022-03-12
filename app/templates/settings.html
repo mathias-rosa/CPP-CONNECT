@@ -30,6 +30,25 @@
                     {{ wtf.form_field(profileForm.new_password, placeholder="Nouveau mot de passe", id="password") }}
                     {{ wtf.form_field(profileForm.new_password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
                 </div>
+
+                <div class="profile_pic">
+                    {{ wtf.form_field(profileForm.profile_pic, placeholder="Entrez une URL de photo", id="profil_pic_url") }}
+
+                    <div class="pannel" id="profile-box">
+
+                        {% if not "svg" in current_user.profil_pic_url or not not "png" in current_user.profil_pic_url or not not "jpg" in current_user.profil_pic_url or not "jpeg" in current_user.profil_pic_url or not "gif" in current_user.profil_pic_url %}
+            
+                            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+                        
+                        
+                        {% else %}
+                            <img src="{{ current_user.profil_pic_url }}" alt="">
+                        {% endif %}
+            
+                    </div>
+
+                </div>
+                
                 
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>

@@ -147,13 +147,6 @@ td{
     text-align: center;
 }
 
-#name, #surname, #password{
-    max-width: 8em;
-}
-#username{
-    max-width: 10em;
-}
-
 tr input, #select-rang{
     font: inherit;
     color: inherit;

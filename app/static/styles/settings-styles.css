@@ -26,6 +26,7 @@
     border-radius: 0.3em;
     font-family: 'Poppins';
     color: hsl(var(--second-color));
+    width: 18em;
 }
 .form-control:focus-visible{
     outline: none;
@@ -38,6 +39,11 @@
     margin: 5%;
     margin-top: 0%;
     margin-left: 0;
+}
+
+.profile_pic{
+    display: flex;
+    align-items: center;
 }
 
 .form-group label{

@@ -396,7 +396,8 @@ def update_user():
                         "username": request.args['newUsername'].replace(" ", ""),
                         "email": request.args['newEmail'],
                         "password": newPassword,
-                        "accountType": request.args['accountType']
+                        "accountType": request.args['accountType'],
+                        "promo" : request.args['newPromo'],
                     }
                 }
             )
