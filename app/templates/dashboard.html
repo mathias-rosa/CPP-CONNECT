@@ -13,13 +13,14 @@
 
         <div class="pannel" id="profile-box">
 
-            {% if not ".svg" in current_user.profil_pic_url or not ".png" in current_user.profil_pic_url or not ".jpg" in current_user.profil_pic_url or not ".jpeg" in current_user.profil_pic_url or not ".gif" in current_user.profil_pic_url %}
+            {% if current_user.profile_pic == "None" %}
             
-            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-        
-        
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+                        
+                        
             {% else %}
                 <img src="{{ current_user.profil_pic_url }}" alt="">
+
             {% endif %}
 
             <h1>{{current_user.name}}</h1>
@@ -44,7 +45,7 @@
                 <i class="material-icons-round">architecture</i>
                 <p>Outils</p>
             </a>
-            <a class="tile" id="ressources" href="https://drive.google.com/drive/folders/1JzO5Pbek--fbNGhzBTdJvNYxJXvUp7rV?usp=sharing">
+            <a class="tile" id="ressources" href="https://drive.google.com/drive/folders/1JzO5Pbek--fbNGhzBTdJvNYxJXvUp7rV?usp=sharing" target="_blank">
                 <i class="material-icons-round">turned_in_not</i>
                 <p>Ressources des années précedentes</p>
             </a>
