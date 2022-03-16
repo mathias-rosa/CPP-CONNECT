@@ -36,7 +36,9 @@
 
                     <div class="pannel" id="profile-box">
 
-                        {% if not "svg" in current_user.profil_pic_url or not not "png" in current_user.profil_pic_url or not not "jpg" in current_user.profil_pic_url or not "jpeg" in current_user.profil_pic_url or not "gif" in current_user.profil_pic_url %}
+                        {{ current_user.profil_pic_url }}
+
+                        {% if current_user.profil_pic_url == "None" %}
             
                             <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
                         

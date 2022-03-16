@@ -329,7 +329,13 @@ def settings():
             if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
                 current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
             if profileForm.profile_pic.data != "":
-                current_user.profil_pic_url = profileForm.profile_pic.data
+                if not "svg" in current_user.profil_pic_url or \
+                    not not "png" in current_user.profil_pic_url or \
+                    not not "jpg" in current_user.profil_pic_url or \
+                    not "jpeg" in current_user.profil_pic_url or \
+                    not "gif" in current_user.profil_pic_url :
+                    
+                    current_user.profil_pic_url = profileForm.profile_pic.data
                 
             mongodb.db.Users.update_one(
                 {"_id": current_user.id},
