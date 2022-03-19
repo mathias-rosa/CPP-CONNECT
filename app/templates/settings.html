@@ -44,7 +44,7 @@
                 Du coup, si vous souhaitez changer votre photo de profil pour un chat mignon,
                 vous pouvez chercher le chat mignon sur internet puis copier son URL.
                 <br>
-                Votre photo de profil actuelle est : <span>{{ current_user.profil_pic_url }}</span>
+                Votre photo de profil actuelle est : <br> <a href="{{ current_user.profil_pic_url }}">{{ current_user.profil_pic_url }}</a>
 
                 {% if current_user.profil_pic_url != "Benjamin La cucarracha" %}
                 <br><br>Pour revenir à la photo de profil par default, entrez "Benjamin La cucarracha" dans le champ ci-dessous.

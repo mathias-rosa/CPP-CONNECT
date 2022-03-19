@@ -10,6 +10,7 @@
     padding-top: 2%;
     padding-bottom: 2%;
     margin-bottom: 3%;
+    box-sizing: border-box;
 }
 .div-box h1{
     margin-top: 0;
@@ -56,6 +57,10 @@
     padding-bottom: 1em;
 }
 
+.change_profile_pic_form a{
+    line-break: anywhere;
+    color: hsl(var(--second-accent-color));
+}
 .inputs{
     width: 100%;
 }
@@ -124,10 +129,12 @@ input{
 
     .profile_pic {
         flex-direction: column;
+        align-items: flex-start;
     }
 
     .inputs-inline {
         width: 100%;
         flex-direction: column;
+        align-items: flex-start;
     }
 }
