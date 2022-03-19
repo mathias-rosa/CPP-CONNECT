@@ -13,15 +13,14 @@
 
         <div class="pannel" id="profile-box">
 
-            {% if current_user.profile_pic == "Benjamin La cucarracha" %}
-            
-                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-                        
-                        
-            {% else %}
-                <img src="{{ current_user.profil_pic_url }}" alt="">
-
-            {% endif %}
+            {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
+        
+            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+        
+        
+        {% else %}
+            <img src="{{ current_user.profil_pic_url }}" alt="">
+        {% endif %}
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
