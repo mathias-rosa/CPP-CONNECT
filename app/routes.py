@@ -11,7 +11,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 import datetime
 
 from app.models import User, Tool, Addresses
-from app.forms import LoginForm, RegisterForm, ChangeSelfInformationsForm
+from app.forms import LoginForm, RegisterForm, ChangeSelfInformationsForm, ProfilePicForm
 
 
 @app.route('/favicon.ico')
@@ -328,15 +328,7 @@ def settings():
                 current_user.email = profileForm.email.data
             if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
                 current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
-            if profileForm.profile_pic.data != "":
-                if not "svg" in current_user.profil_pic_url or \
-                    not not "png" in current_user.profil_pic_url or \
-                    not not "jpg" in current_user.profil_pic_url or \
-                    not "jpeg" in current_user.profil_pic_url or \
-                    not "gif" in current_user.profil_pic_url :
-                    
-                    current_user.profil_pic_url = profileForm.profile_pic.data
-                
+
             mongodb.db.Users.update_one(
                 {"_id": current_user.id},
                 {'$set':
@@ -346,15 +338,56 @@ def settings():
                         "username": current_user.username,
                         "email": current_user.email,
                         "password": current_user.password,
-                        "profil_pic_url" : current_user.profil_pic_url
                     }
                 }
             )
             return render_template('settings.html',
+                            profilePicForm=profilePicForm,
                             profileForm=profileForm,
                             theaming=theaming,
                             )
         return "Mot de passe incorect"
+
+    # Modification de ma photo de profile
+    profilePicForm = ProfilePicForm()
+
+    if profilePicForm.validate_on_submit():
+
+
+        if profilePicForm.profile_pic.data != "":
+            if "Benjamin La cucarracha" in current_user.profil_pic_url:
+                    
+                mongodb.db.Users.update_one(
+                    {"_id": current_user.id},
+                    {'$set':
+                        {
+                            "profil_pic_url" : "Benjamin La cucarracha"
+                        }
+                    }
+                )
+            elif not "svg" in current_user.profil_pic_url or \
+                not not "png" in current_user.profil_pic_url or \
+                not not "jpg" in current_user.profil_pic_url or \
+                not "jpeg" in current_user.profil_pic_url or \
+                not "gif" in current_user.profil_pic_url :
+                
+                current_user.profil_pic_url = profilePicForm.profile_pic.data
+                    
+                mongodb.db.Users.update_one(
+                    {"_id": current_user.id},
+                    {'$set':
+                        {
+                            "profil_pic_url" : current_user.profil_pic_url
+                        }
+                    }
+                )
+            
+
+    return render_template('settings.html',
+                    profilePicForm=profilePicForm,
+                    profileForm=profileForm,
+                    theaming=theaming,
+                    )
 
     # Mise à jour du thème de l'utilisateur.
     try:
@@ -385,6 +418,7 @@ def settings():
     except:
         pass
     return render_template('settings.html',
+                            profilePicForm=profilePicForm,
                             profileForm=profileForm,
                             theaming=theaming,
                             )

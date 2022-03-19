@@ -29,29 +29,45 @@
                 <div class="inputs-inline">
                     {{ wtf.form_field(profileForm.new_password, placeholder="Nouveau mot de passe", id="password") }}
                     {{ wtf.form_field(profileForm.new_password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
+                </div>               
+                
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
+        </form>
+    </div>
+
+    <div class="div-box">
+        <form class="change_profile_pic_form" method="POST" action="/settings">
+            <h1>Changer ma photo de Profile</h1>
+            <p>
+                Nous n'avons pas de serveur pour stocker vos photos de profil. <br>
+                Du coup, si vous souhaitez changer votre photo de profil pour un chat mignon,
+                vous pouvez chercher le chat mignon sur internet puis copier son URL.
+                <br>
+                Votre photo de profil actuelle est : <span>{{ current_user.profil_pic_url }}</span>
+
+                {% if current_user.profil_pic_url != "Benjamin La cucarracha" %}
+                <br><br>Pour revenir à la photo de profil par default, entrez "Benjamin La cucarracha" dans le champ ci-dessous.
+                {% endif %}
+
+            </p>
+            <div class="profile_pic">
+                {{ profilePicForm.hidden_tag() }}
+                {{ wtf.form_field(profilePicForm.profile_pic, placeholder="Entrez une URL de photo", id="profil_pic_url") }}
+
+                <div class="pannel" id="profile-box">
+
+                    {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
+        
+                        <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+                    
+                    
+                    {% else %}
+                        <img src="{{ current_user.profil_pic_url }}" alt="">
+                    {% endif %}
+        
                 </div>
 
-                <div class="profile_pic">
-                    {{ wtf.form_field(profileForm.profile_pic, placeholder="Entrez une URL de photo", id="profil_pic_url") }}
-
-                    <div class="pannel" id="profile-box">
-
-                        {{ current_user.profil_pic_url }}
-
-                        {% if current_user.profil_pic_url == "None" %}
-            
-                            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-                        
-                        
-                        {% else %}
-                            <img src="{{ current_user.profil_pic_url }}" alt="">
-                        {% endif %}
-            
-                    </div>
-
-                </div>
-                
-                
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Valider</button>
         </form>
@@ -93,13 +109,6 @@
         </form>
     </div> 
 
-    {% if current_user.accountType == "admin" %}
-
-    <div class="div-box">
-        <h1 style="margin: 0;">Je suis admin</h1>
-    </div> 
-
-    {% endif %}
 </div>
 
 {% endblock %}
