@@ -118,8 +118,11 @@ p, h1, h2{
 }
 .login-img{
     display: flex;
-    height: 75%;
-    padding-left: 3%;
+    margin-left: 3%;
+    clip-path: circle(50%);
+    object-fit: cover;
+    height: 3.3em;
+    width: 3.3em;
 }
 .menu{
     display: flex;
@@ -296,7 +299,7 @@ p, h1, h2{
         padding-bottom: 2%;
     }
     .header h2{
-        white-space: normal;
+        /* white-space: normal; */
         text-align: end;
         line-height: 1.35;
         margin: 0;

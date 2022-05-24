@@ -12,6 +12,7 @@
 }
 .header img{
     height: 2.4em;
+    max-width: 2.4em;
 }
 
 .widget{

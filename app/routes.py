@@ -311,8 +311,9 @@ def settings():
     else:
         theaming = "light-theme"
 
-    # Modification des informations personnelles
     profileForm = ChangeSelfInformationsForm()
+    profilePicForm = ProfilePicForm()
+    # Modification des informations personnelles
     if profileForm.validate_on_submit():
         # L'utilisateur doit rentrer son mot de passe afin effectuer toute modification.
         # Si le mot de passe est incorect, on retourne "mot de passe incorect" (il faudra créer une belle page)
@@ -349,7 +350,6 @@ def settings():
         return "Mot de passe incorect"
 
     # Modification de ma photo de profile
-    profilePicForm = ProfilePicForm()
 
     if profilePicForm.validate_on_submit():
 
@@ -384,11 +384,11 @@ def settings():
                 )
             
 
-    return render_template('settings.html',
-                    profilePicForm=profilePicForm,
-                    profileForm=profileForm,
-                    theaming=theaming,
-                    )
+        return render_template('settings.html',
+                        profilePicForm=profilePicForm,
+                        profileForm=profileForm,
+                        theaming=theaming,
+                        )
 
     # Mise à jour du thème de l'utilisateur.
     try:

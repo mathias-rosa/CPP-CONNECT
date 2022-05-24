@@ -27,7 +27,6 @@
     border-radius: 0.3em;
     font-family: 'Poppins';
     color: hsl(var(--second-color));
-    width: 18em;
 }
 .form-control:focus-visible{
     outline: none;
@@ -40,6 +39,7 @@
     margin: 5%;
     margin-top: 0%;
     margin-left: 0;
+    
 }
 
 .profile_pic{
@@ -54,6 +54,9 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+}
+
+form{
     padding-bottom: 1em;
 }
 
@@ -136,5 +139,13 @@ input{
         width: 100%;
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .form-control{
+        width: 100% !important;
+    }
+    .form-group{
+        width: -moz-available;
+        width: -webkit-fill-available;
     }
 }
