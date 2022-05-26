@@ -22,14 +22,7 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">
                 <h2>Se connecter</h2>
-                {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
-        
-                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="" class="login-img">
-            
-            
-                {% else %}
-                <img src="{{ current_user.profil_pic_url }}" alt="" class="login-img">
-                {% endif %}   
+                <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img" style="clip-path: inherit">
             </a>
             {% else %}
                 
@@ -37,7 +30,14 @@
                     <h2>{{current_user.name}} {{current_user.surname}}</h2>
                 </a>
                 <div class="menu" @click="showMenu = true; arrow = 'arrow_drop_up'" @mouseenter="showMenu = true; arrow = 'arrow_drop_up'" >
-                    <img src="{{ current_user.profil_pic_url }}" alt="logo" class="login-img">    
+                    {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
+        
+                    <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="" class="login-img">
+                
+                
+                    {% else %}
+                    <img src="{{ current_user.profil_pic_url }}" alt="" class="login-img">
+                    {% endif %}  
                     <i class="material-icons-round" x-text="arrow"></i>
                 </div>
                 <div class="dropdown-menu" x-show="showMenu" @click.away="showMenu = false; arrow= 'arrow_drop_down'" 

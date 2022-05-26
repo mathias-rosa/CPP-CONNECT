@@ -294,12 +294,15 @@ def notes():
     # On genere un dictionnaire {nom_matiere : note}
     moyennes = {note[0]:note[1]  for note in notes}
 
+    bricolage = {"brico" : notes}
+
     return render_template('notes.html',
                             current_user=current_user,
                             theaming=theaming,
                             baseURL=request.base_url,
                             notes=notes,
-                            moyennes=moyennes
+                            moyennes=moyennes,
+                            bricolage=bricolage
                             )
 
 
