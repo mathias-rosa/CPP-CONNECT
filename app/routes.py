@@ -4,6 +4,8 @@
 """
 
 import os
+
+from matplotlib.colors import ListedColormap
 from app import app, mongodb
 from flask import render_template, send_from_directory, redirect, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -289,12 +291,16 @@ def notes():
         theaming = "light-theme"
 
     notes = mongodb.db.Users.find_one({"username" : current_user.username})["notes"]
+    
+    # On genere un dictionnaire {nom_matiere : note}
+    moyennes = {note[0]:note[1]  for note in notes}
 
     return render_template('notes.html',
                             current_user=current_user,
                             theaming=theaming,
                             baseURL=request.base_url,
-                            notes=notes
+                            notes=notes,
+                            moyennes=moyennes
                             )
 
 

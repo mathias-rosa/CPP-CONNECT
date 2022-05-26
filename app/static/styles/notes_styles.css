@@ -251,6 +251,20 @@
     text-align: center;
 }
 
+.div-graph{
+    display: flex;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
+    backdrop-filter: blur(1em);
+    border-radius: 1.5em;
+    padding: 1.5%;
+    margin: 3%;
+    margin-left: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
 
 @media only screen and (max-width: 600px) {
     .gepi-form{

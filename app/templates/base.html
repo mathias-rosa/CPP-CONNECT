@@ -22,9 +22,17 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">
                 <h2>Se connecter</h2>
-                <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img">    
+                {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
+        
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="" class="login-img">
+            
+            
+                {% else %}
+                <img src="{{ current_user.profil_pic_url }}" alt="" class="login-img">
+                {% endif %}   
             </a>
             {% else %}
+                
                 <a href="{{ url_for('dashboard') }}" id="profile">
                     <h2>{{current_user.name}} {{current_user.surname}}</h2>
                 </a>

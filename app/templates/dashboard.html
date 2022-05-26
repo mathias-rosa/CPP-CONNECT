@@ -18,9 +18,9 @@
             <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
         
         
-        {% else %}
+            {% else %}
             <img src="{{ current_user.profil_pic_url }}" alt="">
-        {% endif %}
+            {% endif %}
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
@@ -56,10 +56,12 @@
                 <i class="material-icons-round">settings</i>
                 <p>Paramètres</p>
             </a>
-            <!--a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
+            <!-- 
+            <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
                 <i class="material-icons-round">calculate</i>
                 <p>Calcul de Moyenne</p>
-            </a-->
+            </a> 
+            -->
             <a class="tile" id="addresses"  href="{{ url_for('addresses') }}">
                 <i class="material-icons-round">restaurant_menu</i>
                 <p>Le Petit CPP</p>
