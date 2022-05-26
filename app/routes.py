@@ -5,7 +5,6 @@
 
 import os
 
-from matplotlib.colors import ListedColormap
 from app import app, mongodb
 from flask import render_template, send_from_directory, redirect, url_for, request
 from werkzeug.security import generate_password_hash, check_password_hash
