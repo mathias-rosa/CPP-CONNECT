@@ -18,8 +18,8 @@
 }
 .semester-div {
     display: flex;
-    width: 50%;
     overflow-x: auto;
+    flex: 1;
 }
 .semester-div a{
     display: flex;
@@ -46,9 +46,11 @@
     display: flex;
     align-items: center;
     cursor: pointer;
+    margin-left: 1.5em;
 }
 .gepi h1{
-    font-size: 1em
+    font-size: 1em;
+    color: black;
 }
 .gepi i{
     margin-left: 0.5em;
@@ -233,6 +235,7 @@
 .coef{
     grid-column: 8 / 10;  
     justify-items: end;
+    min-width: 4.5em,
 }
 .box_note{
     grid-column: 10;   
@@ -240,14 +243,12 @@
     background-color: var(--second-color);
     height: 3em;
     border-radius: 0.5em;
-    margin-top: 1em;
     width: 7em;
 }
 .note{
-    color: hsl(var(--blanc-ou-noir));
+    color: hsl(var(--paragraph-color));
     margin-left: 0.4em;
     margin-right: 0.4em;
-    margin-top: 0.1em;
     text-align: center;
 }
 
@@ -263,9 +264,35 @@
     margin-left: 0;
     justify-content: space-between;
     align-items: center;
+    margin-left: 3%;
 }
 
-
+.notes_et_graphes{
+    display: flex;
+}
+.graphe_moyennes{
+    flex: 1;
+    flex-direction: row;
+}
+@media only screen and (max-width: 1200px){
+    .graphe_moyennes{
+        display: none;
+    }
+    .nom_note {
+        font-size: 2em; 
+    }
+    .coef {
+        font-size: 2em;
+    }
+    .note {
+        font-size: 2em;
+        margin-top: 0.6em;
+    }
+    .notes {
+        padding: 4%;
+        max-width: 100%;
+    }
+}
 @media only screen and (max-width: 600px) {
     .gepi-form{
         top: auto;
@@ -275,5 +302,36 @@
         padding-bottom: 5%;
         width: 100%;
         box-sizing: border-box;
+    }
+    .nom_note {
+        font-size: 1.3em;
+    }
+    .coef {
+        font-size: 1.3em;
+    }
+    .note {
+        font-size: 1.3em;
+        margin-top: 0.6em;
+    }
+    .notes {
+        padding: 4%;
+        max-width: 100%;
+        border-radius: 1em;
+    }
+    .semester-gepi {
+        border-radius: 1em;
+        height: 4em;
+    }
+    .gepi h1 {
+        display: none;
+    }
+    .gepi i {
+        margin-left: 0;
+    }
+    .gepi {
+        margin-right: 1em;
+    }
+    .semester-div {
+        margin-left: 1em;
     }
 }

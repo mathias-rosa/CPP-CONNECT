@@ -276,7 +276,7 @@ def get_notes():
 
     # login
 
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 20)
 
     # sert à attendre que la page charge
     login_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#login")))
