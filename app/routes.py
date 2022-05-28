@@ -306,6 +306,21 @@ def notes():
                             )
 
 
+@app.route('/notesv2')
+@login_required
+def notesv2():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+
+
+    return render_template('notesv2.html',
+                            current_user=current_user,
+                            theaming=theaming,
+                            baseURL=request.base_url,
+                            )
+
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
 def settings():

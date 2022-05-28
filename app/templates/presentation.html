@@ -10,12 +10,15 @@
 <div class="content">
     
     <div class="prez">
-        <img src="https://live.staticflickr.com/8240/8663791019_e16b26a796_b.jpg" alt="photo de la Prez">
+        <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/photo_promo11.png') }}" alt="photo de la Prez">
         <div class="expo">
-            <h1>Bonjour à toi !</h1>
+            <h1>Salut toi !</h1>
             <p class="mot">
-                Moi c'est Maëllys, Je suis la présidente des élèves de La CPP Réunion.
-                <br>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Cupiditate ducimus error officia, id quidem numquam quae rerum assumenda voluptatibus ipsam tempora ratione quaerat, sed, praesentium quis? Tempora praesentium vero vel.
+                Et bienvenue sur notre site internet ! 
+                <br>Ici, c'est la page de présentation où tu pourras obtenir quelques informations sur ce qui t'attend si tu nous rejoins !
+                <br>Nous, on est la promo 11 ! ( la meilleure, tu peux pas faire mieux dsl ) Notre prépa se situe à l'île de la Réunion, et elle fait partie du 
+                <br>groupe INP ! Alors si tu cherches directement sur les sites du <a href="http://www.groupe-inp.fr/">Groupe INP</a> ou de <a href="https://www.la-prepa-des-inp.fr/">La Prépa des INP</a> et que tu ne trouves rien sur la Réunion, c'est normal ! Il Faut que tu te rendes sur le site de <a href="https://www.lorraine-inp.fr/prepa-des-inp/la-prepa-des-inp-la-reunion/">La Prépa des INP de Lorraine</a>, car le site de la Réunion y est rattaché !
+                <br>Ps : fouilles bien ce site, il y a pas mal de choses intéressantes !
         </p>
         </div>
     </div>
@@ -23,27 +26,27 @@
     <div class="lexique">
 
         <div class="sous-titre">
-            <h1>Lexique :</h1>
+            <h1>Lexique</h1>
             <h2>Un peu de vocabulaire pour mieux te retrouver</h2>
         </div>
         <table>
             <thead>
                 <tr>
-                    <th scope="col">Mots</th>
-                    <th scope="col">traduction</th>
+                    <th scope="col">Mot</th>
+                    <th scope="col">Traduction</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td scope="row">1A</th>
-                    <td>Elève de première année</td>
+                    <td>Elève de première année, probablement toi ! ( ou dans le futur peut-être )</td>
                 </tr>
                 <tr>
                     <td scope="row">2A</th>
                     <td>Elève de deuxième année</td>
                 </tr>
                 <tr>
-                    <td scope="row">Grand frère/grande sœur</th>
+                    <td scope="row">Grand frère /<br>Grande sœur</th>
                     <td>
                         Ils correspondent aux parrains/marraines des classes prépa ordinaires.
                         Mais en CPP la fraternité est mise en avant. Il s’agira du 2A qui sera là pour vous guider, 
@@ -51,14 +54,20 @@
                     </td>
                 </tr>
                 <tr>
-                    <td scope="row">Petit frère/Petite sœur</th>
+                    <td scope="row">Petit frère /<br>Petite sœur</th>
                     <td>A contrario, les plus petits frères/petites sœurs, c’est vous ! Vous êtes ceux qu’on va couver</td>
                 </tr>
                 <tr>
-                    <td scope="row">Khôlles (ou colles)</th>
+                    <td scope="row">Khôlles</th>
                     <td>
                         Evaluation orale au tableau que tu auras en Maths et en Physique devant un prof par petit groupe de 3 à 5 personnes, vous aurez une heure pour montrer au professeur que vous maîtrisez le programme des deux dernières semaines. De petits exercices vous seront donnés et les professeurs seront derrière vous pour vous guider,
                         c’est le meilleur moyen de se rendre compte des éventuels problèmes de compréhension du cours !
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">DS</th>
+                    <td>
+                        Petit nom pour dire Devoir Surveillé. Tu le connais peut-être déjà, mais quand tu l'entendra, il faudrat courir !
                     </td>
                 </tr>
                 <tr>
@@ -67,6 +76,28 @@
                         Ils font partie intégrante de la gastronomie locale,
                         vous pourrez les découvrir au marché le dimanche matin ou en cours de maths,
                         ils s’avèrent être de redoutables objets mathématiques.
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">RU</th>
+                    <td>
+                        Le RU ou Restaurant Universitaire est un lieu paisible pour manger avec ses amis.
+                        Il est, certe, un peu éloigné de la prépa, mais si le soir vous avez la flemme de cuisiner...
+                        La formule complète est à 3.30€, et si tu es boursier elle descend à 1€ ! Une véritable affaire.
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Gepi</th>
+                    <td>
+                        Site internet permettant de consulter toutes les dernières notes publiès par les profs !
+                        Un annonceur de bonnes nouvelles, et de mauvaises...
+                    </td>
+                </tr>
+                <tr>
+                    <td scope="row">Émarger</th>
+                    <td>
+                        Même si tu connais probablement la définition de ce dernier, on te demandera de le faire très souvent...
+                        En effet, quasiment à chaque DS ! Eh oui, parce que chez nous, t'es une star ! ( on y croit fort en tout cas )
                     </td>
                 </tr>
             </tbody>
@@ -153,14 +184,15 @@
             <h1>Communication</h1>
             <p>
                 Ce cours aura pour vocation de vous apprendre les choses intéressantes de la vie (rien à voir avec David Castello-Lopes) et de former une réelle réflexion sur le 
-                fonctionnement du monde (oui on sait, ça ne vous dit pas grand-chose comme ça. Justement, c’est pour que vous réfléchissiez à quoi vous pouvez vous attendre *clin d’œil* *clin d’œil*
+                fonctionnement du monde (oui on sait, ça ne vous dit pas grand-chose comme ça. Justement, c’est pour que vous réfléchissiez à quoi vous pouvez vous attendre *clin d’œil* *clin d’œil*)
+                Tout de même il faut savoir que cette matière à la rigueur que le Français et la Philo auraientt si elles y étaient !
             </p>
         </div>
         <div class="cours" id="economie ">
             <h1>Économie </h1>
             <p>
                 En concurrence avec les maths, au deuxième semestre, vous allez en voir aussi des nombres dans cette matière. Et surtout, vous allez vous rendre compte à quel point ils sont riches ces espèces... 
-                d'humains de grandes marques et font du profit sur notre dos.
+                d'humains de grandes marques et font du profit sur notre dos. Le CA, la TVA et bien d'autres... toutes ces notions seront carrés dans votre tête ! 
             </p>
         </div>
 
@@ -233,7 +265,7 @@
                 <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/MadameThiburce.svg') }}" alt="thiburce" id="thiburce">
                 <p>
                     You (nul en english) : Quand tu get a 6/20 at a DST <br>
-                    Mrs Thiburce : « You are Amazing »  <br>
+                    Mrs Thiburce : « You are AMAZING !!!! »  <br>
                     You: …
                 </p>
             </div>
@@ -254,7 +286,7 @@
                 <img src="{{ url_for('static', filename='img/pate_sam_bonbonPiment/Guillaume.svg') }}" alt="guillaume" id="guillaume">
                 <p>
                     Annonceur de bonnes comme de mauvaises nouvelles,
-                    Dit toujours que les DS sont faciles (alors que c’est faux)
+                    dit toujours que les DS sont faciles (alors que c’est faux)
                     Soutient un max avec de beaux EDT tout colorés et des GIF tout mimi à la fin de chaque mail.                
                 </p>
             </div>
@@ -266,12 +298,59 @@
     <div class="reunion">
 
         <h1>La Réunion, une île magnifique</h1>
+        <div class="photos">
+            <img src="https://technopole-reunion.com/wp-content/uploads/2020/04/reunionvuehaut.jpg" alt="1" id="photo">
+            <div class="Deux_photos">
+                <img src="https://espaceperso.aircaraibes.com/sites/aircaraibes.com/files/styles/style_5/public/article_visual/fotolia_cascade_du_bassin_des_aigrettes_-_ile_de_la_reunion.jpg" alt="2" id="photo" class="photo2">
+                <img src="https://img.ev.mu/images/attractions/2984/960x640/5660.jpg" alt="5" id="photo" class="photo5">
+            </div>
+            <div class="Grande_photo">
+                <img src="https://images.france.fr/zeaejvyq9bhj/6WF1c1FX5pVxfoaOHZsKy9/3e49bcdfddaccd61cf6c649717adfa75/montagne_mafate79_sentier_cap_noir_-_CREDIT_IRT_-_frog_974_photographies_dts_06_2018.jpg?w=1120&h=490&q=70&fl=progressive&fit=fill" alt="4" id="photo">
+            </div>
+            <div class="Deux_photos">
+                <img src="https://www.cartedelareunion.fr/wp-content/uploads/2016/07/Paddle-lagon-passe-de-lErmitage-cartedelareunion.fr-%C2%A9-Serge-Gelabert-1422x800.jpg" alt="6" id="photo">
+                <img src="https://coconut-story.com/wp-content/uploads/2019/09/baignade-reunion-1.jpg" alt="7" id="photo">
+            </div>
+            <div class="Grande_photo">
+                <img src="https://suitespot.fr/wp-content/uploads/2020/05/La-Reunion-France.jpg" alt="3" id="photo">
+            </div>
+        </div>
+        <div class="google_maps">
+            <h1 class="texte_gm">Nous, on est juste là !</h1>
+            <h1 class="texte_gm_2"> Notre prépa se situe dans l'enceinte du Lycée Lislet Geoffroy, à Saint-Denis</h1>
+            <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d954312.09632659!2d54.922104435046045!3d-20.880850365957663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x21827fb8537eac13%3A0x738b4da871cc0c23!2sCPP%20-%20La%20Pr%C3%A9pa%20des%20INP%20-%20Site%20de%20Saint%20Denis%20de%20la%20R%C3%A9union!5e0!3m2!1sfr!2sfr!4v1653767290939!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
 
     </div>
 
     <div class="logement">
 
         <h1>Astuces de logement</h1>
+
+        <div class="Logements">
+            <div class="Classique">
+                <h1 class="titre_logements">Appartement / Maison / Villa ?</h1>
+                <p>
+                    La prépa se situe au chef-lieu : Saint-Denis ! Donc si tu as les moyens et que tu cherches un appartement, on te conseille les agences à cet endroit.
+                    Mais si tu es plus près de tes sous, à ce moment-là va jeter un œil sur Leboncoin ! Et si tu as des connaissances, le bouche-à-oreille ça marche toujours ! 
+                    Sinon tu peux rentrer en contact avec des étudiants de la promo actuelle pour qu'ils te donnent des tuyaux ! ( tu peux nous retrouver sur notre page <a href="https://www.instagram.com/reunioninp/">Instagram</a> officielle !)
+                </p>
+            </div>
+            <div class="Crous">
+                <h1 class="titre_logements">Crous</h1>
+                <p>
+                    Le <a href="https://www.crous-reunion.fr/">Crous</a> n'est pas une solution à négliger ! Plusieurs types de logements sont disponibles et sont pour la plupart abordable en termes de prix, tu n'as qu'à te renseigner sur leur site ! 
+                    En plus de ça tu seras juste à côté du RU ! Par contre, ce dernier n'est ouvert qu'en semaine.
+                </p>
+            </div>
+            <div class="Internat">
+                <h1 class="titre_logements">Internat</h1>
+                <p>
+                    Eh oui, il y a un internat ! En fait la prépa se situe dans l'enceinte du Lycée Lislet Geoffroy ( ainsi que d'autres prépas  ), et ce lycée bénéficient de l'internat de Leconte De Lisle ( un autre lycée, oui, en fait il y en a trois au même endroit, mais bref  ) et nous avons quelques places réservées pour nous ! 
+                    Alors pour obtenir les infos dont tu as besoin, contact le secrétariat de <a href="http://lycee-llisle.ac-reunion.fr/">Leconte De Lisle</a>. La prépa s'y trouve à 5 min à pied, les repas sont fournis... Mais Attention : l'internat ferme ses portes les weekends et vacances, il faudra bouger à ce moment-là !
+                </p>
+            </div>
+        </div>
 
     </div>
 

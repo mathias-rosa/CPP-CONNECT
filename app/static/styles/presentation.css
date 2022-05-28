@@ -7,7 +7,9 @@
     border: 0.1em solid hsl(var(--third-color));
     overflow: hidden;
 }
-
+a{
+    color: inherit;
+}
 .prez img{
     max-width: 21em;
     max-height: 21em;
@@ -142,6 +144,63 @@ td{
     margin: 0;
     padding-bottom: 0.5em;
     margin-bottom: 0.5em;
+}
+.Classique, .Crous, .Internat {
+    display: flex;
+    background-color: var(--blanc-ou-noir);
+    border-radius: 1em;
+    padding: 1%;
+    margin-right: 4%;
+    flex-direction: row;
+    align-content: center;
+    align-items: center;
+    margin-bottom: 1em;
+    flex-wrap: wrap;
+}
+.titre_logements {
+    color: hsl(var(--paragraph-color));
+    font-size: 1.5em;
+}
+.photos, .google_maps{
+    display: flex;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
+    backdrop-filter: blur(1em);
+    border-radius: 2.5em;
+    padding: 2% ;
+    margin-bottom: 3%;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+#photo {
+    width: 100%;
+    border-radius: 1em;
+}
+.Deux_photos {
+    display: grid;
+}
+.photo2 {
+    grid-column: 1;
+    width: 99%;
+}
+.photo5 {
+    grid-column: 2;
+    margin-right: 3.7em;
+}
+.texte_gm{
+    font-size: 1.5em;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.texte_gm_2{
+    font-size: 1em;
+    margin-top: 0;
+}
+.map{
+    border-radius: 1em;
+    height: 20em;
+    width: 100%;
 }
 @media only screen and (max-width: 600px) {
 

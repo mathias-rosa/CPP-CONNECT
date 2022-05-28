@@ -4,11 +4,25 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/notes_styles.css') }}">
 <title>Notes</title>
+<script>
+
+
+    async function getNotes() {
+        let matieres = fetch("{{ url_for('update_notes') }}")
+        .then((response) => response.json())
+        .then((responseJSON) => {return responseJSON.matieres});
+     
+        return await matieres
+    }
+    
+
+</script>
 {% endblock %}
 
 {% block content %}
 
-<div class="content" x-data="{visible: false}">
+<div class="content" x-data="{visible: false, getNotes}">
+
 
     <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
 
@@ -33,6 +47,7 @@
     </div>
 
     <div class="notes_et_graphes">
+        
         <div class="notes">
             <div class="titre-notes">  
                 <h1>Semestre 1</h1>
@@ -45,46 +60,42 @@
                 </div>
     
             </div>
+
+            <template x-for="matiere in await getNotes()">
+
+                <div class="matiere">
     
-            {%  for matiere in notes %}
-    
-            <div class="matiere">
-    
-                <div class="moyenne">
-    
-                    <h1>{{ matiere[0] }}</h1>
-                    <div class="note-mg">
-                        <h1>{{ matiere[1] }}</h1>
-                    </div>
-    
-                </div>
-    
-                <div class="list-notes">
-                    {% for note in matiere[2:] %} 
-                    <div class="note_container">
-                        <h1 class="nom_note">
-                            {{ note.nom_note }}
-                        </h1>
-                        <h1 class="coef">
-                            coef : {{ note.coef }}
-                        </h1>
-                        <div class="box_note">
-                            <h1 class="note">
-                                {{ note.note }}
-                            </h1>
+                    <div class="moyenne">
+                        
+                        <h1 x-text="matiere.name"></h1>
+                        <div class="note-mg">
+                            <h1>20</h1>
                         </div>
                     </div>
-    
-                    {% endfor %}
+
+                    <div class="list-notes">
+                        <template x-for="note in matiere.notes">
+
+                            <div class="note_container">
+                                <h1 class="nom_note" x-text="note.name"></h1>
+                                <h1 class="coef">coef : <strong x-text="note.coef"></strong> </h1>
+                                <div class="box_note">
+                                    <h1 class="note" x-text="note.note"></h1>
+                                </div>
+                            </div>
+        
+                        </template>
+                    </div>
+        
+        
                 </div>
-    
-            </div>
-    
-            {%  endfor %}
+        
+
+              </template>
     
         </div>
     
-        <div class="graphe_moyennes">
+        <div class="graphe_moyennes" style="display: none;">
             <div class="div-graph" style="margin-top: 0;">
                 <canvas id="graph"></canvas>
             </div>
@@ -117,12 +128,6 @@
 </div>
 
 
-<script>
-    // moyennes est un dictionnaire défini en python. On l'enregistre dans une variable js
-    moyennes = JSON.parse("{{moyennes}}".replaceAll("&#39;", "\""));
-    bricolage = JSON.parse("{{bricolage}}".replaceAll("&#39;", "\""));
-    notes = bricolage.brico
-</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.4.0/chartjs-plugin-annotation.min.js" integrity="sha512-HrwQrg8S/xLPE6Qwe7XOghA/FOxX+tuVF4TxbvS73/zKJSs/b1gVl/P4MsdfTFWYFYg/ISVNYIINcg35Xvr6QQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="{{ url_for('static', filename='script/graphique_notes.js') }}" type="module"></script>

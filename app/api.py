@@ -21,6 +21,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import re
 import os
 import datetime
+import json
 
 from flask_mail import Message
 
@@ -367,6 +368,13 @@ def get_notes():
         )
 
     return {"notes": liste_matiere}
+
+
+@app.route('/notes/update_notes')
+@login_required
+def update_notes():
+    notes = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
+    return {'matieres' : notes['matieres']}
 
 
 @app.route('/update_user')

@@ -46,7 +46,7 @@
     display: flex;
     align-items: center;
     cursor: pointer;
-    margin-left: 1.5em;
+    margin-left: 1em;
 }
 .gepi h1{
     font-size: 1em;
@@ -235,7 +235,7 @@
 .coef{
     grid-column: 8 / 10;  
     justify-items: end;
-    min-width: 4.5em,
+    min-width: 4.5em;
 }
 .box_note{
     grid-column: 10;   
@@ -292,6 +292,16 @@
         padding: 4%;
         max-width: 100%;
     }
+    .semester-div {
+        margin-left: 1em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .semester-div a {
+        margin-top: 0.35em;
+        margin-bottom: 0.35em;
+        flex: 1;
+    }
 }
 @media only screen and (max-width: 600px) {
     .gepi-form{
@@ -320,7 +330,7 @@
     }
     .semester-gepi {
         border-radius: 1em;
-        height: 4em;
+        height: 9em;
     }
     .gepi h1 {
         display: none;
@@ -333,5 +343,12 @@
     }
     .semester-div {
         margin-left: 1em;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .semester-div a {
+        margin-top: 0.35em;
+        margin-bottom: 0.35em;
+        flex: 1;
     }
 }
