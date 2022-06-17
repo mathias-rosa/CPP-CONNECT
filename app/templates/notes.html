@@ -14,15 +14,15 @@
 
     <div class="semester-gepi">
         <div class="semester-div">
-            <a href="{{ url_for('notes') }}" class="semester">
-                <div><h1>Semestre 1</h1></div>
-            </a>
-            <a href="{{ url_for('notes') }}" class="semester">
-                <div><h1>Semestre 2</h1></div>
-            </a>
-            <a href="{{ url_for('notes') }}" class="semester">
-                <div><h1>Semestre 3</h1></div>
-            </a>
+            <button x-on:click="semestre = 1" class="semester">
+                Semestre 1
+            </button>
+            <button x-on:click="semestre = 2" class="semester">
+                Semestre 2
+            </button>
+            <button x-on:click="semestre = 3" class="semester">
+                Semestre 3
+            </button>
         </div>
         <button class="gepi" @click="visible = true">
             <h1>Télécharger les notes de GEPI</h1>

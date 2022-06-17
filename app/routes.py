@@ -314,6 +314,10 @@ def notesv2():
     else:
         theaming = "light-theme"
 
+    try:
+        semestre = mongodb.db.Notes.find_one({"userId" : current_user.id})
+    except:
+       print("Pas de notes pour cet utilisateur")
 
     return render_template('notesv2.html',
                             current_user=current_user,

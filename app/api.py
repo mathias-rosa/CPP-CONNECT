@@ -374,7 +374,7 @@ def get_notes():
 @login_required
 def update_notes():
     notes = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
-    return {'matieres' : notes['matieres']}
+    return {'semestre1': notes['semestres'][0], 'semestre2': notes['semestres'][1], 'semestre3': notes['semestres'][2]}
 
 
 @app.route('/update_user')
