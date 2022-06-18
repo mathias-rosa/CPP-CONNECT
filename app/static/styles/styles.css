@@ -192,6 +192,7 @@ p, h1, h2{
     padding-left: 1em;
     padding-right: 1em;
     margin-top: 1em;
+    margin-bottom: 2em;
 }
 .cpp-bouton:hover {
     background-color: hsl(var(--accent-color));

@@ -373,8 +373,31 @@ def get_notes():
 @app.route('/notes/update_notes')
 @login_required
 def update_notes():
-    notes = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
-    return {'semestre1': notes['semestres'][0], 'semestre2': notes['semestres'][1], 'semestre3': notes['semestres'][2]}
+    semestre = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
+    if semestre == None:
+        semestre = {
+            "userId" : str(current_user.id),
+            "semestres": {
+                "semestre1" : {
+                    "moyenne" : 20,
+                    "notes" : []
+                },
+                "semestre2" : {
+                    "moyenne" : 20,
+                    "notes" : []
+                },
+                "semestre3" : {
+                    "moyenne" : 20,
+                    "notes" :  []
+                },
+                "semestre4" : {
+                    "moyenne" : 20,
+                    "notes" :  []
+                },
+                }
+            }
+        mongodb.db.Notes.insert_one(semestre)
+    return semestre["semestres"]
 
 
 @app.route('/update_user')

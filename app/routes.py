@@ -107,7 +107,7 @@ def signup():
                         "password": hashed_password,
                         "theaming": "light-theme",
                         "accountType": "élève",
-                        "notes": {},
+                        "profil_pic_url": "Benjamin La cucarracha",
                         "promo": form.promo.data}
             mongodb.db.Users.insert_one(new_user)
             user = mongodb.db.Users.find_one({"email": email})
@@ -281,8 +281,6 @@ def anciens():
                             )
 
 
-@app.route('/notes')
-@login_required
 def notes():
     if not current_user.is_anonymous:
         theaming = current_user.theaming
@@ -306,24 +304,20 @@ def notes():
                             )
 
 
-@app.route('/notesv2')
+@app.route('/notes')
 @login_required
-def notesv2():
+def notes():
     if not current_user.is_anonymous:
         theaming = current_user.theaming
     else:
         theaming = "light-theme"
 
-    try:
-        semestre = mongodb.db.Notes.find_one({"userId" : current_user.id})
-    except:
-       print("Pas de notes pour cet utilisateur")
-
-    return render_template('notesv2.html',
+    return render_template('notes.html',
                             current_user=current_user,
                             theaming=theaming,
                             baseURL=request.base_url,
                             )
+
 
 @app.route('/settings', methods=['GET', 'POST'])
 @login_required
