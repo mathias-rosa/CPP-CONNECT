@@ -21,7 +21,7 @@
 
 {% block content %}
 
-<div class="content" x-data="{visible: false, notesSemestre : {}, semestre: 1}" x-init="notesSemestre = await getNotes()">
+<div class="content" x-data="{notesSemestre : {}, semestre: 1, indexCounter : 0, noteCounter : 0}" x-init="notesSemestre = await getNotes()">
 
     <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
 
@@ -81,6 +81,7 @@
                                 <div class="box_note">
                                     <h1 class="note" x-text="note.note"></h1>
                                 </div>
+                                <div style="display: none;" class="path" x-text="'notesSemestre[\'semestre' + semestre + '\'][\'notes\'][\'' + indexCounter + '\'][\'notes\'][\'' + noteCounter + '\']'"></div>
                             </div>
         
                         </template>

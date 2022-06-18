@@ -160,7 +160,6 @@ let semester3 = document.querySelector("#semester3");
 let semester4 = document.querySelector("#semester4");
 
 semester1.addEventListener("click", () => {
-  console.log("salut");
   afficheNotes(1);
 });
 
