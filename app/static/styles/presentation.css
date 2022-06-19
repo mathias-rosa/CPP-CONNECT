@@ -218,13 +218,6 @@ td{
     grid-row: span 2;
 }
 
-.photos-col-3 {
-    grid-column: span 3;
-}
-.photos-row-3 {
-    grid-row: span 3;
-}
-
 #photo {
     width: 100%;
     border-radius: 1.5em;
@@ -244,7 +237,6 @@ td{
     width: 100%;
 }
 @media only screen and (max-width: 600px) {
-
     .prez{
         flex-wrap: wrap;
         align-items: flex-start;
@@ -278,7 +270,7 @@ td{
         box-shadow: 0 8px 32px 0 hsl(var(--third-color));
         border: 0.1em solid hsl(var(--third-color));
         backdrop-filter: blur(1em);
-        border-radius: 2.5em;
+        border-radius: 1.5em;
         padding: 4% ;
         margin-bottom: 3%;
     }
@@ -288,9 +280,22 @@ td{
     }
 
     .photos {
+        --gap: 0.75em;
         --num-cols: 2;
         --row-height: 10em;
+        border-radius: 1em;
       }
+    #photo {
+        width: 100%;
+        border-radius: 0.5em;
+    }
+    .google_maps{
+        border-radius: 1em;
+        padding: 5%;
+    }
+    .texte_gm_2 {
+        font-size: 0.8em;
+    }
 
 }
 @media only screen and (max-width: 1000px) {

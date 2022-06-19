@@ -305,6 +305,7 @@ p, h1, h2{
         line-height: 1.35;
         margin: 0;
         margin-right: 5%;
+        font-size: 1em;
     }
     .header{
         padding-left: 3%;
