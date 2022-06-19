@@ -231,12 +231,27 @@ def addresses():
     # On récupère la liste des bonnes adresses depuis la base de donnée
     addresses_list = [Addresses(address) for address in mongodb.db.Addresses.find({})]
 
-    
+    # nord = [adresse for adresse in addresses_list if adresse.localisation == "nord"]
+
+    Nord, Ouest, Sud, Est = [], [], [], []
+    for addresse in addresses_list:
+        print(addresse.localisation)
+        if addresse.localisation == "nord":
+            Nord.append(addresse)
+        elif addresse.localisation == "ouest":
+            Ouest.append(addresse)
+        elif addresse.localisation == "sud":
+            Sud.append(addresse)
+        elif addresse.localisation == "est":
+            Est.append(addresse)
 
     return render_template('addresses.html',
                             current_user=current_user,
                             theaming=theaming,
-                            addresses_list=addresses_list,
+                            Nord=Nord,
+                            Ouest=Ouest,
+                            Sud=Sud,
+                            Est=Est,
                             )
 
 @app.route('/guiness')

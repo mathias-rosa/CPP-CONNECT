@@ -62,5 +62,6 @@ class Addresses():
         self.stars = addresses_dict.get('stars')
         self.url = addresses_dict.get('url')
         self.maps = addresses_dict.get('maps')
+        self.localisation = addresses_dict.get('localisation')
     
 

@@ -12,7 +12,10 @@
 
 <h1 id="title">Quelques bonnes adresses (si vous avez le temps lol)</h1>
 
-{% for address in addresses_list %}
+
+<h1 class="zone">Au nord</h1>
+
+{% for address in Nord %}
 
 <div class="container">
 
@@ -35,6 +38,89 @@
 </div>
 
 {% endfor %}
+
+
+<h1 class="zone">À l'ouest</h1>
+
+{% for address in Ouest %}
+
+<div class="container">
+
+    <iframe class="map" src="{{ address.maps }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="description">
+        <a class="element-title" href="{{ address.url }}"><h1>{{ address.name }}</h1></a>
+        <p>
+            {{ address.description }}
+        </p>
+        <div class="stars">
+            {% for star in range(address.stars|int) %}
+                <i class="material-icons-round">star_rate</i>
+            {% endfor %}
+            {% for star in range(5 - address.stars|int) %}
+                <i class="material-icons-round">star_outline</i>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}
+
+
+<h1 class="zone">Au sud</h1>
+
+{% for address in Sud %}
+
+<div class="container">
+
+    <iframe class="map" src="{{ address.maps }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="description">
+        <a class="element-title" href="{{ address.url }}"><h1>{{ address.name }}</h1></a>
+        <p>
+            {{ address.description }}
+        </p>
+        <div class="stars">
+            {% for star in range(address.stars|int) %}
+                <i class="material-icons-round">star_rate</i>
+            {% endfor %}
+            {% for star in range(5 - address.stars|int) %}
+                <i class="material-icons-round">star_outline</i>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+{% endfor %}
+
+
+<h1 class="zone">À l'est</h1>
+<h2 class="yar">Y a rien à l'est mdr</h2>
+
+{% for address in Est %}
+
+<div class="container">
+
+    <!-- <iframe class="map" src="{{ address.maps }}" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+    <div class="description">
+        <a class="element-title" href="{{ address.url }}"><h1>{{ address.name }}</h1></a>
+        <p>
+            {{ address.description }}
+        </p>
+        <div class="stars">
+            {% for star in range(address.stars|int) %}
+                <i class="material-icons-round">star_rate</i>
+            {% endfor %}
+            {% for star in range(5 - address.stars|int) %}
+                <i class="material-icons-round">star_outline</i>
+            {% endfor %}
+        </div>
+    </div> -->
+
+</div>
+
+{% endfor %}
+
 
 </div>
 
