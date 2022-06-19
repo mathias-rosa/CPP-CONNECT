@@ -206,17 +206,23 @@ td{
 }
 
 .photos > img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .photos-col-2 {
-  grid-column: span 2;
+    grid-column: span 2;
+}
+.photos-row-2 {
+    grid-row: span 2;
 }
 
-.photos-row-2 {
-  grid-row: span 2;
+.photos-col-3 {
+    grid-column: span 3;
+}
+.photos-row-3 {
+    grid-row: span 3;
 }
 
 #photo {

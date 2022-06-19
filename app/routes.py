@@ -231,6 +231,8 @@ def addresses():
     # On récupère la liste des bonnes adresses depuis la base de donnée
     addresses_list = [Addresses(address) for address in mongodb.db.Addresses.find({})]
 
+    
+
     return render_template('addresses.html',
                             current_user=current_user,
                             theaming=theaming,
