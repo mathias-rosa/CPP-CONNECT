@@ -290,6 +290,8 @@ def anciens():
     # On récupère la liste des anciens étudiants et les écoles qu'ils ont eu dans la base de donnée.
     anciens_list = [ancien for ancien in mongodb.db.Anciens.find({})]
 
+    anciens_list.sort(key=lambda k: k['promo'])
+
     return render_template('anciens.html',
                             current_user=current_user,
                             theaming=theaming,

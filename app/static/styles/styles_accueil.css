@@ -231,4 +231,7 @@
     br{
         display: none;
     }
+    #dessin {
+        display: none;
+    }
   }

@@ -143,8 +143,7 @@ p, h1, h2{
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;
     border: 0.1em solid hsl(var(--third-color));
-    padding: 2%;
-    padding-bottom: 0;
+    padding: 1.5%;
     z-index: 3;
 }
 .dropdown-menu a{
@@ -305,7 +304,7 @@ p, h1, h2{
         line-height: 1.35;
         margin: 0;
         margin-right: 5%;
-        font-size: 1em;
+        font-size: 1.1em;
     }
     .header{
         padding-left: 3%;
@@ -314,7 +313,6 @@ p, h1, h2{
     .dropdown-menu{
         width: 14em;
         padding: 3%;
-        padding-bottom: 0;
         top: 4em;
     }
     .dropdown-menu a{
