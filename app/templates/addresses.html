@@ -27,11 +27,17 @@
         </p>
         <div class="stars">
             {% for star in range(address.stars|int) %}
-                <i class="material-icons-round">star_rate</i>
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/1.svg') }}" alt="star">
             {% endfor %}
-            {% for star in range(5 - address.stars|int) %}
-                <i class="material-icons-round">star_outline</i>
+
+            {% if address.stars|int != address.stars|float %}
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/' + (address.stars|float -  address.stars|int)|round(1)|string + '.svg') }}" alt="star">
+            {% endif %}
+
+            {% for star in range(4 - address.stars|int) %}
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/0.svg') }}" alt="star">
             {% endfor %}
+
         </div>
     </div>
 
@@ -54,11 +60,17 @@
         </p>
         <div class="stars">
             {% for star in range(address.stars|int) %}
-                <i class="material-icons-round">star_rate</i>
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/1.svg') }}" alt="star">
             {% endfor %}
-            {% for star in range(5 - address.stars|int) %}
-                <i class="material-icons-round">star_outline</i>
+
+            {% if address.stars|int != address.stars|float %}
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/' + (address.stars|float -  address.stars|int)|round(1)|string + '.svg') }}" alt="star">
+            {% endif %}
+
+            {% for star in range(4 - address.stars|int) %}
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/0.svg') }}" alt="star">
             {% endfor %}
+
         </div>
     </div>
 
@@ -81,11 +93,17 @@
         </p>
         <div class="stars">
             {% for star in range(address.stars|int) %}
-                <i class="material-icons-round">star_rate</i>
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/1.svg') }}" alt="star">
             {% endfor %}
-            {% for star in range(5 - address.stars|int) %}
-                <i class="material-icons-round">star_outline</i>
+
+            {% if address.stars|int != address.stars|float %}
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/' + (address.stars|float -  address.stars|int)|round(1)|string + '.svg') }}" alt="star">
+            {% endif %}
+
+            {% for star in range(4 - address.stars|int) %}
+                <img src="{{ url_for('static', filename='img/' + theaming + '/stars/0.svg') }}" alt="star">
             {% endfor %}
+
         </div>
     </div>
 

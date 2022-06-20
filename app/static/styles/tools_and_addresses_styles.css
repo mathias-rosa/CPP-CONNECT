@@ -67,7 +67,11 @@
 
 .stars {
     display:flex;
-    margin-top: 2%
+    margin-top: 2%;
+    height: 1.1em;
+}
+.stars img{
+    margin-right: 0.5em;
 }
 .stars i{
     color: hsl(var(--second-accent-color));
