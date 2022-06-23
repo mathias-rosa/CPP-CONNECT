@@ -69,10 +69,14 @@ def signup():
                                         theaming=theaming,
                                         )
 
+            accountType = ""
+
             # Afin d'éviter que n'importe qui puisse se créer un compte, on demande à l'utilisateur
             # de rentrer un "sésame" qu'on lui aura donné au préalable. Si ce sésame est correct, il peut
             # se créer un compte.
-            if form.sesame.data != "f(pâté)=samoussa":
+            if form.sesame.data == "f(pâté)=samoussa":
+                accountType = "élève"
+            else:
                 error = "Sésame invalide."
                 return render_template('signup.html',
                         form=form,
@@ -106,7 +110,7 @@ def signup():
                         "email": email,
                         "password": hashed_password,
                         "theaming": "light-theme",
-                        "accountType": "élève",
+                        "accountType": accountType,
                         "profil_pic_url": "Benjamin La cucarracha",
                         "promo": form.promo.data}
             mongodb.db.Users.insert_one(new_user)

@@ -23,7 +23,20 @@
         </div>
     </div>
 
-    <div class="lexique">
+    <div class="sommaire">
+        <h1 class="sommaire_title">Sommaire</h1>
+        <div class="liens_page">
+            <a href="#lexique" class="lien">⇾ Lexique</a>
+            <a href="#matières" class="lien">⇾ Les cours à la prépa</a>
+            <a href="#profs" class="lien">⇾ Les professeurs</a>
+            <a href="#reunion" class="lien">⇾ Pourquoi choisir le CPP de la Réunion</a>
+            <a href="#ile" class="lien">⇾ La Réunion, une île magnifique</a>
+            <a href="#lieu_prépa" class="lien">⇾ Site de la prépa</a>
+            <a href="#logement" class="lien">⇾ Astuces de logement</a>
+        </div>
+    </div>
+
+    <div class="lexique" id="lexique">
 
         <div class="sous-titre">
             <h1>Lexique</h1>
@@ -101,7 +114,7 @@
         </table>
     </div>
 
-    <div class="matières">
+    <div class="matières" id="matières">
 
         <h1>Les cours à la prépa</h1>
 
@@ -195,7 +208,7 @@
 
     </div>
 
-    <div class="profs">
+    <div class="profs" id="profs">
 
         <h1>Pour vous guider, vous retrouverez :</h1>
 
@@ -292,7 +305,7 @@
 
     </div>
 
-    <div class="reunion">
+    <div class="reunion" id="reunion">
         <h1>Pourquoi choisir le CPP de la Réunion</h1>
         <div class="Raisons">
             <div class="Enseignement">
@@ -316,6 +329,9 @@
                 </p>
             </div>
         </div>
+    </div>
+
+    <div class="ile" id="ile">
         <h1>La Réunion, une île magnifique</h1>
         <div class="Structure-photos">
             <div class="photos">
@@ -329,16 +345,18 @@
                 <img src="{{ url_for('static', filename='img/presentation/volcan2.jpg') }}" id="photo" class="photos-col-2">
             </div>
         </div>
-
+    </div>
+    
+    <div class="lieu_prépa" id="lieu_prépa">
         <div class="google_maps">
             <h1 class="texte_gm">Nous, on est juste là !</h1>
             <h1 class="texte_gm_2"> Notre prépa se situe dans l'enceinte du Lycée Lislet Geoffroy, à Saint-Denis</h1>
             <iframe class="map" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d954312.09632659!2d54.922104435046045!3d-20.880850365957663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x21827fb8537eac13%3A0x738b4da871cc0c23!2sCPP%20-%20La%20Pr%C3%A9pa%20des%20INP%20-%20Site%20de%20Saint%20Denis%20de%20la%20R%C3%A9union!5e0!3m2!1sfr!2sfr!4v1653767290939!5m2!1sfr!2sfr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
-
     </div>
+    
 
-    <div class="logement">
+    <div class="logement" id="logement">
 
         <h1>Astuces de logement</h1>
 

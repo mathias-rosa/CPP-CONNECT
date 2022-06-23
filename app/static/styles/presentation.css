@@ -33,11 +33,32 @@ a:hover {
     display: flex;
     margin-left: 0.5em;
 }
-
-.lexique{
-    margin-top: 4%;
+.sommaire{
+    margin-top:2em;
+    display: flex;
+    flex-direction: column;
+    background: var(--blanc-ou-noir);
+    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    border: 0.1em solid hsl(var(--third-color));
+    backdrop-filter: blur(1em);
+    border-radius: 2.5em;
+    padding: 2% ;
+    margin-bottom: 3%;
 }
-
+.sommaire_title{
+    margin-top:0;
+}
+.liens_page{
+    display: flex;
+    flex-direction: column;
+    margin-left: 1em;
+}
+.lien{
+    font-size: 1.5em;
+    color: hsl(var(--paragraph-color));
+    text-decoration: none;
+    margin-bottom: 0.5em;
+}
 .mots{
     margin-top: 0;
 
@@ -247,7 +268,13 @@ td{
         max-width: 100%;
         border-bottom-left-radius: 0.7em;
     }
-    
+    .sommaire{
+        border-radius: 1em;
+        padding: 5%
+    }
+    .lien {
+        font-size: 1.2em;
+    }
     .sous-titre{
         flex-direction: column;
     }
