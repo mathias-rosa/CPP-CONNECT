@@ -403,8 +403,6 @@ def update_notes():
         notes_prepa["semestres"]["semestre3"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre3"]["notes"])
         notes_prepa["semestres"]["semestre4"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre4"]["notes"])
 
-        print(notes_prepa)
-
         mongodb.db.Notes.replace_one(({"userId" : str(current_user.id)}), notes_prepa)
 
         return notes_prepa["semestres"]
