@@ -197,6 +197,7 @@
     justify-content: space-between;
     flex: 1;
     border-bottom: solid 0.3em hsl(var(--second-accent-color));
+    align-items: center;
 }
 .moyenne h1{
     font-size: 1.5em;
@@ -213,15 +214,17 @@
 .note-mg{
     background-color: hsl(var(--second-accent-color));
     height: 2.5em;
-    margin-top: 0.7em;
     border-radius: 0.5em;
+    display: flex;
+    align-items: center;
 }
 .note-mg h1{
     font-size: 1.5em;
     color: white;
-    margin-top: 0.1em;
     margin-left: 0.4em;
     margin-right: 0.4em;
+    margin-top: 0;
+    margin-bottom: 0;
 }
 #generale .note-mg{
     background-color: transparent;
@@ -278,7 +281,7 @@
     flex: 1;
     flex-direction: row;
 }
-@media only screen and (max-width: 1200px){
+@media only screen and (max-width: 1000px){
     .graphe_moyennes{
         display: none;
     }
@@ -294,7 +297,7 @@
     }
     .notes {
         padding: 4%;
-        max-width: 100%;
+        width: 100%;
     }
     .semester-div {
         flex-wrap: wrap;
@@ -328,7 +331,7 @@
     }
     .notes {
         padding: 4%;
-        max-width: 100%;
+        width: 100%;
         border-radius: 1em;
     }
     .semester-gepi {
