@@ -234,8 +234,10 @@
     grid-column: 1 / 8;
 }
 .matiere_coef{
-    grid-column: 8 / 10;
-    min-width: 9em;
+    grid-column: 8;
+}
+.cros_div{
+    grid-column: 9;
 }
 #generale{
     border-bottom: solid 0.3em hsl(var(--accent-color));
@@ -274,9 +276,8 @@
     grid-column: 1 / 8;
 }
 .coef{
-    grid-column: 8 / 10;  
+    grid-column: 8;  
     justify-items: end;
-    min-width: 4.5em;
 }
 .box_note{
     grid-column: 10;   
@@ -325,6 +326,10 @@
     height: 2em;
     width: 100%;
     color: var(--blanc-ou-noir);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 0.2em;
 }
 @media only screen and (max-width: 1000px){
     .graphe_moyennes{
@@ -365,13 +370,13 @@
         box-sizing: border-box;
     }
     .nom_note {
-        font-size: 1.3em;
+        font-size: 1.5em;
     }
     .coef {
-        font-size: 1.3em;
+        font-size: 1.5em;
     }
     .note {
-        font-size: 1.3em;
+        font-size: 1.5em;
         margin-top: 0.6em;
     }
     .notes {
@@ -401,5 +406,26 @@
         margin-top: 0.35em;
         margin-bottom: 0.35em;
         flex: 1;
+    }
+    .moyenne h1 {
+        font-size: 1.2em;
+    }
+    .note-mg h1 {
+        margin-bottom: 0;
+    }
+    .cross{
+        font-size: 1.5em;
+    }
+    .titre-notes {
+        height: 2.5em;
+    }
+    .titre-notes h1 {
+        font-size: 1.7em;
+    }
+    .box_note {
+        width: 5em;
+    }
+    .ajouter-matière {
+        font-size: 1.2em;
     }
 }

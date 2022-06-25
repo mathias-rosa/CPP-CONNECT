@@ -74,7 +74,7 @@
                         x-transition:enter.duration.300ms
                         x-transition:leave.duration.200ms>
                         Ajouter une matière 
-                        <i class="material-icons-round">list_alt</i>
+                        <i class="material-icons-round">post_add</i>
             </button>
 
             <template x-for="matiere in notesSemestre['semestre'+ semestre]['notes']">
@@ -85,7 +85,10 @@
                         
                         <h1 x-text="matiere.name"></h1>
                         <div class="matiere_coef">
-                            <h1 class="m_coef" x-text="'coef : ' + matiere.coef"></h1>
+                            <h1 class="m_coef" x-text="matiere.coef"></h1>
+                        </div>
+                        <div class="cross_div">
+                            <h1 class="cross">✖</h1>
                         </div>
                         <div class="note-mg">
                             <h1 x-text="matiere.moyenne"></h1>
@@ -98,7 +101,10 @@
 
                             <div class="note_container">
                                 <h1 class="nom_note" x-text="note.name"></h1>
-                                <h1 class="coef">coef : <strong x-text="note.coef"></strong> </h1>
+                                <h1 class="coef"><strong x-text="note.coef"></strong></h1>
+                                <div class="cross_div">
+                                    <h1 class="cross">✖</h1>
+                                </div>
                                 <div class="box_note">
                                     <h1 class="note" x-text="note.note"></h1>
                                 </div>
@@ -114,6 +120,7 @@
                         x-transition:enter.duration.300ms
                         x-transition:leave.duration.200ms>
                         Ajouter une note
+                        <i class="material-icons-round">description</i>
                     </button>
         
                 </div>
