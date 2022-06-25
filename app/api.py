@@ -370,34 +370,70 @@ def get_notes():
     return {"notes": liste_matiere}
 
 
+def calcul_moyenne(notes : list, type="generale"):
+
+    moy_ou_note = "moyenne" if type == "generale" else "note"
+    moyenne = 0
+    coefs = 0
+    for matiere_ou_note in notes:
+        moyenne += matiere_ou_note[moy_ou_note] * matiere_ou_note['coef']
+        coefs += matiere_ou_note['coef']
+    
+    if coefs == 0:
+        return None
+    return round(moyenne / coefs, 2)
+
 @app.route('/notes/update_notes')
 @login_required
 def update_notes():
-    semestre = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
-    if semestre == None:
-        semestre = {
-            "userId" : str(current_user.id),
-            "semestres": {
-                "semestre1" : {
-                    "moyenne" : 20,
-                    "notes" : []
-                },
-                "semestre2" : {
-                    "moyenne" : 20,
-                    "notes" : []
-                },
-                "semestre3" : {
-                    "moyenne" : 20,
-                    "notes" :  []
-                },
-                "semestre4" : {
-                    "moyenne" : 20,
-                    "notes" :  []
-                },
-                }
+    notes_prepa = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
+    if notes_prepa:
+        
+        # Semestre 1
+
+        for matiere in notes_prepa["semestres"]["semestre4"]["notes"]:
+            matiere["moyenne"] = calcul_moyenne(matiere["notes"], type="note")
+            print(matiere["moyenne"])
+
+        notes_prepa["semestres"]["semestre1"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre1"]["notes"])
+        
+        # Semestre 2
+        
+        notes_prepa["semestres"]["semestre2"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre2"]["notes"])
+        notes_prepa["semestres"]["semestre3"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre3"]["notes"])
+        notes_prepa["semestres"]["semestre4"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre4"]["notes"])
+
+        print(notes_prepa)
+
+        mongodb.db.Notes.replace_one(({"userId" : str(current_user.id)}), notes_prepa)
+
+        return notes_prepa["semestres"]
+
+    notes_prepa = {
+        "userId" : str(current_user.id),
+        "semestres": {
+            "semestre1" : {
+                "moyenne" : 20,
+                "notes" : []
+            },
+            "semestre2" : {
+                "moyenne" : 20,
+                "notes" : []
+            },
+            "semestre3" : {
+                "moyenne" : 20,
+                "notes" :  []
+            },
+            "semestre4" : {
+                "moyenne" : 20,
+                "notes" :  []
+            },
             }
-        mongodb.db.Notes.insert_one(semestre)
-    return semestre["semestres"]
+        }
+
+    mongodb.db.Notes.insert_one(notes_prepa)
+
+    return notes_prepa["semestres"]
 
 
 @app.route('/update_user')

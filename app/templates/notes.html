@@ -21,7 +21,9 @@
 
 {% block content %}
 
-<div class="content" x-data="{notesSemestre : {}, semestre: 1, indexCounter : 0, noteCounter : 0}" x-init="notesSemestre = await getNotes()">
+<div class="content" 
+    x-data="{notesSemestre : {}, semestre: 1, indexCounter : 0, noteCounter : 0, icon : 'drive_file_rename_outline',  consultation: true}" 
+    x-init="notesSemestre = await getNotes()">
 
     <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
 
@@ -39,6 +41,7 @@
             <button x-on:click="semestre = 4" class="semester" id="semester4">
                 Semestre 4
             </button>
+
         </div>
 
         <input type="hidden" x-model="semestre" id="SemesterVar"></input>
@@ -48,9 +51,15 @@
     <div class="notes_et_graphes">
         
         <div class="notes">
-            <div class="titre-notes">  
-                <h1 x-text="'Semestre ' + semestre"></h1>
+            <div class="top">
+                <div class="titre-notes">  
+                    <h1 x-text="'Semestre ' + semestre"></h1>
+                </div>
+                <button @click="add = true; consultation === true ? consultation = false : consultation = true; consultation ? icon = 'drive_file_rename_outline' : icon = 'done' ;">
+                    <i class="material-icons-round" x-text="icon"></i>
+                </button>
             </div>
+            
             <div class="moyenne" id="generale">
                 
                 <h1>Moyenne Générale</h1>
@@ -60,6 +69,14 @@
     
             </div>
 
+            <button class="ajouter-matière"
+                        x-show="!consultation"
+                        x-transition:enter.duration.300ms
+                        x-transition:leave.duration.200ms>
+                        Ajouter une matière 
+                        <i class="material-icons-round">list_alt</i>
+            </button>
+
             <template x-for="matiere in notesSemestre['semestre'+ semestre]['notes']">
 
                 <div class="matiere">
@@ -67,12 +84,16 @@
                     <div class="moyenne">
                         
                         <h1 x-text="matiere.name"></h1>
+                        <div class="matiere_coef">
+                            <h1 class="m_coef" x-text="'coef : ' + matiere.coef"></h1>
+                        </div>
                         <div class="note-mg">
                             <h1 x-text="matiere.moyenne"></h1>
                         </div>
                     </div>
 
                     <div class="list-notes">
+
                         <template x-for="note in matiere.notes">
 
                             <div class="note_container">
@@ -83,10 +104,17 @@
                                 </div>
                                 <div style="display: none;" class="path" x-text="'notesSemestre[\'semestre' + semestre + '\'][\'notes\'][\'' + indexCounter + '\'][\'notes\'][\'' + noteCounter + '\']'"></div>
                             </div>
+
         
                         </template>
                     </div>
         
+                    <button class="ajouter-matière"
+                        x-show="!consultation"
+                        x-transition:enter.duration.300ms
+                        x-transition:leave.duration.200ms>
+                        Ajouter une note
+                    </button>
         
                 </div>
         
