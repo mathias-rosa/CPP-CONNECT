@@ -26,16 +26,11 @@
 }
 
 .semester:hover {
-  background-color: hsl(var(--accent-color));
+  background-color: hsl(var(--accent-color)) !important;
   box-shadow: var(--couleur-accentuation);
   transition: ease 200ms;
 }
 
-.semester:focus {
-  background-color: hsl(var(--accent-color));
-  box-shadow: var(--couleur-accentuation);
-  transition: ease 200ms;
-}
 
 .semester {
   display: flex;

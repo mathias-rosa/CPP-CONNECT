@@ -15,6 +15,15 @@
         return await notes;
     }
 
+    function changeColor(semestre) {
+        document.querySelectorAll('.semester').forEach((e) => {
+            e.style.backgroundColor = 'hsl(var(--second-accent-color))' 
+        });
+        document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))';
+    }
+
+
+
 </script>
 
 
@@ -30,16 +39,16 @@
 
     <div class="semester-gepi">
         <div class="semester-div">
-            <button x-on:click="semestre = 1" class="semester" id="semester1" autofocus>
+            <button x-on:click="semestre = 1 ; changeColor(semestre) " class="semester" id="semester1" autofocus>
                 Semestre 1
             </button>
-            <button x-on:click="semestre = 2" class="semester" id="semester2">
+            <button x-on:click="semestre = 2 ; changeColor(semestre)" class="semester" id="semester2">
                 Semestre 2
             </button>
-            <button x-on:click="semestre = 3" class="semester" id="semester3">
+            <button x-on:click="semestre = 3 ; changeColor(semestre)" class="semester" id="semester3">
                 Semestre 3
             </button>
-            <button x-on:click="semestre = 4" class="semester" id="semester4">
+            <button x-on:click="semestre = 4 ; changeColor(semestre)" class="semester" id="semester4">
                 Semestre 4
             </button>
 
@@ -53,13 +62,11 @@
     <h2 class="mobile-text" style="display: none;"
         x-on:swiped-right="
         semestre === 1 ? semestre = 4 : semestre--;
-        document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
-        document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+         
         " 
         x-on:swiped-left="
         semestre === 4 ? semestre = 1 : semestre++;
-        document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
-        document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+        changeColor(semestre)
         " >
             (Swippez pour changer de semestre)
         </h2>
@@ -67,13 +74,11 @@
     <div class="notes_et_graphes" 
     x-on:swiped-right="
     semestre === 1 ? semestre = 4 : semestre--;
-    document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
-    document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+    changeColor(semestre)
     " 
     x-on:swiped-left="
     semestre === 4 ? semestre = 1 : semestre++;
-    document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
-    document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+    changeColor(semestre)
     " >
         
         <div class="notes">
