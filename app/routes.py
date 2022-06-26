@@ -459,6 +459,13 @@ def settings():
                 {"username": current_user.username},
                 {'$set': {'theaming': "pink-pastel"}}, upsert=False
             )
+        elif theme == "prepa-theme" and theme != theaming:
+            theaming = "prepa-theme"
+            mongodb.db.Users.update_one(
+                {"username": current_user.username},
+                {'$set': {'theaming': "prepa-theme"}}, upsert=False
+            )
+
 
     except:
         pass

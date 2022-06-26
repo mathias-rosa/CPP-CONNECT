@@ -19,7 +19,7 @@ body{
     height: 100%;
 }
 .login-box{
-    background: var(--blanc-ou-noir);
+    background: var(--theme-color);
     box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
@@ -166,7 +166,7 @@ body{
         padding: 0;
     }
     body{
-        background-color: var(--blanc-ou-noir);
+        background-color: var(--theme-color);
     }
     .header h1{
         display: flex;

@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     border-radius: 0.6em;
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     border: 0.1em solid hsl(var(--third-color));
     overflow: hidden;
@@ -37,7 +37,7 @@ a:hover {
     margin-top:2em;
     display: flex;
     flex-direction: column;
-    background: var(--blanc-ou-noir);
+    background: var(--theme-color);
     box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     border: 0.1em solid hsl(var(--third-color));
     backdrop-filter: blur(1em);
@@ -90,7 +90,7 @@ a:hover {
 
 .cours{
     display: flex;
-    background: var(--blanc-ou-noir);
+    background: var(--theme-color);
     box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     border: 0.1em solid hsl(var(--third-color));
     backdrop-filter: blur(1em);
@@ -124,7 +124,7 @@ a:hover {
 
 .prof {
     display: flex;
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     border-radius: 1em;
     padding: 4%;
     margin-right: 4%;
@@ -148,7 +148,7 @@ th{
 }
 
 table{
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     border-radius: 1em;
     padding: 1%;
     width: 100%;
@@ -179,7 +179,7 @@ td{
 }
 .Classique, .Crous, .Internat, .Enseignement, .L_effectif, .Les-activités {
     display: flex;
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     border-radius: 1em;
     padding: 1%;
     flex-direction: row;
@@ -199,7 +199,7 @@ td{
 }
 .photos, .google_maps{
     display: flex;
-    background: var(--blanc-ou-noir);
+    background: var(--theme-color);
     box-shadow: 0 8px 32px 0 hsl(var(--third-color));
     border: 0.1em solid hsl(var(--third-color));
     backdrop-filter: blur(1em);
@@ -293,7 +293,7 @@ td{
     .cours{
         display: flex;
         flex-direction: column;
-        background: var(--blanc-ou-noir);
+        background: var(--theme-color);
         box-shadow: 0 8px 32px 0 hsl(var(--third-color));
         border: 0.1em solid hsl(var(--third-color));
         backdrop-filter: blur(1em);

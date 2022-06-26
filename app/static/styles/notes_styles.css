@@ -1,7 +1,7 @@
 .semester-gepi {
   display: flex;
-  background: var(--blanc-ou-noir);
-  box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+  background: var(--theme-color);
+  box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
   border: 0.1em solid hsl(var(--third-color));
   backdrop-filter: blur(1em);
   border-radius: 1.5em;
@@ -27,8 +27,14 @@
 
 .semester:hover {
   background-color: hsl(var(--accent-color));
-  transition: 100ms ease;
   box-shadow: var(--couleur-accentuation);
+  transition: ease 200ms;
+}
+
+.semester:focus {
+  background-color: hsl(var(--accent-color));
+  box-shadow: var(--couleur-accentuation);
+  transition: ease 200ms;
 }
 
 .semester {
@@ -45,8 +51,9 @@
   border: none;
   font-family: "Poppins";
   font-size: 1.5em;
-  font-weight: bold;
+  font-weight: 600;
   cursor: pointer;
+  transition: ease 200ms;
 }
 
 .semester:focus {
@@ -93,7 +100,7 @@
   bottom: 0;
   height: fit-content;
   height: -moz-fit-content;
-  background: var(--blanc-ou-noir);
+  background: var(--theme-color);
   border-radius: 1.5em;
   padding: 2%;
   max-width: 100%;
@@ -192,8 +199,8 @@
 
 .notes {
   display: flex;
-  background: var(--blanc-ou-noir);
-  box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+  background: var(--theme-color);
+  box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
   border: 0.1em solid hsl(var(--third-color));
   backdrop-filter: blur(1em);
   border-radius: 1.5em;
@@ -242,7 +249,7 @@
 .titre-notes h1 {
   margin-top: 0;
   margin-left: 0.5em;
-  color: var(--blanc-ou-noir);
+  color: var(--theme-color);
 }
 
 .moyenne {
@@ -338,7 +345,7 @@
 .note_container .coef {
   height: 100%;
   font-size: 1.3em;
-  background-color: hsl(var(--third-color));
+  background-color: hsl(var(--main-color));
   padding: 0.3em;
   padding-left: 1em;
   padding-right: 1em;
@@ -347,8 +354,8 @@
 
 .div-graph {
   display: flex;
-  background: var(--blanc-ou-noir);
-  box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+  background: var(--theme-color);
+  box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
   border: 0.1em solid hsl(var(--third-color));
   backdrop-filter: blur(1em);
   border-radius: 1.5em;
@@ -378,7 +385,7 @@
   font-weight: 700;
   height: 2em;
   width: 100%;
-  color: var(--blanc-ou-noir);
+  color: var(--theme-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -388,7 +395,7 @@
 }
 
 .ajouter-matière:hover {
-  background-color: hsl(var(--blanc-ou-noir));
+  background-color: hsl(var(--theme-color));
   color: hsl(var(--paragraph-color));
   transition: ease 200ms;
 }

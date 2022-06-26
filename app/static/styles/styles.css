@@ -7,7 +7,8 @@
     --second-color: 218, 13%, 12%;
     --third-color: 240, 18%, 90%;
     --paragraph-color: 218, 13%, 12%;
-    --blanc-ou-noir: white
+    --theme-color: white;
+    --contrast-color: black;
 }
 
 ::-webkit-scrollbar {
@@ -137,8 +138,8 @@ p, h1, h2{
     width: 12em;
     right: 2%;
     top: 3.3em;
-    background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    background: var(--theme-color);
+    box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
     backdrop-filter: blur(1em);
     -webkit-backdrop-filter: blur(1em);
     border-radius: 1em;

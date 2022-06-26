@@ -5,12 +5,12 @@
 
 .container{
     display: flex;
-    background: var(--blanc-ou-noir);
-    box-shadow: 0 8px 32px 0 hsl(var(--third-color));
+    background: var(--theme-color);
+    box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
     border: 0.1em solid hsl(var(--third-color));
     backdrop-filter: blur(1em);
     border-radius: 2.5em;
-    padding: 2% ;
+    padding: 2%;
     margin-bottom: 3%;
 }
 

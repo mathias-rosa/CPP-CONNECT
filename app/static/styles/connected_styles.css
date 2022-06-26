@@ -28,7 +28,7 @@
 }
 .tile{
     display: flex;
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     border-radius: 1em;
     padding: 3%;
     cursor: pointer;
@@ -85,7 +85,7 @@
     max-width: 15em;
     padding: 2%;
     border-radius: 1em;
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
@@ -109,7 +109,7 @@
     width: 100%;
 }
 table{
-    background-color: var(--blanc-ou-noir);
+    background-color: var(--theme-color);
     border-radius: 1em;
     padding: 1%;
     width: 100%;
