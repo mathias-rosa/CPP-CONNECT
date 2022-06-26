@@ -62,7 +62,7 @@
             
             <div class="moyenne" id="generale">
                 
-                <h1>Moyenne Générale</h1>
+                <h1 class="moyenne_name">Moyenne Générale</h1>
                 <div class="note-mg">
                     <h1 x-text="notesSemestre['semestre'+ semestre]['moyenne']"></h1>
                 </div>
@@ -83,16 +83,14 @@
     
                     <div class="moyenne">
                         
-                        <h1 x-text="matiere.name"></h1>
-                        <div class="matiere_coef">
-                            <h1 class="m_coef" x-text="matiere.coef"></h1>
+                        <h1 class="moyenne_name" x-text="matiere.name"></h1>
+                        <div class="notes-coef">
+                            <h1 class="coef" x-text="'coef : ' + matiere.coef"></h1>
+                            <div class="note-mg">
+                                <h1 x-text="matiere.moyenne"></h1>
+                            </div>
                         </div>
-                        <div class="cross_div">
-                            <h1 class="cross">✖</h1>
-                        </div>
-                        <div class="note-mg">
-                            <h1 x-text="matiere.moyenne"></h1>
-                        </div>
+     
                     </div>
 
                     <div class="list-notes">
@@ -101,13 +99,11 @@
 
                             <div class="note_container">
                                 <h1 class="nom_note" x-text="note.name"></h1>
-                                <h1 class="coef"><strong x-text="note.coef"></strong></h1>
-                                <div class="cross_div">
-                                    <h1 class="cross">✖</h1>
-                                </div>
-                                <div class="box_note">
+                                <div class="notes-coef">
+                                    <h1 class="coef" x-text="'coef : ' + note.coef"></h1>
                                     <h1 class="note" x-text="note.note"></h1>
                                 </div>
+                               
                                 <div style="display: none;" class="path" x-text="'notesSemestre[\'semestre' + semestre + '\'][\'notes\'][\'' + indexCounter + '\'][\'notes\'][\'' + noteCounter + '\']'"></div>
                             </div>
 
