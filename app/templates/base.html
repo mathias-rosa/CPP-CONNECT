@@ -9,7 +9,9 @@
     <script defer src="https://unpkg.com/alpinejs@3.2.2/dist/cdn.min.js"></script>
     {% block head %}{% endblock %}
 </head>
+{% include 'theaming.html' %}
 <body>
+    
 
     <div class="header">
         <div class="header-left">
@@ -62,6 +64,5 @@
     {% block content %}{% endblock %}
 
     {% include 'footer.html' %}
-    {% include 'theaming.html' %}
 </body>
 </html>

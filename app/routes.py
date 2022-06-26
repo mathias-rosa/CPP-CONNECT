@@ -239,7 +239,6 @@ def addresses():
 
     Nord, Ouest, Sud, Est = [], [], [], []
     for addresse in addresses_list:
-        print(addresse.localisation)
         if addresse.localisation == "nord":
             Nord.append(addresse)
         elif addresse.localisation == "ouest":

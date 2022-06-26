@@ -365,6 +365,7 @@
   justify-content: space-between;
   align-items: center;
   margin-left: 3%;
+  margin-right: 0;
 }
 
 .notes_et_graphes {
@@ -472,6 +473,10 @@
 
   .semester-gepi {
     border-radius: 1em;
+    padding: 0;
+  }
+  .semester-div::-webkit-scrollbar {
+    display: none;
   }
 
   .gepi h1 {
@@ -487,10 +492,12 @@
   }
 
   .semester-div {
-    flex-wrap: wrap;
-    justify-content: center;
     display: flex;
-    flex-direction: column;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    overflow-x: scroll;
+    border-radius: 0.9em;
+    justify-content: flex-start;
   }
 
   .semester-div a {
@@ -525,5 +532,14 @@
 
   .ajouter-matière {
     font-size: 1.2em;
+  }
+
+  .mobile-text{
+    display: flex !important;
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 0;
+    font-size: 1em;
+    justify-content: center;
   }
 }

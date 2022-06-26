@@ -3,6 +3,7 @@
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/notes_styles.css') }}">
+<script src="{{ url_for('static', filename='script/swiped-events.min.js') }}"></script>
 <title>Notes</title>
 <script>
 
@@ -29,7 +30,7 @@
 
     <div class="semester-gepi">
         <div class="semester-div">
-            <button x-on:click="semestre = 1" class="semester" id="semester1">
+            <button x-on:click="semestre = 1" class="semester" id="semester1" autofocus>
                 Semestre 1
             </button>
             <button x-on:click="semestre = 2" class="semester" id="semester2">
@@ -44,13 +45,39 @@
 
         </div>
 
+
         <input type="hidden" x-model="semestre" id="SemesterVar"></input>
 
     </div>
 
-    <div class="notes_et_graphes">
+    <h2 class="mobile-text" style="display: none;"
+        x-on:swiped-right="
+        semestre === 1 ? semestre = 4 : semestre--;
+        document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
+        document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+        " 
+        x-on:swiped-left="
+        semestre === 4 ? semestre = 1 : semestre++;
+        document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
+        document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+        " >
+            (Swippez pour changer de semestre)
+        </h2>
+
+    <div class="notes_et_graphes" 
+    x-on:swiped-right="
+    semestre === 1 ? semestre = 4 : semestre--;
+    document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
+    document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+    " 
+    x-on:swiped-left="
+    semestre === 4 ? semestre = 1 : semestre++;
+    document.querySelectorAll('.semester').forEach((e) => {e.style.backgroundColor = 'hsl(var(--second-accent-color))' });
+    document.querySelector('#semester' + semestre).style.backgroundColor = 'hsl(var(--accent-color))'; 
+    " >
         
         <div class="notes">
+
             <div class="top">
                 <div class="titre-notes">  
                     <h1 x-text="'Semestre ' + semestre"></h1>
@@ -60,7 +87,7 @@
                 </button>
             </div>
             
-            <div class="moyenne" id="generale">
+            <div class="moyenne" id="generale" >
                 
                 <h1 class="moyenne_name">Moyenne Générale</h1>
                 <div class="note-mg">
@@ -77,7 +104,7 @@
                         <i class="material-icons-round">post_add</i>
             </button>
 
-            <template x-for="matiere in notesSemestre['semestre'+ semestre]['notes']">
+            <template x-for="matiere in notesSemestre['semestre'+ semestre]['notes']" >
 
                 <div class="matiere">
     

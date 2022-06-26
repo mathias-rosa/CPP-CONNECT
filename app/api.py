@@ -393,7 +393,6 @@ def update_notes():
 
         for matiere in notes_prepa["semestres"]["semestre4"]["notes"]:
             matiere["moyenne"] = calcul_moyenne(matiere["notes"], type="note")
-            print(matiere["moyenne"])
 
         notes_prepa["semestres"]["semestre1"]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre1"]["notes"])
         
