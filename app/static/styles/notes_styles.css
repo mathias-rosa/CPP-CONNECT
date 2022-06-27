@@ -239,16 +239,22 @@
 }
 
 .titre-notes {
-  background-color: hsl(var(--second-accent-color));
-  height: 3em;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 4%;
+  padding-left: 4%;
   border-radius: 0.5em;
+  height: 3em;
   width: 100%;
+  background-color: hsl(var(--second-accent-color));
+  color: var(--theme-color);
+  cursor: pointer;
 }
 
 .titre-notes h1 {
-  margin-top: 0;
-  margin-left: 0.5em;
-  color: var(--theme-color);
+  margin: 0;
+  color: inherit;
 }
 
 .moyenne {
@@ -476,6 +482,7 @@
   .semester-gepi {
     border-radius: 1em;
     padding: 0;
+    display: none;
   }
 
   .semester-div::-webkit-scrollbar {

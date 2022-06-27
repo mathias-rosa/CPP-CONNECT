@@ -19,7 +19,7 @@
     <div class="semester-gepi">
         <div class="semester-div">
             <button x-on:click="selSemestre = 1 ; changeColor(selSemestre) " class="semester" id="semester1" autofocus>
-                Semestre 1
+                Semestre 1 
             </button>
             <button x-on:click="selSemestre = 2 ; changeColor(selSemestre)" class="semester" id="semester2">
                 Semestre 2
@@ -75,8 +75,11 @@
                 >
     
                     <div class="top">
-                        <div class="titre-notes">  
-                            <h1 x-text="'Semestre ' + semestre"></h1>
+                        <div class="titre-notes" x-on:click="selSemestre === 4 ? selSemestre = 1 : selSemestre++;">  
+                            <h1 x-html="'Semestre ' + semestre"></h1>
+                            <i class="material-icons-outlined">
+                                arrow_forward_ios
+                            </i>
                         </div>
                         <button @click="add = true; consultation === true ? consultation = false : consultation = true; consultation ? icon = 'drive_file_rename_outline' : icon = 'done' ;">
                             <i class="material-icons-round" x-text="icon"></i>
