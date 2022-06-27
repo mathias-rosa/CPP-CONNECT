@@ -35,6 +35,13 @@ body{
 p, h1, h2{
     color: hsl(var(--paragraph-color));
 }
+#tooltip{
+    font-style: italic;
+    font-weight: 400;
+    margin-top: 0;
+    font-size: 1em;
+    justify-content: center;
+}
 .footer-text{
     display: flex;
     color: hsl(var(--main-color));
@@ -283,7 +290,6 @@ p, h1, h2{
     font: inherit;
     margin: 0;
 }
-
 
 @media only screen and (max-width: 600px) {
     .content{

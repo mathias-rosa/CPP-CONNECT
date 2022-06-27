@@ -5,7 +5,7 @@ let semestre = JSON.parse(window.localStorage.getItem("semestre"));
 let graphe_moyennes = document.getElementsByClassName("graphe_moyennes");
 
 
-async function afficheNotes(semestre) {
+window.afficheNotes = async function afficheNotes(semestre) {
 
   while (graphe_moyennes.firstChild) {
     graphe_moyennes.removeChild(graphe_moyennes.lastChild);
@@ -153,27 +153,3 @@ async function afficheNotes(semestre) {
       }
   });
 }
-
-let semester1 = document.querySelector("#semester1");
-let semester2 = document.querySelector("#semester2");
-let semester3 = document.querySelector("#semester3");
-let semester4 = document.querySelector("#semester4");
-
-semester1.addEventListener("click", () => {
-  afficheNotes(1);
-});
-
-semester2.addEventListener("click", () => {
-  afficheNotes(2);
-});
-
-semester3.addEventListener("click", () => {
-  afficheNotes(3);
-});
-
-semester4.addEventListener("click", () => {
-  afficheNotes(4);
-});
-
-
-afficheNotes(1)

@@ -5,7 +5,7 @@
   border: 0.1em solid hsl(var(--third-color));
   backdrop-filter: blur(1em);
   border-radius: 1.5em;
-  padding: 1.5%;
+  padding: 1%;
   margin-bottom: 3%;
   justify-content: space-between;
   align-items: center;
@@ -20,7 +20,7 @@
 
 .semester-div {
   display: flex;
-  overflow-x: auto;
+  overflow: hidden;
   justify-content: flex-start;
   flex: 1;
 }
@@ -30,7 +30,6 @@
   box-shadow: var(--couleur-accentuation);
   transition: ease 200ms;
 }
-
 
 .semester {
   display: flex;
@@ -49,6 +48,7 @@
   font-weight: 600;
   cursor: pointer;
   transition: ease 200ms;
+  font-size: 1.2em;
 }
 
 .semester:focus {
@@ -192,6 +192,11 @@
   text-decoration: underline 0.1em solid;
 }
 
+.notes-container {
+  width: 29em;
+  height: fit-content;
+}
+
 .notes {
   display: flex;
   background: var(--theme-color);
@@ -201,9 +206,8 @@
   border-radius: 1.5em;
   flex-direction: column;
   max-width: 32em;
-  padding: 2%;
+  padding: 4%;
   height: 100%;
-  width: 29em;
 }
 
 .top {
@@ -268,11 +272,11 @@
 }
 
 .coef {
-    grid-column: 7/9;
-    text-align: right;
-    font-size: 1em;
-    font-weight: 600;
-    margin: 0;
+  grid-column: 7/9;
+  text-align: right;
+  font-size: 1em;
+  font-weight: 600;
+  margin: 0;
 }
 
 .moyenne_name {
@@ -461,15 +465,19 @@
   }
 
   .notes {
-    padding: 4%;
-    width: 100%;
     border-radius: 1em;
+    box-sizing: border-box;
+  }
+
+  .notes-container {
+    width: 100%;
   }
 
   .semester-gepi {
     border-radius: 1em;
     padding: 0;
   }
+
   .semester-div::-webkit-scrollbar {
     display: none;
   }
@@ -491,8 +499,9 @@
     flex-wrap: nowrap;
     flex-direction: row;
     overflow-x: scroll;
-    border-radius: 0.9em;
+    border-radius: 1em;
     justify-content: flex-start;
+    font-size: 0.7em;
   }
 
   .semester-div a {
@@ -529,7 +538,7 @@
     font-size: 1.2em;
   }
 
-  .mobile-text{
+  .mobile-text {
     display: flex !important;
     font-style: italic;
     font-weight: 400;
