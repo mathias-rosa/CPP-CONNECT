@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/notes_styles.css') }}">
 <script src="{{ url_for('static', filename='script/swiped-events.min.js') }}"></script>
+<script src="{{ url_for('static', filename='script/long-press.js') }}"></script>
 <title>Notes</title>
 
 {% endblock %}
@@ -11,7 +12,7 @@
 {% block content %}
 
 <div class="content" 
-    x-data="{notesSemestre : {}, selSemestre: 1, indexCounter : 0, noteCounter : 0, icon : 'drive_file_rename_outline',  consultation: true}" 
+    x-data="{notesSemestre : {}, selSemestre: 1, indexCounter : 0, noteCounter : 0, consultation: true, addItemToSemestre}" 
     x-init="notesSemestre = await getNotes()">
 
     <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
@@ -41,7 +42,7 @@
     <h2 class="mobile-text" id="#tooltip" style="display: none;"
         x-on:swiped-right="
         selSemestre === 1 ? selSemestre = 4 : selSemestre--;
-         
+        changeColor(selSemestre)
         " 
         x-on:swiped-left="
         selSemestre === 4 ? selSemestre = 1 : selSemestre++;
@@ -51,38 +52,46 @@
         </h2>
 
     <div class="notes_et_graphes" 
-    x-on:swiped-right="
-    selSemestre === 1 ? selSemestre = 4 : selSemestre--;
-    changeColor(selSemestre)
-    " 
-    x-on:swiped-left="
-    selSemestre === 4 ? selSemestre = 1 : selSemestre++;
-    changeColor(selSemestre)
-    " >
+        x-on:swiped-right="
+        selSemestre === 1 ? selSemestre = 4 : selSemestre--;
+        changeColor(selSemestre)
+        " 
+        x-on:swiped-left="
+        selSemestre === 4 ? selSemestre = 1 : selSemestre++;
+        changeColor(selSemestre)
+        " 
+    >
 
         <div class="notes-container">
             <template x-for="semestre in [1, 2, 3, 4]">
 
                 <div class="notes" 
                     x-show="selSemestre === semestre"
-
                     x-transition:enter.ease-out.duration.400ms
                     x-transition:enter-start.opacity.0
                     x-transition:enter-start.scale.90
                     x-transition:enter-end.opacity.100
                     x-transition:enter-end.scale.100
 
+                    data-long-press-delay="300"
+                    x-on:long-press="consultation ? consultation = false : consultation = true;"
                 >
     
                     <div class="top">
-                        <div class="titre-notes" x-on:click="selSemestre === 4 ? selSemestre = 1 : selSemestre++;">  
+                        <div class="titre-notes" 
+                            x-on:click="
+                                selSemestre === 4 ? selSemestre = 1 : selSemestre++;
+                                changeColor(selSemestre)
+                            ">  
                             <h1 x-html="'Semestre ' + semestre"></h1>
                             <i class="material-icons-outlined">
                                 arrow_forward_ios
                             </i>
                         </div>
-                        <button @click="add = true; consultation === true ? consultation = false : consultation = true; consultation ? icon = 'drive_file_rename_outline' : icon = 'done' ;">
-                            <i class="material-icons-round" x-text="icon"></i>
+                        <button 
+                            @click="add = true; consultation === true ? consultation = false : consultation = true;"
+                            >
+                            <i class="material-icons-round" x-text="consultation ? 'drive_file_rename_outline' : 'done'"></i>
                         </button>
                     </div>
                     
@@ -98,7 +107,20 @@
                     <button class="ajouter-matière"
                                 x-show="!consultation"
                                 x-transition:enter.duration.300ms
-                                x-transition:leave.duration.200ms>
+                                x-transition:leave.duration.200ms
+                                x-on:click="
+                                notesSemestre = addItemToSemestre(
+                                    notesSemestre, 
+                                    {
+                                        'coef' : 1,
+                                        'moyenne' : 20,
+                                        'name' : 'Nouvelle Matière',
+                                        'notes' : []
+
+                                    },
+                                    ['semestre' + semestre, 'notes']
+                                );"   
+                                >
                                 Ajouter une matière 
                                 <i class="material-icons-round">post_add</i>
                     </button>
@@ -136,13 +158,24 @@
                 
                                 </template>
                             </div>
-                
+                            
                             <button class="ajouter-matière"
                                 x-show="!consultation"
                                 x-transition:enter.duration.300ms
-                                x-transition:leave.duration.200ms>
+                                x-transition:leave.duration.200ms
+                                x-on:click="notesSemestre = addItemToSemestre(notesSemestre, 
+                                                    {
+                                                        'coef' : 1,
+                                                        'name' : 'Nouvelle Evaluation',
+                                                        'note' : 15.5
+
+                                                    },
+                                                    ['semestre' + semestre, 'notes', indexCounter, 'notes']
+                                                    )"    
+                            >
                                 Ajouter une note
                                 <i class="material-icons-round">description</i>
+                                
                             </button>
                 
                         </div>
@@ -182,6 +215,19 @@
         return await notes;
     }
 
+    function addItemToSemestre(notesSemestre, obj, path) {
+        notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
+        if (path.length === 4) {
+            notesSemestre[path[0]][path[1]][path[2]][path[3]].push(obj);
+        } else if (path.length === 2) {
+            notesSemestre[path[0]][path[1]].push(obj);
+        }
+
+        console.log(notesSemestre);
+
+        return notesSemestre;
+    }
+
     function changeColor(selSemestre) {
         document.querySelectorAll('.semester').forEach((e) => {
             e.style.backgroundColor = 'hsl(var(--second-accent-color))'; 
@@ -195,6 +241,7 @@
         }
 
     }
+
 
     changeColor("1")
 
