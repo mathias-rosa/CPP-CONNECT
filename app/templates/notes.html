@@ -12,7 +12,17 @@
 {% block content %}
 
 <div class="content" 
-    x-data="{notesSemestre : {}, selSemestre: 1, indexCounter : 0, noteCounter : 0, consultation: true, addItemToSemestre}" 
+    x-data="
+        {
+            notesSemestre : {},
+            selSemestre: 1,
+            indexCounter : 0,
+            noteCounter : 0,
+            consultation: true,
+            addItemToSemestre,
+            tooltip : false
+        }
+    " 
     x-init="notesSemestre = await getNotes()">
 
     <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
@@ -38,18 +48,6 @@
         <input type="hidden" x-model="selSemestre" id="SemesterVar"></input>
 
     </div>
-
-    <h2 class="mobile-text" id="#tooltip" style="display: none;"
-        x-on:swiped-right="
-        selSemestre === 1 ? selSemestre = 4 : selSemestre--;
-        changeColor(selSemestre)
-        " 
-        x-on:swiped-left="
-        selSemestre === 4 ? selSemestre = 1 : selSemestre++;
-        changeColor(selSemestre)
-        " >
-            (Swippez pour changer de semestre)
-        </h2>
 
     <div class="notes_et_graphes" 
         x-on:swiped-right="
@@ -81,7 +79,9 @@
                         <div class="titre-notes" 
                             x-on:click="
                                 selSemestre === 4 ? selSemestre = 1 : selSemestre++;
-                                changeColor(selSemestre)
+                                changeColor(selSemestre);
+                                tooltip = true;
+                                setTimeout(() => tooltip = false, 3000)
                             ">  
                             <h1 x-html="'Semestre ' + semestre"></h1>
                             <i class="material-icons-outlined">
@@ -94,6 +94,12 @@
                             <i class="material-icons-round" x-text="consultation ? 'drive_file_rename_outline' : 'done'"></i>
                         </button>
                     </div>
+
+                    <h2 class="mobile-text" id="#tooltip" x-show="tooltip" style="display: none;"
+                        x-transition:enter.duration.300ms
+                        x-transition:leave.duration.200ms>
+                        (Swippez pour changer de semestre)
+                    </h2>
                     
                     <div class="moyenne" id="generale" >
                         
@@ -137,22 +143,45 @@
                                     <div class="note-mg">
                                         <h1 x-text="matiere.moyenne"></h1>
                                     </div>
-                                </div>
-             
+                                    <div  id="del" x-show="!consultation"
+                                        x-transition:enter.duration.300ms
+                                        x-transition:leave.duration.200ms    
+                                        x-transition.delay.100ms
+                                        x-on:click="notesSemestre = delItem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter])"
+                                    >
+                                        <i class="material-icons-outlined">
+                                            delete
+                                        </i>
+                                    </div>
+                                </div>             
                             </div>
         
                             <div class="list-notes">
         
                                 <template x-for="(note, noteCounter) in matiere.notes">
         
-                                    <div class="note_container">
+                                    <div class="note_container" 
+                                        x-transition:enter.duration.300ms
+                                         x-transition:leave.duration.200ms>
                                         <h1 class="nom_note" x-text="note.name"></h1>
-                                        <div class="notes-coef">
+                                        <div class="notes-coef" id="notes">
                                             <h1 class="coef" x-text="'coef : ' + note.coef"></h1>
                                             <h1 class="note" x-text="note.note"></h1>
+                                            <div  id="del" x-show="!consultation"
+                                            x-transition:enter.duration.300ms
+                                            x-transition:leave.duration.200ms    
+                                            x-transition.delay.100ms
+                                            x-on:click="notesSemestre = delItem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter])"
+                                        >
+                                            <i class="material-icons-outlined">
+                                                delete
+                                            </i>
+                                        </div>
                                         </div>
                                        
                                         <div style="display: none;" class="path" x-text="'notesSemestre[\'semestre' + semestre + '\'][\'notes\'][\'' + indexCounter + '\'][\'notes\'][\'' + noteCounter + '\']'"></div>
+                                        
+      
                                     </div>
         
                 
@@ -217,8 +246,6 @@
 
     function addItemToSemestre(notesSemestre, obj, path) {
         notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
-        console.log(path)
-        console.log(notesSemestre);
         if (path.length === 4) { // On ajoute une note
             notesSemestre[path[0]][path[1]][path[2]][path[3]].push(obj);
         } else if (path.length === 2) { // On ajoute une matière
@@ -226,6 +253,17 @@
             window.scrollTo(0, document.body.scrollHeight);
         }
 
+        return notesSemestre;
+    }
+
+    function delItem(notesSemestre, path) {
+        notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
+        if (path.length === 5) { // On supprime une note
+            notesSemestre[path[0]][path[1]][path[2]][path[3]].pop(path[4]);
+        } else if (path.length === 3) { // On supprime une matière
+            notesSemestre[path[0]][path[1]].pop(path[2]);
+        } 
+        
         return notesSemestre;
     }
 

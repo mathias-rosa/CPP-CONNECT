@@ -272,9 +272,16 @@
 .notes-coef {
   display: flex;
   justify-content: space-between;
-  width: 40%;
   align-items: center;
   margin-left: auto;
+}
+
+.notes-coef div, .notes-coef h1 {
+  margin-left: 1em;
+}
+
+.note_container #del{
+  width: 3.5em;
 }
 
 .coef {
@@ -355,6 +362,7 @@
   padding-left: 1em;
   padding-right: 1em;
   border-radius: 5em;
+  min-width: fit-content;
 }
 
 .div-graph {
@@ -383,26 +391,26 @@
 }
 
 .ajouter-matière {
-  font-size: 1.5em;
-  font-family: "Poppins";
-  margin-top: 0.5em;
-  border-radius: 0.3em;
-  background-color: hsl(var(--paragraph-color));
-  font-weight: 700;
-  height: 2em;
-  width: 100%;
-  color: var(--theme-color);
   display: flex;
   justify-content: center;
   align-items: center;
-  column-gap: 0.2em;
-  cursor: pointer;
+  font-family: "Poppins";
+  font-size: 1.5em;
+  font-weight: 700;
+  height: 2em;
+  width: 100%;
+  border: 0.1em solid var(--contrast-color);
+  border-radius: 0.3em;
+  margin-top: 0.5em;
+  color: var(--theme-color);
+  background-color: hsl(var(--paragraph-color));
   transition: ease 200ms;
+  cursor: pointer;
 }
 
 .ajouter-matière:hover {
-  background-color: hsl(var(--theme-color));
   color: hsl(var(--paragraph-color));
+  background-color: hsl(var(--theme-color));
   transition: ease 200ms;
 }
 
@@ -438,6 +446,10 @@
   }
 }
 
+.mobile-text {
+  display: none;
+}
+
 @media only screen and (max-width: 600px) {
   .gepi-form {
     top: auto;
@@ -457,13 +469,6 @@
     font-size: 1.5em;
   }
 
-  .notes-coef {
-    width: 45%;
-  }
-
-  .moyenne .notes-coef {
-    width: 50%;
-  }
 
   .note {
     font-size: 1.5em;
@@ -546,10 +551,10 @@
   }
 
   .mobile-text {
-    display: flex !important;
+    display: flex;
     font-style: italic;
     font-weight: 400;
-    margin-top: 0;
+    margin-bottom: 0;
     font-size: 1em;
     justify-content: center;
   }
