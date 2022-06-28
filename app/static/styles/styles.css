@@ -35,9 +35,7 @@ body {
   box-sizing: border-box;
 }
 
-p,
-h1,
-h2 {
+p, h1, h2 {
   color: hsl(var(--paragraph-color));
 }
 

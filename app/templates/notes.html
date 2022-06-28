@@ -72,7 +72,7 @@
                     x-transition:enter-end.scale.100
 
                     data-long-press-delay="300"
-                    x-on:long-press="consultation ? consultation = false : consultation = true;"
+                    x-on:long-press=" consultation === true ? consultation = false : (consultation = true, notesSemestre = await commitChanges(notesSemestre));"
                 >
     
                     <div class="top">
@@ -89,7 +89,10 @@
                             </i>
                         </div>
                         <button 
-                            @click="add = true; consultation === true ? consultation = false : consultation = true;"
+                            @click="
+                                add = true;
+                                consultation === true ? consultation = false : (consultation = true, notesSemestre = await commitChanges(notesSemestre));
+                            "
                             >
                             <i class="material-icons-round" x-text="consultation ? 'drive_file_rename_outline' : 'done'"></i>
                         </button>
@@ -137,9 +140,11 @@
             
                             <div class="moyenne">
                                 
-                                <h1 class="moyenne_name" x-text="matiere.name"></h1>
+                                <h1 class="moyenne_name" x-text="matiere.name" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter, 'name'], $el.textContent)"></h1>
                                 <div class="notes-coef">
-                                    <h1 class="coef" x-text="'coef : ' + matiere.coef"></h1>
+                                    <div class="coef">
+                                        <h1>coef : &nbsp </h1><h1 x-text="matiere.coef" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter, 'coef'], $el.textContent, convert=true)"></h1>
+                                    </div>
                                     <div class="note-mg">
                                         <h1 x-text="matiere.moyenne"></h1>
                                     </div>
@@ -147,7 +152,7 @@
                                         x-transition:enter.duration.300ms
                                         x-transition:leave.duration.200ms    
                                         x-transition.delay.100ms
-                                        x-on:click="notesSemestre = delItem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter])"
+                                        x-on:click="notesSemestre = delItem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter])"
                                     >
                                         <i class="material-icons-outlined">
                                             delete
@@ -163,10 +168,15 @@
                                     <div class="note_container" 
                                         x-transition:enter.duration.300ms
                                          x-transition:leave.duration.200ms>
-                                        <h1 class="nom_note" x-text="note.name"></h1>
+                                        <h1 class="nom_note" x-text="note.name" :contenteditable="!consultation" 
+                                            x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter, 'name'], $el.textContent)"
+                                        >
+                                        </h1>
                                         <div class="notes-coef" id="notes">
-                                            <h1 class="coef" x-text="'coef : ' + note.coef"></h1>
-                                            <h1 class="note" x-text="note.note"></h1>
+                                            <div class="coef">
+                                                <h1>coef : &nbsp </h1><h1 x-text="note.coef" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter, 'coef'], $el.textContent, convert=true)"></h1>
+                                            </div>
+                                            <h1 class="note" x-text="note.note" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter, 'note'], $el.textContent, convert=true)"></h1>
                                             <div  id="del" x-show="!consultation"
                                             x-transition:enter.duration.300ms
                                             x-transition:leave.duration.200ms    
@@ -179,7 +189,6 @@
                                         </div>
                                         </div>
                                        
-                                        <div style="display: none;" class="path" x-text="'notesSemestre[\'semestre' + semestre + '\'][\'notes\'][\'' + indexCounter + '\'][\'notes\'][\'' + noteCounter + '\']'"></div>
                                         
       
                                     </div>
@@ -237,7 +246,7 @@
 <script>
 
     async function getNotes() {
-        let notes = fetch("{{ url_for('update_notes') }}")
+        let notes = fetch("{{ url_for('get_notes') }}")
         .then((response) => response.json())
         .then((responseJSON) => {return responseJSON});
         window.localStorage.setItem("notesSemestre", JSON.stringify(await notes));
@@ -259,12 +268,48 @@
     function delItem(notesSemestre, path) {
         notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
         if (path.length === 5) { // On supprime une note
-            notesSemestre[path[0]][path[1]][path[2]][path[3]].pop(path[4]);
+            notesSemestre[path[0]][path[1]][path[2]][path[3]].splice(path[4], 1);
         } else if (path.length === 3) { // On supprime une matière
             notesSemestre[path[0]][path[1]].pop(path[2]);
         } 
         
         return notesSemestre;
+    }
+
+    function updataElem(notesSemestre, path, newText, convert = false) {
+        if (convert === true) {
+            newText = newText.replace(',','.')
+            // Lorsque l'utilisateur n'a pas encore fini de rentrer sa note, il ne faut pas la modifier
+            if (newText.slice(-1) === '.') {
+                return notesSemestre
+            } else {
+                newText = parseFloat(newText);  
+            }
+        }
+        
+        notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
+        if (path.length === 6) { // On modifie une note
+            notesSemestre[path[0]][path[1]][path[2]][path[3]][path[4]][path[5]] = newText;
+
+        } else if (path.length === 4) { // On modifie une matière
+            notesSemestre[path[0]][path[1]][path[2]][path[3]] = newText;
+        } 
+    
+        return notesSemestre
+    }
+
+    async function commitChanges(notesSemestre) {
+        console.log(notesSemestre);
+        const rawResponse = await fetch('{{baseURL}}/update_notes', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(notesSemestre)
+        });
+        return await rawResponse.json();
+        
     }
 
     function changeColor(selSemestre) {
