@@ -280,9 +280,7 @@
         if (convert === true) {
             newText = newText.replace(',','.')
             // Lorsque l'utilisateur n'a pas encore fini de rentrer sa note, il ne faut pas la modifier
-            if (newText.slice(-1) === '.') {
-                return notesSemestre
-            } else {
+            if (newText.slice(-1) !== '.' && !isNaN(newText) && newText !== "") {
                 newText = parseFloat(newText);  
             }
         }

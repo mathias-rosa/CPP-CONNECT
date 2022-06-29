@@ -439,8 +439,6 @@ def update_notes():
 
     notes_prepa["semestres"] = request.json
 
-    print(request.json)
-
     for semestre in range(1, 5):
 
         for matiere in notes_prepa["semestres"]["semestre" + str(semestre)]["notes"]:
