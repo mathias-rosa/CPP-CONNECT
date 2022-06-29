@@ -367,11 +367,11 @@ input.moyenne_name {
 
 .note {
   color: hsl(var(--paragraph-color));
-    margin-left: 1.4em;
+  margin-left: 1.4em;
   margin-right: 0.4em;
   text-align: right;
   grid-column: 10;
-  width: 2em;
+  width: 3em;
 }
 
 .note_container .coef {
@@ -410,18 +410,27 @@ input.moyenne_name {
   flex-direction: row;
 }
 
+.boutons-ajouter{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+  margin-top: 0.5em;
+}
+
 .ajouter-matière {
   display: flex;
   justify-content: center;
   align-items: center;
   font-family: "Poppins";
-  font-size: 1.5em;
+  font-size: 1.2em;
   font-weight: 700;
-  height: 2em;
+  height: 2.5em;
   width: 100%;
-  border: 0.1em solid var(--contrast-color);
-  border-radius: 0.3em;
-  margin-top: 0.5em;
+  padding-left: 2.5%;
+  padding-right: 2.5%;
+  border: 0.15em solid var(--contrast-color);
+  border-radius: 0.6em;
   color: var(--theme-color);
   background-color: hsl(var(--paragraph-color));
   transition: ease 200ms;
@@ -432,6 +441,15 @@ input.moyenne_name {
   color: hsl(var(--paragraph-color));
   background-color: hsl(var(--theme-color));
   transition: ease 200ms;
+}
+
+.ajouter-matière i {
+  margin-left: 5%;
+}
+
+.boutons-ajouter .ajouter-matière {
+  height: 3.5em;
+  text-align: left;
 }
 
 @media only screen and (max-width: 1000px) {
@@ -567,7 +585,11 @@ input.moyenne_name {
   }
 
   .ajouter-matière {
-    font-size: 1.2em;
+    font-size: 1em;
+  }
+  .boutons-ajouter .ajouter-matière {
+    height: 4em;
+    justify-content: flex-start;
   }
 
   .mobile-text {

@@ -76,7 +76,7 @@ window.afficheNotes = async function afficheNotes(semestre) {
 
     moyenne_generale[matiere.name] = matiere.moyenne;
 
-      if (matiere.notes.length > 2) {
+      if (matiere.notes.length > 1) {
         let obj = {};
 
         matiere.notes.forEach((note) => {

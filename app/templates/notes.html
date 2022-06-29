@@ -25,7 +25,7 @@
     " 
     x-init="notesSemestre = await getNotes()">
 
-    <h1 id="title">Visualisation des notes (en cours de réalisation)</h1>
+    <h1 id="title">Visualisation des notes</h1>
 
     <div class="semester-gepi">
         <div class="semester-div">
@@ -112,27 +112,35 @@
                         </div>
             
                     </div>
-        
+
                     <button class="ajouter-matière"
-                                x-show="!consultation"
-                                x-transition:enter.duration.300ms
-                                x-transition:leave.duration.200ms
-                                x-on:click="
-                                notesSemestre = addItemToSemestre(
-                                    notesSemestre, 
+                        x-show="!consultation"
+                        x-transition:enter.duration.300ms
+                        x-transition:leave.duration.200ms
+                        x-on:click="
+                        notesSemestre = addItemToSemestre(
+                            notesSemestre, 
+                            {
+                                'coef' : 1,
+                                'moyenne' : 20,
+                                'name' : 'Nouvelle Matière',
+                                'notes' : [
                                     {
                                         'coef' : 1,
-                                        'moyenne' : 20,
-                                        'name' : 'Nouvelle Matière',
-                                        'notes' : []
+                                        'name' : 'Nouvelle Evaluation',
+                                        'note' : 20
 
-                                    },
-                                    ['semestre' + semestre, 'notes']
-                                );"   
-                                >
-                                Ajouter une matière 
-                                <i class="material-icons-round">post_add</i>
+                                    }
+                                ]
+
+                            },
+                            ['semestre' + semestre, 'notes', 0]
+                        );"   
+                    >
+                        Ajouter une matière 
+                        <i class="material-icons-round">post_add</i>
                     </button>
+        
         
                     <template x-for="(matiere, indexCounter) in notesSemestre['semestre'+ semestre]['notes']">
         
@@ -192,36 +200,67 @@
                                         </div>
                                        
                                         
-      
                                     </div>
         
                 
                                 </template>
                             </div>
-                            
-                            <button class="ajouter-matière"
-                                x-show="!consultation"
-                                x-transition:enter.duration.300ms
-                                x-transition:leave.duration.200ms
-                                x-on:click="notesSemestre = addItemToSemestre(notesSemestre, 
-                                                    {
-                                                        'coef' : 1,
-                                                        'name' : 'Nouvelle Evaluation',
-                                                        'note' : 15.5
 
-                                                    },
-                                                    ['semestre' + semestre, 'notes', indexCounter, 'notes']
-                                                    )"    
-                            >
+                            <div class="boutons-ajouter">
+                                <button class="ajouter-matière"
+                                    x-show="!consultation"
+                                    x-transition:enter.duration.300ms
+                                    x-transition:leave.duration.200ms
+                                    x-on:click="notesSemestre = addItemToSemestre(notesSemestre, 
+                                        {
+                                            'coef' : 1,
+                                            'name' : 'Nouvelle Evaluation',
+                                            'note' : 20
+
+                                        },
+                                        ['semestre' + semestre, 'notes', indexCounter, 'notes']
+                                    )"    
+                                >
                                 Ajouter une note
                                 <i class="material-icons-round">description</i>
                                 
                             </button>
+
+                            <div style="flex: 1 0 1em;"></div>
+
+                            <button class="ajouter-matière"
+                                x-show="!consultation"
+                                x-transition:enter.duration.300ms
+                                x-transition:leave.duration.200ms
+                                x-on:click="
+                                    notesSemestre = addItemToSemestre(
+                                        notesSemestre, 
+                                        {
+                                            'coef' : 1,
+                                            'moyenne' : 20,
+                                            'name' : 'Nouvelle Matière',
+                                            'notes' : [
+                                                {
+                                                    'coef' : 1,
+                                                    'name' : 'Nouvelle Evaluation',
+                                                    'note' : 20
+
+                                                }
+                                            ]
+
+                                        },
+                                        ['semestre' + semestre, 'notes', indexCounter + 1]
+                                    );"   
+                                >
+                                Ajouter une matière 
+                                <i class="material-icons-round">post_add</i>
+                            </button>
+                            </div>
+                            
                 
-                        </div>
-                
+                        </div>              
         
-                      </template>
+                    </template>
             
                 </div>
             </template>  
@@ -259,9 +298,8 @@
         notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
         if (path.length === 4) { // On ajoute une note
             notesSemestre[path[0]][path[1]][path[2]][path[3]].push(obj);
-        } else if (path.length === 2) { // On ajoute une matière
-            notesSemestre[path[0]][path[1]].push(obj);
-            window.scrollTo(0, document.body.scrollHeight);
+        } else if (path.length === 3) { // On ajoute une matière
+            notesSemestre[path[0]][path[1]].splice(path[2], 0, obj);
         }
 
         return notesSemestre;
@@ -272,7 +310,7 @@
         if (path.length === 5) { // On supprime une note
             notesSemestre[path[0]][path[1]][path[2]][path[3]].splice(path[4], 1);
         } else if (path.length === 3) { // On supprime une matière
-            notesSemestre[path[0]][path[1]].pop(path[2]);
+            notesSemestre[path[0]][path[1]].splice(path[2], 1);
         } 
         
         return notesSemestre;
@@ -299,7 +337,6 @@
     }
 
     async function commitChanges(notesSemestre) {
-        console.log(notesSemestre);
         const rawResponse = await fetch('{{baseURL}}/update_notes', {
             method: 'POST',
             headers: {
