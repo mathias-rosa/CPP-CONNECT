@@ -210,6 +210,14 @@
   height: 100%;
 }
 
+.notes input{
+  background-color: hsl(var(--main-color));
+  width: 100%;
+  margin-right: 0;
+  padding: 1%;
+  margin-top: 1%;
+}
+
 .top {
   display: flex;
   justify-content: space-between;
@@ -309,6 +317,10 @@
   border: none;
   outline: none;
   border-radius: 0.5em;
+}
+
+input.moyenne_name {
+  margin-bottom: 2%;
 }
 
 #generale {

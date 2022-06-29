@@ -139,11 +139,13 @@
                         <div class="matiere">
             
                             <div class="moyenne">
-                                
-                                <h1 class="moyenne_name" x-text="matiere.name" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter, 'name'], $el.textContent)"></h1>
+                                <input :value="notesSemestre['semestre'+ semestre]['notes'][indexCounter]['name']"
+                                    @input="notesSemestre['semestre'+ semestre]['notes'][indexCounter]['name'] = $event.target.value" 
+                                    x-show="!consultation" class="moyenne_name">
+                                <h1 class="moyenne_name" x-text="matiere.name" x-show="consultation"></h1>
                                 <div class="notes-coef">
                                     <div class="coef">
-                                        <h1>coef : &nbsp </h1><h1 x-text="matiere.coef" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter, 'coef'], $el.textContent, convert=true)"></h1>
+                                        <h1>coef : &nbsp </h1><h1 x-text.number="matiere.coef" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter, 'coef'], $el.textContent, convert=true)"></h1>
                                     </div>
                                     <div class="note-mg">
                                         <h1 x-text="matiere.moyenne"></h1>
@@ -168,10 +170,10 @@
                                     <div class="note_container" 
                                         x-transition:enter.duration.300ms
                                          x-transition:leave.duration.200ms>
-                                        <h1 class="nom_note" x-text="note.name" :contenteditable="!consultation" 
-                                            x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter, 'name'], $el.textContent)"
-                                        >
-                                        </h1>
+                                        <h1 class="nom_note" x-text="note.name" x-show="consultation"></h1>
+                                        <input :value="notesSemestre['semestre'+ semestre]['notes'][indexCounter]['notes'][noteCounter]['name']"
+                                            @input="notesSemestre['semestre'+ semestre]['notes'][indexCounter]['notes'][noteCounter]['name'] = $event.target.value"  
+                                            x-show="!consultation" class="moyenne_name">
                                         <div class="notes-coef" id="notes">
                                             <div class="coef">
                                                 <h1>coef : &nbsp </h1><h1 x-text="note.coef" :contenteditable="!consultation" x-on:input="notesSemestre = updataElem(notesSemestre, ['semestre' + semestre, 'notes', indexCounter,'notes', noteCounter, 'coef'], $el.textContent, convert=true)"></h1>
