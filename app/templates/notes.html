@@ -261,9 +261,23 @@
                         </div>              
         
                     </template>
+
+                    <button
+                        class="ajouter-matière"
+                        x-show="!consultation" 
+                        style="margin-top: 1em;"
+                        @click="
+                            add = true;
+                            consultation === true ? consultation = false : (consultation = true, notesSemestre = await commitChanges(notesSemestre));
+                        "
+                    >
+                    Valider les modifications
+                    <i class="material-icons-round" >done</i>
+                </button>
             
                 </div>
             </template>  
+
         </div>
     
     

@@ -256,7 +256,7 @@
   height: 3em;
   width: 100%;
   background-color: hsl(var(--second-accent-color));
-  color: var(--theme-color);
+  color: white;
   cursor: pointer;
 }
 

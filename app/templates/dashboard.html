@@ -33,21 +33,25 @@
             <div class="tile" id="welcome">
                 <h1>Bonjour {{ current_user.name }}</h1>
             </div>
-            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
-                <i class="material-icons-round">note_alt</i>
-                <p>Consulter mes notes</p>
-            </a>
             <a class="tile" id="home"  href="https://mail.etu.univ-lorraine.fr/" target="_blank">
                 <i class="material-icons-round">email</i>
                 <p>Consulter mes mails</p>
             </a>
-            <a class="tile" id="tools"  href="{{ url_for('tools') }}">
-                <i class="material-icons-round">architecture</i>
-                <p>Outils</p>
+            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
+                <i class="material-icons-round">note_alt</i>
+                <p>Consulter mes notes</p>
             </a>
+            <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
+                <i class="material-icons-round">calculate</i>
+                <p>Calcul de Moyenne</p>
+            </a> 
             <a class="tile" id="ressources" href="https://mega.nz/folder/37wTSAaZ#sTxSruLB4YbYgznKBVoU7w" target="_blank">
                 <i class="material-icons-round">turned_in_not</i>
                 <p>Ressources des années précedentes</p>
+            </a>
+            <a class="tile" id="tools"  href="{{ url_for('tools') }}">
+                <i class="material-icons-round">architecture</i>
+                <p>Outils</p>
             </a>
             <a class="tile" id="settings"  href="{{ url_for('anciens') }}">
                 <i class="material-icons-round">school</i>
@@ -56,13 +60,7 @@
             <a class="tile" id="settings"  href="{{ url_for('settings') }}">
                 <i class="material-icons-round">settings</i>
                 <p>Paramètres</p>
-            </a>
-            
-            <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
-                <i class="material-icons-round">calculate</i>
-                <p>Calcul de Moyenne</p>
-            </a> 
-           
+            </a>           
             <a class="tile" id="addresses"  href="{{ url_for('addresses') }}">
                 <i class="material-icons-round">restaurant_menu</i>
                 <p>Le Petit CPP</p>
