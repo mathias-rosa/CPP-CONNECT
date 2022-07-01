@@ -293,7 +293,7 @@ def anciens():
     # On récupère la liste des anciens étudiants et les écoles qu'ils ont eu dans la base de donnée.
     anciens_list = [ancien for ancien in mongodb.db.Anciens.find({})]
 
-    anciens_list.sort(key=lambda k: k['promo'])
+    anciens_list.sort(key=lambda k: k['promo'], reverse=True)
 
     return render_template('anciens.html',
                             current_user=current_user,
@@ -301,30 +301,6 @@ def anciens():
                             anciens_list=anciens_list,
                             baseURL=request.base_url
                             )
-
-
-def notes():
-    if not current_user.is_anonymous:
-        theaming = current_user.theaming
-    else:
-        theaming = "light-theme"
-
-    notes = mongodb.db.Users.find_one({"username" : current_user.username})["notes"]
-    
-    # On genere un dictionnaire {nom_matiere : note}
-    moyennes = {note[0]:note[1]  for note in notes}
-
-    bricolage = {"brico" : notes}
-
-    return render_template('notes.html',
-                            current_user=current_user,
-                            theaming=theaming,
-                            baseURL=request.base_url,
-                            notes=notes,
-                            moyennes=moyennes,
-                            bricolage=bricolage
-                            )
-
 
 @app.route('/notes')
 @login_required
