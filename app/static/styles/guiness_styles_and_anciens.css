@@ -16,7 +16,7 @@ input:focus-visible{
 
 .outer_box{
     display: flex;
-    border-radius: 1em;
+    border-radius: 1.5em;
     background-color: var(--theme-color);
     flex-direction: column;
     padding: 2%;
