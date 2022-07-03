@@ -64,6 +64,15 @@ body{
 .inputs label{
     color: hsl(var(--paragraph-color));
 }
+.checkbox{
+    display: flex;
+    margin-top: 0.8em;
+    font-weight: 700;
+    font-style: normal;
+}
+.checkbox input{
+    margin-left: 0;
+}
 .help-block{
     display: flex;
     margin-bottom: 0.1em;

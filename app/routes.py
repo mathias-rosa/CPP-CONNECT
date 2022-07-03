@@ -115,7 +115,7 @@ def signup():
                         "promo": form.promo.data}
             mongodb.db.Users.insert_one(new_user)
             user = mongodb.db.Users.find_one({"email": email})
-            login_user(User(user))
+            login_user(User(user), remember=form.remember.data)
             return redirect(url_for('dashboard'))
 
         error = "Les mots de passe ne correspondent pas"

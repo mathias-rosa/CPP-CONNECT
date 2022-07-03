@@ -127,6 +127,10 @@ input{
     border-color: hsl(var(--second-color));
 }
 
+#contact a {
+    color: hsl(var(--second-accent-color));
+}
+
 
 @media only screen and (max-width: 600px) {
 

@@ -20,6 +20,7 @@ class RegisterForm(FlaskForm):
     email = StringField('Email', validators=[InputRequired(), Email(message='Invalid email'), Length(max=50)])
     password = PasswordField('Mot de passe', validators=[InputRequired(), Length(min=6, max=80)])
     password_confirm = PasswordField('', validators=[InputRequired(), Length(min=6, max=80)])
+    remember = BooleanField('Se rappeller de moi')
 
 
 class ChangeSelfInformationsForm(FlaskForm):
