@@ -33,6 +33,7 @@ def index():
     return render_template('index.html',
                             year=datetime.date.today().year,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 @app.route('/presentation')
@@ -44,6 +45,7 @@ def presentation():
 
     return render_template('presentation.html',
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 
@@ -67,6 +69,7 @@ def signup():
                                         error=error,
                                         message=message,
                                         theaming=theaming,
+                                        baseURL=request.base_url
                                         )
 
             accountType = ""
@@ -83,6 +86,7 @@ def signup():
                         error=error,
                         message=message,
                         theaming=theaming,
+                        baseURL=request.base_url
                         )
 
             # Pour des raisons de sécurité, on hache le mot de passe de l'utilisateur avant de
@@ -124,6 +128,7 @@ def signup():
                             error=error,
                             message=message,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
     return render_template('signup.html',
@@ -131,6 +136,7 @@ def signup():
                             error=error,
                             message=message,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 
@@ -171,6 +177,7 @@ def login():
                                     message=message,
                                     warning=warning,
                                     theaming=theaming,
+                                    baseURL=request.base_url
                                     )
 
         if check_password_hash(user.password, form.password.data):
@@ -186,6 +193,7 @@ def login():
                             message=message,
                             warning=warning,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 
@@ -251,6 +259,7 @@ def addresses():
     return render_template('addresses.html',
                             current_user=current_user,
                             theaming=theaming,
+                            baseURL=request.base_url,
                             Nord=Nord,
                             Ouest=Ouest,
                             Sud=Sud,
@@ -278,6 +287,7 @@ def guiness():
     return render_template('guiness.html',
                         current_user=current_user,
                         theaming=theaming,
+                        baseURL=request.base_url,
                         record_list=record_list
                         )
 
@@ -365,6 +375,7 @@ def settings():
                             profilePicForm=profilePicForm,
                             profileForm=profileForm,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
         return "Mot de passe incorect"
 
@@ -407,6 +418,7 @@ def settings():
                         profilePicForm=profilePicForm,
                         profileForm=profileForm,
                         theaming=theaming,
+                        baseURL=request.base_url
                         )
 
     # Mise à jour du thème de l'utilisateur.
@@ -448,6 +460,7 @@ def settings():
                             profilePicForm=profilePicForm,
                             profileForm=profileForm,
                             theaming=theaming,
+                            baseURL=request.base_url
                             )
 
 
@@ -467,4 +480,5 @@ def page_not_found(e):
         theaming = "light-theme"
     return render_template('404.html',
                             theaming=theaming,
+                            baseURL=request.base_url
                             ), 404
