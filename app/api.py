@@ -386,7 +386,7 @@ def calcul_moyenne(notes : list, type="generale"):
 @app.route('/notes/get_notes')
 @login_required
 def get_notes():
-    notes_prepa = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
+    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
     if notes_prepa:
         
         # Calcul des moyennes 
@@ -398,13 +398,13 @@ def get_notes():
             
             notes_prepa["semestres"]["semestre" + str(semestre)]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre" + str(semestre)]["notes"])
 
-        mongodb.db.Notes.replace_one(({"userId" : str(current_user.id)}), notes_prepa)
+        mongodb.db.Notes.replace_one(({"username" : str(current_user.username)}), notes_prepa)
 
 
         return notes_prepa["semestres"]
 
     notes_prepa = {
-        "userId" : str(current_user.id),
+        "username" : str(current_user.username),
         "semestres": {
             "semestre1" : {
                 "moyenne" : 20,
@@ -435,7 +435,7 @@ def get_notes():
 @login_required
 def update_notes():
 
-    notes_prepa = mongodb.db.Notes.find_one({"userId" : str(current_user.id)})
+    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
 
     notes_prepa["semestres"] = request.json
 
@@ -446,7 +446,7 @@ def update_notes():
         
         notes_prepa["semestres"]["semestre" + str(semestre)]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre" + str(semestre)]["notes"])
 
-    mongodb.db.Notes.replace_one(({"userId" : str(current_user.id)}), notes_prepa)
+    mongodb.db.Notes.replace_one(({"username" : str(current_user.username)}), notes_prepa)
 
     return notes_prepa["semestres"]
 

@@ -210,7 +210,7 @@
   height: 100%;
 }
 
-.notes input{
+.notes input {
   background-color: hsl(var(--main-color));
   width: 100%;
   margin-right: 0;
@@ -284,11 +284,11 @@
   margin-left: auto;
 }
 
-.notes-coef div{
+.notes-coef div {
   margin-left: 1em;
 }
 
-.note_container #del{
+.note_container #del {
   width: 3.5em;
 }
 
@@ -410,7 +410,7 @@ input.moyenne_name {
   flex-direction: row;
 }
 
-.boutons-ajouter{
+.boutons-ajouter {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -452,6 +452,10 @@ input.moyenne_name {
   text-align: left;
 }
 
+.mobile-text {
+  display: none;
+}
+
 @media only screen and (max-width: 1000px) {
   .graphe_moyennes {
     display: none;
@@ -484,10 +488,6 @@ input.moyenne_name {
   }
 }
 
-.mobile-text {
-  display: none;
-}
-
 @media only screen and (max-width: 600px) {
   .gepi-form {
     top: auto;
@@ -506,7 +506,6 @@ input.moyenne_name {
   .coef {
     font-size: 0.9em;
   }
-
 
   .note {
     font-size: 1.5em;

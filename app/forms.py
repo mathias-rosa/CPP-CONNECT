@@ -26,7 +26,6 @@ class RegisterForm(FlaskForm):
 class ChangeSelfInformationsForm(FlaskForm):
     name = StringField('Prénom')
     surname = StringField('Nom')
-    username = StringField("Nom d'utilisateur")
     email = StringField('Email', validators=[Optional(), Email(message='Invalid email'), Length(max=50)])
     current_password = PasswordField('Mot de passe actuel *', validators=[InputRequired(), Length(min=6, max=80)])
     new_password = PasswordField('Nouveau mot de passe', validators=[Optional(), Length(min=6, max=80)])

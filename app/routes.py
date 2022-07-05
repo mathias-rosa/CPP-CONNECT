@@ -352,8 +352,6 @@ def settings():
                 current_user.name = profileForm.name.data
             if profileForm.surname.data != "":
                 current_user.surname = profileForm.surname.data
-            if profileForm.username.data != "":
-                current_user.username = profileForm.username.data
             if profileForm.email.data != "":
                 current_user.email = profileForm.email.data
             if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
@@ -365,7 +363,6 @@ def settings():
                     {
                         "name": current_user.name,
                         "surname": current_user.surname,
-                        "username": current_user.username,
                         "email": current_user.email,
                         "password": current_user.password,
                     }
