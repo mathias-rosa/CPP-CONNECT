@@ -42,7 +42,7 @@
                 {% endif %}
                 {% if message is not none %}
                     <div>
-                        <p class="help-block" id="message">{{ message }}</p>
+                        <p class="help-block" id="message">{% autoescape false %}{{ message }}{% endautoescape %}</p>
                     </div>
                 {% endif %}
                 {% if warning is not none %}

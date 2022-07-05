@@ -81,7 +81,7 @@ def reset_request():
         user = mongodb.db.Users.find_one({"email": email})
         if user:
             user = User(user)
-            message = "Lien de réinitialisation envoyé à : " + email
+            message = "Lien de réinitialisation envoyé à : " + email + ". <br>Pensez à verifier dans le dossier spam..."
             send_reset_email(user) # Envoi du mail
             return render_template('reset_request.html',
                             theaming="light-theme",
