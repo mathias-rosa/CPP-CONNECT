@@ -188,6 +188,26 @@
                     });
             }
 
+            // EDT -------------------------------------------------
+
+            let SEL = "08Po12Is19Sy81"
+    
+            function b64_to_utf8(e) {
+                var e = e;
+                return decodeURIComponent(window.atob(e));
+            }
+            function decrypter_data_edt(e) {
+                var e = e,
+                t = new RegExp(SEL, "g");
+                return JSON.parse((
+                (data_base64_sans_sel = e.replace(t, "")),
+                (data_normal = b64_to_utf8(data_base64_sans_sel)),
+                data_normal)
+                );
+            }
+
+            // -----------------------------------------------------
+
         </script>
 
         {% endif %}

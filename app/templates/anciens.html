@@ -15,10 +15,18 @@
 
 {% for anciens in anciens_list %}
 
-<div class="outer_box" id="anciens">
-    <div class="ranking_title">
-        <h1>Promo {{anciens.promo}}</h1>
-    </div>
+    <div class="outer_box" id="anciens">
+        <div class="ranking_title">
+            <h1>Promo {{anciens.promo}}</h1>
+            {% if anciens.rangs %}
+                <a href="{{anciens.rangs}}">
+                    <i class="material-icons-outlined">
+                        format_list_numbered
+                    </i>
+                </a>
+            {% endif %}
+
+        </div>
 
     {% for eleves in anciens.eleves %}
 
@@ -26,6 +34,7 @@
             <div class="user">
                 <a id="email" href="mailto:{{ eleves.email }}"><h1>{{ eleves.name }} {{ eleves.surname }}</h1></a>
                 <h2>Moyenne : {{ eleves.moyenne }}</h2>
+                <h2 id="rank">Rang : {{ eleves.classement }}</h2>
             </div>
             <div class="right-box">
                 <h1>{{ eleves.ecole }}</h1>
@@ -33,6 +42,8 @@
         </div>
 
     {% endfor %}
+
+    </div>
 
 </div>
 
