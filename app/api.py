@@ -250,6 +250,7 @@ def calcul_moyenne(notes : list, type="generale"):
         return None
     return round(moyenne / coefs, 2)
 
+
 @app.route('/notes/get_notes')
 @login_required
 def get_notes():
@@ -296,6 +297,12 @@ def get_notes():
     
 
     return notes_prepa["semestres"]
+
+
+@app.route('/notes/get_notes_gepi')
+@login_required
+def get_notes_gepi():
+    pass
 
 
 # @app.route('/notes/get_notes_gepi')

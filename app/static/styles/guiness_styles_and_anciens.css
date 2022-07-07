@@ -13,6 +13,10 @@
 input:focus-visible{
     outline: none;
 }
+.bloc_promo{
+    display: flex;
+    flex-direction: row;
+}
 
 .outer_box{
     display: flex;

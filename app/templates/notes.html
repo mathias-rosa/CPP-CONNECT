@@ -20,7 +20,8 @@
             noteCounter : 0,
             consultation: true,
             addItemToSemestre,
-            tooltip : false
+            tooltip : false,
+            gepi : false
         }
     " 
     x-on:swiped-right="
@@ -35,7 +36,43 @@
 
     <h1 id="title">Visualisation des notes</h1>
 
-    <div class="semester-gepi" >
+    <button @click="gepi ? gepi = false : gepi = true">Telecharger notes</button>
+
+    <div class="gepi-login" x-show="gepi" 
+        x-data="{
+            gepi_username : '',
+            gepi_password : ''
+        }"
+        x-transition:enter.ease-out.duration.400ms
+        x-transition:enter-start.opacity.0
+        x-transition:enter-start.scale.90
+        x-transition:enter-end.opacity.100
+        x-transition:enter-end.scale.100
+    >
+        <h1>Se connecter à GEPI</h1>
+        <div class="inputs">
+            <label> Identifiant GEPI </label>
+            <input type="text" :value="gepi_username" @input="gepi_username = $event.target.value">
+            
+            <label> Mot de passe GEPI </label>
+            <input type="password" :value="gepi_password" @input="gepi_password = $event.target.value">
+        </div>
+        
+        <div class="gepi-btns">
+                <button class="btn" id="cta" @click="getNotesFromGepi(gepi_username, gepi_password) ; gepi = false ; gepi_username= '' ; gepi_password = ''" >Se connecter</button>
+            <button class="btn" @click="gepi = false ; gepi_username= '' ; gepi_password = ''">Abandonner</button>
+        </div>
+
+    </div>
+
+
+    <div class="semester-gepi" x-show="!gepi"
+        x-transition:enter.ease-out.duration.400ms
+        x-transition:enter-start.opacity.0
+        x-transition:enter-start.scale.90
+        x-transition:enter-end.opacity.100
+        x-transition:enter-end.scale.100
+    >
         <div class="semester-div">
             <button x-on:click="selSemestre = 1 ; changeColor(selSemestre) " class="semester" id="semester1" autofocus>
                 Semestre 1 
@@ -57,7 +94,13 @@
 
     </div>
 
-    <div class="notes_et_graphes">
+    <div class="notes_et_graphes"  x-show="!gepi" 
+        x-transition:enter.ease-out.duration.400ms
+        x-transition:enter-start.opacity.0
+        x-transition:enter-start.scale.90
+        x-transition:enter-end.opacity.100
+        x-transition:enter-end.scale.100
+    >
 
         <div class="notes-container">
             <template x-for="semestre in [1, 2, 3, 4]">
@@ -307,6 +350,11 @@
         .then((responseJSON) => {return responseJSON});
         window.localStorage.setItem("notesSemestre", JSON.stringify(await notes));
         return await notes;
+    }
+
+    async function getNotesFromGepi(username, password) {
+        console.log(username, password);
+        return await getNotes();
     }
 
     function addItemToSemestre(notesSemestre, obj, path) {
