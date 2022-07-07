@@ -27,6 +27,15 @@ class User(UserMixin):
         self.theaming = user_dict.get('theaming')
         self.promo = user_dict.get("promo")
         self.profil_pic_url = user_dict.get("profil_pic_url")
+
+    def est_admin(self):
+        return self.accountType == "admin"
+    
+    def est_etudiant(self):
+        return self.accountType in ("élève", "admin")
+
+    def est_secretaire(self):
+        return self.accountType in ("secretaire", "admin")
     
     def get_id(self):
         return str(self.id)
@@ -45,6 +54,7 @@ class User(UserMixin):
         except:
             return None
         return User(mongodb.db.Users.find_one({"_id": user_id}))
+
 
 class Tool():
     def __init__(self, tool_dict):

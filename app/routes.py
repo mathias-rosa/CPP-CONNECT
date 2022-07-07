@@ -383,8 +383,6 @@ def settings():
 
         if profilePicForm.profile_pic.data != "":
 
-            current_user.profil_pic_url = profilePicForm.profile_pic.data
-
             if "Benjamin La cucarracha" in current_user.profil_pic_url:
                     
                 mongodb.db.Users.update_one(
@@ -395,17 +393,18 @@ def settings():
                         }
                     }
                 )
-            elif not "svg" in current_user.profil_pic_url or \
-                not not "png" in current_user.profil_pic_url or \
-                not not "jpg" in current_user.profil_pic_url or \
-                not "jpeg" in current_user.profil_pic_url or \
-                not "gif" in current_user.profil_pic_url :
+
+            elif ".svg" in profilePicForm.profile_pic.data or \
+                ".png" in profilePicForm.profile_pic.data or \
+                ".jpg" in profilePicForm.profile_pic.data or \
+                ".jpeg" in profilePicForm.profile_pic.data or \
+                ".gif" in profilePicForm.profile_pic.data :
                     
                 mongodb.db.Users.update_one(
                     {"_id": current_user.id},
                     {'$set':
                         {
-                            "profil_pic_url" : current_user.profil_pic_url
+                            "profil_pic_url" : profilePicForm.profile_pic.data
                         }
                     }
                 )

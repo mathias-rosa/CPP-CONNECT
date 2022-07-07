@@ -237,139 +237,6 @@ def rajouter_note(liste_matiere, colles, maths_ou_physique):
                         })
 
 
-@app.route('/notes/get_notes_gepi')
-@login_required
-def get_notes_gepi():
-
-    """
-        Api qui permet de recuperere les notes
-    """
-
-    try:
-        USER = request.args['USER']
-        GEPI_LOGIN = request.args['GEPI_LOGIN']
-        GEPI_PASSWORD = request.args['GEPI_PASSWORD']
-
-    except:
-        return "login ou mot de passe gepi invalide ou non passé en argument"
-
-    """
-    # On crée une instance du web-driver Firefox (environement de production)
-
-    options = Options()
-    options.headless = False
-    driver = webdriver.Firefox(options=options)
-
-    """
-    # On crée une instance du web-driver chrome (environement de déploiment)
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
-    # """
-
-    # On va sur https://cppreunion.fr/gepi/login.php
-    driver.get("https://cppreunion.fr/gepi/login.php")
-    # En fonction de notre connection et des performance de notre machine il faudra attendre
-
-    # login
-
-    wait = WebDriverWait(driver, 20)
-
-    # sert à attendre que la page charge
-    login_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#login")))
-
-    login_box.send_keys(GEPI_LOGIN)
-
-    password_box = driver.find_element_by_css_selector("input#no_anti_inject_password")
-    password_box.send_keys(GEPI_PASSWORD)
-
-    login_button = driver.find_element_by_css_selector("input#soumettre")
-    login_button.send_keys(Keys.ENTER)
-
-    # On va sur le détail des notes
-    detail_des_notes = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#menu_barre > div.menu_barre_container > ul > li:nth-child(2) > a")))
-
-    detail_des_notes.send_keys(Keys.ENTER)
-
-    # on recupère tous les elements td.releve qui contiennent les notes et matieres
-    selenium_lines = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "td.releve")))
-
-    selenium_lines = driver.find_elements_by_css_selector("td.releve")
-
-    liste_matiere = []
-
-    while selenium_lines:
-        # On récupère le nom de chaque matière
-        matiere :str = selenium_lines.pop(0).text.split("\n")[0]
-        # On récupère la liste de toutes les notes dans la matière
-        liste_notes :list = selenium_lines.pop(0).text.split("\n")
-
-        # On crée une liste qui contiendra toutes les notes de la matière
-        liste_notes_matiere = [matiere]
-
-        # On crée une variable qui servira à calculer le moyenne de la matière
-
-        somme_notes = 0
-        somme_coef = 0
-
-        # On transforme chaque note de la liste des notes en dictionnaire
-        for note in liste_notes:
-            nom_note = re.search(r'.+?:', note)
-            if nom_note:
-                nom_note = nom_note.group(0)[:-1]
-            else:
-                nom_note = None
-
-            note_obtenue = re.search(r': [0-9\.]+', note)
-            if note_obtenue:
-                note_obtenue = float(note_obtenue.group(0)[2:])
-            else:
-                note_obtenue = None
-
-            coef = re.search(r'coef:[1-9]+', note)
-            if coef:
-                coef = float(coef.group(0)[5:])
-            else:
-                coef = 1.0
-
-            date = re.search(r'[0-9]{2}\/[0-9]{2}/[0-9]{4}', note)
-            if date:
-                date = date.group(0)
-            else:
-                date = None
-
-            dict_note = {
-                            "nom_note": nom_note,
-                            "note": note_obtenue,
-                            "coef": coef,
-                            "date": date,
-                        }
-            if dict_note["note"]:
-                liste_notes_matiere.append(dict_note)
-                somme_coef += dict_note["coef"]
-                somme_notes += dict_note["note"] * dict_note["coef"]
-
-        # On ajoute la liste des notes de la matière dans la liste de toutes les matières
-        # s'il y a au moins une note dans la liste (donc pas seulement le titre)
-        if len(liste_notes_matiere) > 1:
-            liste_notes_matiere.insert(1, round(somme_notes/somme_coef, 2))
-            liste_matiere.append(liste_notes_matiere)
-
-    rajouter_note(liste_matiere, "Colles de mathématiques", "Mathématiques")
-    rajouter_note(liste_matiere, "Colles de physique", "Physique Chimie")
-
-    mongodb.db.Users.update_one(
-            {"username": USER},
-            {'$set': {'notes': liste_matiere}}, upsert=False
-        )
-
-    return {"notes": liste_matiere}
-
-
 def calcul_moyenne(notes : list, type="generale"):
 
     moy_ou_note = "moyenne" if type == "generale" else "note"
@@ -429,6 +296,139 @@ def get_notes():
     
 
     return notes_prepa["semestres"]
+
+
+# @app.route('/notes/get_notes_gepi')
+# @login_required
+# def get_notes_gepi():
+
+#     """
+#         Api qui permet de recuperere les notes
+#     """
+
+#     try:
+#         USER = request.args['USER']
+#         GEPI_LOGIN = request.args['GEPI_LOGIN']
+#         GEPI_PASSWORD = request.args['GEPI_PASSWORD']
+
+#     except:
+#         return "login ou mot de passe gepi invalide ou non passé en argument"
+
+#     """
+#     # On crée une instance du web-driver Firefox (environement de production)
+
+#     options = Options()
+#     options.headless = False
+#     driver = webdriver.Firefox(options=options)
+
+#     """
+#     # On crée une instance du web-driver chrome (environement de déploiment)
+#     chrome_options = webdriver.ChromeOptions()
+#     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+#     chrome_options.add_argument("--headless")
+#     chrome_options.add_argument("--disable-dev-shm-usage")
+#     chrome_options.add_argument("--no-sandbox")
+#     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+#     # """
+
+#     # On va sur https://cppreunion.fr/gepi/login.php
+#     driver.get("https://cppreunion.fr/gepi/login.php")
+#     # En fonction de notre connection et des performance de notre machine il faudra attendre
+
+#     # login
+
+#     wait = WebDriverWait(driver, 20)
+
+#     # sert à attendre que la page charge
+#     login_box = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "input#login")))
+
+#     login_box.send_keys(GEPI_LOGIN)
+
+#     password_box = driver.find_element_by_css_selector("input#no_anti_inject_password")
+#     password_box.send_keys(GEPI_PASSWORD)
+
+#     login_button = driver.find_element_by_css_selector("input#soumettre")
+#     login_button.send_keys(Keys.ENTER)
+
+#     # On va sur le détail des notes
+#     detail_des_notes = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "#menu_barre > div.menu_barre_container > ul > li:nth-child(2) > a")))
+
+#     detail_des_notes.send_keys(Keys.ENTER)
+
+#     # on recupère tous les elements td.releve qui contiennent les notes et matieres
+#     selenium_lines = wait.until(EC.visibility_of_element_located((By.CSS_SELECTOR, "td.releve")))
+
+#     selenium_lines = driver.find_elements_by_css_selector("td.releve")
+
+#     liste_matiere = []
+
+#     while selenium_lines:
+#         # On récupère le nom de chaque matière
+#         matiere :str = selenium_lines.pop(0).text.split("\n")[0]
+#         # On récupère la liste de toutes les notes dans la matière
+#         liste_notes :list = selenium_lines.pop(0).text.split("\n")
+
+#         # On crée une liste qui contiendra toutes les notes de la matière
+#         liste_notes_matiere = [matiere]
+
+#         # On crée une variable qui servira à calculer le moyenne de la matière
+
+#         somme_notes = 0
+#         somme_coef = 0
+
+#         # On transforme chaque note de la liste des notes en dictionnaire
+#         for note in liste_notes:
+#             nom_note = re.search(r'.+?:', note)
+#             if nom_note:
+#                 nom_note = nom_note.group(0)[:-1]
+#             else:
+#                 nom_note = None
+
+#             note_obtenue = re.search(r': [0-9\.]+', note)
+#             if note_obtenue:
+#                 note_obtenue = float(note_obtenue.group(0)[2:])
+#             else:
+#                 note_obtenue = None
+
+#             coef = re.search(r'coef:[1-9]+', note)
+#             if coef:
+#                 coef = float(coef.group(0)[5:])
+#             else:
+#                 coef = 1.0
+
+#             date = re.search(r'[0-9]{2}\/[0-9]{2}/[0-9]{4}', note)
+#             if date:
+#                 date = date.group(0)
+#             else:
+#                 date = None
+
+#             dict_note = {
+#                             "nom_note": nom_note,
+#                             "note": note_obtenue,
+#                             "coef": coef,
+#                             "date": date,
+#                         }
+#             if dict_note["note"]:
+#                 liste_notes_matiere.append(dict_note)
+#                 somme_coef += dict_note["coef"]
+#                 somme_notes += dict_note["note"] * dict_note["coef"]
+
+#         # On ajoute la liste des notes de la matière dans la liste de toutes les matières
+#         # s'il y a au moins une note dans la liste (donc pas seulement le titre)
+#         if len(liste_notes_matiere) > 1:
+#             liste_notes_matiere.insert(1, round(somme_notes/somme_coef, 2))
+#             liste_matiere.append(liste_notes_matiere)
+
+#     rajouter_note(liste_matiere, "Colles de mathématiques", "Mathématiques")
+#     rajouter_note(liste_matiere, "Colles de physique", "Physique Chimie")
+
+#     mongodb.db.Users.update_one(
+#             {"username": USER},
+#             {'$set': {'notes': liste_matiere}}, upsert=False
+#         )
+
+#     return {"notes": liste_matiere}
 
 
 @app.route('/notes/update_notes', methods=['GET', 'POST'])

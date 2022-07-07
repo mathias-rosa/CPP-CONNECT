@@ -33,10 +33,18 @@
             <div class="tile" id="welcome">
                 <h1>Bonjour {{ current_user.name }}</h1>
             </div>
+
+            <!-- Pour tous les utilisateurs -->
+
             <a class="tile" id="home"  href="https://mail.etu.univ-lorraine.fr/" target="_blank">
                 <i class="material-icons-round">email</i>
                 <p>Consulter mes mails</p>
             </a>
+
+            <!-- Pour les étudiants -->
+
+            {% if current_user.est_etudiant() %}
+
             <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
                 <i class="material-icons-round">note_alt</i>
                 <p>Consulter mes notes</p>
@@ -53,29 +61,38 @@
                 <i class="material-icons-round">architecture</i>
                 <p>Outils</p>
             </a>
-            <a class="tile" id="settings"  href="{{ url_for('anciens') }}">
+            <a class="tile" id="alumnis"  href="{{ url_for('anciens') }}">
                 <i class="material-icons-round">school</i>
                 <p>Alumnis</p>
             </a>
             <a class="tile" id="settings"  href="https://www.facebook.com/groups/153011081449404/" target="_blank">
                 <i class="material-icons-round">groups</i>
                 <p>Facebook CPP974</p>
-            </a>
-            <a class="tile" id="settings"  href="{{ url_for('settings') }}">
-                <i class="material-icons-round">settings</i>
-                <p>Paramètres</p>
-            </a>           
+            </a>      
             <a class="tile" id="addresses"  href="{{ url_for('addresses') }}">
                 <i class="material-icons-round">restaurant_menu</i>
                 <p>Le Petit CPP</p>
-            </a>
-            <a class="tile" id="guiness" href="{{ url_for('guiness') }}">
+            </a>    
+            <!-- <a class="tile" id="guiness" href="{{ url_for('guiness') }}">
                 <i class="material-icons-round">grade</i>
                 <p>CPP's Business Records</p>
-            </a>
+            </a> -->
+
+            {% endif %}
+
+            <!-- Pour le secrétaire -->
+            
+
+            <!-- Pour tout le monde mais à la fin -->
+
+            <a class="tile" id="settings"  href="{{ url_for('settings') }}">
+                <i class="material-icons-round">settings</i>
+                <p>Paramètres</p>
+            </a> 
+
         </div>
 
-        {% if current_user.accountType == "admin" %}
+        {% if current_user.est_admin() %}
         <!--Dashboard en plus pour les Admins-->
 
         <div class="pannel" id="admin">
