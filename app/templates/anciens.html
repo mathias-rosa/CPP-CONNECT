@@ -45,13 +45,27 @@
                 {% endfor %}
     
             </div>
+            
+            <div class="docs_affect">
 
-            <div class="outer_box" id="anciens">
-                <div class="calendar">
-                    <h2>Rangs limites d'affections</h2>
-                    <embed src="{{ url_for('static', filename='static/documents_ecole' + ) }}" type="application/pdf" width="100%" height="300"/>
+                <div class="outer_box" id="anciens">
+                    <div class="docs">
+                        <h1 class="titre_affect">Rangs limites d'affections définitifs</h1>
+                        <img src="{{ url_for('static', filename='/documents_ecole/Promo_' + anciens.promo|string +'-4sem.png' ) }}" class="img_affect">
+                    </div> 
                 </div>
+
+                <div>
+                    <div class="outer_box" id="anciens">
+                        <div class="docs">
+                            <h1 class="titre_affect">Rangs limites d'affections des trois premiers semestres</h1>
+                            <img src="{{ url_for('static', filename='/documents_ecole/Promo_' + anciens.promo|string +'-3sem.png' ) }}" class="img_affect">
+                        </div> 
+                    </div>
+                </div>
+
             </div>
+            
         </div>
 
 

@@ -17,6 +17,22 @@ input:focus-visible{
     display: flex;
     flex-direction: row;
 }
+.docs_affect{
+    display: flex;
+    flex-direction: column;
+}
+.docs{
+    margin: 0.5em;
+    display: flex;
+    flex-direction: column;
+}
+.titre_affect{
+    margin-top: 0;
+}
+.img_affect{
+    width: 100%;
+    border-radius: 1em;
+}
 
 .outer_box{
     display: flex;
