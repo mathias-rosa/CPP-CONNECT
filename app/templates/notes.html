@@ -21,7 +21,7 @@
             consultation: true,
             addItemToSemestre,
             tooltip : false,
-            gepi : false
+            gepi : false,
         }
     " 
     x-on:swiped-right="
@@ -36,7 +36,10 @@
 
     <h1 id="title">Visualisation des notes</h1>
 
-    <button @click="gepi ? gepi = false : gepi = true">Telecharger notes</button>
+    <div class="boutons_spé">
+        <button class="bt_spé" id="bt_graphes">Afficher graphes</button>
+        <button @click="gepi ? gepi = false : gepi = true" class="bt_spé">Telecharger notes</button>
+    </div>
 
     <div class="gepi-login" x-show="gepi" 
         x-data="{
@@ -59,8 +62,8 @@
         </div>
         
         <div class="gepi-btns">
-                <button class="btn" id="cta" @click="getNotesFromGepi(gepi_username, gepi_password) ; gepi = false ; gepi_username= '' ; gepi_password = ''" >Se connecter</button>
             <button class="btn" @click="gepi = false ; gepi_username= '' ; gepi_password = ''">Abandonner</button>
+            <button class="btn" id="cta" @click="getNotesFromGepi(gepi_username, gepi_password) ; gepi = false ; gepi_username= '' ; gepi_password = ''" >Se connecter</button>
         </div>
 
     </div>
@@ -93,6 +96,7 @@
         <input type="hidden" x-model="selSemestre" id="SemesterVar"></input>
 
     </div>
+
 
     <div class="notes_et_graphes"  x-show="!gepi" 
         x-transition:enter.ease-out.duration.400ms
@@ -325,8 +329,7 @@
         </div>
     
     
-        <div class="graphe_moyennes"  
-        
+        <div class="graphe_moyennes"
             x-transition:enter.ease-out.duration.400ms
             x-transition:enter-start.opacity.0
             x-transition:enter-start.scale.90
@@ -354,7 +357,19 @@
 
     async function getNotesFromGepi(username, password) {
         console.log(username, password);
-        return await getNotes();
+        const rawResponse = await fetch('{{baseURL}}/get_notes_gepi', {
+            method: 'POST',
+            headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                'gepi_username' : username,
+                'gepi_password' : password
+            })
+        });
+        // return await rawResponse.json(); 
+        // return await getNotes();
     }
 
     function addItemToSemestre(notesSemestre, obj, path) {

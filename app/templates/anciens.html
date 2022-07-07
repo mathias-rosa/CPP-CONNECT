@@ -46,25 +46,29 @@
     
             </div>
             
-            <div class="docs_affect">
+            {% if anciens.rangs %}
+  
+                <div class="docs_affect">
 
-                <div class="outer_box" id="anciens">
-                    <div class="docs">
-                        <h1 class="titre_affect">Rangs limites d'affections définitifs</h1>
-                        <img src="{{ url_for('static', filename='/documents_ecole/Promo_' + anciens.promo|string +'-4sem.png' ) }}" class="img_affect">
-                    </div> 
-                </div>
-
-                <div>
-                    <div class="outer_box" id="anciens">
+                    <div class="outer_box" id="classement">
                         <div class="docs">
-                            <h1 class="titre_affect">Rangs limites d'affections des trois premiers semestres</h1>
-                            <img src="{{ url_for('static', filename='/documents_ecole/Promo_' + anciens.promo|string +'-3sem.png' ) }}" class="img_affect">
+                            <h1 class="titre_affect">Rangs limites d'affections définitifs</h1>
+                            <img src="{{ url_for('static', filename='/documents_ecole/Promo_' + anciens.promo|string +'-4sem.png' ) }}" class="img_affect">
                         </div> 
                     </div>
-                </div>
 
-            </div>
+                    <div>
+                        <div class="outer_box" id="classement">
+                            <div class="docs">
+                                <h1 class="titre_affect">Simulations prenant en compte que les trois premiers semestres</h1>
+                                <img src="{{ url_for('static', filename='/documents_ecole/Promo_' + anciens.promo|string +'-3sem.png' ) }}" class="img_affect">
+                            </div> 
+                        </div>
+                    </div>
+
+                </div>
+            
+            {% endif %}
             
         </div>
 

@@ -21,6 +21,12 @@ window.afficheNotes = async function afficheNotes(semestre) {
   let myChart = new Chart(graph, {
     type: "bar",
     options: {
+      scales: {
+        y: {
+          suggestedMin: 0,
+          suggestedMax: 20,
+        },
+      },
       radius: 3,
       plugins: {
         autocolors: false,

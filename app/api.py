@@ -205,38 +205,6 @@ def add_record():
     return "Invalid args"
 
 
-def rajouter_note(liste_matiere, colles, maths_ou_physique):
-    """
-        Cette fonction sert à rajouter les notes de colles de maths et de physique dans les
-        moyennes de maths et de physique.
-    """
-    # On souhaite rajouter la moyenne des colles de maths dans la moyenne de maths
-    moyenne_colles = None
-    for matiere in liste_matiere:
-        if matiere[0] == colles:
-            moyenne_colles = matiere[1]
-            break
-    if moyenne_colles:
-        # Si la moyenne de mat n'existe pas encore,
-        # On crée une liste contenant le nom des matières
-        liste_matiere_nom = [matiere[0] for matiere in liste_matiere]
-        if not maths_ou_physique in liste_matiere_nom:
-            liste_matiere.append([maths_ou_physique, moyenne_colles, {
-                            "nom_note": colles,
-                            "note": moyenne_colles,
-                            "coef": 3.0,
-                            "date": datetime.date.today().strftime("%d/%m/%Y"),
-                        }])
-        else:
-            index_maths = liste_matiere_nom.index(maths_ou_physique)
-            liste_matiere[index_maths].insert(2,{
-                            "nom_note": colles,
-                            "note": moyenne_colles,
-                            "coef": 3.0,
-                            "date": datetime.date.today().strftime("%d/%m/%Y")
-                        })
-
-
 def calcul_moyenne(notes : list, type="generale"):
 
     moy_ou_note = "moyenne" if type == "generale" else "note"
@@ -299,10 +267,40 @@ def get_notes():
     return notes_prepa["semestres"]
 
 
-@app.route('/notes/get_notes_gepi')
+@app.route('/notes/update_notes', methods=['GET', 'POST'])
+@login_required
+def update_notes():
+
+    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
+
+    notes_prepa["semestres"] = request.json
+
+    for semestre in range(1, 5):
+
+        for matiere in notes_prepa["semestres"]["semestre" + str(semestre)]["notes"]:
+                matiere["moyenne"] = calcul_moyenne(matiere["notes"], type="note")
+        
+        notes_prepa["semestres"]["semestre" + str(semestre)]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre" + str(semestre)]["notes"])
+
+    mongodb.db.Notes.replace_one(({"username" : str(current_user.username)}), notes_prepa)
+
+    return notes_prepa["semestres"]
+
+
+
+@app.route('/notes/get_notes_gepi', methods=['GET', 'POST'])
 @login_required
 def get_notes_gepi():
-    pass
+    
+    credentials = request.json
+
+    print(credentials)
+
+    gepi_username = credentials["gepi_username"]
+    gepi_password = credentials["gepi_password"]
+
+
+    return json.dump({gepi_username, gepi_password})
 
 
 # @app.route('/notes/get_notes_gepi')
@@ -437,25 +435,36 @@ def get_notes_gepi():
 
 #     return {"notes": liste_matiere}
 
-
-@app.route('/notes/update_notes', methods=['GET', 'POST'])
-@login_required
-def update_notes():
-
-    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
-
-    notes_prepa["semestres"] = request.json
-
-    for semestre in range(1, 5):
-
-        for matiere in notes_prepa["semestres"]["semestre" + str(semestre)]["notes"]:
-                matiere["moyenne"] = calcul_moyenne(matiere["notes"], type="note")
-        
-        notes_prepa["semestres"]["semestre" + str(semestre)]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre" + str(semestre)]["notes"])
-
-    mongodb.db.Notes.replace_one(({"username" : str(current_user.username)}), notes_prepa)
-
-    return notes_prepa["semestres"]
+def rajouter_note(liste_matiere, colles, maths_ou_physique):
+    """
+        Cette fonction sert à rajouter les notes de colles de maths et de physique dans les
+        moyennes de maths et de physique.
+    """
+    # On souhaite rajouter la moyenne des colles de maths dans la moyenne de maths
+    moyenne_colles = None
+    for matiere in liste_matiere:
+        if matiere[0] == colles:
+            moyenne_colles = matiere[1]
+            break
+    if moyenne_colles:
+        # Si la moyenne de mat n'existe pas encore,
+        # On crée une liste contenant le nom des matières
+        liste_matiere_nom = [matiere[0] for matiere in liste_matiere]
+        if not maths_ou_physique in liste_matiere_nom:
+            liste_matiere.append([maths_ou_physique, moyenne_colles, {
+                            "nom_note": colles,
+                            "note": moyenne_colles,
+                            "coef": 3.0,
+                            "date": datetime.date.today().strftime("%d/%m/%Y"),
+                        }])
+        else:
+            index_maths = liste_matiere_nom.index(maths_ou_physique)
+            liste_matiere[index_maths].insert(2,{
+                            "nom_note": colles,
+                            "note": moyenne_colles,
+                            "coef": 3.0,
+                            "date": datetime.date.today().strftime("%d/%m/%Y")
+                        })
 
 
 @app.route('/update_user')
