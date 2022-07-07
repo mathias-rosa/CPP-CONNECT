@@ -223,6 +223,15 @@
                 );
             }
 
+            function getCours(edt) {
+                let edt_json = decrypter_data_edt(edt);
+                let date = new Date()
+                let today = edt_json.array_colonnes_jours[date.getDay() - 1]
+                console.log(today);
+            }
+
+
+
             // -----------------------------------------------------
 
         </script>
