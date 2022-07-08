@@ -24,10 +24,60 @@
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
-            <!-- <div class="calendar">
-                <h2>Emploi du temps</h2>
-                <embed src="http://www.truite.org/wp-content/uploads/2016/03/Guide-papillons.pdf" type="application/pdf" width="100%" height="300"/>
-            </div> -->
+            <div class="calendar" x-data="{getCours}">
+                <h2>Lundi</h2>
+                <div class="journée">
+                    <template x-for="(cours, index) in getCours('{{edt}}')">
+                        <div class="cours" 
+                            x-data="{hd : cours['position_minutes_debut'], hf : cours['position_minutes_fin']}"
+                            x-init="
+                                $el.style.top = ((hd-450)/(1050-450) * 500 + index*10).toString() + 'px';
+                                $el.style.height= ((hf-hd)/(1050-450) * 500).toString() + 'px';
+                                $el.style.backgroundColor = cours['background_color1'];
+                            " 
+                        >
+                            <h1 x-text="cours['nom1_ligne1']"></h1>
+                            <p x-text="cours['professeur1'] + ' ' + cours['salle1']"></p>
+                            <h2 x-text="convertHMS(hd) + ' - ' + convertHMS(hf)"></h2>
+                        </div>                        
+                    </template>
+
+                    <div class="cours" style="height : 100px;">
+
+                    </div>
+                                            
+
+                    <!-- <div class="cours"
+                        style="display: none;"
+                        x-init="
+                            $el.style.top = ((450-450)/(1050-450) * 100).toString() + '%';
+                            $el.style.height= ((570-450)/(1050-450) * 100).toString() + '%';
+                            $el.style.backgroundColor = 'magenta';
+                        " 
+                    >
+                        <h1>Mathématiques</h1>
+                        <p>Gilles</p>
+                        <h2 x-text="convertHMS(450) + ' - ' + convertHMS(570)"></h2>
+                        
+                        
+                    </div>
+                    <div class="cours" 
+                        style="display: none;"
+                        x-init="
+                            $el.style.top = ((570-450)/(1050-450) * 100 + 2).toString() + '%';
+                            $el.style.height= ((720-570)/(1050-450) * 100).toString() + '%';
+                            $el.style.backgroundColor = 'magenta';
+
+                        " 
+                    >
+                        <h1>Physique</h1>
+                        <p>Dudu</p>
+                        <h2 x-text="convertHMS(570) + ' - ' + convertHMS(720)"></h2>
+                        
+                    </div> -->
+                    
+                </div>
+            </div>
         </div>
         <div class="pannel" id="menu">
             <div class="tile" id="welcome">
@@ -228,9 +278,18 @@
                 let date = new Date()
                 let today = edt_json.array_colonnes_jours[date.getDay() - 1]
                 console.log(today);
+                return today
             }
 
-
+            function convertHMS(value) {
+                const min = parseInt(value, 10); // convert value to number if it's string
+                let hours   = Math.floor(min / 60); // get hours
+                let minutes = Math.floor((min - (hours * 60))); // get minutes
+                // add 0 if value < 10; Example: 2 => 02
+                if (hours   < 10) {hours   = "0"+hours;}
+                if (minutes < 10) {minutes = "0"+minutes;}
+                return hours+':'+minutes; // Return is HH : MM 
+            }
 
             // -----------------------------------------------------
 
