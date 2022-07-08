@@ -205,11 +205,18 @@ def dashboard():
     else:
         theaming = "light-theme"
     userlist = [User(user) for user in mongodb.db.Users.find({})]
+
+    edt = mongodb.db.edt.find_one({"semaine": datetime.datetime.utcnow().isocalendar()[1]})
+
+    if edt:
+        edt = edt['edt']
+
     return render_template('dashboard.html',
                             current_user=current_user,
                             userlist=userlist,
                             theaming=theaming,
-                            baseURL=request.base_url
+                            baseURL=request.base_url,
+                            edt=edt
                             )
 
 

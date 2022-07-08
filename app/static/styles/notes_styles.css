@@ -1,5 +1,7 @@
 /* Connection à gepi (* duplicat avec login_styles.css * ) ----------------------------- */
-
+/* #title {
+  text-align: center;
+} */
 .gepi-login {
   display: flex;
   flex-direction: column;
@@ -82,16 +84,25 @@
 
 
 /* Le reste --------------------------------------------------------------------------- */
+
+.title-box {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  margin-bottom: 3%;
+  flex-wrap: wrap;
+}
+
 .boutons_spé {
   display: flex;
-  border-radius: 0.5em;
+  border-radius: 1.5em;
   padding: 1%;
-  margin-bottom: 3%;
-  max-width: 32em;
   background: var(--theme-color);
   align-items: center;
   box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
   border: 0.1em solid hsl(var(--third-color));
+  justify-content: center;
 }
 
 .bt_spé {
@@ -100,10 +111,21 @@
   font-weight: 600;
   font-size: 1em;
   color: white;
-  width: 100%;
+  border: none;
+  width: fit-content;
+  min-width: 13em;
   height: 3em;
-  border-radius: 0.5em;
-  margin: 1%
+  padding-inline: 4%;
+  border-radius: 0.6em;
+  margin: 1%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  cursor: pointer;
+}
+.bt_spé:hover {
+  background: hsl(var(--accent-color));
 }
 
 #bt_graphes {
@@ -167,147 +189,6 @@
   outline: 0;
 }
 
-.gepi {
-  display: flex;
-  align-items: center;
-  cursor: pointer;
-  margin-left: 1em;
-}
-
-.gepi h1 {
-  font-size: 1em;
-  color: black;
-}
-
-.gepi i {
-  margin-left: 0.5em;
-}
-
-.popup {
-  display: block;
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%;
-  background-color: hsla(var(--second-color), 0.3);
-  backdrop-filter: blur(0.1em);
-}
-
-.gepi-form {
-  display: flex;
-  position: absolute;
-  margin: auto;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  height: fit-content;
-  height: -moz-fit-content;
-  background: var(--theme-color);
-  border-radius: 1.5em;
-  padding: 2%;
-  max-width: 100%;
-  width: 30em;
-  align-content: center;
-  justify-content: flex-start;
-  align-items: flex-start;
-  flex-direction: column;
-}
-
-.gepi-form input {
-  width: 10em;
-  margin-right: 3%;
-}
-
-.gepi-form div {
-  width: 100%;
-}
-
-.gepi-form h1 {
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
-  color: hsl(var(--accent-color));
-}
-
-.gepi-form h2 {
-  width: 100%;
-  font-size: 1em;
-  color: hsl(var(--paragraph-color));
-}
-
-.gepi-form input {
-  display: flex;
-  padding-top: 0.2em;
-  margin-top: 0.2em;
-  padding-bottom: 0.2em;
-  padding-left: 0.5em;
-  height: 2.3em;
-  min-width: 15em;
-  background-color: transparent;
-  border: solid 0.14em hsl(var(--third-color));
-  border-radius: 0.3em;
-  font-family: "Poppins";
-  color: hsl(var(--second-color));
-}
-
-.gepi-form input:focus-visible {
-  outline: none;
-  border-bottom: solid hsl(var(--accent-color));
-}
-
-.buttons {
-  display: flex;
-  margin-top: 3%;
-}
-
-.buttons #download {
-  display: flex;
-  padding-top: 0;
-  padding: 0.4em;
-  margin-top: 3%;
-  border-radius: 0.5em;
-  border: none;
-  background-color: hsl(var(--second-accent-color));
-  color: white;
-  width: 13em;
-  justify-content: center;
-  font-family: "Poppins";
-  font-size: 1.1em;
-  font-weight: 800;
-  cursor: pointer;
-  margin-right: 4%;
-}
-
-.buttons #cancel {
-  display: flex;
-  padding-top: 0;
-  padding: 0.4em;
-  margin-top: 3%;
-  border: none;
-  color: hsl(var(--accent-color));
-  background-color: transparent;
-  justify-content: center;
-  font-family: "Poppins";
-  font-size: 1.1em;
-  font-weight: 400;
-  cursor: pointer;
-  margin-right: 4%;
-  align-items: center;
-}
-
-.buttons #cancel:hover {
-  text-decoration: underline 0.1em solid;
-}
-
-.bout_gr_mob {
-  display: none;
-}
-
 .notes-container {
   width: 30em;
   height: fit-content;
@@ -369,6 +250,7 @@
   padding-right: 4%;
   padding-left: 4%;
   border-radius: 0.5em;
+  box-sizing: border-box;
   height: 3em;
   width: 100%;
   background-color: hsl(var(--second-accent-color));
@@ -525,6 +407,10 @@ input.moyenne_name {
   flex: 1;
   flex-direction: row;
 }
+#graph.notes {
+  height: auto;
+  margin-block: 3%;
+}
 
 .boutons-ajouter {
   display: flex;
@@ -574,9 +460,10 @@ input.moyenne_name {
 
 
 @media only screen and (max-width: 1000px) {
-  .graphe_moyennes {
+
+  /* .graphe_moyennes {
     display: none;
-  }
+  } */
 
   .nom_note {
     font-size: 2em;
@@ -613,11 +500,21 @@ input.moyenne_name {
   }
 
   #bt_graphes {
-    display: block;
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .div-graph {
+    margin-left: 0;
+    border-radius: 1em;
   }
 }
 
 @media only screen and (max-width: 600px) {
+
+  .title-box {
+    flex-direction: column;
+  }
+
   .gepi-form {
     top: auto;
     border-bottom-left-radius: 0;
@@ -733,7 +630,13 @@ input.moyenne_name {
     justify-content: center;
   }
 
-  .bt_spé{
-    height: 4em;
+  .boutons_spé {
+    width: 100%;
+  }
+  .bt_spé {
+    justify-content: center;
+    width: 100%;
+    min-width: 3em;
+    padding-inline: 2%;
   }
 }

@@ -22,6 +22,8 @@
             addItemToSemestre,
             tooltip : false,
             gepi : false,
+            display_graph : true,
+            display_notes : true
         }
     " 
     x-on:swiped-right="
@@ -34,11 +36,23 @@
     "
     x-init="notesSemestre = await getNotes()">
 
-    <h1 id="title">Visualisation des notes</h1>
+    <div class="title-box">
+        <h1 id="title">Visualisation des notes</h1>
 
-    <div class="boutons_spé">
-        <button class="bt_spé" id="bt_graphes">Afficher graphes</button>
-        <button @click="gepi ? gepi = false : gepi = true" class="bt_spé">Telecharger notes</button>
+        <div class="boutons_spé">
+            <button x-init="window.innerWidth < 1000 ? display_graph = false : console.log(window.innerWidth)" 
+                @click="display_graph ? (display_graph = false, display_notes = true) : (display_graph = true, display_notes = false)" 
+                class="bt_spé" id="bt_graphes"
+                >
+                <label x-show="window.innerWidth > 600" x-text=" display_graph ? 'Afficher graphes' : 'Afficher notes'"></label>
+                <label x-show="window.innerWidth < 600" x-text=" display_graph ? 'Graphs on' : 'Graphs off'"></label>
+                <i class="material-icons-round">show_chart</i>
+            </button>
+            <button @click="gepi ? gepi = false : gepi = true" class="bt_spé">
+                <label x-show="window.innerWidth > 600">Télécharger notes</label>
+                <i class="material-icons-round">file_download</i>
+            </button>
+        </div>
     </div>
 
     <div class="gepi-login" x-show="gepi" 
@@ -98,7 +112,7 @@
     </div>
 
 
-    <div class="notes_et_graphes"  x-show="!gepi" 
+    <div class="notes_et_graphes" x-show="!gepi" 
         x-transition:enter.ease-out.duration.400ms
         x-transition:enter-start.opacity.0
         x-transition:enter-start.scale.90
@@ -106,7 +120,13 @@
         x-transition:enter-end.scale.100
     >
 
-        <div class="notes-container">
+        <div class="notes-container" x-show="display_notes"
+            x-transition:enter.ease-out.duration.400ms
+            x-transition:enter-start.opacity.0
+            x-transition:enter-start.scale.90
+            x-transition:enter-end.opacity.100
+            x-transition:enter-end.scale.100
+        >
             <template x-for="semestre in [1, 2, 3, 4]">
 
                 <div class="notes" 
@@ -329,13 +349,37 @@
         </div>
     
     
-        <div class="graphe_moyennes"
+        <div class="graphe_moyennes" x-show="display_graph"
             x-transition:enter.ease-out.duration.400ms
             x-transition:enter-start.opacity.0
             x-transition:enter-start.scale.90
             x-transition:enter-end.opacity.100
             x-transition:enter-end.scale.100
         >
+            <div class="notes" id="graph" x-show="window.innerWidth < 1000">
+                <div class="titre-notes" 
+                    x-on:click="
+                        selSemestre === 4 ? selSemestre = 1 : selSemestre++;
+                        changeColor(selSemestre);
+                ">  
+                    <h1 x-text="'Semestre ' + selSemestre"></h1>
+                    <i class="material-icons-outlined">
+                        arrow_forward_ios
+                    </i>
+                </div>
+
+            </div>
+            
+
+            <div class="graphe_moyennes" id="js"
+                x-transition:enter.ease-out.duration.400ms
+                x-transition:enter-start.opacity.0
+                x-transition:enter-start.scale.90
+                x-transition:enter-end.opacity.100
+                x-transition:enter-end.scale.100
+            >
+
+            </div>
     
         </div>
 
@@ -368,8 +412,8 @@
                 'gepi_password' : password
             })
         });
-        // return await rawResponse.json(); 
-        // return await getNotes();
+        console.log(await rawResponse.json()); 
+        return await getNotes();
     }
 
     function addItemToSemestre(notesSemestre, obj, path) {

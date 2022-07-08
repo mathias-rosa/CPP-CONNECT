@@ -294,13 +294,13 @@ def get_notes_gepi():
     
     credentials = request.json
 
-    print(credentials)
+    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
 
     gepi_username = credentials["gepi_username"]
     gepi_password = credentials["gepi_password"]
 
 
-    return json.dump({gepi_username, gepi_password})
+    return credentials
 
 
 # @app.route('/notes/get_notes_gepi')

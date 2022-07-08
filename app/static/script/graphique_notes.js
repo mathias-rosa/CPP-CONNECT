@@ -2,7 +2,7 @@ let style = getComputedStyle(document.body);
 
 let semestre = JSON.parse(window.localStorage.getItem("semestre"));
 
-let graphe_moyennes = document.getElementsByClassName("graphe_moyennes");
+let graphe_moyennes = document.querySelector("#js.graphe_moyennes");
 
 
 window.afficheNotes = async function afficheNotes(semestre) {
@@ -71,7 +71,7 @@ window.afficheNotes = async function afficheNotes(semestre) {
     },
   });
   
-  graphe_moyennes = document.querySelector(".graphe_moyennes");
+  graphe_moyennes = document.querySelector("#js.graphe_moyennes");
   let div = document.createElement("div");
   div.className = "div-graph";
   div.style.marginTop = "0";
@@ -151,7 +151,7 @@ window.afficheNotes = async function afficheNotes(semestre) {
           },
           
         });
-        let graphe_moyennes = document.querySelector(".graphe_moyennes");
+        let graphe_moyennes = document.querySelector("#js.graphe_moyennes");
         let div = document.createElement("div");
         div.className = "div-graph";
         div.appendChild(graph);
