@@ -59,6 +59,7 @@
         x-data="{
             gepi_username : '',
             gepi_password : ''
+            gepi_semestre : 1
         }"
         x-transition:enter.ease-out.duration.400ms
         x-transition:enter-start.opacity.0
@@ -73,11 +74,14 @@
             
             <label> Mot de passe GEPI </label>
             <input type="password" :value="gepi_password" @input="gepi_password = $event.target.value">
+
+            <label>Notes du Semestre :</label>
+            <input type="number" :value="gepi_semestre" @input="gepi_semestre = $event.target.value">
         </div>
         
         <div class="gepi-btns">
             <button class="btn" @click="gepi = false ; gepi_username= '' ; gepi_password = ''">Abandonner</button>
-            <button class="btn" id="cta" @click="getNotesFromGepi(gepi_username, gepi_password) ; gepi = false ; gepi_username= '' ; gepi_password = ''" >Se connecter</button>
+            <button class="btn" id="cta" @click="notesSemestre = await getNotesFromGepi(gepi_username, gepi_password, gepi_semestre) ; gepi = false"  >Se connecter</button>
         </div>
 
     </div>
@@ -399,8 +403,11 @@
         return await notes;
     }
 
-    async function getNotesFromGepi(username, password) {
-        console.log(username, password);
+    async function getNotesFromGepi(username, password, semestre) {
+        if (semestre > 4 || semestre < 1) {
+            console.log("Erreur semestre invalide")
+            return "Erreur semestre invalide"
+        }
         const rawResponse = await fetch('{{baseURL}}/get_notes_gepi', {
             method: 'POST',
             headers: {
@@ -409,11 +416,12 @@
             },
             body: JSON.stringify({
                 'gepi_username' : username,
-                'gepi_password' : password
+                'gepi_password' : password,
+                'semestre' : semestre
             })
         });
-        console.log(await rawResponse.json()); 
-        return await getNotes();
+        console.log(await rawResponse); 
+        return await rawResponse;
     }
 
     function addItemToSemestre(notesSemestre, obj, path) {

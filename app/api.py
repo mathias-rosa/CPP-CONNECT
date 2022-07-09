@@ -205,102 +205,18 @@ def add_record():
     return "Invalid args"
 
 
-def calcul_moyenne(notes : list, type="generale"):
+# def calcul_moyenne(notes : list, type="generale"):
 
-    moy_ou_note = "moyenne" if type == "generale" else "note"
-    moyenne = 0
-    coefs = 0
-    for matiere_ou_note in notes:
-        moyenne += matiere_ou_note[moy_ou_note] * matiere_ou_note['coef']
-        coefs += matiere_ou_note['coef']
+#     moy_ou_note = "moyenne" if type == "generale" else "note"
+#     moyenne = 0
+#     coefs = 0
+#     for matiere_ou_note in notes:
+#         moyenne += matiere_ou_note[moy_ou_note] * matiere_ou_note['coef']
+#         coefs += matiere_ou_note['coef']
     
-    if coefs == 0:
-        return None
-    return round(moyenne / coefs, 2)
-
-
-@app.route('/notes/get_notes')
-@login_required
-def get_notes():
-    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
-    if notes_prepa:
-        
-        # Calcul des moyennes 
-
-        for semestre in range(1, 5):
-
-            for matiere in notes_prepa["semestres"]["semestre" + str(semestre)]["notes"]:
-                matiere["moyenne"] = calcul_moyenne(matiere["notes"], type="note")
-            
-            notes_prepa["semestres"]["semestre" + str(semestre)]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre" + str(semestre)]["notes"])
-
-        mongodb.db.Notes.replace_one(({"username" : str(current_user.username)}), notes_prepa)
-
-
-        return notes_prepa["semestres"]
-
-    notes_prepa = {
-        "username" : str(current_user.username),
-        "semestres": {
-            "semestre1" : {
-                "moyenne" : 20,
-                "notes" : []
-            },
-            "semestre2" : {
-                "moyenne" : 20,
-                "notes" : []
-            },
-            "semestre3" : {
-                "moyenne" : 20,
-                "notes" :  []
-            },
-            "semestre4" : {
-                "moyenne" : 20,
-                "notes" :  []
-            },
-            }
-        }
-
-    mongodb.db.Notes.insert_one(notes_prepa)
-    
-
-    return notes_prepa["semestres"]
-
-
-@app.route('/notes/update_notes', methods=['GET', 'POST'])
-@login_required
-def update_notes():
-
-    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
-
-    notes_prepa["semestres"] = request.json
-
-    for semestre in range(1, 5):
-
-        for matiere in notes_prepa["semestres"]["semestre" + str(semestre)]["notes"]:
-                matiere["moyenne"] = calcul_moyenne(matiere["notes"], type="note")
-        
-        notes_prepa["semestres"]["semestre" + str(semestre)]["moyenne"] = calcul_moyenne(notes_prepa["semestres"]["semestre" + str(semestre)]["notes"])
-
-    mongodb.db.Notes.replace_one(({"username" : str(current_user.username)}), notes_prepa)
-
-    return notes_prepa["semestres"]
-
-
-
-@app.route('/notes/get_notes_gepi', methods=['GET', 'POST'])
-@login_required
-def get_notes_gepi():
-    
-    credentials = request.json
-
-    notes_prepa = mongodb.db.Notes.find_one({"username" : str(current_user.username)})
-
-    gepi_username = credentials["gepi_username"]
-    gepi_password = credentials["gepi_password"]
-
-
-    return credentials
+#     if coefs == 0:
+#         return None
+#     return round(moyenne / coefs, 2)
 
 
 # @app.route('/notes/get_notes_gepi')
