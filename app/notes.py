@@ -8,6 +8,7 @@ from werkzeug.security import generate_password_hash
 from flask_login import login_required, logout_user, current_user
 
 import requests
+import os
 
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
