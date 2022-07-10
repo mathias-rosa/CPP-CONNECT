@@ -502,6 +502,7 @@ input.moyenne_name {
   #bt_graphes {
     display: flex;
     justify-content: space-evenly;
+    padding: 9%;
   }
   .div-graph {
     margin-left: 0;

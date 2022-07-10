@@ -174,18 +174,18 @@
                         (Swippez pour changer de semestre)
                     </h2>
 
-                    <div>
-                        <a x-show="!consultation"
-                        class="ajouter-matière"
-                        x-transition:enter.duration.300ms
-                        x-transition:leave.duration.200ms 
-                        style="margin-top: 1em; box-sizing: border-box; text-decoration: none;"
-                        href="https://mail.etu.univ-lorraine.fr/"
-                        target="_blank">
-                        Consulter les coefs
-                        <i class="material-icons-round">receipt_long</i>
-                        </a>
-                    </div>
+                    
+                    <a x-show="!consultation"
+                    class="ajouter-matière"
+                    x-transition:enter.duration.300ms
+                    x-transition:leave.duration.200ms 
+                    style="margin-top: 1em; box-sizing: border-box; text-decoration: none;"
+                    href="https://mega.nz/fm/yyZQzL6J"
+                    target="_blank">
+                    Consulter les coefs
+                    <i class="material-icons-round">receipt_long</i>
+                    </a>
+                    
                     
                     <div class="moyenne" id="generale" >
                         
@@ -204,14 +204,14 @@
                         notesSemestre = addItemToSemestre(
                             notesSemestre, 
                             {
-                                'coef' : 1,
+                                'coef' : NaN,
                                 'moyenne' : 20,
                                 'name' : 'Nouvelle Matière',
                                 'notes' : [
                                     {
-                                        'coef' : 1,
+                                        'coef' : NaN,
                                         'name' : 'Nouvelle Evaluation',
-                                        'note' : 20
+                                        'note' : NaN
 
                                     }
                                 ]
@@ -296,9 +296,9 @@
                                     x-transition:leave.duration.200ms
                                     x-on:click="notesSemestre = addItemToSemestre(notesSemestre, 
                                         {
-                                            'coef' : 1,
+                                            'coef' : NaN,
                                             'name' : 'Nouvelle Evaluation',
-                                            'note' : 20
+                                            'note' : NaN
 
                                         },
                                         ['semestre' + semestre, 'notes', indexCounter, 'notes']
@@ -319,14 +319,14 @@
                                     notesSemestre = addItemToSemestre(
                                         notesSemestre, 
                                         {
-                                            'coef' : 1,
+                                            'coef' : NaN,
                                             'moyenne' : 20,
                                             'name' : 'Nouvelle Matière',
                                             'notes' : [
                                                 {
-                                                    'coef' : 1,
+                                                    'coef' : NaN,
                                                     'name' : 'Nouvelle Evaluation',
-                                                    'note' : 20
+                                                    'note' : NaN
 
                                                 }
                                             ]
