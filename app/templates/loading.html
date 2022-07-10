@@ -1,0 +1,59 @@
+
+<!-- A integrer dans une div class loading. -->
+
+<img src="{{ url_for('static', filename='img/' + theaming + '/hexagon_in.svg') }}" alt="hexagon_in" class="hexagon_loading" id="hexagon_in">
+<img src="{{ url_for('static', filename='img/' + theaming + '/hexagon_out.svg') }}" alt="hexagon_out" class="hexagon_loading" id="hexagon_out">
+
+<style>
+    .loading {
+        display: flex;
+        position: fixed;
+        width: 100%;
+        height: 91%;
+        margin-top: -2%;
+        margin-left: -2%;
+        align-items: center;
+        background-color: var(--theme-color);
+        /* border-radius: 1.5em; */
+        z-index: 1;
+    }
+    .hexagon_loading {
+        position: absolute;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto; 
+    }
+    #hexagon_in {
+        height: 22%;
+        animation: spin_g 2s linear infinite;
+        
+    }
+    #hexagon_out {
+        height: 30%;
+        animation: spin_d 2s linear infinite;
+    }
+
+    @keyframes spin_d {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+    @keyframes spin_g {
+        0% { transform: rotate(360deg); }
+        100% { transform: rotate(0deg); }
+    }
+
+    @media only screen and (max-width: 600px) {
+        .loading {
+            margin-left: -5%;
+            margin-top: -5%;
+        }
+        #hexagon_in {
+            height: 15%;
+        }
+        #hexagon_out {
+            height: 22%;
+        }
+    }
+
+</style>

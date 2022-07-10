@@ -23,7 +23,8 @@
             tooltip : false,
             gepi : false,
             display_graph : true,
-            display_notes : true
+            display_notes : true,
+            clické : false
         }
     " 
     x-on:swiped-right="
@@ -55,10 +56,14 @@
         </div>
     </div>
 
+    <div x-show="clické" class="loading">
+        {% include 'loading.html' %}
+    </div>
+
     <div class="gepi-login" x-show="gepi" 
         x-data="{
             gepi_username : '',
-            gepi_password : ''
+            gepi_password : '',
             gepi_semestre : 1
         }"
         x-transition:enter.ease-out.duration.400ms
@@ -81,7 +86,7 @@
         
         <div class="gepi-btns">
             <button class="btn" @click="gepi = false ; gepi_username= '' ; gepi_password = ''">Abandonner</button>
-            <button class="btn" id="cta" @click="notesSemestre = await getNotesFromGepi(gepi_username, gepi_password, gepi_semestre) ; gepi = false"  >Se connecter</button>
+            <button class="btn" id="cta" @click="clické = true ; gepi = false ; notesSemestre, clické = await getNotesFromGepi(gepi_username, gepi_password, gepi_semestre) ; location.reload(); ">Se connecter</button>
         </div>
 
     </div>
@@ -404,7 +409,7 @@
 
     </div>
 
-    
+
 </div>
 
 <script src="{{ url_for('static', filename='script/graphique_notes.js') }}" type="module"></script>
@@ -436,7 +441,7 @@
             })
         });
         console.log(await rawResponse); 
-        return await rawResponse;
+        return await rawResponse, false;
     }
 
     function addItemToSemestre(notesSemestre, obj, path) {

@@ -172,7 +172,7 @@ def get_notes_gepi():
         try:
             nom_matiere = selenium_lines.pop(0).text.split("\n")[0]
         except:
-            return json.dumps(notes_prepa)
+            return notes_prepa
         # On récupère la liste de toutes les notes dans la matière
         liste_notes: list = selenium_lines.pop(0).text.split("\n")
 
@@ -203,6 +203,8 @@ def get_notes_gepi():
             notes_prepa["semestres"][f"semestre{semestre}"]["notes"][index_matiere] = add_notes(
                 liste_notes, notes_prepa["semestres"][f"semestre{semestre}"]["notes"][index_matiere])
     
+    driver.quit()
+
     # On rajoute les colles de maths et physique
 
     liste_matieres = [
@@ -252,6 +254,7 @@ def get_notes_gepi():
 
     mongodb.db.Notes.replace_one(
             ({"username": str(current_user.username)}), notes_prepa)
+
     return notes_prepa["semestres"]
 
 
