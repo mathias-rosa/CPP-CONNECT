@@ -173,6 +173,19 @@
                         x-transition:leave.duration.200ms>
                         (Swippez pour changer de semestre)
                     </h2>
+
+                    <div>
+                        <a x-show="!consultation"
+                        class="ajouter-matière"
+                        x-transition:enter.duration.300ms
+                        x-transition:leave.duration.200ms 
+                        style="margin-top: 1em; box-sizing: border-box; text-decoration: none;"
+                        href="https://mail.etu.univ-lorraine.fr/"
+                        target="_blank">
+                        Consulter les coefs
+                        <i class="material-icons-round">receipt_long</i>
+                        </a>
+                    </div>
                     
                     <div class="moyenne" id="generale" >
                         
@@ -335,6 +348,8 @@
                     <button
                         class="ajouter-matière"
                         x-show="!consultation" 
+                        x-transition:enter.duration.300ms
+                        x-transition:leave.duration.200ms 
                         style="margin-top: 1em;"
                         @click="
                             add = true;
