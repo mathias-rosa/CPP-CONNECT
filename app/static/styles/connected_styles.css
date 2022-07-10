@@ -238,6 +238,7 @@ tr input:focus-visible{
         box-sizing: border-box;
         margin-bottom: 1.5em;
         margin-top: 3%;
+        padding: 1.5em;
     }
     #welcome{
         display: none;

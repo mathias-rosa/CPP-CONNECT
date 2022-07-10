@@ -304,6 +304,7 @@ a#email:hover{
     #anciens.outer_box{
         width: 100%;
         box-sizing: border-box;
+        margin-right: 0;
     }
     .inner_box {
         flex-direction: column;

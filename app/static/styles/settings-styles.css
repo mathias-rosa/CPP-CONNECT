@@ -152,4 +152,20 @@ input{
         width: -moz-available;
         width: -webkit-fill-available;
     }
+
+    .span-et-input {
+        display: flex;
+        flex-direction: column-reverse;
+        justify-content: space-evenly;
+        align-items: stretch;
+        padding: 0;
+    }
+
+    .entrée {
+        margin: 0;
+    }
+
+    .thème {
+        text-align: center;
+    }
 }
