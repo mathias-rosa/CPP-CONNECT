@@ -185,9 +185,12 @@ def get_notes_gepi():
                 "notes": []
             })
 
-            if len(matiere["notes"]) > 1:
+            if {'coef': 1.0, 'name': None, 'note': None, 'date': None, 'gepi': True} in matiere["notes"]:
+                matiere["notes"].remove({'coef': 1.0, 'name': None, 'note': None, 'date': None, 'gepi': True})
+            if len(matiere["notes"]) >= 1:
                 notes_prepa["semestres"][f"semestre{semestre}"]["notes"].append(
                     matiere)
+                liste_matieres.append(nom_matiere)
             
             if nom_matiere == "Colles de mathématiques":
                 colles_de_maths = matiere
@@ -195,6 +198,7 @@ def get_notes_gepi():
             elif nom_matiere == "Colles de physique":
                 colles_de_physique = matiere
                 matiere["coef"] = 0
+        
 
         else:  # Si la matière existe déjà
             index_matiere = next((index for (index, d) in enumerate(
@@ -209,6 +213,7 @@ def get_notes_gepi():
 
     liste_matieres = [
         matiere["name"] for matiere in notes_prepa["semestres"][f"semestre{semestre}"]["notes"]]
+
 
     if "Physique" in liste_matieres:
         liste_matieres.append("Physique Chimie")
