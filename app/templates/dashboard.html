@@ -24,7 +24,7 @@
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
-            <div class="calendar" x-data="{getCours}">
+            <div class="calendar" x-data="{getCours}" x-show="false">
                 <h2>Lundi</h2>
                 <div class="journée">
                     <template x-for="(cours, index) in getCours('{{edt}}')">
