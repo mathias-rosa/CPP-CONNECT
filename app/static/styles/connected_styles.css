@@ -40,7 +40,19 @@
     background-color: hsl(var(--paragraph-color));
     color: var(--theme-color);
     border-radius: 0.5em;
+    font-size: 1em;
     
+}
+
+#pasDeCours{
+    text-align: center;
+    font-size: 1em;
+}
+
+#edtCplt{
+    text-align: center;
+    font-size: 1em;
+    margin-top: 5em;
 }
 
 .tile{

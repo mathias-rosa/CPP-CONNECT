@@ -24,9 +24,11 @@
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
-            <div class="calendar" x-data="{getCours}" x-show="false">
-                <h2>Lundi</h2>
+            <!-- <div class="calendar" x-data="{getCours, jours : ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'], date : new Date()}" x-show="true">
+                <h2 x-text="jours[date.getDay()] + ' ' + date.getDate() + ' / ' + date.getMonth() + ' / ' + date.getFullYear()"></h2>
                 <div class="journée">
+                    <h1 x-text="'{{edt}}' === 'None' ? 'Pas de cours prévus aujourd\'hui' : ''" id="pasDeCours"></h1>
+                    <h1 x-text="'{{edt}}' === 'None' ? 'Consulter mon emploi du temps complet' : ''" id="edtCplt"></h1>
                     <template x-for="(cours, index) in getCours('{{edt}}')">
                         <div class="cours" 
                             x-data="{hd : cours['position_minutes_debut'], hf : cours['position_minutes_fin']}"
@@ -47,7 +49,7 @@
                     </div>
                                             
 
-                    <!-- <div class="cours"
+                    <div class="cours"
                         style="display: none;"
                         x-init="
                             $el.style.top = ((450-450)/(1050-450) * 100).toString() + '%';
@@ -74,10 +76,10 @@
                         <p>Dudu</p>
                         <h2 x-text="convertHMS(570) + ' - ' + convertHMS(720)"></h2>
                         
-                    </div> -->
+                    </div>
                     
                 </div>
-            </div>
+            </div> -->
         </div>
         <div class="pannel" id="menu">
             <div class="tile" id="welcome">
@@ -95,14 +97,14 @@
 
             {% if current_user.est_etudiant() %}
 
-            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
-                <i class="material-icons-round">note_alt</i>
-                <p>Consulter mes notes</p>
-            </a>
             <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
                 <i class="material-icons-round">calculate</i>
                 <p>Calcul de Moyenne</p>
             </a> 
+            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
+                <i class="material-icons-round">note_alt</i>
+                <p>Consulter mes notes</p>
+            </a>
             <a class="tile" id="ressources" href="https://mega.nz/folder/37wTSAaZ#sTxSruLB4YbYgznKBVoU7w" target="_blank">
                 <i class="material-icons-round">folder_open</i>
                 <p>Ressources des années précedentes</p>
