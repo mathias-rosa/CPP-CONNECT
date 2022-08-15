@@ -326,21 +326,6 @@ p, h1, h2 {
 }
 
 
-.fb_dialog{
-  position: inherit !important;
-  background-color: transparent !important;
-}
-
-.fb_dialog_content iframe {
-position: inherit !important;
-
-}
-
-.fb_dialog_content{
-  background-color: transparent;
-  background-color: transparent !important;
-}
-
 @media only screen and (max-width: 600px) {
   .content {
     padding: 5%;
