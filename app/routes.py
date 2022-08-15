@@ -206,10 +206,11 @@ def dashboard():
         theaming = "light-theme"
     userlist = [User(user) for user in mongodb.db.Users.find({})]
 
-    edt = mongodb.db.edt.find_one({"semaine": datetime.datetime.utcnow().isocalendar()[1]})
+    #edt = mongodb.db.edt.find_one({"semaine": datetime.datetime.utcnow().isocalendar()[1]})
+    edt = mongodb.db.edt.find_one({"promo": current_user.promo})
 
     if edt:
-        edt = edt['edt']
+        edt = edt['semaines'][str(datetime.datetime.utcnow().isocalendar()[1])]
 
     return render_template('dashboard.html',
                             current_user=current_user,
