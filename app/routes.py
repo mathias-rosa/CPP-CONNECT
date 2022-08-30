@@ -391,7 +391,7 @@ def settings():
 
         if profilePicForm.profile_pic.data != "":
 
-            if "Benjamin La cucarracha" in current_user.profil_pic_url:
+            if "Benjamin La cucarracha" in profilePicForm.profile_pic.data:
                     
                 mongodb.db.Users.update_one(
                     {"_id": current_user.id},
@@ -408,6 +408,8 @@ def settings():
                 ".jpeg" in profilePicForm.profile_pic.data or \
                 ".gif" in profilePicForm.profile_pic.data :
                     
+                current_user.profil_pic_url = profilePicForm.profile_pic.data
+
                 mongodb.db.Users.update_one(
                     {"_id": current_user.id},
                     {'$set':
