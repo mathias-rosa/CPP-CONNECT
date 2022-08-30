@@ -83,9 +83,11 @@ form{
     margin: 5%;
     /*margin-top: 0;*/
     margin-left: 0;
+    overflow-x: auto;
 }
 .radio{
     margin-right: 3%;
+    flex-shrink: 0;
     width: 12em;
     height: 9em;
     overflow: hidden;
@@ -153,17 +155,17 @@ input{
         width: -webkit-fill-available;
     }
 
-    .span-et-input {
+    /* .span-et-input {
         display: flex;
         flex-direction: column-reverse;
         justify-content: space-evenly;
         align-items: center;
         padding: 0;
-    }
+    } */
 
-    .entrée {
+    /* .entrée {
         margin: 0;
-    }
+    } */
 
     .thème {
         text-align: center;
