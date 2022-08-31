@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/edt_styles.css') }}">
+<title>Outils</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="content" x-data="{getCours, jours : ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'], date : new Date()}">
+
+{% if current_user.est_secretaire() %}
+
+<h1>Espace de gestion des emplois du temps</h1>
+
+<form action="edt_1A">
+
+
+</form>
+
+<form action="edt_2A">
+
+
+</form>
+
+{% endif %}
+
+{% if current_user.est_etudiant() %}
+
+<h1>Consultation de l'emploi du temps</h1>
+
+
+{% endif %}
+
+<h1 id="title" x-text="'Emploi du temps"></h1>
+
+<script>
+    let SEL = "08Po12Is19Sy81"
+    
+    function b64_to_utf8(e) {
+        var e = e;
+        return decodeURIComponent(window.atob(e));
+    }
+    function decrypter_data_edt(e) {
+        var e = e,
+        t = new RegExp(SEL, "g");
+        return JSON.parse((
+        (data_base64_sans_sel = e.replace(t, "")),
+        (data_normal = b64_to_utf8(data_base64_sans_sel)),
+        data_normal)
+        );
+    }
+
+    function getCours(edt) {
+        let edt_json = decrypter_data_edt(edt);
+        let date = new Date()
+        let today = edt_json.array_colonnes_jours[date.getDay() - 1]
+        console.log(today);
+        return today
+    }
+
+    function convertHMS(value) {
+        const min = parseInt(value, 10); // convert value to number if it's string
+        let hours   = Math.floor(min / 60); // get hours
+        let minutes = Math.floor((min - (hours * 60))); // get minutes
+        // add 0 if value < 10; Example: 2 => 02
+        if (hours   < 10) {hours   = "0"+hours;}
+        if (minutes < 10) {minutes = "0"+minutes;}
+        return hours+':'+minutes; // Return is HH : MM 
+    }
+</script>
+
+</div>
+
+{% endblock %}

@@ -3,6 +3,7 @@
     Module qui définit certains objets utilisés dans l'application
 """
 
+import datetime
 from flask import Flask, send_from_directory, request
 from flask_login import UserMixin, LoginManager
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
@@ -27,6 +28,12 @@ class User(UserMixin):
         self.theaming = user_dict.get('theaming')
         self.promo = user_dict.get("promo")
         self.profil_pic_url = user_dict.get("profil_pic_url")
+    
+    def annee(self):
+        date = datetime.datetime.now()
+        if date.month > 7 :
+  	        return date.year - 2009 - self.promo + 1
+        return date.year - 2010 - self.promo + 1
 
     def est_admin(self):
         return self.accountType == "admin"

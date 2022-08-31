@@ -320,6 +320,21 @@ def anciens():
                             baseURL=request.base_url
                             )
 
+@app.route('/edt')
+@login_required
+def edt():
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+
+    return render_template('edt.html',
+                            current_user=current_user,
+                            theaming=theaming,
+                            baseURL=request.base_url
+                            )
+
+
 @app.route('/notes')
 @login_required
 def notes():

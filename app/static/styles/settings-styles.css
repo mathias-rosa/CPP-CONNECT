@@ -1,4 +1,4 @@
-.div-box{
+.div-box {
     display: flex;
     background: var(--theme-color);
     box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
@@ -12,10 +12,12 @@
     margin-bottom: 3%;
     box-sizing: border-box;
 }
-.div-box h1{
+
+.div-box h1 {
     margin-top: 0;
 }
-.form-control{
+
+.form-control {
     display: flex;
     padding-top: 0.2em;
     margin-top: 0.2em;
@@ -28,56 +30,63 @@
     font-family: 'Poppins';
     color: hsl(var(--second-color));
 }
-.form-control:focus-visible{
+
+.form-control:focus-visible {
     outline: none;
     border-bottom: solid hsl(var(--accent-color));
 }
-#password.form-control{
+
+#password.form-control {
     width: 18em;
 }
-.form-group{
+
+.form-group {
     margin: 3%;
     margin-top: 0%;
     margin-left: 0;
-    
+
 }
 
-.profile_pic{
+.profile_pic {
     display: flex;
     align-items: center;
 }
 
-.form-group label{
+.form-group label {
     color: hsl(var(--paragraph-color))
 }
-.form-profile{
+
+.form-profile {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
 }
 
-form{
+form {
     padding-bottom: 1em;
 }
 
-.change_profile_pic_form a{
+.change_profile_pic_form a {
     line-break: anywhere;
     color: hsl(var(--second-accent-color));
 }
-.inputs{
+
+.inputs {
     width: 100%;
 }
-.inputs-inline{
+
+.inputs-inline {
     display: flex;
     align-items: flex-end;
     width: 100%;
-}   
-.control-label{
+}
+
+.control-label {
     display: flex;
     width: 101%;
 }
 
-.boutons-modes{
+.boutons-modes {
     display: flex;
     width: 100%;
     margin: 5%;
@@ -85,7 +94,8 @@ form{
     margin-left: 0;
     overflow-x: auto;
 }
-.radio{
+
+.radio {
     margin-right: 3%;
     flex-shrink: 0;
     width: 12em;
@@ -95,7 +105,8 @@ form{
     background-color: hsl(var(--main-color));
     border: hsl(var(--third-color)) 0.1em solid;
 }
-.boutons-modes label{
+
+.boutons-modes label {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -107,7 +118,8 @@ form{
     color: hsl(var(--paragraph-color));
     cursor: pointer;
 }
-.span-et-input{
+
+.span-et-input {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -116,22 +128,57 @@ form{
     padding: 3%;
     padding-left: 15%;
 }
-label img{
+
+label img {
     max-width: 100%;
     max-height: 100%;
     border-bottom: hsl(var(--third-color)) 0.1em solid;
 }
-input{
+
+input {
     margin-right: 5%;
 }
 
-.radio:hover{
+.radio:hover {
     border-color: hsl(var(--second-color));
 }
 
 #contact a {
     color: hsl(var(--second-accent-color));
 }
+
+/* Gepi */
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5%;
+}
+
+.inputs input {
+    display: flex;
+    padding-top: 0.2em;
+    margin-top: 0.2em;
+    padding-bottom: 0.2em;
+    padding-left: 0.5em;
+    height: 2.3em;
+    background-color: transparent;
+    border: solid 0.14em hsl(var(--third-color));
+    border-radius: 0.3em;
+    font-family: 'Poppins';
+    color: hsl(var(--second-color));
+}
+
+.inputs input:focus-visible {
+    outline: none;
+    border-bottom: solid hsl(var(--accent-color));
+}
+
+.inputs label {
+    color: hsl(var(--paragraph-color));
+    margin-top: 5%;
+}
+
 
 
 @media only screen and (max-width: 600px) {
@@ -147,10 +194,11 @@ input{
         align-items: flex-start;
     }
 
-    .form-control{
+    .form-control {
         width: 100% !important;
     }
-    .form-group{
+
+    .form-group {
         width: -moz-available;
         width: -webkit-fill-available;
     }
