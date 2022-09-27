@@ -24,3 +24,7 @@ flask-mail==0.9.1
 bs4==0.0.1
 
 selenium==3.141.0
+
+
+markupsafe==2.0.1
+Werkzeug==2.0.3 

@@ -173,6 +173,21 @@
     margin-top: 0;
 }
 
+.btns{    
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.btns .btn{
+    min-width: 12em;
+    margin-right: 1em;
+    margin-block: 0.3em;
+    height: 2.5em;    
+}
+
+
 /* Styles admins */
 
 #admin{
@@ -280,4 +295,5 @@ tr input:focus-visible{
     #username, #titre, #email{
         min-width: 10em;
     }
+
   }

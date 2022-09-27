@@ -81,11 +81,33 @@
                 </div>
             </div>
         </div>
-        <div class="pannel" id="menu">
+        <div class="pannel" id="menu" x-data="{showMSG : localStorage.getItem('showMSG')}">
             <div class="tile" id="welcome">
                 <h1>Bonjour {{ current_user.name }}</h1>
             </div>
 
+            {% if current_user.est_etudiant() %}
+                <div class="alert" x-show="localStorage.getItem('showMSG') !== 'false' && showMSG !== 'false'">
+                    <a href="{{ url_for('notes') }} ">
+                        <h2>[OPEN ASTUCE]</h2>
+                        <p>
+                            Vous pouvez consulter vos notes depuis la page "calcul de moyenne" et en
+                            cliquant sur "Telecharger notes". <br><br>
+                            
+                            PS : C'est plus joli que GEPI et ça vous permet de calculer votre moyenne <br>
+                            PS : Si vous avez la flemme de rentrer vos identifiants à chaque fois, vous pouvez les enregistrer
+                            sur votre machine depuis les paramètres et ça marchera peut être. 
+                        </p>
+
+                    </a>
+                        <div class="btns">
+                            <button class="btn" @click="localStorage.setItem('showMSG', 'false'); showMSG='false';">Ne plus afficher</button>
+                            <a href="{{ url_for('notes') }}"><button class="btn" id="cta" @click="">Trop bien ! Lets go !</button></a>
+                        </div>
+                </div>
+
+
+            {% endif %}
             <!-- Pour tous les utilisateurs -->
 
             <a class="tile" id="home"  href="https://mail.etu.univ-lorraine.fr/" target="_blank">
@@ -101,17 +123,13 @@
                 <i class="material-icons-round">calculate</i>
                 <p>Calcul de Moyenne</p>
             </a> 
-            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
-                <i class="material-icons-round">note_alt</i>
-                <p>Consulter mes notes</p>
+            <a class="tile" id="tools"  href="{{ url_for('tools') }}">
+                <i class="material-icons-round">architecture</i>
+                <p>Outils</p>
             </a>
             <a class="tile" id="ressources" href="https://mega.nz/folder/37wTSAaZ#sTxSruLB4YbYgznKBVoU7w" target="_blank">
                 <i class="material-icons-round">folder_open</i>
                 <p>Ressources des années précedentes</p>
-            </a>
-            <a class="tile" id="tools"  href="{{ url_for('tools') }}">
-                <i class="material-icons-round">architecture</i>
-                <p>Outils</p>
             </a>
             <a class="tile" id="alumnis"  href="{{ url_for('anciens') }}">
                 <i class="material-icons-round">school</i>
@@ -121,6 +139,10 @@
                 <i class="material-icons-round">groups</i>
                 <p>Facebook CPP974</p>
             </a>      
+            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
+                <i class="material-icons-round">note_alt</i>
+                <p>Consulter mes notes</p>
+            </a>
             <a class="tile" id="addresses"  href="{{ url_for('addresses') }}">
                 <i class="material-icons-round">restaurant_menu</i>
                 <p>Le Petit CPP</p>

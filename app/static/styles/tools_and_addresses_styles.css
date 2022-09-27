@@ -3,17 +3,6 @@
     color: hsl(var(--accent-color));
 }
 
-.container{
-    display: flex;
-    background: var(--theme-color);
-    box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
-    border: 0.1em solid hsl(var(--third-color));
-    backdrop-filter: blur(1em);
-    border-radius: 2.5em;
-    padding: 2%;
-    margin-bottom: 3%;
-}
-
 .tool-img, .map{
     border-radius: 1.5em;
     height: 13em;

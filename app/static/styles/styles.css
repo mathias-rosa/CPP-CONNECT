@@ -325,6 +325,64 @@ p, h1, h2 {
   margin: 0;
 }
 
+/* Boites */
+
+.container{
+  display: flex;
+  background: var(--theme-color);
+  box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
+  border: 0.1em solid hsl(var(--third-color));
+  backdrop-filter: blur(1em);
+  border-radius: 2.5em;
+  padding: 2%;
+  margin-bottom: 3%;
+} 
+
+.alert{
+  display: flex;
+  flex-direction: column;
+  background: var(--theme-color);
+  box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
+  border: 0.1em solid hsla(var(--second-accent-color )) ;
+  backdrop-filter: blur(1em);
+  border-radius: 2.5em;
+  padding: 2%;
+  margin-bottom: 3%;
+}
+
+.alert a{
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Boutons */
+
+.btn{
+  display: flex;
+  align-items: center;
+  border: 0.15em solid var(--contrast-color);
+  margin-right: 5%;
+  width: 10em;
+  color: var(--contrast-color);
+  background-color: var(--theme-color);
+  cursor: pointer;
+  transition: 100ms ease;
+}
+
+.btn:hover {
+  color: var(--theme-color);
+  background-color: var(--contrast-color);
+}
+
+#cta {
+  border: none;
+  color: var(--theme-color);
+  background-color: hsl(var(--second-accent-color));
+}
+
+#cta:hover{
+  background-color: hsl(var(--accent-color));
+}
 
 @media only screen and (max-width: 600px) {
   .content {
@@ -387,5 +445,10 @@ p, h1, h2 {
 
   #copyright {
     text-align: end;
+  }
+
+  .alert{
+    border-radius: 1em;
+    padding: 3%;
   }
 }

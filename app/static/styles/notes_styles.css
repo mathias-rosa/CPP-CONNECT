@@ -21,6 +21,9 @@
   color: hsl(var(--accent-color));
 }
 
+.gepi-login a{
+  color: inherit;
+}
 
 .inputs{
   display: flex;
@@ -53,34 +56,6 @@
   margin-top: 10%;
   width: 100%;
 }
-
-.btn{
-  display: flex;
-  align-items: center;
-  border: 0.15em solid var(--contrast-color);
-  margin-right: 5%;
-  width: 10em;
-  color: var(--contrast-color);
-  background-color: var(--theme-color);
-  cursor: pointer;
-  transition: 100ms ease;
-}
-
-.btn:hover {
-  color: var(--theme-color);
-  background-color: var(--contrast-color);
-}
-
-#cta {
-  border: none;
-  color: var(--theme-color);
-  background-color: hsl(var(--second-accent-color));
-}
-
-#cta:hover{
-  background-color: hsl(var(--accent-color));
-}
-
 
 
 /* Le reste --------------------------------------------------------------------------- */
