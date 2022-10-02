@@ -226,7 +226,7 @@ def update_user():
                         "email": request.args['newEmail'],
                         "password": newPassword,
                         "accountType": request.args['accountType'],
-                        "promo" : request.args['newPromo'],
+                        "promo" : int(request.args['newPromo']),
                     }
                 }
             )
