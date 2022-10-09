@@ -24,9 +24,9 @@
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
-            <div class="calendar" x-data="{getCours, jours : ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'], date : new Date()}" x-show="true">
-                <h2 x-text="jours[date.getDay() -1 ] + ' ' + date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear()"></h2>
-                <div class="journée">
+            <div class="calendar" x-data="{getCours, jours : ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'], date : new Date()}" x-show="true">
+                <h2 x-text="jours[date.getDay() ] + ' ' + date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear()"></h2>
+                <div class="journée" style="display: none;">
                     <h1 x-text="getCours('{{edt}}') === [] ? 'Pas de cours prévus aujourd\'hui' : ''" id="pasDeCours"></h1>
                     <h1 x-text="getCours('{{edt}}') === [] ? 'Consulter mon emploi du temps complet' : ''" id="edtCplt"></h1>
                     <template x-for="(cours, index) in getCours('{{edt}}')">
