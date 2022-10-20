@@ -50,7 +50,7 @@ def send_reset_email(user):
         style="
             margin-right: 5%; cursor: pointer;
             transition: 100ms ease; border: none; color: white;
-            background-color: #1d3658; font-family : Poppins, Arial";
+            background-color: #1d3658; font-family : Poppins, Arial;
             padding: 5%;
         "
     >
