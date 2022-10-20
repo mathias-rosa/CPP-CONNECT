@@ -31,7 +31,7 @@
                     {{ wtf.form_field(form.new_password_confirm, placeholder="Confirmation du mot de passe", id="password-confirm") }}
                 </div>
                 <div class="connect">
-                    {{ form.submit(class="btn btn-lg btn-primary btn-block") }}
+                    {{ form.submit(class="btn", id="cta") }}
                 </div>
                 <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
                     <h2>En fait, non. Me connecter</h2>
