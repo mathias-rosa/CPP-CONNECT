@@ -41,9 +41,7 @@
                     {{ wtf.form_field(form.password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
                 </div>
                 {{ wtf.form_field(form.remember) }}
-                <div class="connect">
-                    <button class="btn btn-lg btn-primary btn-block" type='submit'>S'inscrire</button>
-                </div>
+                <button class="btn" id="cta" type='submit'>S'inscrire</button>
                 <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
                     <h2>J'ai déjà un compte, me connecter</h2>
                 </div></a>

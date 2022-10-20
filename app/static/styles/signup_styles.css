@@ -102,10 +102,6 @@ body{
     border: solid 0.14em rgb(255, 193, 7);
     color: black;
 }
-.connect{
-    display: flex;
-    margin-top: 1em;
-}
 .login{
     display: flex;
     justify-content: center;
@@ -123,6 +119,7 @@ body{
     margin-bottom: 0;
 }
 .btn{
+    margin-top: 5%;
     width: 100%;
 }
 

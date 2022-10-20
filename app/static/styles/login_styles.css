@@ -99,23 +99,7 @@ body{
     margin-top: 1em;
 }
 .btn{
-    display: flex;
-    padding-top: 0;
-    padding: 0.4em;
-    border-radius: 0.5em;
-    border: none;
-    background-color: hsl(var(--second-accent-color));
-    color: white;
-    width: 10em;
-    justify-content: center;
-    font-family: 'Poppins';
-    font-size: 1.1em;
-    font-weight: 800;
-    cursor: pointer;
-}
-.btn:hover{
-    background-color: hsl(var(--accent-color));
-    transition: 100ms ease;
+    margin-right: 0;
 }
 .inscription{
     display: flex;
