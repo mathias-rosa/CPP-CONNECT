@@ -35,17 +35,6 @@ def send_reset_email(user):
     msg = Message('Rénitialisation du mot de passe',
                   sender=("Equipe des comptes CPP-CONNECT", 'cpp.reunion.promo11@gmail.com'),
                   recipients=[user.email])
-    msg.body = f'''
-Bonjour,\n\nVous recevez ce mail car vous avez effectué une demande de modification de votre mot de passe.
-Afin de modifier votre mot de passe, cliquez sur le lien ci-dessous :
-{url_for('reset_token', token=token, _external=True)}
-
-Bonne journée,
-L'équipe des comptes cpp-connect.
-
-Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
-
-    '''
 
     msg.html = f'''
 
@@ -59,9 +48,10 @@ Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
 
     <a href="{url_for('reset_token', token=token, _external=True)}" 
         style="
-            display: flex; align-items: center; margin-right: 5%; width: 10em; cursor: pointer;
+            margin-right: 5%; width: 10em; cursor: pointer;
             transition: 100ms ease; border: none; color: white;
-            background-color: hsl(215, 50%, 23%);"
+            background-color: #1d3658;
+        "
     >
         Rénitialiser mon mot de passe
     </a>
