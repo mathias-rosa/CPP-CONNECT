@@ -44,6 +44,7 @@ def send_reset_email(user):
     <p style="font-family : Poppins, Arial">
         Vous recevez ce mail car vous avez effectué une demande de modification de votre mot de passe. <br>
         Afin de modifier votre mot de passe, cliquez sur le lien ci-dessous :
+        <br>
     </p>
 
     <a href="{url_for('reset_token', token=token, _external=True)}" 
@@ -51,13 +52,14 @@ def send_reset_email(user):
             margin-right: 5%; cursor: pointer;
             transition: 100ms ease; border: none; color: white;
             background-color: #1d3658; font-family : Poppins, Arial;
-            padding: 5%;
+            padding: 2%; text-decoration : none;
         "
     >
         Rénitialiser mon mot de passe
     </a>
 
     <p style="font-family : Poppins, Arial">
+        <br>
         Bonne journée, <br>
         L'équipe des comptes cpp-connect. <br>
         <br>
