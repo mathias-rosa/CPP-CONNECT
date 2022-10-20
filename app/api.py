@@ -52,7 +52,7 @@ def send_reset_email(user):
             margin-right: 5%; cursor: pointer;
             transition: 100ms ease; border: none; color: white;
             background-color: #1d3658; font-family : Poppins, Arial;
-            padding: 2%; text-decoration : none;
+            padding: 2%; text-decoration : none; border-radius : 5%;
         "
     >
         Rénitialiser mon mot de passe
