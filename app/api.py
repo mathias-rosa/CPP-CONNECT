@@ -51,11 +51,11 @@ Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
 
     <h1 style="font-family : Poppins, Arial">
         Bonjour,
-    <\h1>
+    </h1>
     <p>
         Vous recevez ce mail car vous avez effectué une demande de modification de votre mot de passe. <br>
         Afin de modifier votre mot de passe, cliquez sur le lien ci-dessous :
-    <\p>
+    </p>
 
     <a href="{url_for('reset_token', token=token, _external=True)}" 
         style="
@@ -71,7 +71,7 @@ Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
         L'équipe des comptes cpp-connect. <br>
         <br>
         Si vous n'êtes pas à l'origine de cette demande, ignorez simplement ce mail.
-    <\p>
+    </p>
     
     
     '''
