@@ -16,7 +16,7 @@
     x-data="
         {
             notesSemestre : {},
-            selSemestre: {{current_user.annee()}} == 1 ? 1 : 3,
+            selSemestre: !isNaN(parseInt('{{current_user.semestre()}}')) ? parseInt('{{current_user.semestre()}}') : 4,
             indexCounter : 0,
             noteCounter : 0,
             consultation: true,
@@ -502,6 +502,9 @@
     }
 
     function changeColor(selSemestre) {
+        if (isNaN(selSemestre)) {
+            selSemestre = 4;
+        }
         document.querySelectorAll('.semester').forEach((e) => {
             e.style.backgroundColor = 'hsl(var(--second-accent-color))'; 
         });
@@ -516,7 +519,7 @@
     }
 
     window.addEventListener('load', function () {
-        changeColor("{{current_user.annee()}}" == "1" ? 1 : 3);
+        changeColor(parseInt("{{current_user.semestre()}}"));
     })
 
 
@@ -534,11 +537,12 @@
     if (annee === 1) {
         getNotesFromGepi(gepi_username, gepi_password, 1)
         getNotesFromGepi(gepi_username, gepi_password, 2)
-        .then(() => {changeColor(1)})
+        .then(() => {changeColor(parseInt("{{current_user.semestre()}}"))})
     }
-    else if (annee === 3) {
+    else if (annee === 2) {
         getNotesFromGepi(gepi_username, gepi_password, 3)
-        .then(() => {changeColor(3)})
+        getNotesFromGepi(gepi_username, gepi_password, 4)
+        .then(() => {changeColor(parseInt("{{current_user.semestre()}}"))})
     }
 
 </script>

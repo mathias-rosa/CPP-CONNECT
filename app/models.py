@@ -34,6 +34,19 @@ class User(UserMixin):
         if date.month > 7 :
   	        return date.year - 2009 - self.promo + 1
         return date.year - 2010 - self.promo + 1
+    
+    def semestre(self):
+        date = datetime.datetime.now()
+        annee = self.annee()
+        if annee == 1:
+            if date.month > 7:
+                return 1
+            return 2
+        elif annee == 2:
+            if date.month > 7:
+                return 3
+            return 4
+        return None
 
     def est_admin(self):
         return self.accountType == "admin"
