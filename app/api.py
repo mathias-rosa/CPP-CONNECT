@@ -230,7 +230,7 @@ def update_user():
         Api destinée aux admins qui permet de modifier les informations d'un utilisateur.
     """
 
-    if current_user.accountType != "admin":
+    if not current_user.est_admin():
         return "Forbidden"
 
     # Si l'utilisateur souhaite modofier son mot de passe, On le hache. Sinon, on defini newPassword comme

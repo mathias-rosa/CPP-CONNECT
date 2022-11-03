@@ -16,7 +16,7 @@
     x-data="
         {
             notesSemestre : {},
-            selSemestre: !isNaN(parseInt('{{current_user.semestre()}}')) ? parseInt('{{current_user.semestre()}}') : 4,
+            selSemestre: !isNaN(parseInt('{{current_user.semestre()}}')) ? parseInt('{{current_user.semestre()}}') : 5,
             indexCounter : 0,
             noteCounter : 0,
             consultation: true,
@@ -29,11 +29,11 @@
         }
     " 
     x-on:swiped-right="
-    selSemestre === 1 ? selSemestre = 4 : selSemestre--;
+    selSemestre === 1 ? selSemestre = 5 : selSemestre--;
     changeColor(selSemestre)
     " 
     x-on:swiped-left="
-    selSemestre === 4 ? selSemestre = 1 : selSemestre++;
+    selSemestre === 5 ? selSemestre = 1 : selSemestre++;
     changeColor(selSemestre)
     "
     x-init="notesSemestre = await getNotes()">
@@ -115,6 +115,9 @@
             <button x-on:click="selSemestre = 4 ; changeColor(selSemestre)" class="semester" id="semester4">
                 Semestre 4
             </button>
+            <button x-on:click="selSemestre = 5 ; changeColor(selSemestre)" class="semester" id="semester5">
+                Prépa
+            </button>
 
         </div>
 
@@ -156,7 +159,7 @@
                     <div class="top">
                         <div class="titre-notes" 
                             x-on:click="
-                                selSemestre === 4 ? selSemestre = 1 : selSemestre++;
+                                selSemestre === 5 ? selSemestre = 1 : selSemestre++;
                                 changeColor(selSemestre);
                                 tooltip = true;
                                 setTimeout(() => tooltip = false, 3000)
@@ -371,7 +374,94 @@
                 </div>
             </template>  
 
-            </button>
+            <div class="notes" 
+            x-show="selSemestre === 5"
+            x-transition:enter.ease-out.duration.400ms
+            x-transition:enter-start.opacity.0
+            x-transition:enter-start.scale.90
+            x-transition:enter-end.opacity.100
+            x-transition:enter-end.scale.100
+
+            data-long-press-delay="300"
+            x-on:long-press=" consultation === true ? consultation = false : (consultation = true, notesSemestre = await commitChanges(notesSemestre));"
+            >
+
+                <div class="top">
+                    <div class="titre-notes" 
+                        x-on:click="
+                            selSemestre === 5 ? selSemestre = 1 : selSemestre++;
+                            changeColor(selSemestre);
+                            tooltip = true;
+                            setTimeout(() => tooltip = false, 3000)
+                        ">  
+                        <h1>Prépa</h1>
+                        <i class="material-icons-outlined">
+                            arrow_forward_ios
+                        </i>
+                    </div>
+                    <button 
+                        @click="
+                            add = true;
+                            consultation === true ? consultation = false : (consultation = true, notesSemestre = await commitChanges(notesSemestre));
+                        "
+                        >
+                        <i class="material-icons-round" x-text="consultation ? 'drive_file_rename_outline' : 'done'"></i>
+                    </button>
+                </div>
+
+                <h2 class="mobile-text" id="#tooltip" x-show="tooltip" style="display: none;"
+                    x-transition:enter.duration.300ms
+                    x-transition:leave.duration.200ms>
+                    (Swippez pour changer de semestre)
+                </h2>
+
+                
+                <a x-show="!consultation"
+                class="ajouter-matière"
+                x-transition:enter.duration.300ms
+                x-transition:leave.duration.200ms 
+                style="margin-top: 1em; box-sizing: border-box; text-decoration: none;"
+                href="https://mega.nz/fm/yyZQzL6J"
+                target="_blank">
+                Consulter les coefs
+                <i class="material-icons-round">receipt_long</i>
+                </a>
+                
+                
+                <div class="moyenne" id="generale" >
+                    
+                    <h1 class="moyenne_name">Moyenne de la Prépa</h1>
+                    <div class="note-mg">
+                        <h1 x-text="notesSemestre['prepa']['moyenne']"></h1>
+                    </div>
+        
+                </div>
+
+
+                <div class="list-notes">
+            
+                    <template x-for="semestre in notesSemestre['prepa']['notes']">
+
+                        <div class="note_container" 
+                            x-transition:enter.duration.300ms
+                                x-transition:leave.duration.200ms>
+                            <h1 class="nom_note" x-text="'Semestre ' + semestre.semestre"></h1>
+                            <div class="notes-coef" id="notes">
+                                <div class="coef">
+                                    <h1>coef : &nbsp </h1><h1 x-text="semestre.coef"></h1>
+                                </div>
+                                <h1 class="note" x-text="semestre.moyenne"></h1>
+                            </div>
+                            
+                            
+                        </div>
+
+
+                    </template>
+
+
+                </div>
+            </div>
 
         </div>
     
@@ -386,7 +476,7 @@
             <div class="notes" id="graph" x-show="window.innerWidth < 1000">
                 <div class="titre-notes" 
                     x-on:click="
-                        selSemestre === 4 ? selSemestre = 1 : selSemestre++;
+                        selSemestre === 5 ? selSemestre = 1 : selSemestre++;
                         changeColor(selSemestre);
                 ">  
                     <h1 x-text="'Semestre ' + selSemestre"></h1>
@@ -503,7 +593,7 @@
 
     function changeColor(selSemestre) {
         if (isNaN(selSemestre)) {
-            selSemestre = 4;
+            selSemestre = 5;
         }
         document.querySelectorAll('.semester').forEach((e) => {
             e.style.backgroundColor = 'hsl(var(--second-accent-color))'; 
