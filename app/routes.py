@@ -320,6 +320,75 @@ def anciens():
                             baseURL=request.base_url
                             )
 
+
+@app.route('/anciens/<userid>')
+def social(userid):
+    if not current_user.is_anonymous:
+        theaming = current_user.theaming
+    else:
+        theaming = "light-theme"
+
+    error = ""
+    user = {}
+
+    try:
+        userid = userid.split(".", 1)
+        user_promo = int(userid[0][1:])
+        username = userid[1]
+        name, surname = [e.capitalize() for e in username.split(".", 1)]
+    except Exception as e:
+        error = "Impossible d'identifier cette personne"
+        return render_template('social.html',
+            current_user=current_user,
+            theaming=theaming,
+            error=error,
+            user=user,
+            baseURL=request.base_url
+            )
+    try:
+        liste_promo = mongodb.db.Anciens.find_one({"promo" : user_promo})["eleves"]
+        for eleve in liste_promo:
+            if eleve["name"] == name and eleve["surname"] == surname:
+                print(eleve)
+                user = eleve
+                error = ""
+                break
+            error = f"Auccun {name} {surname}, Promo {user_promo} dans la base de donnée"
+        if error:
+            return render_template('social.html',
+                    current_user=current_user,
+                    theaming=theaming,
+                    error=error,
+                    user=user,
+                    baseURL=request.base_url
+                    )
+    except:
+        error = f"Auccun {name} {surname}, Promo {user_promo} dans la base de donnée"
+        return render_template('social.html',
+            current_user=current_user,
+            theaming=theaming,
+            error=error,
+            user=user,
+            baseURL=request.base_url
+            )
+    
+    try:
+        cpp_connect_user = User(mongodb.db.Users.find_one({"username": f"{name.lower()}.{surname.lower()}"}))
+        profile_pic_url = cpp_connect_user.profil_pic_url
+    except:
+        cpp_connect_user = None
+
+    
+    return render_template('social.html',
+                            current_user=current_user,
+                            theaming=theaming,
+                            error=error,
+                            user=user,
+                            cpp_connect_user=cpp_connect_user,
+                            baseURL=request.base_url
+                            )
+
+
 @app.route('/edt')
 @login_required
 def edt():

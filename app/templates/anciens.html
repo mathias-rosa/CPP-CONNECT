@@ -33,12 +33,12 @@
     
                     <div class="inner_box">
                         <div class="user">
-                            <a id="email" href="mailto:{{ eleves.email }}"><h1>{{ eleves.name }} {{ eleves.surname }}</h1></a>
+                            <a id="email" href="mailto:{{ eleves.socials.email }}"><h1>{{ eleves.name }} {{ eleves.surname }}</h1></a>
                             <h2>Moyenne : {{ eleves.moyenne }}</h2>
                             <h2 id="rank">Rang : {{ eleves.classement }}</h2>
                         </div>
                         <div class="right-box">
-                            <h1>{{ eleves.ecole }}</h1>
+                            <h1>{{ eleves.ecole[0] }}</h1>
                         </div>
                     </div>
     

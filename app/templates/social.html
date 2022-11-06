@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
+<title>Alumnis : {{ user.name }} {{ user.surname }}</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="content">
+
+    {% if error %}
+
+    <h1>{{error}}</h1>
+
+    {% else %}
+
+    <div class="profile_pic">
+
+        {% if cpp_connect_user.__dict__ %}
+
+            {% if cpp_connect_user.profil_pic_url == "Benjamin La cucarracha" %}
+            
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+            
+            {% else %}
+                <img src="{{ cpp_connect_user.profil_pic_url }}" alt="">
+            {% endif %}
+
+        {% else %}
+            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+        {% endif %}
+
+    </div>
+
+    <div class="container presentation">
+
+        <h1>{{ user.name }} {{ user.surname }}</h1>
+        <h2>Promo {{ user.promo }} - {{ user.ecole[0] }}</h2>
+
+    </div>
+
+    <div class="container bio">
+
+        <h1>Bio</h1>
+
+        {% if user.bio %}
+
+        <p>{{ user.bio }}</p>
+
+        {% else %}
+
+        <p>
+            Salut ! <br>
+            Je suis {{ user.name }} de la promo {{ user.promo }}. Après la prépa j’ai fait l’{{ user.ecole[0] }}.
+        </p>
+
+        {% endif %}
+
+    </div>
+
+    <div class="container etudes">
+
+        <h1>Etudes</h1>
+
+        <ul>
+            <li>{{ user.ecole[0] }} <span>{{user.ecole[1]}}</span> </li>
+            <li>La prépa des INP <span> {{user.ecole[1] - 2}} - {{user.ecole[1]}}</span></li> <!--Potentielement à changer pour les HN-->
+        </ul>
+
+    </div>
+
+    <div class="container contact">
+        
+        <h1>Contact</h1>
+        
+        <p> {{ user.socials }} </p>
+
+    </div>
+
+    <div class="container infos">
+
+        <h1>Infos Générales</h1>
+
+        <ul>
+            <li>Moyenne : <span>{{ user.moyenne }}</span></li>
+            <li>Classement : <span>{{ user.classement }}</span></li>
+        </ul>
+
+    </div>
+
+
+    {% endif %}
+
+
+</div>
+
+{% endblock %}
