@@ -351,6 +351,7 @@ def social(userid):
             if eleve["name"] == name and eleve["surname"] == surname:
                 print(eleve)
                 user = eleve
+                user["promo"] = user_promo
                 error = ""
                 break
             error = f"Auccun {name} {surname}, Promo {user_promo} dans la base de donnée"

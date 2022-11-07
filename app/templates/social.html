@@ -2,6 +2,8 @@
 
 {% block head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/connected_styles.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='styles/social_styles.css') }}">
+<script src="https://kit.fontawesome.com/88b79f00e6.js" crossorigin="anonymous"></script>
 <title>Alumnis : {{ user.name }} {{ user.surname }}</title>
 {% endblock %}
 
@@ -15,79 +17,110 @@
 
     {% else %}
 
-    <div class="profile_pic">
+    <!-- Colonne 1 -->
 
-        {% if cpp_connect_user.__dict__ %}
-
-            {% if cpp_connect_user.profil_pic_url == "Benjamin La cucarracha" %}
-            
-                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-            
-            {% else %}
+    <div class="column" id="c1">
+        <div class="profile_pic">
+    
+            {% if cpp_connect_user.__dict__ %}
+    
+                {% if cpp_connect_user.profil_pic_url == "Benjamin La cucarracha" %}
+                
+                    <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+                
+                {% else %}
                 <img src="{{ cpp_connect_user.profil_pic_url }}" alt="">
-            {% endif %}
+                {% endif %}
+                
+                {% else %}
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+                {% endif %}
+    
+            </div>
 
-        {% else %}
-            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-        {% endif %}
-
-    </div>
-
-    <div class="container presentation">
-
-        <h1>{{ user.name }} {{ user.surname }}</h1>
-        <h2>Promo {{ user.promo }} - {{ user.ecole[0] }}</h2>
-
-    </div>
-
-    <div class="container bio">
-
-        <h1>Bio</h1>
-
-        {% if user.bio %}
-
-        <p>{{ user.bio }}</p>
-
-        {% else %}
-
-        <p>
-            Salut ! <br>
-            Je suis {{ user.name }} de la promo {{ user.promo }}. Après la prépa j’ai fait l’{{ user.ecole[0] }}.
-        </p>
-
-        {% endif %}
-
-    </div>
-
-    <div class="container etudes">
-
-        <h1>Etudes</h1>
-
-        <ul>
-            <li>{{ user.ecole[0] }} <span>{{user.ecole[1]}}</span> </li>
-            <li>La prépa des INP <span> {{user.ecole[1] - 2}} - {{user.ecole[1]}}</span></li> <!--Potentielement à changer pour les HN-->
-        </ul>
-
-    </div>
-
-    <div class="container contact">
+            <div class="container bio">
         
-        <h1>Contact</h1>
+                <h1>Bio</h1>
         
-        <p> {{ user.socials }} </p>
+                {% if user.bio %}
+        
+                <p>{{ user.bio }}</p>
+        
+                {% else %}
+        
+                <p>
+                    Salut ! <br>
+                    Je suis {{ user.name }} de la promo {{ user.promo }}. Après la prépa j’ai fait l’{{ user.ecole[0] }}.
+                </p>
+        
+                {% endif %}
+        
+            </div>
+        
+    </div>
+
+    <!-- Colonne 2 -->
+    
+    <div class="column" id="c2">
+
+        <div class="container presentation">
+    
+            <p>Promo {{ user.promo }} - {{ user.ecole[0] }}</p>
+            <h1>{{ user.name }} {{ user.surname }}</h1>
+            
+        </div>
+
+        <!-- Sous-colonne 1 -->
+
+        
+        <div id="sc1">
+            <div class="container etudes">
+
+                <h1>Etudes</h1>
+
+                <ul>
+                    <li>{{ user.ecole[0] }} <br> <span>{{user.ecole[1]}} - </span> </li>
+                    <li>La prépa des INP  <br> <span> {{user.ecole[1] - 2}} - {{user.ecole[1]}}</span></li> <!--Potentielement à changer pour les HN-->
+                </ul>
+
+            </div>
+       
+            <div class="container infos">
+        
+                <h1>Infos Générales</h1>
+        
+                <ul>
+                    <li>Moyenne : <span>{{ user.moyenne }}</span></li>
+                    <li>Classement : <span>{{ user.classement }}</span></li>
+                </ul>
+        
+            </div>
+            
+        </div>
+        
+        <!-- Sous-colonne 2 -->
+        
+        <div id="sc2">
+            
+                <div class="container contact">
+                    
+                    <h1>Contact</h1>
+                    
+                    <p> {{ user.socials }} </p>
+            
+                    <i class="fa-brands fa-linkedin"></i>
+                    
+                </div>
+
+        </div>
 
     </div>
 
-    <div class="container infos">
 
-        <h1>Infos Générales</h1>
 
-        <ul>
-            <li>Moyenne : <span>{{ user.moyenne }}</span></li>
-            <li>Classement : <span>{{ user.classement }}</span></li>
-        </ul>
 
-    </div>
+   
+
 
 
     {% endif %}
