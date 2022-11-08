@@ -49,7 +49,7 @@
     padding-left: 1%;
     flex: 1;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 6fr 3fr;
     column-gap: 1em;
 }
 
@@ -90,4 +90,73 @@ span {
 #sc2 {
     grid-row: 2;
     grid-column: 2 / 3;
+}
+
+.socials {
+    margin-top: 1em;
+}
+
+.social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    color: inherit;
+    transition: ease;
+    border-radius: 0.5em;
+}
+
+.social:hover {
+    background-color: hsl(var(--main-color));
+}
+
+.social p {
+    font-size: 0.8em;
+    margin-top: 0;
+    margin-inline: 1em;
+}
+
+.social .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1em;
+    height: 1em;
+    border-radius: 0.3em;
+    padding: 0.6em;
+    margin: 0.2em;
+    font-size: 1.3em;
+    color: var(--theme-color);
+    background-color: hsl(var(--second-accent-color));
+}
+
+.return {
+    padding: 3%;
+}
+
+.return .box{
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: var(--theme-color);
+    background-color: hsl(var(--second-accent-color));
+    transition: ease;
+    border-radius: 0.5em;
+    padding: 0.5em;
+    padding-left: 1em;
+}
+
+.return .box:hover {
+    color: var(--theme-color);
+    background-color: hsl(var(--accent-color));
+}
+
+.return p{
+    margin: 0;
+    margin-inline: 1em;
+    font-size: 0.8em;
+    color: inherit;
 }

@@ -11,7 +11,7 @@
 <div class="content">
 
     <h1 id="title" style="margin-bottom: 0;">Derniers résultats d'affectation de vos collègues</h1>
-    <h2 id="tooltip" style="margin-top: 0; margin-bottom: 2em;">Vous pouvez les contacter en cliquant sur leur nom</h2>
+    <h2 id="tooltip" style="margin-top: 0; margin-bottom: 2em;">Cliquez sur leur nom pour obtenir plus d'informations</h2>
 
     {% for anciens in anciens_list %}
 
@@ -29,18 +29,19 @@
     
                 </div>
     
-                {% for eleves in anciens.eleves %}
+                {% for eleve in anciens.eleves %}
     
-                    <div class="inner_box">
+                    <!-- <a class="inner_box" href="mailto:{{ eleve.socials.mail }}"> -->
+                    <a class="inner_box" href="{{ baseURL }}/p{{ anciens.promo }}.{{ eleve.name }}.{{eleve.surname}}">
                         <div class="user">
-                            <a id="email" href="mailto:{{ eleves.socials.email }}"><h1>{{ eleves.name }} {{ eleves.surname }}</h1></a>
-                            <h2>Moyenne : {{ eleves.moyenne }}</h2>
-                            <h2 id="rank">Rang : {{ eleves.classement }}</h2>
+                            <h2 id="email" ><h1>{{ eleve.name }} {{ eleve.surname }}</h1></h2>
+                            <h2>Moyenne : {{ eleve.moyenne }}</h2>
+                            <h2 id="rank">Rang : {{ eleve.classement }}</h2>
                         </div>
                         <div class="right-box">
-                            <h1>{{ eleves.ecole[0] }}</h1>
+                            <h1>{{ eleve.ecole[0] }}</h1>
                         </div>
-                    </div>
+                    </a>
     
                 {% endfor %}
     
