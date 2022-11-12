@@ -5,12 +5,15 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/social_styles.css') }}">
 <script src="https://kit.fontawesome.com/88b79f00e6.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@ryangjchandler/alpine-clipboard@2.x.x/dist/alpine-clipboard.js" defer></script>
+<script src="https://unpkg.com/@victoryoalli/alpinejs-screen@1.0.0/dist/screen.min.js" defer></script>
 <title>Alumnis : {{ user.name }} {{ user.surname }}</title>
 {% endblock %}
 
 {% block content %}
 
-<div class="content">
+<div class="content" x-data="{
+    mobile : $width < 600
+}">
 
     {% if error %}
 
@@ -18,10 +21,35 @@
 
     {% else %}
 
+    <div class="container presentation" id="profile-box" x-show="mobile">
+
+        {% if cpp_connect_user.__dict__ %}
+    
+            {% if cpp_connect_user.profil_pic_url == "Benjamin La cucarracha" %}
+            
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+            
+            {% else %}
+                <img src="{{ cpp_connect_user.profil_pic_url }}" alt="">
+            {% endif %}
+            
+            {% else %}
+            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+            {% endif %}
+
+        <h1>{{ user.name }}</h1>
+        <h2>{{user.surname}}</h2>
+
+        <h3>Promo {{user.promo}}</h3>
+        <h3>────</h3>
+        <h3>{{user.ecole[0]}}</h3>
+        
+    </div>
+
     <!-- Colonne 1 -->
 
-    <div class="column" id="c1">
-        <div class="profile_pic">
+    <div class="column" id="c1" x-screen="mobile = $width < 600">
+        <div class="profile_pic" x-show="!mobile">
     
             {% if cpp_connect_user.__dict__ %}
     
@@ -30,12 +58,12 @@
                     <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
                 
                 {% else %}
-                <img src="{{ cpp_connect_user.profil_pic_url }}" alt="">
+                    <img src="{{ cpp_connect_user.profil_pic_url }}" alt="">
                 {% endif %}
                 
-                {% else %}
-                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-                {% endif %}
+            {% else %}
+            <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
+            {% endif %}
     
             </div>
 
@@ -64,7 +92,7 @@
     
     <div class="column" id="c2">
 
-        <div class="container presentation">
+        <div class="container presentation" x-show="!mobile">
     
             <p>Promo {{ user.promo }} - {{ user.ecole[0] }}</p>
             <h1>{{ user.name }} {{ user.surname }}</h1>
@@ -153,7 +181,7 @@
                     </div>
                 </div>
 
-                <div class="container return">
+                <div class="container return"  x-show="!mobile">
                     <a class="box" href="/anciens">
                         <i class="fa-solid fa-arrow-rotate-left"></i>
                         <p>Retour à la liste des élèves</p>
