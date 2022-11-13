@@ -332,7 +332,7 @@ def social(userid):
     user = {}
 
     try:
-        userid = userid.split(".", 1)
+        userid = userid.replace("&s", " ").replace("&r", " ").split(".", 1)
         user_promo = int(userid[0][1:])
         username = userid[1]
         name, surname = [e.capitalize() for e in username.split(".", 1)]
@@ -347,9 +347,9 @@ def social(userid):
             )
     try:
         liste_promo = mongodb.db.Anciens.find_one({"promo" : user_promo})["eleves"]
+        print([eleve["name"] for eleve in liste_promo])
         for eleve in liste_promo:
-            if eleve["name"] == name and eleve["surname"] == surname:
-                print(eleve)
+            if eleve["name"].capitalize() == name and eleve["surname"].capitalize() == surname:
                 user = eleve
                 user["promo"] = user_promo
                 error = ""
