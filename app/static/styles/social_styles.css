@@ -160,3 +160,26 @@ span {
     font-size: 0.8em;
     color: inherit;
 }
+
+@media only screen and (max-width: 600px) {
+    .content {
+        flex-direction: column;
+    }
+
+    #c2 {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    #c1 {
+        max-width: 100%;
+    }
+
+    .presentation h1 {
+        font-size: 2em;
+    }
+    .presentation h3 {
+        text-align: center;
+        margin: 0;
+        font-weight: 400;
+    }
+}

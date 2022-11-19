@@ -32,7 +32,7 @@
                 {% for eleve in anciens.eleves %}
     
                     <!-- <a class="inner_box" href="mailto:{{ eleve.socials.mail }}"> -->
-                    <a class="inner_box" href="{{ baseURL }}/p{{ anciens.promo }}.{{ eleve.name }}.{{eleve.surname}}">
+                    <a class="inner_box" href="{{ baseURL }}/p{{ anciens.promo }}.{{ eleve.name.capitalize().replace('\n', '&r').replace(' ', '&s') }}.{{ eleve.surname.capitalize().replace('\n', '&r').replace(' ', '&s') }}">
                         <div class="user">
                             <h2 id="email" ><h1>{{ eleve.name }} {{ eleve.surname }}</h1></h2>
                             <h2>Moyenne : {{ eleve.moyenne }}</h2>

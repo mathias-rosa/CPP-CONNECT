@@ -117,6 +117,16 @@
         </form>
     </div>
 
+    <!-- {% if current_user.annee() > 2 %}
+
+    <div class="div-box">
+
+        <h1>Modifier mon profil social</h1>
+        
+    </div>
+
+    {% endif %} -->
+
     <div class="div-box" id="gepi" x-data="{
         gepi_username : localStorage.getItem('gepi_username') ? gepi_username = CryptoJS.AES.decrypt(localStorage.getItem('gepi_username'), '{{current_user.password[8:13] + current_user.username + current_user.password[10:15]}}').toString(CryptoJS.enc.Utf8) : '',
         gepi_password : localStorage.getItem('gepi_password') ? gepi_password= CryptoJS.AES.decrypt(localStorage.getItem('gepi_password'), '{{current_user.password[8:13] + current_user.username + current_user.password[10:15]}}').toString(CryptoJS.enc.Utf8) : '',
