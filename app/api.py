@@ -273,9 +273,3 @@ def delete_user():
     mongodb.db.Users.delete_one({"username": request.args['username']})
 
     return "fait"
-
-# SSL
-
-@app.route('/.well-known/acme-challenge/FNVVMzI1B9O9hdJyJPburQd3Q7AIj1DmDKExpbpcwiM')
-def ssl():
-    return 'FNVVMzI1B9O9hdJyJPburQd3Q7AIj1DmDKExpbpcwiM.bnhQavHXSDbRj6Jvs6xUE_o00M2DDvLxpqzbdsNXVR8'
