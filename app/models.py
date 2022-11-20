@@ -32,7 +32,7 @@ class User(UserMixin):
     def annee(self):
         date = datetime.datetime.now()
         if date.month > 7 :
-  	        return date.year - 2009 - self.promo + 1
+            return date.year - 2009 - self.promo + 1
         return date.year - 2010 - self.promo + 1
     
     def semestre(self):

@@ -4,6 +4,7 @@
 """
 
 import os
+import datetime
 
 from app import app, mongodb
 from flask import render_template, send_from_directory, redirect, url_for, request
@@ -58,6 +59,8 @@ def signup():
     error = None
     message = None
     form = RegisterForm()
+    date = datetime.datetime.now()
+    proposition_promo = date.year - 2009 if date.month > 7 else date.year - 2010
     if form.validate_on_submit():
         if form.password.data == form.password_confirm.data:
             email = form.email.data.replace(" ", "").lower()
@@ -66,6 +69,7 @@ def signup():
                 error = "Cet utilisateur existe déjà"
                 return render_template('signup.html',
                                         form=form,
+                                        proposition_promo=proposition_promo,
                                         error=error,
                                         message=message,
                                         theaming=theaming,
@@ -83,6 +87,7 @@ def signup():
                 error = "Sésame invalide."
                 return render_template('signup.html',
                         form=form,
+                        proposition_promo=proposition_promo,
                         error=error,
                         message=message,
                         theaming=theaming,
@@ -125,6 +130,7 @@ def signup():
         error = "Les mots de passe ne correspondent pas"
         return render_template('signup.html',
                             form=form,
+                            proposition_promo=proposition_promo,
                             error=error,
                             message=message,
                             theaming=theaming,
@@ -133,6 +139,7 @@ def signup():
 
     return render_template('signup.html',
                             form=form,
+                            proposition_promo=proposition_promo,
                             error=error,
                             message=message,
                             theaming=theaming,
