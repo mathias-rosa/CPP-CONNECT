@@ -3,3 +3,4 @@ __pycache__
 geckodriver.log
 .vscode
 cpp-connect
+.env

@@ -6,6 +6,11 @@ from flask_mail import Mail
 
 import pymongo
 
+from dotenv import load_dotenv
+from pathlib import Path
+dotenv_path = Path(os.path.dirname(os.path.abspath(__file__))) / '../.env'
+load_dotenv(dotenv_path=dotenv_path)
+
 # Configuration génerale de l'application
 
 app = Flask(__name__)
