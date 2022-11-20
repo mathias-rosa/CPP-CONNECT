@@ -106,23 +106,12 @@ def get_notes_gepi():
 
 
     # ===========================================================================
-    # On crée une instance du web-driver Firefox (environement de production)
+    # On crée une instance du web-driver Firefox
     # ===========================================================================
 
-    # options = Options()
-    # options.headless = False
-    # driver = webdriver.Firefox(options=options)
-
-    # ===========================================================================
-    #  On crée une instance du web-driver chrome (environement de déploiment)
-    # ===========================================================================
-
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    options = Options()
+    options.headless = True
+    driver = webdriver.Firefox(options=options)
 
     # On va sur https://cppreunion.fr/gepi/login.php
     driver.get("https://cppreunion.fr/gepi/login.php")
@@ -135,6 +124,7 @@ def get_notes_gepi():
     # sert à attendre que la page charge
     login_box = wait.until(EC.visibility_of_element_located(
         (By.CSS_SELECTOR, "input#login")))
+        
 
     login_box.send_keys(gepi_username)
 
