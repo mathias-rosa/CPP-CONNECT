@@ -13,6 +13,7 @@ import os
 from selenium import webdriver
 from selenium.webdriver.firefox.options import Options
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.alert import Alert
 
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
@@ -132,8 +133,18 @@ def get_notes_gepi():
         "input#no_anti_inject_password")
     password_box.send_keys(gepi_password)
 
+    try:
+        alert = Alert(driver)
+        while alert:
+            alert.accept()
+            time.sleep(0.5)
+            alert = Alert(driver)
+    except:
+        pass
+
     login_button = driver.find_element_by_css_selector("input#soumettre")
     login_button.send_keys(Keys.ENTER)
+    
 
     # On va sur le détail des notes
     detail_des_notes = wait.until(EC.visibility_of_element_located(
