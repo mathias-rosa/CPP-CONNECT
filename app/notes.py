@@ -264,7 +264,8 @@ def get_notes_gepi():
             coef_prepa += notes_prepa["semestres"]["prepa"]["notes"][semestre]["coef"]
 
 
-    notes_prepa["semestres"]["prepa"]["moyenne"] = round(sum_prepa / coef_prepa, 3)
+    if coef_prepa != 0:
+        notes_prepa["semestres"]["prepa"]["moyenne"] = round(sum_prepa / coef_prepa, 3)
 
 
     mongodb.db.Notes.replace_one(
@@ -308,8 +309,8 @@ def get_notes():
                 sum_prepa += (notes_prepa["semestres"]["prepa"]["notes"][semestre]["moyenne"] * notes_prepa["semestres"]["prepa"]["notes"][semestre]["coef"])
                 coef_prepa += notes_prepa["semestres"]["prepa"]["notes"][semestre]["coef"]
 
-
-        notes_prepa["semestres"]["prepa"]["moyenne"] = round(sum_prepa / coef_prepa, 3)
+        if coef_prepa != 0:
+            notes_prepa["semestres"]["prepa"]["moyenne"] = round(sum_prepa / coef_prepa, 3)
 
         mongodb.db.Notes.replace_one(
             ({"username": str(current_user.username)}), notes_prepa)
@@ -381,7 +382,8 @@ def update_notes():
             sum_prepa += (notes_prepa["semestres"]["prepa"]["notes"][semestre]["moyenne"] * notes_prepa["semestres"]["prepa"]["notes"][semestre]["coef"])
             coef_prepa += notes_prepa["semestres"]["prepa"]["notes"][semestre]["coef"]
 
-    notes_prepa["semestres"]["prepa"]["moyenne"] = round(sum_prepa / coef_prepa, 3)
+    if coef_prepa != 0:
+        notes_prepa["semestres"]["prepa"]["moyenne"] = round(sum_prepa / coef_prepa, 3)
 
     mongodb.db.Notes.replace_one(
         ({"username": str(current_user.username)}), notes_prepa)
