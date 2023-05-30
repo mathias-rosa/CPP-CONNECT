@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,11 +9,14 @@
     <meta property="og:title" content="CPP CONNECT" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="{{ baseURL }}static/img/og_image.png" />
-    <meta property="og:description" content="CPP-connect est une application web offrant différents outils aux étudiants de la Prépa des INP de la réunion dont la possibilité de calculer sa moyenne, accéder à des ressources données par les an..." />
-    
+    <meta property="og:description"
+        content="CPP-connect est une application web offrant différents outils aux étudiants de la Prépa des INP de la réunion dont la possibilité de calculer sa moyenne, accéder à des ressources données par les an..." />
+
 
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/styles.css') }}">
-    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
+        rel="stylesheet">
     {% block head %}{% endblock %}
     <script defer src="https://unpkg.com/alpinejs@3.2.2/dist/cdn.min.js"></script>
     <!-- abla -->
@@ -20,8 +24,10 @@
 
 </head>
 {% include 'theaming.html' %}
+
 <body>
-    <script type="text/javascript">
+    <!-- Piwik -->
+    <!-- <script type="text/javascript">
         (function (window, document, dataLayerName, id) {
             window[dataLayerName] = window[dataLayerName] || [], window[dataLayerName].push({ start: (new Date).getTime(), event: "stg.start" }); var scripts = document.getElementsByTagName('script')[0], tags = document.createElement('script');
             function stgCreateCookie(a, b, c) { var d = ""; if (c) { var e = new Date; e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3), d = "; expires=" + e.toUTCString() } document.cookie = a + "=" + b + d + "; path=/" }
@@ -30,13 +36,14 @@
             tags.async = !0, tags.src = "https://mathias-rosa.containers.piwik.pro/" + id + ".js" + qPString, scripts.parentNode.insertBefore(tags, scripts);
             !function (a, n, i) { a[n] = a[n] || {}; for (var c = 0; c < i.length; c++)!function (i) { a[n][i] = a[n][i] || {}, a[n][i].api = a[n][i].api || function () { var a = [].slice.call(arguments, 0); "string" == typeof a[0] && window[dataLayerName].push({ event: n + "." + i + ":" + a[0], parameters: [].slice.call(arguments, 1) }) } }(i[c]) }(window, "ppms", ["tm", "cm"]);
         })(window, document, 'dataLayer', '24cdaa38-05ff-4ccf-8675-89191ca5150c');
-    </script>
-    
+    </script> -->
+
 
     <div class="header">
         <div class="header-left">
             <a href="{{ url_for('index') }}">
-                <img src="{{ url_for('static', filename='img/' + theaming + '/cpp_connect.svg') }}" alt="logo" class="logo">
+                <img src="{{ url_for('static', filename='img/' + theaming + '/cpp_connect.svg') }}" alt="logo"
+                    class="logo">
                 <h1>CPP CONNECT</h1>
             </a>
         </div>
@@ -44,43 +51,45 @@
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">
                 <h2>Se connecter</h2>
-                <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo" class="login-img" style="clip-path: inherit">
+                <img src="{{ url_for('static', filename='img/' + theaming + '/user_connect.svg') }}" alt="logo"
+                    class="login-img" style="clip-path: inherit">
             </a>
             {% else %}
-                
-                <a href="{{ url_for('dashboard') }}" id="profile">
-                    <h2>{{current_user.name}} {{current_user.surname}}</h2>
+
+            <a href="{{ url_for('dashboard') }}" id="profile">
+                <h2>{{current_user.name}} {{current_user.surname}}</h2>
+            </a>
+            <div class="menu" @click="showMenu = true; arrow = 'arrow_drop_up'"
+                @mouseenter="showMenu = true; arrow = 'arrow_drop_up'">
+                {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
+
+                <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="" class="login-img">
+
+
+                {% else %}
+                <img src="{{ current_user.profil_pic_url }}" alt="" class="login-img">
+                {% endif %}
+                <i class="material-icons-round" x-text="arrow"></i>
+            </div>
+            <div class="dropdown-menu" x-show="showMenu" @click.away="showMenu = false; arrow= 'arrow_drop_down'"
+                x-transition @mouseleave="showMenu = false; arrow= 'arrow_drop_down'">
+                <a href="{{ url_for('dashboard') }}" class="item">
+                    <i class="material-icons-round">dashboard</i>
+                    <p>Tableau de bord</p>
                 </a>
-                <div class="menu" @click="showMenu = true; arrow = 'arrow_drop_up'" @mouseenter="showMenu = true; arrow = 'arrow_drop_up'" >
-                    {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
-        
-                    <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="" class="login-img">
-                
-                
-                    {% else %}
-                    <img src="{{ current_user.profil_pic_url }}" alt="" class="login-img">
-                    {% endif %}  
-                    <i class="material-icons-round" x-text="arrow"></i>
-                </div>
-                <div class="dropdown-menu" x-show="showMenu" @click.away="showMenu = false; arrow= 'arrow_drop_down'" 
-                     x-transition @mouseleave="showMenu = false; arrow= 'arrow_drop_down'" >
-                    <a href="{{ url_for('dashboard') }}" class="item" >
-                        <i class="material-icons-round">dashboard</i>
-                        <p>Tableau de bord</p>
-                    </a>
-                    <a href="{{ url_for('settings') }}" class="item" >
-                        <i class="material-icons-round">settings</i>
-                        <p>Paramètres</p>
-                    </a>
-                    <a href="{{ url_for('logout') }}" class="item" style="margin-bottom: 0;" >
-                        <i class="material-icons-round">logout</i>
-                        <p>Se déconnecter</p>
-                    </a>
-                </div>
+                <a href="{{ url_for('settings') }}" class="item">
+                    <i class="material-icons-round">settings</i>
+                    <p>Paramètres</p>
+                </a>
+                <a href="{{ url_for('logout') }}" class="item" style="margin-bottom: 0;">
+                    <i class="material-icons-round">logout</i>
+                    <p>Se déconnecter</p>
+                </a>
+            </div>
             {% endif %}
         </div>
     </div>
-    
+
     {% block content %}{% endblock %}
 
     {% include 'footer.html' %}
