@@ -14,70 +14,68 @@
         <div class="pannel" id="profile-box">
 
             {% if current_user.profil_pic_url == "Benjamin La cucarracha" %}
-        
+
             <img src="{{ url_for('static', filename='img/Avatar/profile_pict_1.svg') }}" alt="">
-        
-        
+
+
             {% else %}
             <img src="{{ current_user.profil_pic_url }}" alt="">
             {% endif %}
 
             <h1>{{current_user.name}}</h1>
             <h2>{{current_user.surname}}</h2>
-            <div class="calendar" x-data="{getCours, jours : ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'], date : new Date()}" x-show="true">
-                <h2 x-text="jours[date.getDay() ] + ' ' + date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear()"></h2>
+            <div class="calendar"
+                x-data="{getCours, jours : ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'], date : new Date()}"
+                x-show="true">
+                <h2
+                    x-text="jours[date.getDay() ] + ' ' + date.getDate() + ' / ' + (date.getMonth() + 1) + ' / ' + date.getFullYear()">
+                </h2>
                 <div class="journée" style="display: none;">
-                    <h1 x-text="getCours('{{edt}}') === [] ? 'Pas de cours prévus aujourd\'hui' : ''" id="pasDeCours"></h1>
-                    <h1 x-text="getCours('{{edt}}') === [] ? 'Consulter mon emploi du temps complet' : ''" id="edtCplt"></h1>
+                    <h1 x-text="getCours('{{edt}}') === [] ? 'Pas de cours prévus aujourd\'hui' : ''" id="pasDeCours">
+                    </h1>
+                    <h1 x-text="getCours('{{edt}}') === [] ? 'Consulter mon emploi du temps complet' : ''" id="edtCplt">
+                    </h1>
                     <template x-for="(cours, index) in getCours('{{edt}}')">
-                        <div class="cours" 
-                            x-data="{hd : cours['position_minutes_debut'], hf : cours['position_minutes_fin']}"
-                            x-init="
+                        <div class="cours"
+                            x-data="{hd : cours['position_minutes_debut'], hf : cours['position_minutes_fin']}" x-init="
                                 $el.style.top = ((hd-450)/(1050-450) * 500 + index*10).toString() + 'px';
                                 $el.style.height= ((hf-hd)/(1050-450) * 500).toString() + 'px';
                                 $el.style.backgroundColor = cours['background_color1'];
-                            " 
-                        >
+                            ">
                             <h1 x-text="cours['nom1_ligne1']"></h1>
                             <p x-text="cours['professeur1'] + ' ' + cours['salle1']"></p>
                             <h2 x-text="convertHMS(hd) + ' - ' + convertHMS(hf)"></h2>
-                        </div>                        
+                        </div>
                     </template>
 
                     <div class="cours" style="height : 100px;">
 
                     </div>
-                                            
 
-                    <div class="cours"
-                        style="display: none;"
-                        x-init="
+
+                    <div class="cours" style="display: none;" x-init="
                             $el.style.top = ((450-450)/(1050-450) * 100).toString() + '%';
                             $el.style.height= ((570-450)/(1050-450) * 100).toString() + '%';
                             $el.style.backgroundColor = 'magenta';
-                        " 
-                    >
+                        ">
                         <h1>Mathématiques</h1>
                         <p>Gilles</p>
                         <h2 x-text="convertHMS(450) + ' - ' + convertHMS(570)"></h2>
-                        
-                        
+
+
                     </div>
-                    <div class="cours" 
-                        style="display: none;"
-                        x-init="
+                    <div class="cours" style="display: none;" x-init="
                             $el.style.top = ((570-450)/(1050-450) * 100 + 2).toString() + '%';
                             $el.style.height= ((720-570)/(1050-450) * 100).toString() + '%';
                             $el.style.backgroundColor = 'magenta';
 
-                        " 
-                    >
+                        ">
                         <h1>Physique</h1>
                         <p>Dudu</p>
                         <h2 x-text="convertHMS(570) + ' - ' + convertHMS(720)"></h2>
-                        
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -87,30 +85,33 @@
             </div>
 
             {% if current_user.est_etudiant() %}
-                <div class="alert" x-show="localStorage.getItem('showMSG') !== 'false' && showMSG !== 'false'">
-                    <a href="{{ url_for('notes') }} ">
-                        <h2>[OPEN ASTUCE]</h2>
-                        <p>
-                            Vous pouvez consulter vos notes depuis la page "calcul de moyenne" et en
-                            cliquant sur "Telecharger notes". <br><br>
-                            
-                            PS : C'est plus joli que GEPI et ça vous permet de calculer votre moyenne <br>
-                            PS : Si vous avez la flemme de rentrer vos identifiants à chaque fois, vous pouvez les enregistrer
-                            sur votre machine depuis les paramètres et ça marchera peut être. 
-                        </p>
+            <div class="alert" x-show="localStorage.getItem('showMSG') !== 'false' && showMSG !== 'false'">
+                <a href="{{ url_for('notes') }} ">
+                    <h2>[OPEN ASTUCE]</h2>
+                    <p>
+                        Vous pouvez consulter vos notes depuis la page "calcul de moyenne" et en
+                        cliquant sur "Telecharger notes". <br><br>
 
-                    </a>
-                        <div class="btns">
-                            <button class="btn" @click="localStorage.setItem('showMSG', 'false'); showMSG='false';">Ne plus afficher</button>
-                            <a href="{{ url_for('notes') }}"><button class="btn" id="cta" @click="">Trop bien ! Lets go !</button></a>
-                        </div>
+                        PS : C'est plus joli que GEPI et ça vous permet de calculer votre moyenne <br>
+                        PS : Si vous avez la flemme de rentrer vos identifiants à chaque fois, vous pouvez les
+                        enregistrer
+                        sur votre machine depuis les paramètres et ça marchera peut être.
+                    </p>
+
+                </a>
+                <div class="btns">
+                    <button class="btn" @click="localStorage.setItem('showMSG', 'false'); showMSG='false';">Ne plus
+                        afficher</button>
+                    <a href="{{ url_for('notes') }}"><button class="btn" id="cta" @click="">Trop bien ! Lets go
+                            !</button></a>
                 </div>
+            </div>
 
 
             {% endif %}
             <!-- Pour tous les utilisateurs -->
 
-            <a class="tile" id="home"  href="https://mail.etu.univ-lorraine.fr/" target="_blank">
+            <a class="tile" id="home" href="https://mail.etu.univ-lorraine.fr/" target="_blank">
                 <i class="material-icons-round">email</i>
                 <p>Consulter mes mails</p>
             </a>
@@ -119,34 +120,35 @@
 
             {% if current_user.est_etudiant() %}
 
-            <a class="tile" id="moyenne"  href="{{ url_for('notes') }}">
+            <a class="tile" id="moyenne" href="{{ url_for('notes') }}">
                 <i class="material-icons-round">calculate</i>
                 <p>Calcul de Moyenne</p>
-            </a> 
-            <a class="tile" id="tools"  href="{{ url_for('tools') }}">
+            </a>
+            <a class="tile" id="tools" href="{{ url_for('tools') }}">
                 <i class="material-icons-round">architecture</i>
                 <p>Outils</p>
             </a>
-            <a class="tile" id="ressources" href="https://mega.nz/folder/37wTSAaZ#sTxSruLB4YbYgznKBVoU7w" target="_blank">
+            <a class="tile" id="ressources" href="https://mega.nz/folder/aIpxkTYJ#6RcUkyxlVNxZvL2aRYpq3A"
+                target="_blank">
                 <i class="material-icons-round">folder_open</i>
                 <p>Ressources des années précedentes</p>
             </a>
-            <a class="tile" id="alumnis"  href="{{ url_for('anciens') }}">
+            <a class="tile" id="alumnis" href="{{ url_for('anciens') }}">
                 <i class="material-icons-round">school</i>
                 <p>Alumnis</p>
             </a>
-            <a class="tile" id="settings"  href="https://www.facebook.com/groups/153011081449404/" target="_blank">
+            <a class="tile" id="settings" href="https://www.facebook.com/groups/153011081449404/" target="_blank">
                 <i class="material-icons-round">groups</i>
                 <p>Facebook CPP974</p>
-            </a>      
-            <a class="tile" id="home"  href="https://cppreunion.fr/gepi/login.php" target="_blank">
+            </a>
+            <a class="tile" id="home" href="https://cppreunion.fr/gepi/login.php" target="_blank">
                 <i class="material-icons-round">note_alt</i>
                 <p>Consulter mes notes</p>
             </a>
-            <a class="tile" id="addresses"  href="{{ url_for('addresses') }}">
+            <a class="tile" id="addresses" href="{{ url_for('addresses') }}">
                 <i class="material-icons-round">restaurant_menu</i>
                 <p>Le Petit CPP</p>
-            </a>    
+            </a>
             <!-- <a class="tile" id="guiness" href="{{ url_for('guiness') }}">
                 <i class="material-icons-round">grade</i>
                 <p>CPP's Business Records</p>
@@ -155,14 +157,14 @@
             {% endif %}
 
             <!-- Pour le secrétaire -->
-            
+
 
             <!-- Pour tout le monde mais à la fin -->
 
-            <a class="tile" id="settings"  href="{{ url_for('settings') }}">
+            <a class="tile" id="settings" href="{{ url_for('settings') }}">
                 <i class="material-icons-round">settings</i>
                 <p>Paramètres</p>
-            </a> 
+            </a>
 
         </div>
 
@@ -172,7 +174,7 @@
         <div class="pannel" id="admin">
 
             <h1>Liste des utilisateurs</h1>
-    
+
             <table>
                 <tr id="titre">
                     <td id="surname">Nom</td>
@@ -194,17 +196,19 @@
                     <td id="password"><input type="password" placeholder="..."></td>
                     <td id="rang">
                         <select id="select-rang">
-                            <option value="Admin" {% if user.accountType == "admin" %}selected{% endif %}>Admin</option>
-                            <option value="Elève" {% if user.accountType == "élève" %}selected{% endif %}>Elève</option>
-                      </select>
+                            <option value="Admin" {% if user.accountType=="admin" %}selected{% endif %}>Admin</option>
+                            <option value="Elève" {% if user.accountType=="élève" %}selected{% endif %}>Elève</option>
+                        </select>
                     </td>
                     <td id="promo"><input type="text" value="{{user.promo}}"></td>
-                    <td id="mod"><i id="{{user.username}}" class="material-icons-round" onclick="mod('{{user.username}}')">edit</i></td>
-                    <td id="del"><i id="{{user.username}}" class="material-icons-round" onclick="del('{{user.username}}')">delete_outline</i></td>
+                    <td id="mod"><i id="{{user.username}}" class="material-icons-round"
+                            onclick="mod('{{user.username}}')">edit</i></td>
+                    <td id="del"><i id="{{user.username}}" class="material-icons-round"
+                            onclick="del('{{user.username}}')">delete_outline</i></td>
                 </tr>
                 {% endfor %}
             </table>
-    
+
         </div>
 
         <script>
@@ -225,12 +229,12 @@
 
                 if (newRang === "Admin") {
                     accountType = "admin"
-                }else{
+                } else {
                     accountType = "élève"
                 }
 
                 let url = "{{ baseURL }}".replace("/dashboard", "/update_user");
-                
+
                 url += "?username=" + userName
                 url += "&newSurname=" + newSurname;
                 url += "&newName=" + newName;
@@ -241,18 +245,18 @@
                 url += "&newPromo=" + newPromo;
 
                 fetch(url)
-                    .then( (resp) => {
-                        let icon = document.querySelector("#" + oldUserName + " #mod i"); 
+                    .then((resp) => {
+                        let icon = document.querySelector("#" + oldUserName + " #mod i");
                         console.log("#" + oldUserName + " #del i", icon);
                         icon.textContent = "published_with_changes"
                         icon.style.color = "hsl(var(--second-accent-color))";
                         icon.style.backgroundColor = "hsl(var(--second-color))";
-                        setTimeout(() => { 
+                        setTimeout(() => {
                             icon.textContent = "edit"
                             icon.removeAttribute("style");
                         }, 1000);
                     })
-                    .catch( (err) => {
+                    .catch((err) => {
                         console.log(err);
                     });
 
@@ -264,17 +268,17 @@
                 url += "?username=" + userName;
 
                 fetch(url)
-                    .then( (resp) => {
-                        let icon = document.querySelector("#" + userName.replace(".", "\\.") + " #del i"); 
+                    .then((resp) => {
+                        let icon = document.querySelector("#" + userName.replace(".", "\\.") + " #del i");
                         console.log("#" + userName + " #del i", icon);
                         icon.textContent = "published_with_changes"
                         icon.style.color = "hsl(var(--second-accent-color))";
                         icon.style.backgroundColor = "hsl(var(--second-color))";
-                        setTimeout(() => { 
+                        setTimeout(() => {
                             document.location.reload();
                         }, 1000);
                     })
-                    .catch( (err) => {
+                    .catch((err) => {
                         console.log(err);
                     });
             }
@@ -282,18 +286,18 @@
             // EDT -------------------------------------------------
 
             let SEL = "08Po12Is19Sy81"
-    
+
             function b64_to_utf8(e) {
                 var e = e;
                 return decodeURIComponent(window.atob(e));
             }
             function decrypter_data_edt(e) {
                 var e = e,
-                t = new RegExp(SEL, "g");
+                    t = new RegExp(SEL, "g");
                 return JSON.parse((
-                (data_base64_sans_sel = e.replace(t, "")),
-                (data_normal = b64_to_utf8(data_base64_sans_sel)),
-                data_normal)
+                    (data_base64_sans_sel = e.replace(t, "")),
+                    (data_normal = b64_to_utf8(data_base64_sans_sel)),
+                    data_normal)
                 );
             }
 
@@ -307,12 +311,12 @@
 
             function convertHMS(value) {
                 const min = parseInt(value, 10); // convert value to number if it's string
-                let hours   = Math.floor(min / 60); // get hours
+                let hours = Math.floor(min / 60); // get hours
                 let minutes = Math.floor((min - (hours * 60))); // get minutes
                 // add 0 if value < 10; Example: 2 => 02
-                if (hours   < 10) {hours   = "0"+hours;}
-                if (minutes < 10) {minutes = "0"+minutes;}
-                return hours+':'+minutes; // Return is HH : MM 
+                if (hours < 10) { hours = "0" + hours; }
+                if (minutes < 10) { minutes = "0" + minutes; }
+                return hours + ':' + minutes; // Return is HH : MM 
             }
 
             // -----------------------------------------------------
