@@ -149,6 +149,271 @@
 
         <div class="pannel" id="admin">
 
+            <h1>Analytics (vues agrégées)</h1>
+            <div class="analytics-toolbar">
+                <div class="analytics-periods">
+                    <select id="analytics-granularity" class="analytics-period">
+                        <option value="day">Jour</option>
+                        <option value="month">Mois</option>
+                        <option value="year">Année</option>
+                    </select>
+                    <input id="analytics-date" class="analytics-period" type="date">
+                    <button class="analytics-period active" data-period="all">Tout</button>
+                </div>
+                <span id="analytics-total" class="analytics-total"></span>
+            </div>
+
+            <h2 style="margin:14px 0 6px;">Évolution des vues</h2>
+            <div id="analytics-heatmap" class="analytics-heatmap"></div>
+            <div class="analytics-legend">
+                <span>moins</span>
+                <i class="hm hm0"></i><i class="hm hm1"></i><i class="hm hm2"></i><i class="hm hm3"></i><i
+                    class="hm hm4"></i>
+                <span>plus</span>
+            </div>
+
+            <h2 style="margin:16px 0 6px;">Pages</h2>
+            <div id="analytics-pages" class="analytics-pages"></div>
+
+            <style>
+                .analytics-toolbar {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    flex-wrap: wrap;
+                    gap: 10px;
+                    margin-bottom: 6px;
+                }
+
+                .analytics-periods {
+                    display: inline-flex;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    border: 1px solid hsl(var(--second-accent-color));
+                }
+
+                .analytics-period {
+                    border: none;
+                    background: transparent;
+                    cursor: pointer;
+                    padding: 7px 16px;
+                    font-family: inherit;
+                    font-size: 0.95em;
+                    color: inherit;
+                    transition: background-color 0.15s ease;
+                }
+
+                select.analytics-period,
+                input.analytics-period {
+                    cursor: text;
+                    color-scheme: light dark;
+                }
+
+                select.analytics-period {
+                    cursor: pointer;
+                }
+
+                .analytics-period+.analytics-period {
+                    border-left: 1px solid hsl(var(--second-accent-color));
+                }
+
+                .analytics-period.active {
+                    background-color: hsl(var(--accent-color));
+                    color: hsl(var(--second-color));
+                    font-weight: 600;
+                }
+
+                .analytics-total {
+                    font-size: 0.95em;
+                    opacity: 0.85;
+                }
+
+                .analytics-heatmap {
+                    display: flex;
+                    gap: 3px;
+                    overflow-x: auto;
+                    padding: 6px 2px;
+                    max-width: 100%;
+                }
+
+                .hm-col {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 3px;
+                }
+
+                .hm {
+                    width: 13px;
+                    height: 13px;
+                    border-radius: 3px;
+                    background-color: hsla(var(--third-color), 0.35);
+                }
+
+                .hm1 {
+                    background-color: hsl(var(--accent-color) / 0.25);
+                }
+
+                .hm2 {
+                    background-color: hsl(var(--accent-color) / 0.45);
+                }
+
+                .hm3 {
+                    background-color: hsl(var(--accent-color) / 0.7);
+                }
+
+                .hm4 {
+                    background-color: hsl(var(--accent-color));
+                }
+
+                .analytics-legend {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+                    font-size: 0.8em;
+                    opacity: 0.8;
+                    margin-top: 4px;
+                }
+
+                .analytics-legend .hm {
+                    width: 11px;
+                    height: 11px;
+                }
+
+                .analytics-pages {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 4px;
+                    max-width: 480px;
+                }
+
+                .analytics-page-row {
+                    display: flex;
+                    justify-content: space-between;
+                    gap: 12px;
+                    padding: 4px 10px;
+                    border-radius: 8px;
+                    background: hsla(var(--third-color), 0.25);
+                    font-size: 0.95em;
+                }
+
+                .analytics-page-row b {
+                    font-variant-numeric: tabular-nums;
+                }
+            </style>
+            <script>
+                const analyticsTotal = document.getElementById('analytics-total');
+                const heatmapEl = document.getElementById('analytics-heatmap');
+                const pagesEl = document.getElementById('analytics-pages');
+                let currentPeriod = 'all';
+
+                function heatLevel(count, max) {
+                    if (!count) return 0;
+                    return 1 + Math.min(3, Math.floor(3 * count / max));
+                }
+
+                function renderHeatmap(series, granularity) {
+                    heatmapEl.innerHTML = '';
+                    if (!series.length) { heatmapEl.innerHTML = '<i>aucune donnée</i>'; return; }
+                    const byLabel = {};
+                    series.forEach(s => byLabel[s.label] = s.count);
+                    const max = Math.max(...series.map(s => s.count));
+                    const labels = series.map(s => s.label);
+
+                    if (granularity !== 'day') {
+                        // un carré par mois / par année, scrollable
+                        labels.forEach(label => {
+                            const sq = document.createElement('i');
+                            sq.className = 'hm hm' + heatLevel(byLabel[label], max);
+                            sq.title = label + ' — ' + byLabel[label] + ' vue(s)';
+                            sq.style.width = '22px'; sq.style.height = '22px';
+                            heatmapEl.appendChild(sq);
+                        });
+                        return;
+                    }
+
+                    // granularity 'day' : grille hebdo style GitHub
+                    const first = new Date(labels[0] + 'T00:00:00');
+                    const last = new Date(labels[labels.length - 1] + 'T00:00:00');
+                    const start = new Date(first);
+                    start.setDate(start.getDate() - ((start.getDay() + 6) % 7));
+                    for (let d = new Date(start); d <= last; d.setDate(d.getDate() + 7)) {
+                        const colEl = document.createElement('div');
+                        colEl.className = 'hm-col';
+                        for (let dow = 0; dow < 7; dow++) {
+                            const cur = new Date(d); cur.setDate(cur.getDate() + dow);
+                            const key = cur.toISOString().slice(0, 10);
+                            const count = byLabel[key] || 0;
+                            const sq = document.createElement('i');
+                            sq.className = 'hm hm' + heatLevel(count, max);
+                            sq.title = key + ' — ' + count + ' vue(s)';
+                            colEl.appendChild(sq);
+                        }
+                        heatmapEl.appendChild(colEl);
+                    }
+                }
+
+                const granularityEl = document.getElementById('analytics-granularity');
+                const dateEl = document.getElementById('analytics-date');
+
+                function currentGranularity() {
+                    return document.querySelector('.analytics-period.active[data-period="all"]')
+                        ? 'all' : granularityEl.value;
+                }
+
+                function loadAnalytics() {
+                    const period = currentGranularity();
+                    const date = dateEl.value;
+                    let url = "{{ url_for('analytics') }}?period=" + period;
+                    if (period !== 'all') {
+                        url += "&series=" + period;
+                        if (date) url += "&date=" + date;
+                    } else {
+                        url += "&series=day";
+                    }
+                    document.querySelectorAll('.analytics-period').forEach(b =>
+                        b.classList.toggle('active', b.dataset && b.dataset.period === period));
+                    fetch(url).then(r => r.json()).then(d => {
+                        const label = period === 'all' ? 'tout'
+                            : period + (date ? ' ' + date : '');
+                        analyticsTotal.textContent = d.total_views + ' vues (' + label + ')';
+                        renderHeatmap(d.series, period === 'all' ? 'day' : period);
+                        pagesEl.innerHTML = d.pages.length
+                            ? d.pages.map(p =>
+                                '<div class="analytics-page-row"><span>' + p.page +
+                                '</span><b>' + p.count + '</b></div>').join('')
+                            : '<i>Aucune donnée pour cette période</i>';
+                    });
+                }
+
+                function syncDateInput() {
+                    const g = granularityEl.value;
+                    if (g === 'day') { dateEl.type = 'date'; dateEl.value = dateEl.value.slice(0, 10) || ''; }
+                    else if (g === 'month') { dateEl.type = 'month'; dateEl.value = dateEl.value.slice(0, 7) || ''; }
+                    else {
+                        dateEl.type = 'text'; dateEl.inputMode = 'numeric';
+                        dateEl.placeholder = 'AAAA';
+                        dateEl.value = dateEl.value.slice(0, 4) || '';
+                    }
+                    dateEl.oninput = null;
+                }
+
+                granularityEl.addEventListener('change', () => {
+                    document.querySelector('.analytics-period[data-period="all"]').classList.remove('active');
+                    syncDateInput();
+                    loadAnalytics();
+                });
+                dateEl.addEventListener('change', loadAnalytics);
+                document.querySelector('.analytics-period[data-period="all"]').addEventListener('click', () => {
+                    granularityEl.value = 'day'; syncDateInput();
+                    loadAnalytics();
+                });
+                syncDateInput();
+                // valeur par défaut = aujourd'hui
+                dateEl.value = new Date().toISOString().slice(0, 10);
+                loadAnalytics();
+                loadAnalytics('all');
+            </script>
+
             <h1>Liste des utilisateurs</h1>
 
             <table>

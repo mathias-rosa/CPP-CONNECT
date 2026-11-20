@@ -19,25 +19,11 @@
         rel="stylesheet">
     {% block head %}{% endblock %}
     <script defer src="https://unpkg.com/alpinejs@3.2.2/dist/cdn.min.js"></script>
-    <!-- abla -->
-    <script async defer data-website-id="3e70422c-532e-4605-a59e-0cd3319f41f0" src="https://s.abla.io/abla.js"></script>
 
 </head>
 {% include 'theaming.html' %}
 
 <body>
-    <!-- Piwik -->
-    <!-- <script type="text/javascript">
-        (function (window, document, dataLayerName, id) {
-            window[dataLayerName] = window[dataLayerName] || [], window[dataLayerName].push({ start: (new Date).getTime(), event: "stg.start" }); var scripts = document.getElementsByTagName('script')[0], tags = document.createElement('script');
-            function stgCreateCookie(a, b, c) { var d = ""; if (c) { var e = new Date; e.setTime(e.getTime() + 24 * c * 60 * 60 * 1e3), d = "; expires=" + e.toUTCString() } document.cookie = a + "=" + b + d + "; path=/" }
-            var isStgDebug = (window.location.href.match("stg_debug") || document.cookie.match("stg_debug")) && !window.location.href.match("stg_disable_debug"); stgCreateCookie("stg_debug", isStgDebug ? 1 : "", isStgDebug ? 14 : -1);
-            var qP = []; dataLayerName !== "dataLayer" && qP.push("data_layer_name=" + dataLayerName), isStgDebug && qP.push("stg_debug"); var qPString = qP.length > 0 ? ("?" + qP.join("&")) : "";
-            tags.async = !0, tags.src = "https://mathias-rosa.containers.piwik.pro/" + id + ".js" + qPString, scripts.parentNode.insertBefore(tags, scripts);
-            !function (a, n, i) { a[n] = a[n] || {}; for (var c = 0; c < i.length; c++)!function (i) { a[n][i] = a[n][i] || {}, a[n][i].api = a[n][i].api || function () { var a = [].slice.call(arguments, 0); "string" == typeof a[0] && window[dataLayerName].push({ event: n + "." + i + ":" + a[0], parameters: [].slice.call(arguments, 1) }) } }(i[c]) }(window, "ppms", ["tm", "cm"]);
-        })(window, document, 'dataLayer', '24cdaa38-05ff-4ccf-8675-89191ca5150c');
-    </script> -->
-
 
     <div class="header">
         <div class="header-left">
@@ -93,6 +79,20 @@
     {% block content %}{% endblock %}
 
     {% include 'footer.html' %}
+
+    {% if not current_user.is_anonymous %}
+    <script>
+        // Compteur de vues agrégé : aucun suivi individuel, juste un compteur par page.
+        try {
+            fetch("{{ url_for('track') }}", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ page: location.pathname }),
+                keepalive: true
+            });
+        } catch (e) { }
+    </script>
+    {% endif %}
 </body>
 
 
