@@ -139,7 +139,7 @@ def reset_token(token):
 
     if form.validate_on_submit():
         if form.new_password.data == form.new_password_confirm.data:
-            hashed_password = generate_password_hash(form.new_password.data, method='sha256')
+            hashed_password = generate_password_hash(form.new_password.data)
             mongodb.db.Users.update_one(
                     {"email": user.email},
                     {'$set':
@@ -236,7 +236,7 @@ def update_user():
     # Si l'utilisateur souhaite modofier son mot de passe, On le hache. Sinon, on defini newPassword comme
     # le hash de l'ancien mot de passe de l'utilisateur.
     if request.args['newPassword']:
-        newPassword = generate_password_hash(request.args['newPassword'], method='sha256')
+        newPassword = generate_password_hash(request.args['newPassword'])
     else:
         newPassword = User(mongodb.db.Users.find_one({"username": request.args['username']})).password
 

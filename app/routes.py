@@ -15,6 +15,19 @@ import datetime
 from app.models import User, Tool, Addresses
 from app.forms import LoginForm, RegisterForm, ChangeSelfInformationsForm, ProfilePicForm
 
+import hashlib
+import hmac
+
+
+def check_password_compat(pwhash, password):
+    """Vérifie un mot de passe, y compris les anciens hash sha256$salt$digest
+    (Werkzeug >= 3 ne les supporte plus mais ils sont encore en base).
+    Les anciens hash utilisent HMAC (hmac.new(salt, password, method))."""
+    if pwhash.startswith("sha256$"):
+        _, salt, digest = pwhash.split("$")
+        return hmac.new(salt.encode(), password.encode(), "sha256").hexdigest() == digest
+    return check_password_hash(pwhash, password)
+
 
 @app.route('/favicon.ico')
 def fav():
@@ -96,7 +109,7 @@ def signup():
 
             # Pour des raisons de sécurité, on hache le mot de passe de l'utilisateur avant de
             # l'enregistrer dans la base de donnée.
-            hashed_password = generate_password_hash(form.password.data, method='sha256')
+            hashed_password = generate_password_hash(form.password.data)
             # Création du nom d'utilisateur.
             # Note : On remplace les espaces par du vide afin de pouvoir les manipuler plus facilement
             username = form.name.data.lower() + "." + form.surname.data.lower()
@@ -110,7 +123,8 @@ def signup():
                 username = username + str(c)
 
             # Géneration d'un id unique
-            id  = int(str(int(generate_password_hash(form.name.data.upper() + form.surname.data + username, method='MD5')[22:], base=16))[:18])
+            import hashlib
+            id  = int(str(int(hashlib.md5((form.name.data.upper() + form.surname.data + username).encode()).hexdigest()[22:], base=16))[:18])
             # Création d'un nouvel utilisateur
             new_user = {"_id": id,
                         "name": form.name.data,
@@ -187,7 +201,7 @@ def login():
                                     baseURL=request.base_url
                                     )
 
-        if check_password_hash(user.password, form.password.data):
+        if check_password_compat(user.password, form.password.data):
             # si le hash du mot de passe entré correspond à celui de la base de donnée,
             # on identifie l'utilisateur.
             login_user(user, remember=form.remember.data)
@@ -446,7 +460,7 @@ def settings():
     if profileForm.validate_on_submit():
         # L'utilisateur doit rentrer son mot de passe afin effectuer toute modification.
         # Si le mot de passe est incorect, on retourne "mot de passe incorect" (il faudra créer une belle page)
-        if check_password_hash(current_user.password, profileForm.current_password.data):
+        if check_password_compat(current_user.password, profileForm.current_password.data):
             # Si un form n'est pas vide (à été rempli), on met à jour l'information correspondante.
             if profileForm.name.data != "":
                 current_user.name = profileForm.name.data
@@ -455,7 +469,7 @@ def settings():
             if profileForm.email.data != "":
                 current_user.email = profileForm.email.data
             if profileForm.new_password.data != "" and profileForm.new_password.data == profileForm.new_password_confirm.data:
-                current_user.password = generate_password_hash(profileForm.new_password.data, method='sha256')
+                current_user.password = generate_password_hash(profileForm.new_password.data)
 
             mongodb.db.Users.update_one(
                 {"_id": current_user.id},
