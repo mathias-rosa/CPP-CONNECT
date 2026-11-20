@@ -5,7 +5,6 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='styles/notes_styles.css') }}">
 <script src="{{ url_for('static', filename='script/swiped-events.min.js') }}"></script>
 <script src="{{ url_for('static', filename='script/long-press.js') }}"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js" integrity="sha512-E8QSvWZ0eCLGk4km3hxSsNmGWbLtSCSUcewDQPQWZF6pEU8GlT8a5fF32wOl1i8ftdMhssTrF/OhyGWwonTcXA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <title>Notes</title>
 
 {% endblock %}
@@ -22,7 +21,6 @@
             consultation: true,
             addItemToSemestre,
             tooltip : false,
-            gepi : false,
             display_graph : true,
             display_notes : true,
             clické : false
@@ -50,10 +48,6 @@
                 <label x-show="window.innerWidth < 600" x-text=" display_graph ? 'Graphs on' : 'Graphs off'"></label>
                 <i class="material-icons-round">show_chart</i>
             </button>
-            <button @click="gepi ? gepi = false : gepi = true" class="bt_spé">
-                <label x-show="window.innerWidth > 600">Télécharger notes</label>
-                <i class="material-icons-round">file_download</i>
-            </button>
         </div>
     </div>
 
@@ -61,41 +55,7 @@
         {% include 'loading.html' %}
     </div>
 
-    <div class="gepi-login" x-show="gepi" 
-        x-data="{
-            gepi_username : localStorage.getItem('gepi_username') ? gepi_username = CryptoJS.AES.decrypt(localStorage.getItem('gepi_username'), '{{current_user.password[8:13] + current_user.username + current_user.password[10:15]}}').toString(CryptoJS.enc.Utf8) : '',
-            gepi_password : localStorage.getItem('gepi_password') ? gepi_password= CryptoJS.AES.decrypt(localStorage.getItem('gepi_password'), '{{current_user.password[8:13] + current_user.username + current_user.password[10:15]}}').toString(CryptoJS.enc.Utf8) : '',
-            gepi_semestre : selSemestre
-        }"
-        x-transition:enter.ease-out.duration.400ms
-        x-transition:enter-start.opacity.0
-        x-transition:enter-start.scale.90
-        x-transition:enter-end.opacity.100
-        x-transition:enter-end.scale.100
-    >
-        <h1>Se connecter à GEPI</h1>
-        <div class="inputs">
-            <label> Identifiant GEPI </label>
-            <input type="text" :value="gepi_username" @input="gepi_username = $event.target.value">
-            
-            <label> Mot de passe GEPI </label>
-            <input type="password" :value="gepi_password" @input="gepi_password = $event.target.value">
-
-            <label>Notes du Semestre :</label>
-            <input type="number" :value="gepi_semestre" @input="gepi_semestre = $event.target.value">
-
-            <label><a href="{{baseURL.replace('/notes', '')}}/settings#gepi" target="_blank">Enregistrer mes identifiants</a></label>
-        </div>
-        
-        <div class="gepi-btns">
-            <button class="btn" @click="gepi = false ; gepi_username= '' ; gepi_password = ''">Abandonner</button>
-            <button class="btn" id="cta" @click="clické = true ; gepi = false ; notesSemestre, clické = await getNotesFromGepi(gepi_username, gepi_password, gepi_semestre) ; location.reload(); ">Se connecter</button>
-        </div>
-
-    </div>
-
-
-    <div class="semester-gepi" x-show="!gepi && !clické"
+    <div class="semester-box" x-show="!clické"
         x-transition:enter.ease-out.duration.400ms
         x-transition:enter-start.opacity.0
         x-transition:enter-start.scale.90
@@ -127,7 +87,7 @@
     </div>
 
 
-    <div class="notes_et_graphes" x-show="!gepi && !clické" 
+    <div class="notes_et_graphes" x-show="!clické"
         x-transition:enter.ease-out.duration.400ms
         x-transition:enter-start.opacity.0
         x-transition:enter-start.scale.90
@@ -515,27 +475,6 @@
         return await notes;
     }
 
-    async function getNotesFromGepi(username, password, semestre) {
-        if (semestre > 4 || semestre < 1) {
-            console.log("Erreur semestre invalide")
-            return "Erreur semestre invalide"
-        }
-        const rawResponse = await fetch('{{baseURL}}/get_notes_gepi', {
-            method: 'POST',
-            headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                'gepi_username' : username,
-                'gepi_password' : password,
-                'semestre' : semestre
-            })
-        });
-        console.log(await rawResponse); 
-        return await rawResponse, false;
-    }
-
     function addItemToSemestre(notesSemestre, obj, path) {
         notesSemestre = JSON.parse(JSON.stringify(notesSemestre)); // convert ES6 proxy to obj
         if (path.length === 4) { // On ajoute une note
@@ -614,30 +553,6 @@
 
 
 </script>
-
-{% if current_user.annee() < 3  %}
-
-<script>
-
-    let gepi_username
-    let gepi_password
-    let annee = "{{current_user.annee()}}" | 0
-    localStorage.getItem('gepi_username') ? gepi_username = CryptoJS.AES.decrypt(localStorage.getItem('gepi_username'), "{{current_user.password[8:13] + current_user.username + current_user.password[10:15]}}").toString(CryptoJS.enc.Utf8) : ""
-    localStorage.getItem('gepi_password') ? gepi_password = CryptoJS.AES.decrypt(localStorage.getItem('gepi_password'), "{{current_user.password[8:13] + current_user.username + current_user.password[10:15]}}").toString(CryptoJS.enc.Utf8) : ""
-    if (annee === 1) {
-        getNotesFromGepi(gepi_username, gepi_password, 1)
-        getNotesFromGepi(gepi_username, gepi_password, 2)
-        .then(() => {changeColor(parseInt("{{current_user.semestre()}}"))})
-    }
-    else if (annee === 2) {
-        getNotesFromGepi(gepi_username, gepi_password, 3)
-        getNotesFromGepi(gepi_username, gepi_password, 4)
-        .then(() => {changeColor(parseInt("{{current_user.semestre()}}"))})
-    }
-
-</script>
-
-{% endif %}
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-annotation/1.4.0/chartjs-plugin-annotation.min.js" integrity="sha512-HrwQrg8S/xLPE6Qwe7XOghA/FOxX+tuVF4TxbvS73/zKJSs/b1gVl/P4MsdfTFWYFYg/ISVNYIINcg35Xvr6QQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
