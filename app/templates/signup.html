@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap4/form.html" as wtf %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -28,19 +28,19 @@
                 {{ form.hidden_tag() }}
                 <div class="inputs">
                     <div class="nom-prenom">
-                        {{ wtf.form_field(form.surname, placeholder="Nom", id="surname", class_="input") }}
-                        {{ wtf.form_field(form.name, placeholder="Prénom", id="name", class_="input") }}
+                        {{ wtf.render_field(form.surname, placeholder="Nom", id="surname", class_="input") }}
+                        {{ wtf.render_field(form.name, placeholder="Prénom", id="name", class_="input") }}
                     </div>
                     <div class="promo-sesame">
-                        {{ wtf.form_field(form.promo, placeholder="Promo", value=proposition_promo, id="promo", class_="input") }}
-                        {{ wtf.form_field(form.sesame, placeholder="Sésame", id="sesame", class_="input") }}
+                        {{ wtf.render_field(form.promo, placeholder="Promo", value=proposition_promo, id="promo", class_="input") }}
+                        {{ wtf.render_field(form.sesame, placeholder="Sésame", id="sesame", class_="input") }}
                     </div>
 
-                    {{ wtf.form_field(form.email, placeholder="Email", id="email") }}
-                    {{ wtf.form_field(form.password, placeholder="Entrez votre Mot de passe", id="password") }}
-                    {{ wtf.form_field(form.password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
+                    {{ wtf.render_field(form.email, placeholder="Email", id="email") }}
+                    {{ wtf.render_field(form.password, placeholder="Entrez votre Mot de passe", id="password") }}
+                    {{ wtf.render_field(form.password_confirm, placeholder="Confirmer votre mot de passe", id="password") }}
                 </div>
-                {{ wtf.form_field(form.remember) }}
+                {{ wtf.render_field(form.remember) }}
                 <button class="btn" id="cta" type='submit'>S'inscrire</button>
                 <a href="{{ url_for('login') }}" class="login" ><div class="bouton">
                     <h2>J'ai déjà un compte, me connecter</h2>

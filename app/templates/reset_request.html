@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap4/form.html" as wtf %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -27,7 +27,7 @@
                 <h1>Réinitialisez votre mot de passe</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    {{ wtf.form_field(form.email, placeholder="Adresse Email", id="email") }}
+                    {{ wtf.render_field(form.email, placeholder="Adresse Email", id="email") }}
                 </div>
                 <div class="connect">
                     <button class="btn" id="cta" type='submit'>Réinitialiser mon mot de passe</button>

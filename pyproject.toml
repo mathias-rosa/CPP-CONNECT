@@ -1,0 +1,26 @@
+[project]
+name = "cpp-connect"
+version = "1.0.0"
+description = "CPP-CONNECT - portail des étudiants CPP"
+requires-python = ">=3.12"
+dependencies = [
+    "flask>=3.1",
+    "werkzeug>=3.1",
+    "jinja2>=3.1",
+    "gunicorn>=23.0",
+    "requests>=2.32",
+    "pymongo>=4.10",
+    "dnspython>=2.7",
+    "passlib>=1.7.4",
+    "bootstrap-flask>=2.2",
+    "flask-login>=0.6.3",
+    "flask-mail>=0.10",
+    "flask-wtf>=1.2",
+    "wtforms>=3.2",
+    "email-validator>=2.2",
+    "python-dotenv>=1.0",
+    "beautifulsoup4>=4.12",
+]
+
+[dependency-groups]
+dev = []

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap4/form.html" as wtf %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -27,8 +27,8 @@
                 <h1>Réinitialisez votre mot de passe</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    {{ wtf.form_field(form.new_password, placeholder="Nouveau mot de passe", id="password") }}
-                    {{ wtf.form_field(form.new_password_confirm, placeholder="Confirmation du mot de passe", id="password-confirm") }}
+                    {{ wtf.render_field(form.new_password, placeholder="Nouveau mot de passe", id="password") }}
+                    {{ wtf.render_field(form.new_password_confirm, placeholder="Confirmation du mot de passe", id="password-confirm") }}
                 </div>
                 <div class="connect">
                     {{ form.submit(class="btn", id="cta") }}

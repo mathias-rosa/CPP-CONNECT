@@ -1,6 +1,6 @@
 import os
 from flask import Flask
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap4 as Bootstrap
 from flask_login import LoginManager
 from flask_mail import Mail
 
@@ -37,3 +37,4 @@ mail = Mail(app)
 from app import routes
 from app import api
 from app import notes
+from app import analytics

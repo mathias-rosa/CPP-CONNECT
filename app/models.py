@@ -6,7 +6,7 @@
 import datetime
 from flask import Flask, send_from_directory, request
 from flask_login import UserMixin, LoginManager
-from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
+from itsdangerous import URLSafeTimedSerializer as Serializer
 
 from app import app, mongodb, login_manager
 
@@ -62,15 +62,15 @@ class User(UserMixin):
 
     def get_reset_token(self, expires_sec=1800):
         # Permet de créer un token de rénitialisation de mot de passe.
-        s = Serializer(app.config['SECRET_KEY'], expires_sec)
-        return s.dumps({'user_id': self.id}).decode('utf-8')
+        s = Serializer(app.config['SECRET_KEY'])
+        return s.dumps({'user_id': self.id})
 
     @staticmethod
-    def verify_reset_token(token):
+    def verify_reset_token(token, expires_sec=1800):
         # Permet de vérifier qu'un token de rénitialisation de mot de passe est valide.
         s = Serializer(app.config['SECRET_KEY'])
         try:
-            user_id = s.loads(token)['user_id']
+            user_id = s.loads(token, max_age=expires_sec)['user_id']
         except:
             return None
         return User(mongodb.db.Users.find_one({"_id": user_id}))

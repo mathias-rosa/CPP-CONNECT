@@ -4,3 +4,5 @@ geckodriver.log
 .vscode
 cpp-connect
 .env
+.venv/
+uv.toml

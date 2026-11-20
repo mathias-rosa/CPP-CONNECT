@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap4/form.html" as wtf %}
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
@@ -27,14 +27,14 @@
                 <h1>Se connecter</h1>
                 {{ form.hidden_tag() }}
                 <div class="inputs">
-                    {{ wtf.form_field(form.username, placeholder="Nom d'utilisateur ou email", class_="email", id="email") }}
-                    {{ wtf.form_field(form.password, placeholder="Mot de passe", class_="password", id="password") }}
+                    {{ wtf.render_field(form.username, placeholder="Nom d'utilisateur ou email", class_="email", id="email") }}
+                    {{ wtf.render_field(form.password, placeholder="Mot de passe", class_="password", id="password") }}
                 </div>
                 <div class="options">
                     <a href="{{ url_for('reset_request') }}" class="inscription" id="mdp_oublie" ><div class="bouton">
                         <h2>Mot de passe oublié ?</h2>
                     </div></a>
-                    {{ wtf.form_field(form.remember) }}
+                    {{ wtf.render_field(form.remember) }}
                 </div>
                 <div class="connect">
                     <a href="{{ url_for('signup') }}" class="inscription" ><div class="bouton">
