@@ -147,8 +147,6 @@ input {
     color: hsl(var(--second-accent-color));
 }
 
-/* Gepi */
-
 .inputs {
     display: flex;
     flex-direction: column;

@@ -1,30 +1,3 @@
-/* Connection à gepi (* duplicat avec login_styles.css * ) ----------------------------- */
-/* #title {
-  text-align: center;
-} */
-.gepi-login {
-  display: flex;
-  flex-direction: column;
-  background: var(--theme-color);
-  box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
-  border: 0.1em solid hsl(var(--third-color));
-  border-radius: 1em;
-  backdrop-filter: blur(1em);
-  width: 100%;
-  max-width: 24em;
-  padding: 1.5em;
-  box-sizing: border-box;
-}
-
-.gepi-login h1{
-  margin: 0;
-  color: hsl(var(--accent-color));
-}
-
-.gepi-login a{
-  color: inherit;
-}
-
 .inputs{
   display: flex;
   flex-direction: column;
@@ -49,12 +22,6 @@
 .inputs label{
   color: hsl(var(--paragraph-color));
   margin-top: 5%;
-}
-
-.gepi-btns {
-  display: flex;
-  margin-top: 10%;
-  width: 100%;
 }
 
 
@@ -107,7 +74,7 @@
   display: none;
 }
 
-.semester-gepi {
+.semester-box {
   display: flex;
   background: var(--theme-color);
   box-shadow: 0 8px 32px 0 hsla(var(--third-color), 0.2);
@@ -491,16 +458,6 @@ input.moyenne_name {
     flex-direction: column;
   }
 
-  .gepi-form {
-    top: auto;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-    padding: 3%;
-    padding-bottom: 5%;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
   .nom_note {
     font-size: 1.5em;
   }
@@ -527,7 +484,7 @@ input.moyenne_name {
     width: 100%;
   }
 
-  .semester-gepi {
+  .semester-box {
     border-radius: 1em;
     padding: 0;
     display: none;
@@ -535,18 +492,6 @@ input.moyenne_name {
 
   .semester-div::-webkit-scrollbar {
     display: none;
-  }
-
-  .gepi h1 {
-    display: none;
-  }
-
-  .gepi i {
-    margin-left: 0;
-  }
-
-  .gepi {
-    margin-right: 1em;
   }
 
   .semester-div {
